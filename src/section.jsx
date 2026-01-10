@@ -84,7 +84,6 @@ export const Section = () => {
   const prev = () => {
     setActive((prev) => Math.max(prev - 1, 0));
   };
-  console.log(active, "kk");
 
   return (
     <div className="w-full flex flex-col gap-10">
