@@ -13,6 +13,7 @@ export const Section = () => {
   const tabs = ["All", "Hot", "Losers", "24h Vol", "Gainers"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [active, setActive] = useState(0);
+  const [imgError, setImgError] = useState(false);
   const dark = true;
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
@@ -64,17 +65,17 @@ export const Section = () => {
     fetchData1();
   }, []);
   const items = ["1.svg", "2.svg", "3.svg", "4.svg"];
- const visibleCards = 2;
-const totalSlides = items.length - visibleCards + 1;
+  const visibleCards = 2;
+  const totalSlides = items.length - visibleCards + 1;
 
   // AUTO SLIDE
- useEffect(() => {
-  const interval = setInterval(() => {
-    setActive((prev) => (prev + 1) % totalSlides);
-  }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive((prev) => (prev + 1) % totalSlides);
+    }, 3000);
 
-  return () => clearInterval(interval);
-}, [totalSlides]);
+    return () => clearInterval(interval);
+  }, [totalSlides]);
 
   const next = () => {
     setActive((prev) => Math.min(prev + 1, totalSlides));
@@ -134,10 +135,10 @@ const totalSlides = items.length - visibleCards + 1;
           </button>
         </div>
       </div>
-    
+
       <div className="flex md:justify-center">
-        <div className="flex w-[80%] justify-center flex-col">
-          <div className="flex gap-1">
+        <div className="flex justify-center flex-col md:p-10">
+          <div className="flex gap-1 overflow-x-auto">
             {tabs.map((tab) => (
               <div
                 name="item1"
@@ -145,24 +146,24 @@ const totalSlides = items.length - visibleCards + 1;
                 onClick={() => {
                   setActiveTab(tab);
                 }}
-                className={`py-2 px-3 rounded-md text-[20px] md:text-[50px] whitespace-nowrap cursor-pointer
+                className={`py-2 px-3 rounded-md text-[16px] md:text-[32px] whitespace-nowrap cursor-pointer
                 ${activeTab === tab ? " " : "text-[#585757]"}`}
               >
                 {tab}
                 {activeTab === tab && (
-                  <div className="flex w-full">
+                  <div className="flex w-full justify-center">
                     <div className="w-[60%] border-b-4 border-white"></div>
                   </div>
                 )}
               </div>
             ))}
           </div>
-          <div className="overflow-y-auto overflow-x-auto h-[400px] text-center md:custom-scroll w-full">
+          <div className="overflow-y-auto overflow-x-auto h-[400px] text-center md:custom-scroll w-full md:p-[0px_20px_20px_20px]">
             <table className="w-full table-fixed">
               <thead className="">
-                <tr className="font-light text-[16px]">
+                <tr className="font-light text-[16px] ">
                   <th
-                    className={`text-left p-5 md:text-[20px] text-[12px] font-semibold top-0 sticky ${
+                    className={`text-left p-5 md:text-[20px] text-[12px] font-semibold top-0 sticky p-[20px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     }`}
                   >
@@ -171,26 +172,26 @@ const totalSlides = items.length - visibleCards + 1;
                   <th
                     className={`${
                       dark ? "bg-[#000000]" : "bg-white"
-                    } text-right md:text-[20px] text-[12px] font-semibold top-0 sticky`}
+                    } text-right md:text-[20px] text-[12px] font-semibold top-0 sticky p-[20px]`}
                   >
                     Coin Price
                   </th>
                   <th
-                    className={`text-right md:text-[20px] text-[12px] font-semibold ${
+                    className={`text-right md:text-[20px] text-[12px] font-semibold p-[20px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
                     24H Change
                   </th>
                   <th
-                    className={`text-right md:text-[20px] max-md:hidden text-[12px] font-semibold ${
+                    className={`text-right md:text-[20px] max-md:hidden text-[12px] font-semibold p-[20px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
                     24h Volume
                   </th>
                   <th
-                    className={`text-right max-md:hidden md:text-[20px] text-[12px] font-semibold ${
+                    className={`text-right max-md:hidden md:text-[20px] text-[12px] font-semibold  p-[0px_40px_0px_0px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
@@ -206,15 +207,25 @@ const totalSlides = items.length - visibleCards + 1;
                         key={index}
                         className={` cursor-pointer  md:text-[20px] text-[12px]  `}
                       >
-                        <td className="text-center p-5 text-nowrap">
+                        <td className="text-center p-5 text-nowrap p-[0px_20px_20px_20px] ">
                           <div className="flex gap-3 items-center w-full ">
                             <div className="">
                               <img
                                 src={mover?.coin_icon}
-                                className="h-6 w-6 text-[13px]"
                                 alt="icon"
+                                className="size-8"
+                                onError={(e) => {
+                                  e.currentTarget.style.display = "none";
+                                  e.currentTarget.nextSibling.style.display =
+                                    "flex";
+                                }}
                               />
+
+                              <div className="hidden text-[16px] font-bold size-8 bg-white text-black rounded-full items-center justify-center">
+                                {mover?.base_asset_symbol?.[0]}
+                              </div>
                             </div>
+
                             <div className="flex flex-col text-left">
                               <div className="font-medium text-sm">
                                 {mover?.base_asset_symbol}
@@ -223,14 +234,14 @@ const totalSlides = items.length - visibleCards + 1;
                             </div>
                           </div>
                         </td>
-                        <td className="text-right text-nowrap">
+                        <td className="text-right text-nowrap p-[0px_20px_20px_20px]">
                           <div>
                             <div className="text-xs text-gray-400">
                               ${mover?.current_price}
                             </div>
                           </div>
                         </td>
-                        <td className="text-right text-nowrap">
+                        <td className="text-right text-nowrap p-[0px_20px_20px_20px]">
                           <div
                             className={`font-semibold text-[12px] text-nowrap p-1 rounded-md ${
                               mover?.change_in_price > 0
@@ -243,7 +254,7 @@ const totalSlides = items.length - visibleCards + 1;
                             {mover?.change_in_price}%
                           </div>
                         </td>
-                        <td className="text-right text-nowrap max-md:hidden">
+                        <td className="text-right text-nowrap max-md:hidden p-[0px_20px_20px_20px]">
                           <div>
                             <div className="text-xs text-gray-400">
                               {mover?.volume}
@@ -251,7 +262,7 @@ const totalSlides = items.length - visibleCards + 1;
                           </div>
                         </td>
                         <td
-                          className={`text-right max-md:hidden text-nowrap   `}
+                          className={`text-right max-md:hidden text-nowrap  p-[0px_20px_20px_20px] `}
                         >
                           <button
                             className={`${
@@ -288,7 +299,7 @@ const totalSlides = items.length - visibleCards + 1;
                   Register and claim exclusive newcomer rewards.
                 </div>
                 <button className="text-[10px] bg-[#2EDBAD] p-2 text-black rounded-2xl mt-2 flex gap-1 items-center cursor-pointer">
-                  Regester now <FaArrowRightLong /> 
+                  Regester now <FaArrowRightLong />
                 </button>
               </div>
             </div>
@@ -456,7 +467,7 @@ const totalSlides = items.length - visibleCards + 1;
               </div>
             </div>
           </div>
-          <div className="bg-[#353535] w-[463px] flex h-[220px] rounded-[10px]">
+          <div className="bg-[#353535] max-w-[400px] flex max-h-[220px] rounded-[10px]">
             <div className="w-[50%] p-3 border border-white rounded-2xl">
               {" "}
               <QRCode
@@ -498,20 +509,18 @@ const totalSlides = items.length - visibleCards + 1;
           </div>
         </div>
       </div>
-      <div className=" flex w-full justify-center text-[12px] gap-5">
+      <div className=" flex w-full justify-center text-[12px] gap-5 md:hidden">
         <div className="flex flex-col items-center font-bold">
-
-         <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
-          <BsAndroid2  className="size-4"/>
+          <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
+            <BsAndroid2 className="size-4" />
           </div>
           <div>Android</div>
         </div>
         <div className="flex flex-col items-center font-bold">
-
-         <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
-          <FaGooglePlay className="size-4" />
-        </div>
-        <div>Google Play</div>
+          <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
+            <FaGooglePlay className="size-4" />
+          </div>
+          <div>Google Play</div>
         </div>
       </div>
       <div className="md:hidden p-3 flex flex-col gap-3">
@@ -543,10 +552,10 @@ const totalSlides = items.length - visibleCards + 1;
           <div className="w-full rounded-[15px] border-2 h-70"></div>
           <div className="w-full rounded-[15px] border-2 h-70"></div>
         </div>
-          <div className="max-md:hidden w-full">
-        {" "}
-        <PromoSlider items={8} />
-      </div>
+        <div className="max-md:hidden w-full">
+          {" "}
+          <PromoSlider items={8} />
+        </div>
       </div>
       <div className="flex flex-col gap-5 items-center bg-[#131516] p-5">
         <div className="font-extrabold text-[20px]">

@@ -4,8 +4,16 @@ import {
   AccordionSummary,
   Typography,
 } from "@mui/material";
-import { FaChevronRight, FaMinus, FaPlus } from "react-icons/fa";
+import {
+  FaChevronRight,
+  FaInstagramSquare,
+  FaMinus,
+  FaPlus,
+  FaTelegramPlane,
+} from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { TfiEmail } from "react-icons/tfi";
 import QRCode from "react-qr-code";
 
 export const Footer = () => {
@@ -38,8 +46,16 @@ export const Footer = () => {
         "Rewards Hub",
       ],
     },
-    {ele:"Trade",category:["BTCUSDT","ETHUSDT","DOGEUSDT","SOLUSDT"]},
-    {ele:"Support",category:["Support Center","Submit a request","Fee Schedule","Official Verification"]},
+    { ele: "Trade", category: ["BTCUSDT", "ETHUSDT", "DOGEUSDT", "SOLUSDT"] },
+    {
+      ele: "Support",
+      category: [
+        "Support Center",
+        "Submit a request",
+        "Fee Schedule",
+        "Official Verification",
+      ],
+    },
   ];
   const dark = true;
   const isOpen = false;
@@ -48,8 +64,10 @@ export const Footer = () => {
       <div className="p-5">
         <div className="justify-between items-center flex">
           <div></div>
-        <div className="text-[36px] font-extrabold">FAQS</div>
-<div className="flex gap-3 items-center">View More <FaChevronRight /></div>
+          <div className="text-[36px] font-extrabold">FAQS</div>
+          <div className="flex gap-3 items-center">
+            View More <FaChevronRight />
+          </div>
         </div>
         {arr?.map((item, index) => (
           <Accordion
@@ -117,11 +135,19 @@ export const Footer = () => {
 
               <div>
                 <h3 className="text-lg font-semibold mb-3">Community</h3>
-                <div className="flex gap-4 text-xl text-gray-300">
-                  <span>𝕏</span>
-                  <span>✈️</span>
-                  <span>📷</span>
-                  <span>✉️</span>
+                <div className="flex gap-4 text-xl text-white">
+                <span>
+                <FaXTwitter />
+              </span>
+              <span>
+                <FaTelegramPlane />
+              </span>
+              <span>
+                <FaInstagramSquare />
+              </span>
+              <span>
+                <TfiEmail />
+              </span>
                 </div>
               </div>
             </div>
@@ -215,25 +241,35 @@ export const Footer = () => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-        {item?.category?.map((ele, ind) => (
-          <div
-            key={ind}
-            className={`${
-              dark ? "text-[#EAECEF]" : "text-[#202630]"
-            } text-[14px] font-normal leading-[22px] text-left`}
-          >
-            {ele}
-          </div>
-        ))}
-      </AccordionDetails>
+                {item?.category?.map((ele, ind) => (
+                  <div
+                    key={ind}
+                    className={`${
+                      dark ? "text-[#EAECEF]" : "text-[#202630]"
+                    } text-[14px] font-normal leading-[22px] text-left`}
+                  >
+                    {ele}
+                  </div>
+                ))}
+              </AccordionDetails>
             </Accordion>
           ))}
-          <div><div className="flex gap-4 text-xl text-gray-300">
-                  <span>𝕏</span>
-                  <span>✈️</span>
-                  <span>📷</span>
-                  <span>✉️</span>
-                </div></div>
+          <div>
+            <div className="flex gap-4 text-xl text-white">
+              <span>
+                <FaXTwitter />
+              </span>
+              <span>
+                <FaTelegramPlane />
+              </span>
+              <span>
+                <FaInstagramSquare />
+              </span>
+              <span>
+                <TfiEmail />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
