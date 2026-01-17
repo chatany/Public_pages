@@ -11,7 +11,7 @@ import {
   FaPlus,
   FaTelegramPlane,
 } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TfiEmail } from "react-icons/tfi";
 import QRCode from "react-qr-code";
@@ -60,11 +60,11 @@ export const Footer = () => {
   const dark = true;
   const isOpen = false;
   return (
-    <div>
-      <div className="p-5">
+    <div className="">
+      <div className="md:p-[0px_60px_0px_60px] ">
         <div className="justify-between items-center flex">
           <div></div>
-          <div className="text-[36px] font-extrabold">FAQS</div>
+          <div className="text-[36px] font-extrabold mb-20">FAQS</div>
           <div className="flex gap-3 items-center">
             View More <FaChevronRight />
           </div>
@@ -118,20 +118,31 @@ export const Footer = () => {
           </Accordion>
         ))}
       </div>
-      <div className="p-[20px_10px_20px_10px]">
+       <div className="flex flex-col gap-5 items-center bg-[#131516] md:p-[20px_0px_20px_0px] p-[10px_0px_10px_0px] mt-10">
+        <div className="font-extrabold text-[20px]">
+          Start your crypto journey now !
+        </div>
+        <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2">
+          <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-[18px]">
+            <img src="gift.svg" className="size-6" /> Sign up now
+          </div>
+          <FaArrowRightLong className="size-5 text-black md:hidden" />
+        </button>
+      </div>
+      <div className="p-[20px_0px_20px_0px]">
         <footer className="bg-[#131516] text-white px-10 py-16 max-md:hidden">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12">
+          <div className=" mx-auto grid grid-cols-1 md:grid-cols-5 gap-12">
             {/* LEFT SECTION */}
             <div className="space-y-6 flex flex-col items-center">
               <h2 className="text-2xl font-semibold">
                 Trade Crypto Anywhere Anytime
               </h2>
 
-              <div className=" p-2 w-[120px]">
+              <div className="w-[120px] h-[120px]">
                 <QRCode className="w-full h-full bg-white  p-2" value={""} />
+              <p className="text-[10px] text-gray-400">Scan to download app</p>
               </div>
 
-              <p className="text-sm text-gray-400">Scan to download app</p>
 
               <div>
                 <h3 className="text-lg font-semibold mb-3">Community</h3>
@@ -153,7 +164,7 @@ export const Footer = () => {
             </div>
 
             {/* ABOUT */}
-            <div>
+            <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">About</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
                 <li>About Us</li>
@@ -165,7 +176,7 @@ export const Footer = () => {
             </div>
 
             {/* PRODUCT */}
-            <div>
+            <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
                 <li>Buy Crypto</li>
@@ -177,7 +188,7 @@ export const Footer = () => {
             </div>
 
             {/* TRADES */}
-            <div>
+            <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Trades</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
                 <li>BTCUSDT</li>
@@ -195,8 +206,8 @@ export const Footer = () => {
 
             {/* SUPPORT */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
+              <h3 className="text-xl font-semibold mb-4 text-left">Support</h3>
+              <ul className="space-y-2 text-gray-300 text-sm text-left">
                 <li>Support Center</li>
                 <li>Submit a request</li>
                 <li>Fee Schedule</li>

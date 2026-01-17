@@ -22,7 +22,7 @@ export default function Carousel() {
   return (
     <div className="w-full bg-black py-20 overflow-hidden">
       {/* Carousel */}
-      <div className="max-w-6xl mx-auto overflow-hidden">
+      <div className="mx-auto overflow-hidden">
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(${translateX}%)` }}
@@ -32,7 +32,7 @@ export default function Carousel() {
               key={i}
               className="min-w-[33.3333%] px-4"
             >
-              <div className="h-[300px] rounded-3xl border-2 border-white"></div>
+              <div className="h-[300px] rounded-3xl border-[1px] border-white"></div>
             </div>
           ))}
         </div>

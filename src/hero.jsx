@@ -3,7 +3,7 @@ import QRCode from "react-qr-code";
 
 export default function Hero() {
   return (
-    <section className=" flex max-md:flex-col md:p-20 p-5 gap-[10%]">
+    <section className=" flex max-md:flex-col md:p-15 p-5 justify-between">
       {/* Left Content */}
       <div className=" z-10 w-full md:w-[50%] flex flex-col text-left border-amber-300">
         <h1 className="text-[25px] md:text-[40px] font-bold text-white leading-tight text-left">
@@ -37,7 +37,7 @@ export default function Hero() {
 
           <div className="max-md:hidden">
             <div className="mb-2">Download App</div>
-            <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center p-2">
               <QRCode value="" className="p-0.5 bg-white w-fit h-fit" />
             </div>
           </div>
