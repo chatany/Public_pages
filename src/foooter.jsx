@@ -15,8 +15,9 @@ import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { TfiEmail } from "react-icons/tfi";
 import QRCode from "react-qr-code";
+import { Link } from "react-router-dom";
 
-export const Footer = () => {
+export const Footer = ({isShow=true}) => {
   const arr = [
     "What is cryptocurrency exchange?",
     "What products does Bitzup offer?",
@@ -61,6 +62,7 @@ export const Footer = () => {
   const isOpen = false;
   return (
     <div className="">
+      {isShow &&
       <div className="md:p-[0px_60px_0px_60px] ">
         <div className="justify-between items-center flex">
           <div></div>
@@ -117,9 +119,10 @@ export const Footer = () => {
       </AccordionDetails> */}
           </Accordion>
         ))}
-      </div>
+      </div>}
+      {isShow &&
        <div className="flex flex-col gap-5 items-center bg-[#131516] md:p-[20px_0px_20px_0px] p-[10px_0px_10px_0px] mt-10">
-        <div className="font-extrabold text-[20px]">
+        <div className="font-bold text-[20px] md:text-[50px]">
           Start your crypto journey now !
         </div>
         <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2">
@@ -128,7 +131,7 @@ export const Footer = () => {
           </div>
           <FaArrowRightLong className="size-5 text-black md:hidden" />
         </button>
-      </div>
+      </div>}
       <div className="p-[20px_0px_20px_0px]">
         <footer className="bg-[#131516] text-white px-10 py-16 max-md:hidden">
           <div className=" mx-auto grid grid-cols-1 md:grid-cols-5 gap-12">
@@ -167,11 +170,11 @@ export const Footer = () => {
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">About</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
-                <li>About Us</li>
-                <li>Terms of Service</li>
-                <li>Privacy Notice</li>
-                <li>Risk Warning</li>
-                <li>Announcements</li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/aml-policy"}>AML Policy</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/cookies-policy"}>Cookie Policy</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/privacy-policy"}>Privacy Notice</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/risk-disclosure"}>Risk Disclosure</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/trading-policy"}>Trading Policy</Link></li>
               </ul>
             </div>
 

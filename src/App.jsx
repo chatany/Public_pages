@@ -1,18 +1,30 @@
 import "./App.css";
-import MobileDrawer from "./Drawer";
-import Hero from "./hero";
-import Navbar from "./Navbar";
-import Partners from "./patner";
-import { Section } from "./section";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { Home } from "./Components/home";
+import { AmlPolicy } from "./Components/AMLPolicy";
+import { Menu } from "./menu";
+import { RiskPolicy } from "./Components/Risk";
+import { TradePolicy } from "./Components/TradePolicy";
+import { CookiePolicy } from "./Components/cookiePolicy";
+import { PrivacyPolicy } from "./privacyPolicy";
+import ScrollToTop from "./Components/custom";
 export default function App() {
   return (
-    <div className=" min-h-screen bg-black flex justify-center flex-col">
-      <Navbar />
-      <Hero />
-      {/* <MobileDrawer open={true} onClose={() => console.log("kk")
-      } /> */}
-      <Partners />
-      <Section/>
-    </div>
+   
+    <Router>
+        <ScrollToTop/>
+      <Routes>
+        <Route  element={<Home/>} path="/" />
+        <Route  element={<Menu children={<AmlPolicy/>}/>} path="/aml-policy" />
+        <Route  element={<Menu children={<RiskPolicy/>}/>} path="/risk-disclosure" />
+        <Route element={<Menu children={<TradePolicy/>}/>} path="/trading-policy" />
+        <Route element={<Menu children={<CookiePolicy/>}/>} path="/cookies-policy" />
+        <Route element={<Menu children={<PrivacyPolicy/>}/>} path="/privacy-policy" />
+      </Routes>
+    </Router>
   );
 }

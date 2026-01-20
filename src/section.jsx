@@ -87,7 +87,7 @@ export const Section = () => {
   return (
     <div className="w-full flex flex-col gap-10">
       <div className="flex justify-center  md:p-[0px_60px_0px_60px]">
-        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-[40px]  max-md:hidden mt-20 ">
+        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-[8%]  max-md:hidden mt-20 ">
           {["1.svg", "2.svg", "3.svg", "4.svg"].map((item, ind) => (
             <div
               key={ind}
@@ -165,7 +165,7 @@ export const Section = () => {
                   onClick={() => {
                     setActiveTab(tab);
                   }}
-                  className={`py-2 px-3 rounded-md text-[16px] md:text-[32px] whitespace-nowrap cursor-pointer
+                  className={`py-2 px-3 rounded-md text-[16px] md:text-[50px] whitespace-nowrap cursor-pointer font-semibold
                 ${activeTab === tab ? " " : "text-[#585757]"}`}
                 >
                   {tab}
@@ -218,7 +218,7 @@ export const Section = () => {
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
-                    Trade
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -291,12 +291,12 @@ export const Section = () => {
                           </div>
                         </td>
                         <td
-                          className={`text-right max-md:hidden text-nowrap  p-[0px_20px_20px_20px] text-black `}
+                          className={`text-right max-md:hidden  p-[0px_26px_20px_20px] text-black `}
                         >
                           <button
                             className={`${
                               dark ? "bg-[#2EDBAD]" : " text-[#2EDBAD]"
-                            } rounded-[40px] p-[8px_26px_8px_26px]`}
+                            } rounded-[40px] p-[8px_20px_8px_20px] text-[16px]`}
                           >
                             Trade
                           </button>
@@ -342,9 +342,9 @@ export const Section = () => {
         </div>
         <div className="md:w-[50%] max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
           <div>
-            <div className="text-[50px] font-extrabold text-center">
+            <div className="text-[50px] font-bold text-center">
               Trade Crypto
-              <div className="text-[50px] font-extrabold text-center">
+              <div className="text-[50px] font-bold text-center">
                 Anywhere Anytime
               </div>
             </div>
@@ -362,7 +362,7 @@ export const Section = () => {
                 <div className="text-[15px] font-normal leading-[100%] whitespace-nowrap">
                   Scan to download app
                 </div>
-                <div className="text-[26px] font-extrabold whitespace-nowrap">
+                <div className="text-[26px] font-bold whitespace-nowrap">
                   iOS & Android
                 </div>
               </div>
@@ -573,7 +573,7 @@ export const Section = () => {
         </div>
       </div>
       <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full  font-extrabold">
+        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full  font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">
@@ -586,7 +586,8 @@ export const Section = () => {
           <PromoSlider items={8} />
         </div>
       </div>
-
+{/* <PrivacyPolicy/> */}
+{/* <Menu  children={<PrivacysPolicy/>}/> */}
       <Footer />
     </div>
   );

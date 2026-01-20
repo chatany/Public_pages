@@ -4,7 +4,7 @@ export default function Partners() {
     "Unlimit.svg",
     "Crystal.svg",
     "Sumsub.svg",
-    "Alchemy.svg",
+    "public/Alchemy Pay.png",
     "fireblock.svg",
     "Trading.svg",
   ];
@@ -21,7 +21,7 @@ export default function Partners() {
           <img
             key={i}
             src={`/${item}`}
-            className="mx-12 py-6  text-[20px] whitespace-nowrap"
+            className="mx-12 py-6 w-[120px] text-[20px] whitespace-nowrap"
           />
         
         ))}
