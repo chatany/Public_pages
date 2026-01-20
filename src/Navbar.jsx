@@ -10,20 +10,22 @@ import {
 import { MdOutlineMenu } from "react-icons/md";
 import { TiArrowSortedDown } from "react-icons/ti";
 import MobileDrawer from "./Drawer";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [openPopup, setOpenPopup] = useState(false);
   const handleClose=()=>{
     setOpenPopup(false);
   }
+  const navigate=useNavigate()
   return (
     <header className="h-[64px] w-full bg-black border-b border-gray-800">
       <div className=" mx-auto h-full px-6 flex items-center justify-between">
         {/* LEFT */}
         <div className="flex items-center gap-8 h-full">
           {/* Logo */}
-          <div className="flex items-center gap-2">
-            <span className="text-white font-semibold text-lg">
+          <div className="flex items-center gap-2 cursor-pointer">
+            <span className="text-white font-semibold text-lg" onClick={()=>navigate("/")}>
               <img src="/bitzup_light_logo.png" className="h-12 w-fit" />
             </span>
           </div>
