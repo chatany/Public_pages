@@ -343,9 +343,9 @@ export const Section = () => {
         </div>
         <div className="md:w-[50%] max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
           <div>
-            <div className="text-[50px] font-bold text-center">
+            <div className="text-[30px] font-bold text-center">
               Trade Crypto
-              <div className="text-[50px] font-bold text-center">
+              <div className="text-[30px] font-bold text-center">
                 Anywhere Anytime
               </div>
             </div>
@@ -441,7 +441,7 @@ export const Section = () => {
         </div>
       </div>
       <div className="flex flex-col mt-10 md:p-[0px_60px_0px_60px]">
-        <div className="font-bold md:text-[45px] text-[30px] mb-15">
+        <div className="font-bold md:text-[30px] text-[30px] mb-15">
           Escort Every Trade
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-60 ">
@@ -574,7 +574,7 @@ export const Section = () => {
         </div>
       </div>
       <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full  font-bold">
+        <div className="text-[30px] md:text-[30px] md:w-[60%] w-full  font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">

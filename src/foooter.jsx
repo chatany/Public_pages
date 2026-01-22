@@ -65,7 +65,7 @@ export const Footer = ({isShow=true}) => {
       {isShow &&
       <div className="md:p-[0px_60px_0px_60px] p-[0px_20px_0px_20px] ">
         <div className="justify-between items-center flex">
-          <div className="text-[36px] font-extrabold mb-10 w-full text-center">FAQS</div>
+          <div className="text-[30px] font-extrabold mb-10 w-full text-center">FAQS</div>
         </div>
         <div className="flex justify-end flex gap-3 items-center whitespace-nowrap">
             View More <FaChevronRight />
@@ -121,7 +121,7 @@ export const Footer = ({isShow=true}) => {
       </div>}
       {isShow &&
        <div className="flex flex-col gap-5 items-center bg-[#131516] md:p-[20px_0px_20px_0px] p-[10px_0px_10px_0px] mt-10">
-        <div className="font-bold text-[20px] md:text-[50px]">
+        <div className="font-bold text-[20px] md:text-[30px]">
           Start your crypto journey now !
         </div>
         <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2">
