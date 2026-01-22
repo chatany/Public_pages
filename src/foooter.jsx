@@ -63,14 +63,13 @@ export const Footer = ({isShow=true}) => {
   return (
     <div className="">
       {isShow &&
-      <div className="md:p-[0px_60px_0px_60px] ">
+      <div className="md:p-[0px_60px_0px_60px] p-[0px_20px_0px_20px] ">
         <div className="justify-between items-center flex">
-          <div></div>
-          <div className="text-[36px] font-extrabold mb-20">FAQS</div>
-          <div className="flex gap-3 items-center">
-            View More <FaChevronRight />
-          </div>
+          <div className="text-[36px] font-extrabold mb-10 w-full text-center">FAQS</div>
         </div>
+        <div className="flex justify-end flex gap-3 items-center whitespace-nowrap">
+            View More <FaChevronRight />
+          </div>  
         {arr?.map((item, index) => (
           <Accordion
             key={index}
@@ -96,14 +95,14 @@ export const Footer = ({isShow=true}) => {
               id="panel1-header"
               className="!m-0 !px-0 !py-0 flex items-center  !border-none justify-between"
             >
-              <Typography
+              <div
                 component="span"
                 className={`${
                   dark ? "text-[#EAECEF]" : "text-[#202630]"
                 } text-[16px] leading-[32px] pl-0 font-medium`}
               >
                 {item}
-              </Typography>
+              </div>
             </AccordionSummary>
             {/* <AccordionDetails>
         {item?.category?.map((ele, ind) => (
@@ -175,6 +174,8 @@ export const Footer = ({isShow=true}) => {
                 <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/privacy-policy"}>Privacy Notice</Link></li>
                 <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/risk-disclosure"}>Risk Disclosure</Link></li>
                 <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/trading-policy"}>Trading Policy</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/user-agreement"}>User Agreement</Link></li>
+                <li className="hover:text-[#2EDBAD] hover:underline "><Link to={"/terms-of-use"}>Terms of use</Link></li>
               </ul>
             </div>
 

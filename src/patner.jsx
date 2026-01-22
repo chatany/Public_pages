@@ -4,7 +4,7 @@ export default function Partners() {
     "Unlimit.svg",
     "Crystal.svg",
     "Sumsub.svg",
-    "public/Alchemy Pay.png",
+    "Alchemy.png",
     "fireblock.svg",
     "Trading.svg",
   ];

@@ -296,7 +296,7 @@ export const Section = () => {
                           <button
                             className={`${
                               dark ? "bg-[#2EDBAD]" : " text-[#2EDBAD]"
-                            } rounded-[40px] p-[8px_20px_8px_20px] text-[16px]`}
+                            } rounded-[20px] p-[8px_20px_8px_20px] text-[16px]`}
                           >
                             Trade
                           </button>
@@ -316,6 +316,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
+      <div className="text-center text-[30px] p-3 font-bold md:hidden">Trade Crypto Anywhere Anytime</div>
       <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full mt-10  md:p-[0px_60px_0px_60px]">
         <div className="md:w-[50%] w-full justify-center flex ">
           <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
@@ -327,13 +328,13 @@ export const Section = () => {
           </div>
         </div>
         <div className=" flex w-full justify-center text-[12px] gap-5 md:hidden mt-10">
-          <div className="flex flex-col items-center font-bold">
+          <div className="flex flex-col items-center font-bold gap-1">
             <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
               <BsAndroid2 className="size-4" />
             </div>
             <div>Android</div>
           </div>
-          <div className="flex flex-col items-center font-bold">
+          <div className="flex flex-col items-center font-bold gap-1">
             <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
               <FaGooglePlay className="size-4" />
             </div>
@@ -394,7 +395,7 @@ export const Section = () => {
         </div>
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:p-[0px_60px_0px_60px]">
-        <div className="font-bold text-[45px]">How to Get Started</div>
+        <div className="font-bold text-[30px]">How to Get Started</div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-10">
             <div className="flex gap-5">
@@ -404,7 +405,7 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Register and claim exclusive newcomer rewards.
                 </div>
-                <button className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-2xl mt-2 flex gap-1 items-center cursor-pointer w-30">
+                <button className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30">
                   Regester now <FaArrowRightLong />
                 </button>
               </div>
@@ -416,7 +417,7 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Buy crypto in a few easy steps. .
                 </div>
-                <button className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-2xl mt-2 flex gap-1 items-center cursor-pointer">
+                <button className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer">
                   Buy Crypto <FaArrowRightLong />
                 </button>
               </div>
@@ -428,7 +429,7 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Sell and buy crypto, copy trade, and more. .
                 </div>
-                <button className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-2xl mt-2 flex gap-1 items-center cursor-pointer">
+                <button className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer">
                   Trade Now <FaArrowRightLong />
                 </button>
               </div>
@@ -551,7 +552,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
-
+<div className="text-[30px] font-bold md:hidden">How to Get Started</div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
         <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
           <div>Create Account</div>
