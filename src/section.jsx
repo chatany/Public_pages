@@ -63,7 +63,7 @@ export const Section = () => {
     fetchData();
     // fetchData1();
   }, []);
-  const items = ["1.svg", "2.svg", "3.svg", "4.svg"];
+  const items = ["2.svg", "1.svg", "3.svg", "4.svg"];
   const visibleCards = 2;
   const totalSlides = items.length - visibleCards + 1;
 
@@ -87,8 +87,8 @@ export const Section = () => {
   return (
     <div className="w-full flex flex-col gap-10">
       <div className="flex justify-center  md:p-[0px_60px_0px_60px]">
-        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-[8%]  max-md:hidden mt-20 ">
-          {["1.svg", "2.svg", "3.svg", "4.svg"].map((item, ind) => (
+        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-[5%]  max-md:hidden mt-20 ">
+          {["2.svg", "1.svg", "3.svg", "4.svg"].map((item, ind) => (
             <div
               key={ind}
               className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
@@ -165,7 +165,7 @@ export const Section = () => {
                   onClick={() => {
                     setActiveTab(tab);
                   }}
-                  className={`py-2 px-3 rounded-md text-[16px] md:text-[50px] whitespace-nowrap cursor-pointer font-semibold
+                  className={`py-2 md:px-[30px] px-[10px] rounded-md text-[16px] md:text-[50px] whitespace-nowrap cursor-pointer font-semibold
                 ${activeTab === tab ? " " : "text-[#585757]"}`}
                 >
                   {tab}
@@ -195,19 +195,19 @@ export const Section = () => {
                   <th
                     className={`${
                       dark ? "bg-[#000000]" : "bg-white"
-                    } text-right md:text-[20px] text-[12px] font-semibold top-0 sticky p-[20px]`}
+                    } text-right md:text-[20px] text-[12px] font-semibold top-0 sticky md:p-[20px] p-[10px]`}
                   >
                     Coin Price
                   </th>
                   <th
-                    className={`text-right md:text-[20px] text-[12px] font-semibold p-[20px] ${
+                    className={`text-right md:text-[20px] text-[12px] font-semibold md:p-[20px] p-[10px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
                     24H Change
                   </th>
                   <th
-                    className={`text-right md:text-[20px] max-md:hidden text-[12px] font-semibold p-[20px] ${
+                    className={`text-right md:text-[20px] max-md:hidden text-[12px] font-semibold md:p-[20px] p-[10px] ${
                       dark ? "bg-[#000000]" : "bg-white"
                     } top-0 sticky`}
                   >
@@ -343,9 +343,9 @@ export const Section = () => {
         </div>
         <div className="md:w-[50%] max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
           <div>
-            <div className="text-[30px] font-bold text-center">
+            <div className="text-[30px] md:text-[50px] font-bold text-center">
               Trade Crypto
-              <div className="text-[30px] font-bold text-center">
+              <div className="text-[30px] md:text-[50px] font-bold text-center">
                 Anywhere Anytime
               </div>
             </div>
@@ -395,7 +395,7 @@ export const Section = () => {
         </div>
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:p-[0px_60px_0px_60px]">
-        <div className="font-bold text-[30px]">How to Get Started</div>
+        <div className="font-bold text-[50px]">How to Get Started</div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-10">
             <div className="flex gap-5">
@@ -406,7 +406,7 @@ export const Section = () => {
                   Register and claim exclusive newcomer rewards.
                 </div>
                 <button className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30">
-                  Regester now <FaArrowRightLong />
+                  Register now <FaArrowRightLong />
                 </button>
               </div>
             </div>
@@ -441,7 +441,7 @@ export const Section = () => {
         </div>
       </div>
       <div className="flex flex-col mt-10 md:p-[0px_60px_0px_60px]">
-        <div className="font-bold md:text-[30px] text-[30px] mb-15">
+        <div className="font-bold md:text-[50px] text-[30px] mb-15">
           Escort Every Trade
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-60 ">
@@ -574,7 +574,7 @@ export const Section = () => {
         </div>
       </div>
       <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[30px] md:text-[30px] md:w-[60%] w-full  font-bold">
+        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full  font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">
