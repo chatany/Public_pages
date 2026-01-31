@@ -64,6 +64,7 @@ export const Section = () => {
     // fetchData1();
   }, []);
   const items = ["2.svg", "1.svg", "3.svg", "4.svg"];
+  
   const visibleCards = 2;
   const totalSlides = items.length - visibleCards + 1;
 
