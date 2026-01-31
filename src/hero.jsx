@@ -6,7 +6,7 @@ export default function Hero() {
     <section className=" flex max-md:flex-col md:p-15 p-5 justify-between">
       {/* Left Content */}
       <div className=" z-10 w-full md:w-[50%] flex flex-col text-left border-amber-300">
-        <h1 className="text-[25px] md:text-[40px] font-bold text-white leading-tight text-left">
+        <h1 className="text-[30px] md:text-[50px] font-bold text-white leading-tight text-left">
           Bitzup - Where Whales are <br /> Made
         </h1>
 
