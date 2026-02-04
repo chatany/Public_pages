@@ -64,7 +64,7 @@ export const Section = () => {
     // fetchData1();
   }, []);
   const items = ["2.svg", "1.svg", "3.svg", "4.svg"];
-  
+
   const visibleCards = 2;
   const totalSlides = items.length - visibleCards + 1;
 
@@ -317,18 +317,20 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="text-center text-[30px] p-3 font-bold md:hidden">Trade Crypto Anywhere Anytime</div>
-      <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full mt-10  md:p-[0px_60px_0px_60px]">
+      <div className="text-center text-[30px] p-3 font-bold md:hidden">
+        Trade Crypto Anywhere Anytime
+      </div>
+      <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
         <div className="md:w-[50%] w-full justify-center flex ">
           <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
             <img
               src="./home.gif"
-              className="w-[160px] h-[335px] md:w-[320px] md:h-[620px] z-20"
+              className="w-[260px] h-[420px] md:w-[320px] md:h-[620px] z-20"
             />
             <div className="absolute bg-[#2EDBAD] blur-[200px]  h-[60%] w-50 rounded-full"></div>
           </div>
         </div>
-        <div className=" flex w-full justify-center text-[12px] gap-5 md:hidden mt-10">
+        <div className=" flex w-full justify-center text-[12px] gap-5 md:hidden">
           <div className="flex flex-col items-center font-bold gap-1">
             <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
               <BsAndroid2 className="size-4" />
@@ -441,6 +443,27 @@ export const Section = () => {
           </div>
         </div>
       </div>
+      <div className="text-[30px] font-bold md:hidden">How to Get Started</div>
+      <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
+        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+          <div>Create Account</div>
+          <div>
+            <FaAngleRight />
+          </div>
+        </div>
+        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+          <div>Quick Buy</div>
+          <div>
+            <FaAngleRight />
+          </div>
+        </div>
+        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+          <div>Start Trading</div>
+          <div>
+            <FaAngleRight />
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col mt-10 md:p-[0px_60px_0px_60px]">
         <div className="font-bold md:text-[50px] text-[30px] mb-15">
           Escort Every Trade
@@ -478,17 +501,17 @@ export const Section = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5 pl-9">
           <div className="flex flex-col md:hidden gap-2">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/secure-shield 1.svg" className="h-[20px] w-[20px]" />
+                <img src="/secure-shield 1.svg" className="size-7" />
               </div>
               <div className="text-left flex flex-col gap-1">
                 <div className="text-[20px] font-bold">
                   Secure Smart Contracts
                 </div>
-                <div className="text-[10px]">
+                <div className="text-[10px] text-[#B2ADAD]">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -498,11 +521,11 @@ export const Section = () => {
           <div className="flex flex-col md:hidden">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/reserve 1.svg" className="h-[20px] w-[20px]" />
+                <img src="/reserve 1.svg" className="size-7" />
               </div>
               <div className="text-left flex flex-col gap-1">
                 <div className="text-[20px] font-bold">Reserve Audit Proof</div>
-                <div className="text-[10px]">
+                <div className="text-[10px] text-[#B2ADAD]">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -512,13 +535,13 @@ export const Section = () => {
           <div className="flex flex-col md:hidden">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/wallet 1.svg" className="h-[20px] w-[20px]" />
+                <img src="/wallet 1.svg" className="size-6" />
               </div>
               <div className="text-left flex flex-col gap-1">
                 <div className="text-[20px] font-bold">
                   Cold/Hot Wallet based Storage
                 </div>
-                <div className="text-[10px]">
+                <div className="text-[10px] text-[#B2ADAD]">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -527,7 +550,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="  md:p-15 grid grid-cols-2 md:grid-cols-4 justify-evenly bg-[#131516] flex-wrap mt-10 p-[20px_0px_20px_0px]">
+      <div className="  md:p-15 grid grid-cols-2 md:grid-cols-4  gap-10 justify-evenly bg-[#131516] flex-wrap mt-10 p-[20px_0px_20px_0px]">
         <div>
           <div className="md:text-[49px] text-[30px] font-bold">$19.64B</div>
           <div className="md:text-[20px] text-[15px] font-semibold text-[#B2ADAD]">
@@ -553,43 +576,23 @@ export const Section = () => {
           </div>
         </div>
       </div>
-<div className="text-[30px] font-bold md:hidden">How to Get Started</div>
-      <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
-          <div>Create Account</div>
-          <div>
-            <FaAngleRight />
-          </div>
-        </div>
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
-          <div>Quick Buy</div>
-          <div>
-            <FaAngleRight />
-          </div>
-        </div>
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
-          <div>Start Trading</div>
-          <div>
-            <FaAngleRight />
-          </div>
-        </div>
-      </div>
+      
       <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full  font-bold">
+        <div className="text-[20px] md:text-[50px] md:w-[60%] w-full mb-10   font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">
-          <div className="w-full rounded-[15px] border-2 h-70"></div>
-          <div className="w-full rounded-[15px] border-2 h-70"></div>
-          <div className="w-full rounded-[15px] border-2 h-70"></div>
+          <div className="w-full rounded-[15px] border-2 h-50"></div>
+          <div className="w-full rounded-[15px] border-2 h-50"></div>
+          <div className="w-full rounded-[15px] border-2 h-50"></div>
         </div>
         <div className="max-md:hidden w-full">
           {" "}
           <PromoSlider items={8} />
         </div>
       </div>
-{/* <PrivacyPolicy/> */}
-{/* <Menu  children={<PrivacysPolicy/>}/> */}
+      {/* <PrivacyPolicy/> */}
+      {/* <Menu  children={<PrivacysPolicy/>}/> */}
       <Footer />
     </div>
   );

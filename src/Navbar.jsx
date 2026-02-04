@@ -26,7 +26,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-2 cursor-pointer">
             <span className="text-white font-semibold text-lg" onClick={()=>navigate("/")}>
-              <img src="/bitzup_light_logo.png" className="h-12 w-fit" />
+              <img src="/bitzup_light_logo.png" className="h-7.5  w-fit" />
             </span>
           </div>
 
@@ -71,7 +71,6 @@ export default function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-2 h-full">
-          <MdOutlineMenu className="size-6 cursor-pointer md:hidden" onClick={()=>setOpenPopup(true)} />
           <div className="max-md:hidden">
             <Icon className="max-md:hidden">
               <FiSearch className="size-6 " />
@@ -80,17 +79,18 @@ export default function Navbar() {
           <span className="text-sm text-gray-300 hover:text-white text-[15px] font-semibold cursor-pointer max-md:hidden">
             Log in
           </span>
-          <button className="h-9 px-4 rounded-full bg-primary text-black  text-[15px] font-semibold bg-[#2EDBAD] max-md:hidden">
+          <button className="h-9 px-4 rounded-full bg-primary text-black  text-[15px] font-semibold bg-[#2EDBAD] ">
             Sign Up
           </button>
-          <Icon>
-            <FiDownload className="size-6 " />
+          <MdOutlineMenu className="size-6 cursor-pointer md:hidden" onClick={()=>setOpenPopup(true)} />
+          <Icon className="max-md:hidden">
+            <FiDownload className="size-6 max-md:hidden" />
           </Icon>
-          <Icon>
-            <FiGlobe className="size-6" />
+          <Icon className="max-md:hidden">
+            <FiGlobe className="size-6 max-md:hidden" />
           </Icon>
-          <Icon>
-            <FiSun className="size-6" />
+          <Icon className="max-md:hidden">
+            <FiSun className="size-6 max-md:hidden" />
           </Icon>
         </div>
         <MobileDrawer open={openPopup} onClose={handleClose}/>
@@ -99,9 +99,9 @@ export default function Navbar() {
   );
 }
 
-function Icon({ children }) {
+function Icon({ children,className }) {
   return (
-    <div className="w-9 h-9 flex items-center justify-center rounded-full text-gray-300 hover:bg-[#111] hover:text-white cursor-pointer">
+    <div className={`w-9 ${className} h-9 flex items-center justify-center rounded-full text-gray-300 hover:bg-[#111] hover:text-white cursor-pointer`}>
       {children}
     </div>
   );

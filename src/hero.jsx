@@ -3,11 +3,11 @@ import QRCode from "react-qr-code";
 
 export default function Hero() {
   return (
-    <section className=" flex max-md:flex-col md:p-15 p-5 justify-between">
+    <section className=" flex max-md:flex-col max-md:gap-5 md:p-15 p-5 justify-between">
       {/* Left Content */}
       <div className=" z-10 w-full md:w-[50%] flex flex-col text-left border-amber-300">
-        <h1 className="text-[30px] md:text-[50px] font-bold text-white leading-tight text-left">
-          Bitzup - Where Whales are <br /> Made
+        <h1 className="text-[25px] md:text-[50px] font-bold text-white leading-tight text-left">
+          Bitzup - Where Whales are Made
         </h1>
 
         {/* Input */}
@@ -51,7 +51,7 @@ export default function Hero() {
       <div className="flex items-center gap-3 mt-8 justify-center md:hidden">
         <input
           placeholder="Email / Phone"
-          className="w-full bg-transparent border border-gray-600 rounded-full px-5 py-3 text-sm text-white outline-none"
+          className="w-[50%] bg-transparent border border-gray-600 rounded-full px-5 py-3 text-sm text-white outline-none"
         />
         <div className="bg-[#2EDBAD] text-black px-6 py-3 rounded-[35px] font-semibold flex justify-center items-center gap-1  text-nowrap w-fit">
           <img src="/gift.svg" className="size-4" /> Sign up
