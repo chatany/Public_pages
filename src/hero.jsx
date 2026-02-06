@@ -3,7 +3,7 @@ import QRCode from "react-qr-code";
 
 export default function Hero() {
   return (
-    <section className=" flex max-md:flex-col max-md:gap-5 md:p-15 p-5 justify-between">
+    <section className=" flex max-md:flex-col max-md:gap-5 md:p-15 p-3 justify-between">
       {/* Left Content */}
       <div className=" z-10 w-full md:w-[50%] flex flex-col text-left border-amber-300">
         <h1 className="text-[25px] md:text-[50px] font-bold text-white leading-tight text-left">
@@ -48,7 +48,7 @@ export default function Hero() {
       <div className=" flex  max-md:justify-end">
         <div className="md:w-[320px] md:h-[320px] w-[260px] h-[150px] rounded-full bg-gradient-to-br bg-[#131516]" />
       </div>
-      <div className="flex items-center gap-3 mt-8 justify-center md:hidden">
+      <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
         <input
           placeholder="Email / Phone"
           className="w-[50%] bg-transparent border border-gray-600 rounded-full px-5 py-3 text-sm text-white outline-none"

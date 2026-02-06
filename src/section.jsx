@@ -3,7 +3,7 @@ import { Footer } from "./foooter";
 import QRCode from "react-qr-code";
 import { GrWindows } from "react-icons/gr";
 import { AiFillApi, AiTwotoneCloseCircle } from "react-icons/ai";
-import { FaAngleRight, FaGooglePlay } from "react-icons/fa";
+import { FaAngleRight, FaChevronRight, FaGooglePlay } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import PromoSlider from "./img";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
@@ -317,6 +317,8 @@ export const Section = () => {
           </div>
         </div>
       </div>
+      <div>
+
       <div className="text-center text-[30px] p-3 font-bold md:hidden">
         Trade Crypto Anywhere Anytime
       </div>
@@ -325,7 +327,7 @@ export const Section = () => {
           <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
             <img
               src="./home.gif"
-              className="w-[260px] h-[420px] md:w-[320px] md:h-[620px] z-20"
+              className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20"
             />
             <div className="absolute bg-[#2EDBAD] blur-[200px]  h-[60%] w-50 rounded-full"></div>
           </div>
@@ -397,6 +399,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
+      </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:p-[0px_60px_0px_60px]">
         <div className="font-bold text-[50px]">How to Get Started</div>
         <div className="flex justify-between items-center">
@@ -445,22 +448,22 @@ export const Section = () => {
       </div>
       <div className="text-[30px] font-bold md:hidden">How to Get Started</div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
           <div>Create Account</div>
-          <div>
-            <FaAngleRight />
+          <div className="bg-[#131516] p-2 rounded-md">
+            <FaChevronRight />
           </div>
         </div>
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
           <div>Quick Buy</div>
-          <div>
-            <FaAngleRight />
+          <div className="bg-[#131516] p-2 rounded-md">
+            <FaChevronRight />
           </div>
         </div>
-        <div className=" border-2 border-amber-50 w-full rounded-[12px] items-center flex justify-between p-2">
+        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
           <div>Start Trading</div>
-          <div>
-            <FaAngleRight />
+          <div className="bg-[#131516] p-2 rounded-md">
+            <FaChevronRight />
           </div>
         </div>
       </div>
@@ -578,7 +581,7 @@ export const Section = () => {
       </div>
       
       <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[20px] md:text-[50px] md:w-[60%] w-full mb-10   font-bold">
+        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full mb-10   font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">

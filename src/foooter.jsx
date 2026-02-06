@@ -67,8 +67,8 @@ export const Footer = ({ isShow = true }) => {
       {isShow && (
         <div className="md:p-[0px_60px_0px_60px] p-[0px_20px_0px_20px] ">
           <div className="justify-between items-center flex">
-            <div className="text-[20px] md:text-[50px] font-bold mb-10 w-full text-center">
-              FAQS
+            <div className="text-[30px] md:text-[50px] font-bold mb-10 w-full  justify-center text-center flex items-end">
+              FAQ<div className="text-[22px]">S</div>
             </div>
           </div>
           <div className="flex justify-end flex gap-3 items-center whitespace-nowrap">
