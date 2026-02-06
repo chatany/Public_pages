@@ -17,12 +17,14 @@ export default function MobileDrawer({ open, onClose }) {
       />
 
       {/* Drawer */}
-      <div
-        className={`fixed top-0 right-0 z-50 h-full w-[85%] max-w-[380px]
-        bg-gradient-to-b from-[#0b0f14] to-[#070a0e]
-        transform transition-transform duration-300
-        ${open ? "translate-x-0" : "translate-x-full"}`}
-      >
+     <div
+  className={`fixed top-0 right-0 z-50 h-full w-[85%] max-w-[380px]
+  bg-gradient-to-b from-[#0b0f14] to-[#070a0e]
+overflow-y-auto overscroll-contain
+  transform transition-transform duration-300
+  ${open ? "translate-x-0" : "translate-x-full"}`}
+>
+      
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4">
           <div className="flex items-center gap-2">
