@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { CgClose } from "react-icons/cg";
 
 export default function MobileDrawer({ open, onClose }) {
-  useEffect(() => {
-    document.body.scroll = "hidden";
-  }, [open]);
+  // useEffect(() => {
+  //   document.body.scroll = "hidden";
+  // }, [open]);
   return (
     <>
       {/* Overlay */}
