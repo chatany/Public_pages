@@ -10,7 +10,7 @@ export default function MobileDrawer({ open, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-transparent ${
+        className={`fixed inset-0 z-40 h-fit bg-transparent ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={onClose}
@@ -75,7 +75,7 @@ export default function MobileDrawer({ open, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="absolute bottom-6 left-0 w-full px-5">
+        <div className="mt-5 left-0 w-full px-5">
           <button className="w-full h-12 rounded-full border border-white/40 text-white font-medium">
             Download App
           </button>

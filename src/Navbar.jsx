@@ -79,8 +79,8 @@ export default function Navbar() {
           <span className="text-sm text-gray-300 hover:text-white text-[15px] font-semibold cursor-pointer max-md:hidden">
             Log in
           </span>
-          <button className="h-9 px-4 rounded-full bg-primary text-black  text-[15px] font-semibold bg-[#2EDBAD] ">
-            Sign Up
+          <button className="h-9 px-4 rounded-full bg-primary text-black  text-[15px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center">
+           <img src="/gift.svg" className="size-4" /> Sign up
           </button>
           <MdOutlineMenu className="size-6 cursor-pointer md:hidden" onClick={()=>setOpenPopup(true)} />
           <Icon className="max-md:hidden">
