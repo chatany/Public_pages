@@ -10,6 +10,8 @@ import { PrivacyPolicy } from "./privacyPolicy";
 import ScrollToTop from "./Components/custom";
 import { UserAgreement } from "./Components/userPolicy";
 import { Terms } from "./Components/userAgreement";
+import { ReferralPage } from "./ReferalPage";
+import { CarrierPage } from "./CarrierPage";
 export default function App() {
   return (
     <Router>
@@ -17,6 +19,8 @@ export default function App() {
       <Routes>
         <Route element={<Home />} path="/" />
         <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
+        <Route element={<ReferralPage/>} path="/refferal"/>
+        <Route element={<CarrierPage/>} path="/carrier"/>
         <Route
           element={<Menu children={<RiskPolicy />} />}
           path="/risk-disclosure"
