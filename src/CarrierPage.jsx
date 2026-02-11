@@ -68,7 +68,7 @@ export const CarrierPage = () => {
     <Navbar/>
     <div className="bg-black text-white min-h-screen ">
       <div className="flex items-center max-md:flex-col  justify-between md:p-15 p-5 ">
-        <div className=" md:text-left text-center flex flex-col gap-10">
+        <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
           <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%]">
             Career Opportunities
           </div>
@@ -121,7 +121,7 @@ export const CarrierPage = () => {
         </div>
       </div>
       <div className="mt-30 md:p-15 p-5">
-        <div className="text-[45px] font-bold mb-10">Our Core Values</div>
+        <div className="md:text-[45px] text-[32px] font-bold mb-10">Our Core Values</div>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
           {coreValues?.map((item, ind) => (
             <div
@@ -140,7 +140,7 @@ export const CarrierPage = () => {
         </div>
       </div>
       <div className="mt-30 md:p-15 p-5">
-        <div className="text-[45px] font-bold mb-10">Why Bitzup ?</div>
+        <div className="md:text-[45px] text-[32px] font-bold mb-10">Why Bitzup ?</div>
         <div className="flex flex-col gap-10">
           <div className="grid md:grid-cols-2  grid-cols-1 gap-10">
             {whyBitzupArr1?.map((item, ind) => (
@@ -171,7 +171,7 @@ export const CarrierPage = () => {
         </div>
       </div>
       <div className="mt-30 md:p-15 p-5">
-        <div className="text-[45px] font-bold mb-10">
+        <div className="md:text-[45px] text-[32px] font-bold mb-10">
           Positions open, waiting just for you!
         </div>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
