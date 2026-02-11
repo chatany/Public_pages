@@ -9,7 +9,7 @@ export const ReferralPage = () => {
     <div className="bg-black min-h-screen ">
       <div className="flex items-center max-md:flex-col  justify-between md:p-20 p-5">
         <div className=" md:text-left text-center flex flex-col gap-10">
-          <div className="md:text-[54px] text-[35px] font-bold text-center leading-[100%]">
+          <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[50px]">
             30% Commission Rebate.
             <br className="max-md:hidden" /> Invite Your Friends Now.
           </div>
@@ -18,7 +18,7 @@ export const ReferralPage = () => {
             together.
           </div>
           <div className="w-full flex max-md:justify-center">
-            <button className="bg-[#2EDBAD] h-[47px] w-[180px] text-[18px] w-f p-1 font-bold text-black rounded-[33px]">
+            <button className="bg-[#2EDBAD] h-[47px] w-[180px] text-[18px]  p-1 font-bold text-black rounded-[33px]">
               Invite Now
             </button>
           </div>
@@ -28,7 +28,7 @@ export const ReferralPage = () => {
           </div>
         </div>
         <div className="mt-10">
-          <img className="bg-[#131516] rounded-full  md:size-96.5 size-73" />
+          <div className="bg-[#131516] rounded-full  md:size-96.5 size-73" />
         </div>
       </div>
       <div className="flex justify-center flex-col items-center md:p-20 p-5">
@@ -112,7 +112,7 @@ export const ReferralPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mt-30 gap-5 items-center bg-[#131516] md:p-[40px_0px_40px_0px] p-[10px_0px_10px_0px] mt-10">
+      <div className="flex flex-col mt-30 gap-5 items-center bg-[#131516] md:p-[40px_0px_40px_0px] p-[40px_0px_40px_0px] mt-10">
         <div className="font-bold text-[35px] md:text-[50px]">
          Start Earning Now !
         </div>
@@ -120,11 +120,11 @@ export const ReferralPage = () => {
           <div className="flex max-md:hidden font-semibold text-black gap-1 items-center justify-center md:w-[180px] text-[18px]">
             <button src="gift.svg" className="text-[20px] rounded-[20px] text-[16px]" > Log In</button>
           </div>
-          <button className={`w-[160px] text-black md:hidden rounded-[20px] text-[16px] text-center`} >Invite Now</button>
+          <button className={`w-[120px] h-[47px] text-black md:hidden rounded-[33px] font-bold text-[16px] text-center`} >Invite Now</button>
         </button>
       </div>
-    </div>
     <Footer isShow={false}/>
+    </div>
     </>
   );
 };
