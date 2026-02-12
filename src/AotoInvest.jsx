@@ -106,13 +106,13 @@ export const AutoInvest = () => {
                 className="text-[20px] rounded-[20px] text-[16px]"
               >
                 {" "}
-                Log In
+               Invest Now
               </button>
             </div>
             <button
               className={`w-[120px] h-[47px] text-black md:hidden rounded-[33px] font-bold text-[16px] text-center`}
             >
-              Invite Now
+             Invest Now
             </button>
           </button>
         </div>
