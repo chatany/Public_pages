@@ -12,6 +12,7 @@ import { UserAgreement } from "./Components/userPolicy";
 import { Terms } from "./Components/userAgreement";
 import { ReferralPage } from "./ReferalPage";
 import { CarrierPage } from "./CarrierPage";
+import { AutoInvest } from "./AotoInvest";
 export default function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ export default function App() {
         <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
         <Route element={<ReferralPage/>} path="/refferal"/>
         <Route element={<CarrierPage/>} path="/carrier"/>
+        <Route element={<AutoInvest/>} path="/invest"/>
         <Route
           element={<Menu children={<RiskPolicy />} />}
           path="/risk-disclosure"
