@@ -17,6 +17,8 @@ import { Footer } from "./foooter";
 export const Verification = () => {
   const dark = true;
   const [open, setOpen] = useState(false);
+
+  
   const popupRef = useRef(null);
   const methedsArr = [
     {
