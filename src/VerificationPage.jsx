@@ -1,0 +1,204 @@
+import { useEffect, useRef, useState } from "react";
+import { CiFacebook } from "react-icons/ci";
+import { FaSearch, FaSortDown, FaTelegramPlane } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
+import {
+  IoIosArrowDown,
+  IoIosLink,
+  IoIosMail,
+  IoIosSearch,
+  IoMdCheckmark,
+  IoMdPhonePortrait,
+} from "react-icons/io";
+import { IoLogoWechat } from "react-icons/io5";
+import Navbar from "./Navbar";
+import { Footer } from "./foooter";
+
+export const Verification = () => {
+  const dark = true;
+  const [open, setOpen] = useState(false);
+  const popupRef = useRef(null);
+  const methedsArr = [
+    {
+      name: "Website",
+      icon: <IoIosLink className="size-5"/>,
+      placeholder: "Please enter the link",
+    },
+    {
+      name: "Email",
+      icon: <IoIosMail className="size-5"/>,
+      placeholder: "Please enter the full information to verify",
+    },
+    {
+      name: "Telegram",
+      icon: <FaTelegramPlane className="size-5"/>,
+      placeholder: "Please enter the link or @username",
+    },
+    {
+      name: "X(Twitter)",
+      icon: <FaSquareXTwitter className="size-5"/>,
+      placeholder: "Please enter the link or @username",
+    },
+    {
+      name: "Wechat",
+      icon: <IoLogoWechat className="size-5"/>,
+      placeholder: "Please enter the link or @username",
+    },
+    {
+      name: "FaceBook",
+      icon: <CiFacebook className="size-5"/>,
+      placeholder: "Please enter the link or @username",
+    },
+    {
+      name: "Phone",
+      icon: <IoMdPhonePortrait className="size-5"/>,
+      placeholder: "Please enter the phone number",
+    },
+  ];
+  const [select, setSelect] = useState(methedsArr[0]);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+  return (
+    <>
+      <Navbar />
+      <div className="bg-black min-h-screen ">
+        <div className="flex justify-center w-full min-h-[60vh]">
+          <div className="flex flex-col w-[60%] max-md:w-full">
+            <div className="flex items-center flex-col p-5 gap-5">
+              <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%] mt-15">
+                Bitzup Official Verification
+              </div>
+              <div className="md:text-[18px] text-[12px] font-bold leading-[100%] text-[#686868]  text-center">
+                Please use Bitzup Verify to check whether the source officially
+                represents Bitzup <br className="max-md:hidden" /> including
+                website link, email address, Discord ID, Twitter account, or
+                Telegram ID.
+              </div>
+            </div>
+
+            <div className="flex max-md:flex-col justify-center items-center p-5 gap-5 mt-10">
+              <div className="w-[40%] max-md:w-full">
+                <div
+                  className="max-w-[520px] max-md:w-full relative  cursor-pointer"
+                  ref={popupRef}
+                >
+                  <div
+                    className={`
+    border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-sm text-white outline-none
+     
+    `}
+                  >
+                    <div
+                      className="w-full flex justify-between h-full p-2 items-center"
+                      onClick={() => setOpen(!open)}
+                    >
+                      <div className="text-[15px] font-normal capitalize">
+                        {select ? (
+                          <div className="flex gap-3 items-center">
+                            <div>{select.icon}</div>
+                            {select.name}{" "}
+                          </div>
+                        ) : (
+                          "Select Method"
+                        )}
+                      </div>
+
+                      <FaSortDown
+                        className={`size-5 ${open ? "transition-transform rotate-180" : ""}`}
+                      />
+                    </div>
+                  </div>
+
+                  {open && (
+                    <div
+                      className={`absolute z-10 mt-2 w-full shadow-xl  ${
+                        dark
+                          ? "bg-[#17181A] text-[#EAECEF]"
+                          : "bg-[#FFFFFF] text-[#262030]"
+                      } rounded-xl  max-h-[300px] custom-scroll overflow-y-auto`}
+                    >
+                      <ul>
+                        {methedsArr.length > 0 ? (
+                          methedsArr.map((coin, ind) => (
+                            <li
+                              key={ind}
+                              className={`flex ${
+                                dark ? "" : "hover:bg-[#F5F5F5]"
+                              } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer`}
+                              onClick={() => {
+                                setSelect(coin);
+                                setOpen(!open);
+                              }}
+                            >
+                              <div className="flex items-center justify-between w-full gap-2">
+                                <div className="flex gap-2 items-center">
+                                  <div>{coin.icon}</div>
+                                  <span className="font-medium">
+                                    {coin.name}
+                                  </span>
+                                  {/* <span className="text-gray-500 text-sm">{coin.coin}</span> */}
+                                </div>
+                                {select?.name === coin.name && (
+                                  <div>
+                                    <IoMdCheckmark />
+                                  </div>
+                                )}
+                              </div>
+                            </li>
+                          ))
+                        ) : (
+                          <div className="h-full w-full flex justify-center items-center">
+                            No Data Found
+                          </div>
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="w-[60%] max-md:w-full">
+                <input
+                  placeholder={select?.placeholder || "Please enter the link."}
+                  className="w-full border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-[15px] font-normal text-[#686868] outline-none "
+                />
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="relative w-[50%] max-md:w-[90%] ">
+                <input
+                  name="Email"
+                  placeholder="Search"
+                  className={`border w-full bg-[#FFFFFF] border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
+     `}
+                  // onKeyDown={(e) => {
+                  //   if (e.key === "Enter") handleSubmit();
+                  // }}
+                  // value={userData.password}
+                  // onChange={(e) => handle("password", e)}
+                  // type={showPassword ? "password" : "text"}
+                />
+                <div className="cursor-pointer ">
+                  <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Footer isShow={false} />
+      </div>
+    </>
+  );
+};
