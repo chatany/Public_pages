@@ -76,13 +76,13 @@ export const Verification = () => {
     <>
       <Navbar />
       <div className="bg-black min-h-screen ">
-        <div className="flex justify-center w-full min-h-[70vh]">
+        <div className="flex justify-center w-full min-h-[75vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
-              <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%] mt-15 mb-10">
+              <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%] mt-15">
                 Bitzup Official Verification
               </div>
-              <div className="md:text-[18px] text-[12px] font-bold leading-[100%] text-[#686868]  text-center">
+              <div className="md:text-[18px] text-[12px] font-bold leading-[25px] text-[#686868]  text-center">
                 Please use Bitzup Verify to check whether the source officially
                 represents Bitzup <br className="max-md:hidden" /> including
                 website link, email address, Discord ID, Twitter account, or
@@ -90,7 +90,7 @@ export const Verification = () => {
               </div>
             </div>
 
-            <div className="flex max-md:flex-col justify-center items-center p-5 gap-5 mt-10 md:mb-10">
+            <div className="flex max-md:flex-col justify-center items-center p-5 gap-5 mt-10 md:mb-5">
               <div className="w-[40%] max-md:w-full">
                 <div
                   className="max-w-[520px] max-md:w-full relative  cursor-pointer"
