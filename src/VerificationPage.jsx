@@ -18,42 +18,41 @@ export const Verification = () => {
   const dark = true;
   const [open, setOpen] = useState(false);
 
-  
   const popupRef = useRef(null);
   const methedsArr = [
     {
       name: "Website",
-      icon: <IoIosLink className="size-5"/>,
+      icon: <IoIosLink className="size-5" />,
       placeholder: "Please enter the link",
     },
     {
       name: "Email",
-      icon: <IoIosMail className="size-5"/>,
+      icon: <IoIosMail className="size-5" />,
       placeholder: "Please enter the full information to verify",
     },
     {
       name: "Telegram",
-      icon: <FaTelegramPlane className="size-5"/>,
+      icon: <FaTelegramPlane className="size-5" />,
       placeholder: "Please enter the link or @username",
     },
     {
       name: "X(Twitter)",
-      icon: <FaSquareXTwitter className="size-5"/>,
+      icon: <FaSquareXTwitter className="size-5" />,
       placeholder: "Please enter the link or @username",
     },
     {
       name: "Wechat",
-      icon: <IoLogoWechat className="size-5"/>,
+      icon: <IoLogoWechat className="size-5" />,
       placeholder: "Please enter the link or @username",
     },
     {
       name: "FaceBook",
-      icon: <CiFacebook className="size-5"/>,
+      icon: <CiFacebook className="size-5" />,
       placeholder: "Please enter the link or @username",
     },
     {
       name: "Phone",
-      icon: <IoMdPhonePortrait className="size-5"/>,
+      icon: <IoMdPhonePortrait className="size-5" />,
       placeholder: "Please enter the phone number",
     },
   ];
@@ -77,10 +76,10 @@ export const Verification = () => {
     <>
       <Navbar />
       <div className="bg-black min-h-screen ">
-        <div className="flex justify-center w-full min-h-[60vh]">
+        <div className="flex justify-center w-full min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
-              <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%] mt-15">
+              <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%] mt-15 mb-10">
                 Bitzup Official Verification
               </div>
               <div className="md:text-[18px] text-[12px] font-bold leading-[100%] text-[#686868]  text-center">
@@ -91,7 +90,7 @@ export const Verification = () => {
               </div>
             </div>
 
-            <div className="flex max-md:flex-col justify-center items-center p-5 gap-5 mt-10">
+            <div className="flex max-md:flex-col justify-center items-center p-5 gap-5 mt-10 md:mb-10">
               <div className="w-[40%] max-md:w-full">
                 <div
                   className="max-w-[520px] max-md:w-full relative  cursor-pointer"
