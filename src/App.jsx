@@ -14,7 +14,7 @@ import { ReferralPage } from "./ReferalPage";
 import { CarrierPage } from "./CarrierPage";
 import { AutoInvest } from "./AotoInvest";
 import { Verification } from "./VerificationPage";
-// import { Vip } from "./Vip";
+import { Vip } from "./Vip";
 export default function App() {
   return (
     <Router>
@@ -24,7 +24,7 @@ export default function App() {
         <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
         <Route element={<ReferralPage />} path="/refferal" />
         <Route element={<CarrierPage />} path="/carrier" />
-        {/* <Route element={<Vip/>} path="vip"/> */}
+        <Route element={<Vip/>} path="vip"/>
         <Route element={<AutoInvest />} path="/invest" />
         <Route element={<Verification />} path="/verification" />
         <Route
