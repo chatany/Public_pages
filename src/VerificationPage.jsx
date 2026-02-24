@@ -13,10 +13,13 @@ import {
 import { IoLogoWechat } from "react-icons/io5";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
+import VerifyPopup from "./Components/verification/success";
 
 export const Verification = () => {
   const dark = true;
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
+  const [inputValue,setInputValue]=useState("")
 
   const popupRef = useRef(null);
   const methedsArr = [
@@ -56,6 +59,10 @@ export const Verification = () => {
       placeholder: "Please enter the phone number",
     },
   ];
+  const methodsArr = data
+    .map((item) => ACCOUNT_TYPE_CONFIG[item.account_type])
+    .filter(Boolean); // unknown type remove
+
   const [select, setSelect] = useState(methedsArr[0]);
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -72,9 +79,69 @@ export const Verification = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [open]);
+
+  const fetchData = async () => {
+    try {
+      // setLoading(true);
+
+      const response = await fetch(
+        "https://test.bitzup.com/market/official-id-type",
+      );
+
+      if (!response.ok) {
+        throw new Error("Request failed");
+      }
+
+      const result = await response.json();
+      setData(result);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      // setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+    // fetchData1();
+  }, []);
+  console.log(data, "jj");
+const handleSubmit = async () => {
+  try {
+    const payload = {
+      account_type: select.name,
+      value: inputValue,
+    };
+
+    const response = await fetch(
+      "https://test.bitzup.com/market/verify-official",
+      {
+        method: "POST", // 👈 important
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload), // 👈 JSON send
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Request failed");
+    }
+
+    const result = await response.json();
+    setData(result);
+
+  } catch (err) {
+    setError(err.message);
+  }
+};
   return (
     <>
       <Navbar />
+      <VerifyPopup
+        isOpen={true}
+        onClose={() => setOpen(false)}
+        url="https://www.bitget.site/official-verification"
+      />
       <div className="bg-black min-h-screen ">
         <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
@@ -173,16 +240,20 @@ export const Verification = () => {
               <div className="w-[60%] max-md:w-full">
                 <input
                   placeholder={select?.placeholder || "Please enter the link."}
+                  value={inputValue}
+                  onChange={(e)=>setInputValue(e.target.value)}
+                  
                   className="w-full border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-[15px] font-normal text-[#686868] outline-none "
                 />
               </div>
             </div>
             <div className="flex justify-center">
               <div className="relative w-[50%] max-md:w-[90%] ">
-                <input
+                <button
                   name="Email"
                   placeholder="Search"
-                  className={`border w-full bg-[#FFFFFF] border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
+                  onClick={handleSubmit}
+                  className={`border w-full bg-[#FFFFFF] cursor-pointer border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
      `}
                   // onKeyDown={(e) => {
                   //   if (e.key === "Enter") handleSubmit();
@@ -190,7 +261,7 @@ export const Verification = () => {
                   // value={userData.password}
                   // onChange={(e) => handle("password", e)}
                   // type={showPassword ? "password" : "text"}
-                />
+                >Search</button>
                 <div className="cursor-pointer ">
                   <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" />
                 </div>
