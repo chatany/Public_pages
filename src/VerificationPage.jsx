@@ -60,10 +60,10 @@ export const Verification = () => {
     },
   ];
   const methodsArr = data
-    .map((item) => ACCOUNT_TYPE_CONFIG[item.account_type])
+    .map((item) => methedsArr[item.account_type])
     .filter(Boolean); // unknown type remove
 
-  const [select, setSelect] = useState(methedsArr[0]);
+  const [select, setSelect] = useState(null);
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -134,6 +134,11 @@ const handleSubmit = async () => {
     setError(err.message);
   }
 };
+useEffect(() => {
+  if (methodsArr.length > 0 && !select) {
+    setSelect(methodsArr[0]);
+  }
+}, [methodsArr]);
   return (
     <>
       <Navbar />
