@@ -182,7 +182,7 @@ export const Vip = () => {
             </div>
           </div>
         </div>
-        <div className="flex max-md:flex-col justify-between items-center ">
+        <div className="flex max-md:flex-col justify-between items-center mt-20 p-10">
           <div></div>
           <div className="flex items-center gap-5">
             <div className="font-bold md:text-[45px] text-[18px] text-white ">
@@ -222,11 +222,11 @@ export const Vip = () => {
             </div>
           </div>
         </div>
-        <div className="text-[18px] font-medium leading-[29px] text-[#686868] p-5">
+        <div className="text-[18px] font-medium leading-[29px] text-[#686868] w-full p-[0px_40px_0px_40px] text-left">
           Trading volume from 
           <span className="text-[#FFDFAD]"> zero-fee trading pairs </span>will
           not be counted toward VIP trading volume. For VIP6 and VIP7,
-          API-generated <br className="max-md:hidden" />
+          API-generated 
           trading volume must not exceed 20% of their total spot/futures trading
           volume.
         </div>
@@ -398,7 +398,7 @@ export const Vip = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-30 gap-5 items-center md:p-[40px_0px_40px_0px] p-[40px_20px_40px_20px] ">
+        <div className="flex flex-col mt-30 gap-15 items-center md:p-[40px_0px_40px_0px] p-[40px_20px_40px_20px] ">
           <div className="font-bold text-[35px] md:text-[45px]">
             Become a Bitzup VIP to enjoy high fee discounts
           </div>

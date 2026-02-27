@@ -15,6 +15,7 @@ import { CarrierPage } from "./CarrierPage";
 import { AutoInvest } from "./AotoInvest";
 import { Verification } from "./VerificationPage";
 import { Vip } from "./Vip";
+import SubmitRequestForm from "./Components/submit/request";
 export default function App() {
   return (
     <Router>
@@ -27,6 +28,7 @@ export default function App() {
         <Route element={<Vip/>} path="vip"/>
         <Route element={<AutoInvest />} path="/invest" />
         <Route element={<Verification />} path="/verification" />
+        <Route element={<SubmitRequestForm/>} path="request"/>
         <Route
           element={<Menu children={<RiskPolicy />} />}
           path="/risk-disclosure"
