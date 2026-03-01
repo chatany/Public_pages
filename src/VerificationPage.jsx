@@ -154,8 +154,6 @@ export const Verification = () => {
       {showPopup && (
         <VerifyPopup
           isOpen={showPopup}
-          onConfirm={}
-          onReport={}
           onClose={() => setShowPopup(false)}
           type=""
           url={inv}
