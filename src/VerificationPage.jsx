@@ -18,8 +18,10 @@ import VerifyPopup from "./Components/verification/success";
 export const Verification = () => {
   const dark = true;
   const [open, setOpen] = useState(false);
+  const [errors, setErrors] = useState("");
+  const [showPopup,setShowPopup]=useState(false)
   const [data, setData] = useState([]);
-  const [inputValue,setInputValue]=useState("")
+  const [inputValue, setInputValue] = useState("");
 
   const popupRef = useRef(null);
   const methedsArr = [
@@ -105,48 +107,54 @@ export const Verification = () => {
     // fetchData1();
   }, []);
   console.log(data, "jj");
-const handleSubmit = async () => {
-  try {
-    const payload = {
-      account_type: select.name,
-      value: inputValue,
-    };
+  const handleSubmit = async () => {
+    try {
+      const payload = {
+        account_type: select.name,
+        value: inputValue,
+      };
 
-    const response = await fetch(
-      "https://test.bitzup.com/market/verify-official",
-      {
-        method: "POST", // 👈 important
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://test.bitzup.com/market/verify-official",
+        {
+          method: "POST", // 👈 important
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload), // 👈 JSON send
         },
-        body: JSON.stringify(payload), // 👈 JSON send
+      );
+
+      if (!response.ok) {
+        throw new Error("Request failed");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Request failed");
+      const result = await response.json();
+      // setData(result);
+      if (result?.verified == true) {
+        setErrors("success");
+      } else {
+        setErrors("error");
+      }
+    } catch (err) {
+      setError(err.message);
     }
-
-    const result = await response.json();
-    setData(result);
-
-  } catch (err) {
-    setError(err.message);
-  }
-};
-useEffect(() => {
-  if (methodsArr.length > 0 && !select) {
-    setSelect(methodsArr[0]);
-  }
-}, [methodsArr]);
+  };
+  useEffect(() => {
+    if (methodsArr.length > 0 && !select) {
+      setSelect(methodsArr[0]);
+    }
+  }, [methodsArr]);
   return (
     <>
       <Navbar />
+{showPopup&&
       <VerifyPopup
-        isOpen={true}
-        onClose={() => setOpen(false)}
-        url="https://www.bitget.site/official-verification"
-      />
+        isOpen={showPopup}
+        onClose={() => setShowPopup(false)}
+        type=""
+        url={inv}
+      />}
       <div className="bg-black min-h-screen ">
         <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
@@ -246,8 +254,7 @@ useEffect(() => {
                 <input
                   placeholder={select?.placeholder || "Please enter the link."}
                   value={inputValue}
-                  onChange={(e)=>setInputValue(e.target.value)}
-                  
+                  onChange={(e) => setInputValue(e.target.value)}
                   className="w-full border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-[15px] font-normal text-[#686868] outline-none "
                 />
               </div>
@@ -266,7 +273,9 @@ useEffect(() => {
                   // value={userData.password}
                   // onChange={(e) => handle("password", e)}
                   // type={showPassword ? "password" : "text"}
-                >Search</button>
+                >
+                  Search
+                </button>
                 <div className="cursor-pointer ">
                   <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" />
                 </div>
