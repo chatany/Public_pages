@@ -110,7 +110,7 @@ export const Verification = () => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        account_type: select.account_type,
+        type: select.account_type,
         value: inputValue,
       };
 
