@@ -190,7 +190,7 @@ export const Verification = () => {
                         {select ? (
                           <div className="flex gap-3 items-center">
                             <div>{select.icon}</div>
-                            {select.name}{" "}
+                            {select.account_type}{" "}
                           </div>
                         ) : (
                           "Select Method"
@@ -212,8 +212,8 @@ export const Verification = () => {
                       } rounded-xl  max-h-[300px] custom-scroll overflow-y-auto`}
                     >
                       <ul>
-                        {methedsArr.length > 0 ? (
-                          methedsArr.map((coin, ind) => (
+                        {data.length > 0 ? (
+                          data.map((coin, ind) => (
                             <li
                               key={ind}
                               className={`flex ${
@@ -226,13 +226,13 @@ export const Verification = () => {
                             >
                               <div className="flex items-center justify-between w-full gap-2">
                                 <div className="flex gap-2 items-center">
-                                  <div>{coin.icon}</div>
+                                  {/* <div>{coin.icon}</div> */}
                                   <span className="font-medium">
-                                    {coin.name}
+                                    {coin.account_type}
                                   </span>
                                   {/* <span className="text-gray-500 text-sm">{coin.coin}</span> */}
                                 </div>
-                                {select?.name === coin.name && (
+                                {select?.account_type === coin.account_type && (
                                   <div>
                                     <IoMdCheckmark />
                                   </div>
