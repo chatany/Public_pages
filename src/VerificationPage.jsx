@@ -18,8 +18,9 @@ import VerifyPopup from "./Components/verification/success";
 export const Verification = () => {
   const dark = true;
   const [open, setOpen] = useState(false);
+  const [success,setSuccess]=useState(null)
   const [errors, setErrors] = useState("");
-  const [showPopup,setShowPopup]=useState(false)
+  const [showPopup, setShowPopup] = useState(false);
   const [data, setData] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -95,6 +96,9 @@ export const Verification = () => {
       }
 
       const result = await response.json();
+      console.log(result,"poi");
+      
+      // if(result?.verified)
       setData(result);
     } catch (err) {
       setError(err.message);
@@ -130,14 +134,14 @@ export const Verification = () => {
       }
 
       const result = await response.json();
+      console.log(result,"poi");
       // setData(result);
       if (result?.verified == true) {
         setErrors("success");
       } else {
         setErrors("error");
       }
-    } catch (err) {
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     if (methodsArr.length > 0 && !select) {
@@ -147,13 +151,16 @@ export const Verification = () => {
   return (
     <>
       <Navbar />
-{showPopup&&
-      <VerifyPopup
-        isOpen={showPopup}
-        onClose={() => setShowPopup(false)}
-        type=""
-        url={inv}
-      />}
+      {showPopup && (
+        <VerifyPopup
+          isOpen={showPopup}
+          onConfirm={}
+          onReport={}
+          onClose={() => setShowPopup(false)}
+          type=""
+          url={inv}
+        />
+      )}
       <div className="bg-black min-h-screen ">
         <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
