@@ -110,7 +110,7 @@ export const Verification = () => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        account_type: select.name,
+        account_type: select.account_type,
         value: inputValue,
       };
 
@@ -137,7 +137,6 @@ export const Verification = () => {
         setErrors("error");
       }
     } catch (err) {
-      setError(err.message);
     }
   };
   useEffect(() => {
