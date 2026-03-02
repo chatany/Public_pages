@@ -215,7 +215,7 @@ export default function SubmitRequestForm() {
                 <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form.file ? "text-white" : "text-[#00C2FF]"}`}
+                    className={`${form.file ? "text-white" : "text-[#2EDBAD]"}`}
                   >
                     {form.file ? form.file.name : "Add file or drop files here"}
                   </span>
@@ -245,7 +245,7 @@ export default function SubmitRequestForm() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#00C2FF] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -347,7 +347,7 @@ hear how we can make your experience better."
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#00C2FF] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -415,7 +415,7 @@ an only be changed once every 6 months. ）
                 <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form2.file ? "text-white" : "text-[#00C2FF]"}`}
+                    className={`${form2.file ? "text-white" : "text-[#2EDBAD]"}`}
                   >
                     {form2.file
                       ? form2.file.name
@@ -447,7 +447,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#00C2FF] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -530,7 +530,7 @@ an only be changed once every 6 months. ）
                 <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form3.file ? "text-white" : "text-[#00C2FF]"}`}
+                    className={`${form3.file ? "text-white" : "text-[#2EDBAD]"}`}
                   >
                     {form3.file
                       ? form3.file.name
@@ -562,7 +562,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#00C2FF] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -657,7 +657,7 @@ an only be changed once every 6 months. ）
                 <label className="w-full border  rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form4.file ? "text-white" : "text-[#00C2FF]"}`}
+                    className={`${form4.file ? "text-white" : "text-[#2EDBAD]"}`}
                   >
                     {form4.file
                       ? form4.file.name
