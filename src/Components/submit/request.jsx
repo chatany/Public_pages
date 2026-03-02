@@ -212,7 +212,7 @@ export default function SubmitRequestForm() {
               </Field>
 
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer hover:border-[#00C2FF] transition">
+                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
                     className={`${form.file ? "text-white" : "text-[#00C2FF]"}`}
@@ -312,10 +312,10 @@ hear how we can make your experience better."
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer hover:border-[#00C2FF] transition">
+                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form1.file ? "text-white" : "text-[#00C2FF]"}`}
+                    className={`${form1.file ? "text-white" : ""}`}
                   >
                     {form1.file
                       ? form1.file.name
@@ -412,7 +412,7 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer hover:border-[#00C2FF] transition">
+                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
                     className={`${form2.file ? "text-white" : "text-[#00C2FF]"}`}
@@ -527,7 +527,7 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer hover:border-[#00C2FF] transition">
+                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
                     className={`${form3.file ? "text-white" : "text-[#00C2FF]"}`}
@@ -654,7 +654,7 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer hover:border-[#00C2FF] transition">
+                <label className="w-full border  rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
                   {/* LEFT TEXT */}
                   <span
                     className={`${form4.file ? "text-white" : "text-[#00C2FF]"}`}
@@ -689,7 +689,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#00C2FF] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
