@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/trade/:path*",
-      "destination": "bitzup-dev-server.vercel.app/trade/:path*"
+      "destination": "https://bitzup-dev-server.vercel.app//trade/:path*"
     }
   ]
 }
