@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
-  const MAIN_SITE = "/trade";
+  const MAIN_SITE = "/trade/";
 
   const handleClose = () => {
     setOpenPopup(false);
