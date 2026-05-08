@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/:path*",
-      "destination": "bitzup-dev.vercel.app/:path*"
+      "source": "/(.*)",
+      "destination": "/"
     }
   ]
 }
