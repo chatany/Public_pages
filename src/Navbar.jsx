@@ -172,40 +172,52 @@ export default function Navbar() {
                   </div>
 
                   {/* DROPDOWN */}
-                  {hasDropdown && hoveredItem === item && (
-                    <div
-                      onMouseLeave={() => setHoveredItem(null)}
-                      className="absolute top-[64px] left-0 w-[320px] bg-[#181A20] border border-[#2B3139] rounded-2xl p-2 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999]"
-                    >
-                      {navConfig[item].map((subItem) => (
-                        <div
-                          key={subItem.title}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleNavigate(subItem.path);
-                            setHoveredItem(null);
-                          }}
-                          className="group flex items-start gap-4 p-4 rounded-xl hover:bg-[#222531] transition-all duration-200 cursor-pointer"
-                        >
-                          {/* ICON */}
-                          <div className="mt-1 text-[#2EDBAD] text-[20px]">
-                            {subItem.icon}
-                          </div>
+                 {/* DROPDOWN */}
+{hasDropdown && hoveredItem === item && (
+  <>
+    {/* hover bridge */}
+    <div className="absolute top-full left-0 w-full h-5 z-[998]" />
 
-                          {/* TEXT */}
-                          <div className="flex flex-col">
-                            <span className="text-white text-[15px] font-semibold group-hover:text-[#2EDBAD] transition-colors">
-                              {subItem.title}
-                            </span>
+    <div
+      onMouseEnter={() => setHoveredItem(item)}
+      onMouseLeave={() => setHoveredItem(null)}
+      className="absolute top-full left-0 mt-5 w-[340px] bg-[#17181A] border border-[#2B3139] rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999] hidden lg:block"
+    >
+      {navConfig[item].map((subItem, index) => (
+        <button
+          key={index}
+          type="button"
+          onClick={() => {
+            setHoveredItem(null);
 
-                            <span className="text-gray-400 text-[13px] leading-[18px] mt-1">
-                              {subItem.desc}
-                            </span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+            setTimeout(() => {
+              handleNavigate(subItem.path);
+            }, 50);
+          }}
+          className="w-full text-left"
+        >
+          <div className="flex gap-3 px-3 py-3 rounded-lg cursor-pointer hover:bg-[#2B3139] transition-all duration-200 group">
+            {/* ICON */}
+            <div className="flex items-start justify-center mt-1 text-[#2EDBAD] text-[20px] min-w-[22px]">
+              {subItem.icon}
+            </div>
+
+            {/* CONTENT */}
+            <div className="flex flex-col">
+              <div className="font-bold text-[14px] text-white group-hover:text-[#2EDBAD] transition-colors">
+                {subItem.title}
+              </div>
+
+              <div className="leading-4 text-[12px] text-[#848E9C] mt-1">
+                {subItem.desc}
+              </div>
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+  </>
+)}
                 </div>
               );
             })}
