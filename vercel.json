@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/trade/:path*",
+      "destination": "https://bitzup-dev.vercel.app/trade/:path*"
     }
   ]
 }
