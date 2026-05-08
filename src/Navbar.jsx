@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
-  const MAIN_SITE = "https://bitzup.com";
+  const MAIN_SITE = "/trade";
 
   const handleClose = () => {
     setOpenPopup(false);
@@ -109,11 +109,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className="h-[64px] w-full bg-black border-b border-gray-800">
+    <header className="h-[64px] w-full bg-black border-b border-[#1E2329]">
       <div className="mx-auto h-full px-6 flex items-center justify-between">
         {/* LEFT */}
         <div className="flex items-center gap-8 h-full">
-          {/* Logo */}
+          {/* LOGO */}
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={() => handleNavigate("/")}
@@ -126,7 +126,7 @@ export default function Navbar() {
           </div>
 
           {/* MENU */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm text-gray-300 h-full">
+          <nav className="hidden lg:flex items-center gap-7 text-sm h-full">
             {[
               "Buy Crypto",
               "Trade",
@@ -142,34 +142,41 @@ export default function Navbar() {
               return (
                 <div
                   key={item}
-                  className="relative h-full flex items-center cursor-pointer text-white font-semibold text-[15px] gap-1 hover:text-[#2EDBAD] transition-colors"
-                  onMouseEnter={() =>
-                    hasDropdown && setHoveredItem(item)
-                  }
-                  onMouseLeave={() =>
-                    hasDropdown && setHoveredItem(null)
-                  }
-                  onClick={() => {
-                    if (!hasDropdown) {
-                      if (item === "Markets") {
-                        handleNavigate(`${MAIN_SITE}/spot`);
-                      }
+                  className="relative h-full flex items-center"
+                  onMouseEnter={() => {
+                    if (hasDropdown) {
+                      setHoveredItem(item);
                     }
                   }}
                 >
-                  {item}
+                  {/* NAV ITEM */}
+                  <div
+                    onClick={() => {
+                      if (!hasDropdown) {
+                        if (item === "Markets") {
+                          handleNavigate(`${MAIN_SITE}/spot`);
+                        }
+                      }
+                    }}
+                    className="flex items-center gap-1 cursor-pointer text-[#EAECEF] font-medium text-[15px] hover:text-[#2EDBAD] transition-all duration-200"
+                  >
+                    {item}
 
-                  {hasDropdown && (
-                    <TiArrowSortedDown
-                      className={`transition-transform duration-200 ${
-                        hoveredItem === item ? "rotate-180" : ""
-                      }`}
-                    />
-                  )}
+                    {hasDropdown && (
+                      <TiArrowSortedDown
+                        className={`transition-all duration-300 ease-in-out ${
+                          hoveredItem === item ? "rotate-180" : ""
+                        }`}
+                      />
+                    )}
+                  </div>
 
                   {/* DROPDOWN */}
                   {hasDropdown && hoveredItem === item && (
-                    <div className="absolute top-[64px] left-0 w-72 bg-[#121212] border border-gray-800 rounded-xl p-2 shadow-2xl z-[100]">
+                    <div
+                      onMouseLeave={() => setHoveredItem(null)}
+                      className="absolute top-[64px] left-0 w-[320px] bg-[#181A20] border border-[#2B3139] rounded-2xl p-2 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999]"
+                    >
                       {navConfig[item].map((subItem) => (
                         <div
                           key={subItem.title}
@@ -178,20 +185,22 @@ export default function Navbar() {
                             handleNavigate(subItem.path);
                             setHoveredItem(null);
                           }}
-                          className="flex items-start gap-3 p-3 hover:bg-[#1e1e1e] rounded-lg transition-colors cursor-pointer"
+                          className="group flex items-start gap-4 p-4 rounded-xl hover:bg-[#222531] transition-all duration-200 cursor-pointer"
                         >
-                          <div className="mt-1 text-[#2EDBAD] text-lg">
+                          {/* ICON */}
+                          <div className="mt-1 text-[#2EDBAD] text-[20px]">
                             {subItem.icon}
                           </div>
 
-                          <div>
-                            <div className="text-white font-bold text-sm hover:text-[#2EDBAD]">
+                          {/* TEXT */}
+                          <div className="flex flex-col">
+                            <span className="text-white text-[15px] font-semibold group-hover:text-[#2EDBAD] transition-colors">
                               {subItem.title}
-                            </div>
+                            </span>
 
-                            <div className="text-gray-500 text-[12px] leading-tight">
+                            <span className="text-gray-400 text-[13px] leading-[18px] mt-1">
                               {subItem.desc}
-                            </div>
+                            </span>
                           </div>
                         </div>
                       ))}
@@ -206,36 +215,42 @@ export default function Navbar() {
         {/* RIGHT */}
         <div className="flex items-center gap-2 h-full">
           <div className="max-md:hidden">
-            <Icon className="max-md:hidden">
-              <FiSearch className="size-6" />
+            <Icon>
+              <FiSearch className="size-5" />
             </Icon>
           </div>
 
-          <span className="text-sm text-gray-300 hover:text-white text-[15px] font-semibold cursor-pointer max-md:hidden">
+          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors">
             Log in
           </span>
 
-          <button className="h-9 px-4 rounded-full text-black text-[15px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center">
+          <button className="h-9 px-5 rounded-full text-black text-[14px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center hover:opacity-90 transition-all">
             <img src="/gift.svg" className="size-4" alt="" />
             Sign up
           </button>
 
           <MdOutlineMenu
-            className="size-6 cursor-pointer md:hidden"
+            className="size-6 cursor-pointer md:hidden text-white"
             onClick={() => setOpenPopup(true)}
           />
 
-          <Icon className="max-md:hidden">
-            <FiDownload className="size-6" />
-          </Icon>
+          <div className="max-md:hidden">
+            <Icon>
+              <FiDownload className="size-5" />
+            </Icon>
+          </div>
 
-          <Icon className="max-md:hidden">
-            <FiGlobe className="size-6" />
-          </Icon>
+          <div className="max-md:hidden">
+            <Icon>
+              <FiGlobe className="size-5" />
+            </Icon>
+          </div>
 
-          <Icon className="max-md:hidden">
-            <FiSun className="size-6" />
-          </Icon>
+          <div className="max-md:hidden">
+            <Icon>
+              <FiSun className="size-5" />
+            </Icon>
+          </div>
         </div>
 
         <MobileDrawer open={openPopup} onClose={handleClose} />
@@ -244,10 +259,10 @@ export default function Navbar() {
   );
 }
 
-function Icon({ children, className }) {
+function Icon({ children, className = "" }) {
   return (
     <div
-      className={`w-9 h-9 flex items-center justify-center rounded-full text-gray-300 hover:bg-[#111] hover:text-white cursor-pointer ${className}`}
+      className={`w-9 h-9 flex items-center justify-center rounded-full text-gray-300 hover:bg-[#1E2329] hover:text-white cursor-pointer transition-all duration-200 ${className}`}
     >
       {children}
     </div>
