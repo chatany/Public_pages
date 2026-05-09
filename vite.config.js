@@ -4,5 +4,14 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss(),],
+  plugins: [react(), tailwindcss()],
+  server: {
+    proxy: {
+      '/trade': {
+        target: 'https://bitzup-dev-server.vercel.app',
+        changeOrigin: true,
+      },
+    },
+  },
 })
+

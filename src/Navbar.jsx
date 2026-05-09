@@ -26,14 +26,14 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
-  const MAIN_SITE = "/trade/";
+  const MAIN_SITE = "/trade";
 
   const handleClose = () => {
     setOpenPopup(false);
   };
 
   const handleNavigate = (path) => {
-    if (path.startsWith("http")) {
+    if (path.startsWith("http") || path.startsWith("/trade")) {
       window.location.href = path;
     } else {
       navigate(path);
