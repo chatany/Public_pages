@@ -3,6 +3,10 @@
     {
       "source": "/trade/:path*",
       "destination": "https://bitzup-dev-server.vercel.app/trade/:path*"
+    },
+    {
+      "source": "/((?!trade).*)",
+      "destination": "/index.html"
     }
   ]
 }
