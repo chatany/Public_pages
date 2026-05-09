@@ -44,66 +44,60 @@ export default function Navbar() {
     Trade: [
       {
         title: "Spot",
-        desc: "Classic trading interface",
-        path: `${MAIN_SITE}/spot`,
+        desc: "Buy and sell on the Spot market with advanced tools",
+        path: `${MAIN_SITE}/spot/BTCUSDT`,
         icon: <FiTrendingUp />,
       },
       {
         title: "Convert",
-        desc: "Zero fees, easiest way to trade",
-        path: `${MAIN_SITE}/spot`,
+        desc: "Convert crypto with one click",
+        path: `${MAIN_SITE}/convert`,
         icon: <FiRefreshCcw />,
       },
       {
-        title: "Auto Invest",
-        desc: "Accumulate crypto on autopilot",
-        path: `${MAIN_SITE}/invest`,
+        title: "Auto invest",
+        desc: "Invest in crypto with one click",
+        path: `${MAIN_SITE}/recurring`,
         icon: <FiPieChart />,
       },
     ],
 
     Futures: [
       {
-        title: "USDT-M Futures",
-        desc: "Perpetual or Delivery contracts",
-        path: `${MAIN_SITE}/spot`,
+        title: "USDⓈ-M Futures",
+        desc: "Contracts settled in USDT",
+        path: `${MAIN_SITE}/futures/BTCUSDT`,
         icon: <FiZap />,
-      },
-      {
-        title: "Coin-M Futures",
-        desc: "Settled in Cryptocurrency",
-        path: `${MAIN_SITE}/spot`,
-        icon: <FiDatabase />,
       },
     ],
 
     Earn: [
       {
-        title: "Savings",
-        desc: "Flexible or Fixed terms",
-        path: `${MAIN_SITE}/invest`,
+        title: "Simple Earn",
+        desc: "Earn passive income on 300+ crypto assets with Staking",
+        path: `${MAIN_SITE}/subscription`,
         icon: <FiDollarSign />,
-      },
-      {
-        title: "Staking",
-        desc: "Secure higher yields",
-        path: `${MAIN_SITE}/invest`,
-        icon: <FiLock />,
       },
     ],
 
     More: [
       {
-        title: "Referral",
-        desc: "Invite friends, earn together",
-        path: "/referral",
-        icon: <FiUsers />,
-      },
-      {
-        title: "VIP",
-        desc: "Exclusive privileges",
+        title: "VIP & Institutional",
+        desc: "Your trusted digital asset platform for VIPs and institutions",
         path: "/vip",
         icon: <FiStar />,
+      },
+      {
+        title: "OTC Trading",
+        desc: "Personalized, private, and secure OTC trading for professionals",
+        path: "/otc",
+        icon: <FiDatabase />,
+      },
+      {
+        title: "Referral Program",
+        desc: "Invite friends to earn either a commission rebate or a one-time reward",
+        path: "/Referral",
+        icon: <FiUsers />,
       },
     ],
   };
@@ -190,9 +184,9 @@ export default function Navbar() {
           onClick={() => {
             setHoveredItem(null);
 
-            setTimeout(() => {
+            // setTimeout(() => {
               handleNavigate(subItem.path);
-            }, 50);
+            // }, 50);
           }}
           className="w-full text-left"
         >
@@ -232,11 +226,11 @@ export default function Navbar() {
             </Icon>
           </div>
 
-          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors">
+          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors" onclikc={()=>navigate(`${MAIN_SITE}/login`)}>
             Log in
           </span>
 
-          <button className="h-9 px-5 rounded-full text-black text-[14px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center hover:opacity-90 transition-all">
+          <button className="h-9 px-5 rounded-full text-black text-[14px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center hover:opacity-90 transition-all" onClick={() => navigate(`${MAIN_SITE}/register`)}>
             <img src="/gift.svg" className="size-4" alt="" />
             Sign up
           </button>
