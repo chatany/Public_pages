@@ -279,13 +279,13 @@ export const Footer = ({ isShow = true }) => {
               <h3 className="text-xl font-semibold mb-4 text-left">Support</h3>
               <ul className="space-y-2 text-gray-300 text-sm text-left">
                 <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
-                  <Link to="/support">Support Center</Link>
+                  <a href="https://support.bitzup.com/support/home">Support Center</a>
                 </li>
                 <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
                   <Link to="/request">Submit a request</Link>
                 </li>
                 <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
-                  <Link to="/fees">Fee Schedule</Link>
+                  <a href={`${MAIN_SITE}/vips`}>Fee Schedule</a>
                 </li>
                 <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
                   <Link to="/verification">Official Verification</Link>

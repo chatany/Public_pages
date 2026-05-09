@@ -264,7 +264,7 @@ export const Verification = () => {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="relative w-[50%] max-md:w-[90%] ">
+              <div className="relative w-[20%] max-md:w-[90%] ">
                 <button
                   name="Email"
                   placeholder="Search"
@@ -281,7 +281,7 @@ export const Verification = () => {
                   Search
                 </button>
                 <div className="cursor-pointer ">
-                  <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" />
+                  {/* <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" /> */}
                 </div>
               </div>
             </div>
