@@ -226,7 +226,7 @@ export default function Navbar() {
             </Icon>
           </div>
 
-          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors" onclikc={()=>navigate(`${MAIN_SITE}/login`)}>
+          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors" onClick={()=>navigate(`${MAIN_SITE}/login`)}>
             Log in
           </span>
 

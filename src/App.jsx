@@ -25,10 +25,10 @@ export default function App() {
         <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
         <Route element={<ReferralPage />} path="/refferal" />
         <Route element={<CarrierPage />} path="/carrier" />
-        <Route element={<Vip/>} path="vip"/>
+        <Route element={<Vip/>} path="/vip"/>
         <Route element={<AutoInvest />} path="/invest" />
         <Route element={<Verification />} path="/verification" />
-        <Route element={<SubmitRequestForm/>} path="request"/>
+        <Route element={<SubmitRequestForm/>} path="/request"/>
         <Route
           element={<Menu children={<RiskPolicy />} />}
           path="/risk-disclosure"

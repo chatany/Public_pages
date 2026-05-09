@@ -6,10 +6,14 @@ import {
 } from "@mui/material";
 import {
   FaChevronRight,
+  FaInstagram,
   FaInstagramSquare,
   FaMinus,
   FaPlus,
+  FaTelegram,
   FaTelegramPlane,
+  FaTiktok,
+  FaTwitter,
 } from "react-icons/fa";
 import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -18,6 +22,7 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 
 export const Footer = ({ isShow = true }) => {
+  const MAIN_SITE = "/trade";
   const arr = [
     "What is cryptocurrency exchange?",
     "What products does Bitzup offer?",
@@ -42,21 +47,29 @@ export const Footer = ({ isShow = true }) => {
     {
       ele: "Product",
       category: [
-        "Buy Crypto",
-        "Futures Trading",
-        "Spot Trading",
-        "Earn",
-        "Rewards Hub",
+        { name: "Buy Crypto", link: `${MAIN_SITE}/spot/BTCUSDT` },
+        { name: "Futures Trading", link: `${MAIN_SITE}/futures/BTCUSDT` },
+        { name: "Spot Trading", link: `${MAIN_SITE}/spot/BTCUSDT` },
+        { name: "Earn", link: `${MAIN_SITE}/subscription` },
+        { name: "Rewards Hub", link: "/rewards" },
       ],
     },
-    { ele: "Trade", category: ["BTCUSDT", "ETHUSDT", "DOGEUSDT", "SOLUSDT"] },
+    {
+      ele: "Trade",
+      category: [
+        { name: "BTCUSDT", link: `${MAIN_SITE}/spot/BTCUSDT` },
+        { name: "ETHUSDT", link: `${MAIN_SITE}/spot/ETHUSDT` },
+        { name: "DOGEUSDT", link: `${MAIN_SITE}/spot/DOGEUSDT` },
+        { name: "SOLUSDT", link: `${MAIN_SITE}/spot/SOLUSDT` },
+      ],
+    },
     {
       ele: "Support",
       category: [
-        "Support Center",
-        "Submit a request",
-        "Fee Schedule",
-        "Official Verification",
+        { name: "Support Center", link: "/support" },
+        { name: "Submit a request", link: "/request" },
+        { name: "Fee Schedule", link: "/fees" },
+        { name: "Official Verification", link: "/verification" },
       ],
     },
   ];
@@ -155,19 +168,39 @@ export const Footer = ({ isShow = true }) => {
 
               <div>
                 <h3 className="text-lg font-semibold mb-3">Community</h3>
-                <div className="flex gap-4 text-xl text-white">
-                  <span>
-                    <FaXTwitter />
-                  </span>
-                  <span>
-                    <FaTelegramPlane />
-                  </span>
-                  <span>
-                    <FaInstagramSquare />
-                  </span>
-                  <span>
-                    <TfiEmail />
-                  </span>
+                <div className="flex gap-6">
+                  <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                    <div
+                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                    >
+                      <FaTelegram className="text-xl text-[#24A1DE]" />
+                    </div>
+                    <span className="text-[10px] opacity-60">Telegram</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                    <div
+                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                    >
+                      <FaTwitter className="text-xl" />
+                    </div>
+                    <span className="text-[10px] opacity-60">Twitter</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                    <div
+                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                    >
+                      <FaInstagram className="text-xl text-[#E4405F]" />
+                    </div>
+                    <span className="text-[10px] opacity-60">Instagram</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                    <div
+                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                    >
+                      <FaTiktok className="text-xl" />
+                    </div>
+                    <span className="text-[10px] opacity-60">Tik Tok</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -204,11 +237,18 @@ export const Footer = ({ isShow = true }) => {
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
-                <li>Buy Crypto</li>
-                <li>Futures Trading</li>
-                <li>Spot Trading</li>
-                <li>Earn</li>
-                <li>Rewards Hub</li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>Buy Crypto</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/futures/BTCUSDT`}>Futures Trading</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>Spot Trading</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/subscription`}>Earn</a>
+                </li>
               </ul>
             </div>
 
@@ -216,17 +256,21 @@ export const Footer = ({ isShow = true }) => {
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Trades</h3>
               <ul className="space-y-2 text-gray-300 text-sm">
-                <li>BTCUSDT</li>
-                <li>ETHUSDT</li>
-                <li>DOGEUSDT</li>
-                <li>SOLUSDT</li>
-                <li>XRP USDT</li>
-                <li>Crypto Price</li>
-
-                <li>Bitcoin Price</li>
-                <li>Ethereum Price</li>
-                <li>Solana Price</li>
-                <li>XRP Price</li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>BTCUSDT</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/ETHUSDT`}>ETHUSDT</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/DOGEUSDT`}>DOGEUSDT</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/SOLUSDT`}>SOLUSDT</a>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <a href={`${MAIN_SITE}/spot/XRPUSDT`}>XRP USDT</a>
+                </li>
               </ul>
             </div>
 
@@ -234,10 +278,18 @@ export const Footer = ({ isShow = true }) => {
             <div>
               <h3 className="text-xl font-semibold mb-4 text-left">Support</h3>
               <ul className="space-y-2 text-gray-300 text-sm text-left">
-                <li>Support Center</li>
-                <li>Submit a request</li>
-                <li>Fee Schedule</li>
-                <li>Official Verification</li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <Link to="/support">Support Center</Link>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <Link to="/request">Submit a request</Link>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <Link to="/fees">Fee Schedule</Link>
+                </li>
+                <li className="hover:text-[#2EDBAD] hover:underline cursor-pointer">
+                  <Link to="/verification">Official Verification</Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -278,44 +330,67 @@ export const Footer = ({ isShow = true }) => {
                 </Typography>
               </AccordionSummary>
               {/* <AccordionDetails> */}
-                {item?.category?.map((ele, ind) =>
-                   item.ele === "About" ? (
-                    <div
-                      key={ind}
-                      className={`${
-                        dark ? "text-[#EAECEF]" : "text-[#202630]"
-                      } text-[14px] font-normal leading-[22px] text-left`}
-                    >
-                    <Link className="hover:text-[#2EDBAD] hover:underline " to={ele.link}>{ele.name}</Link>
-                    </div>
-                  ) : (
-                    <div
-                      key={ind}
-                      className={`${
-                        dark ? "text-[#EAECEF]" : "text-[#202630]"
-                      } text-[14px] font-normal leading-[22px] text-left`}
-                    >
-                      {ele}
-                    </div>
-                  ),
-                )}
+                {item?.category?.map((ele, ind) => (
+                  <div
+                    key={ind}
+                    className={`${
+                      dark ? "text-[#EAECEF]" : "text-[#202630]"
+                    } text-[14px] font-normal leading-[22px] text-left`}
+                  >
+                    {ele.link.startsWith("/trade") ? (
+                      <a 
+                        className="hover:text-[#2EDBAD] hover:underline " 
+                        href={ele.link}
+                      >
+                        {ele.name}
+                      </a>
+                    ) : (
+                      <Link 
+                        className="hover:text-[#2EDBAD] hover:underline " 
+                        to={ele.link}
+                      >
+                        {ele.name}
+                      </Link>
+                    )}
+                  </div>
+                ))}
               {/* </AccordionDetails> */}
             </Accordion>
           ))}
           <div>
-            <div className="flex gap-4 text-xl text-white">
-              <span>
-                <FaXTwitter />
-              </span>
-              <span>
-                <FaTelegramPlane />
-              </span>
-              <span>
-                <FaInstagramSquare />
-              </span>
-              <span>
-                <TfiEmail />
-              </span>
+            <div className="flex gap-6 mt-4">
+              <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                <div
+                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                >
+                  <FaTelegram className="text-xl text-[#24A1DE]" />
+                </div>
+                <span className="text-[10px] opacity-60">Telegram</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                <div
+                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                >
+                  <FaTwitter className="text-xl" />
+                </div>
+                <span className="text-[10px] opacity-60">Twitter</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                <div
+                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                >
+                  <FaInstagram className="text-xl text-[#E4405F]" />
+                </div>
+                <span className="text-[10px] opacity-60">Instagram</span>
+              </div>
+              <div className="flex flex-col items-center gap-1 cursor-pointer group">
+                <div
+                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
+                >
+                  <FaTiktok className="text-xl" />
+                </div>
+                <span className="text-[10px] opacity-60">Tik Tok</span>
+              </div>
             </div>
           </div>
         </div>
