@@ -226,11 +226,11 @@ export default function Navbar() {
             </Icon>
           </div>
 
-          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors" onClick={()=>navigate(`${MAIN_SITE}/login`)}>
+          <span className="text-[15px] text-[#EAECEF] hover:text-white font-medium cursor-pointer max-md:hidden transition-colors" onClick={()=>window.location.href=`${MAIN_SITE}/login`}>
             Log in
           </span>
 
-          <button className="h-9 px-5 rounded-full text-black text-[14px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center hover:opacity-90 transition-all" onClick={() => navigate(`${MAIN_SITE}/register`)}>
+          <button className="h-9 px-5 rounded-full text-black text-[14px] font-semibold bg-[#2EDBAD] gap-2 flex justify-center items-center hover:opacity-90 transition-all" onClick={() => window.location.href=`${MAIN_SITE}/register`}>
             <img src="/gift.svg" className="size-4" alt="" />
             Sign up
           </button>

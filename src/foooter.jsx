@@ -142,7 +142,10 @@ export const Footer = ({ isShow = true }) => {
           <div className="font-bold text-[20px] md:text-[50px]">
             Start your crypto journey now !
           </div>
-          <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2">
+          <button 
+            onClick={() => window.location.href = "/trade/register"}
+            className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2"
+          >
             <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-[18px]">
               <img src="gift.svg" className="size-6" /> Sign up now
             </div>

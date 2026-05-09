@@ -16,7 +16,10 @@ export default function Hero() {
             placeholder="Email / Phone"
             className="w-[320px] bg-transparent border border-gray-600 rounded-full px-5 py-3 text-sm text-white outline-none"
           />
-          <div className="bg-[#2EDBAD] text-black px-6 py-3 rounded-[35px] font-semibold flex justify-center items-center gap-2 text-nowrap">
+          <div 
+            onClick={() => window.location.href = "/trade/register"}
+            className="bg-[#2EDBAD] text-black px-6 py-3 rounded-[35px] font-semibold flex justify-center items-center gap-2 text-nowrap cursor-pointer"
+          >
             <img src="/gift.svg" className="size-4" /> Sign up
           </div>
         </div>
@@ -53,7 +56,10 @@ export default function Hero() {
           placeholder="Email / Phone"
           className="w-[55%] bg-transparent border border-gray-600 rounded-full px-5 h-[47px] text-sm text-white outline-none"
         />
-        <div className="bg-[#2EDBAD] text-black px-6 py-3 rounded-[35px] font-semibold flex justify-center items-center gap-1  text-nowrap w-[45%]">
+        <div 
+          onClick={() => window.location.href = "/trade/register"}
+          className="bg-[#2EDBAD] text-black px-6 py-3 rounded-[35px] font-semibold flex justify-center items-center gap-1  text-nowrap w-[45%] cursor-pointer"
+        >
           <img src="/gift.svg" className="size-4" /> Sign up
         </div>
       </div>

@@ -295,9 +295,10 @@ export const Section = () => {
                           className={`text-right max-md:hidden  p-[0px_26px_20px_20px] text-black `}
                         >
                           <button
+                            onClick={() => window.location.href = "/trade/spot"}
                             className={`${
                               dark ? "bg-[#2EDBAD]" : " text-[#2EDBAD]"
-                            } rounded-[20px] p-[8px_20px_8px_20px] text-[16px]`}
+                            } rounded-[20px] p-[8px_20px_8px_20px] text-[16px] cursor-pointer`}
                           >
                             Trade
                           </button>
@@ -411,7 +412,10 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Register and claim exclusive newcomer rewards.
                 </div>
-                <button className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30">
+                <button 
+                  onClick={() => window.location.href = "/trade/register"}
+                  className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30"
+                >
                   Register now <FaArrowRightLong />
                 </button>
               </div>
@@ -423,7 +427,10 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Buy crypto in a few easy steps. .
                 </div>
-                <button className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer">
+                <button 
+                  onClick={() => window.location.href = "/trade/spot"}
+                  className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
+                >
                   Buy Crypto <FaArrowRightLong />
                 </button>
               </div>
@@ -435,7 +442,10 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Sell and buy crypto, copy trade, and more. .
                 </div>
-                <button className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer">
+                <button 
+                  onClick={() => window.location.href = "/trade/spot"}
+                  className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
+                >
                   Trade Now <FaArrowRightLong />
                 </button>
               </div>
@@ -448,19 +458,28 @@ export const Section = () => {
       </div>
       <div className="text-[30px] font-bold md:hidden">How to Get Started</div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
+        <div 
+          onClick={() => window.location.href = "/trade/register"}
+          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+        >
           <div>Create Account</div>
           <div className="bg-[#131516] p-2 rounded-md">
             <FaChevronRight />
           </div>
         </div>
-        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
+        <div 
+          onClick={() => window.location.href = "/trade/spot"}
+          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+        >
           <div>Quick Buy</div>
           <div className="bg-[#131516] p-2 rounded-md">
             <FaChevronRight />
           </div>
         </div>
-        <div className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4">
+        <div 
+          onClick={() => window.location.href = "/trade/spot"}
+          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+        >
           <div>Start Trading</div>
           <div className="bg-[#131516] p-2 rounded-md">
             <FaChevronRight />
