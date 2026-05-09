@@ -175,7 +175,7 @@ export default function Navbar() {
     <div
       onMouseEnter={() => setHoveredItem(item)}
       onMouseLeave={() => setHoveredItem(null)}
-      className="absolute top-full left-0 mt-5 w-[340px] bg-[#17181A] border border-[#2B3139] rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999] hidden lg:block"
+      className="absolute top-full left-0 mt-0 w-[340px] bg-[#17181A] border border-[#2B3139] rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999] hidden lg:block"
     >
       {navConfig[item].map((subItem, index) => (
         <button
