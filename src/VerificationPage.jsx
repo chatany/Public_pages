@@ -110,7 +110,7 @@ export const Verification = () => {
     fetchData();
     // fetchData1();
   }, []);
-  console.log(data, "jj");
+
   const handleSubmit = async () => {
     try {
       const payload = {
@@ -134,12 +134,10 @@ export const Verification = () => {
       }
 
       const result = await response.json();
-      console.log(result,"poi");
+      setShowPopup(true);
       // setData(result);
-      if (result?.verified == true) {
-        setErrors("success");
-      } else {
-        setErrors("error");
+      if (result?.verified) {
+       setSuccess(result?.value)
       }
     } catch (err) {}
   };
@@ -155,7 +153,7 @@ export const Verification = () => {
         <VerifyPopup
           isOpen={showPopup}
           onClose={() => setShowPopup(false)}
-          type=""
+          type={success? "success": "error"}
           url={inv}
         />
       )}
