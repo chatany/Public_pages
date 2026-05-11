@@ -154,7 +154,7 @@ export const Verification = () => {
           isOpen={showPopup}
           onClose={() => setShowPopup(false)}
           type={success? "success": "error"}
-          url={inv}
+          url={inputValue}
         />
       )}
       <div className="bg-black min-h-screen ">
