@@ -137,7 +137,7 @@ export const Verification = () => {
       setShowPopup(true);
       // setData(result);
       if (result?.verified) {
-       setSuccess(result?.value)
+       setSuccess(result?.verified)
       }
     } catch (err) {}
   };
