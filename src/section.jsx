@@ -476,7 +476,7 @@ export const Section = () => {
               <div className="text-left">
                 <div className="text-[22px] font-bold">Quick Buy</div>
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
-                  Buy or deposit crypto in a few easy steps. .
+                  Buy or deposit crypto in a few easy steps.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
@@ -491,7 +491,7 @@ export const Section = () => {
               <div className="text-left">
                 <div className="text-[22px] font-bold">Start Trading</div>
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
-                  Sell and buy crypto, copy trade, and more. .
+                  Sell and buy crypto, copy trade, and more.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
