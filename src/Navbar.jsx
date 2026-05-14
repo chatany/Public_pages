@@ -116,14 +116,14 @@ export default function Navbar() {
       {
         title: "VIP & Institutional",
         desc: "Your trusted digital asset platform for VIPs and institutions",
-        path: "/vip",
+        path: "/trade/vip",
         iconWhite: "/vipWhite.png",
         iconGreen: "/vipGreen.png",
       },
       {
         title: "Referral Program",
         desc: "Invite friends to earn either a commission rebate or a one-time reward",
-        path: "/Referral",
+        path: "/trade/referral",
         iconWhite: "/referralWhite.png",
         iconGreen: "/referralGreen.png",
       },
