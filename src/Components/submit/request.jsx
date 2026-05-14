@@ -95,22 +95,22 @@ export default function SubmitRequestForm() {
       <Navbar />
       <div className="min-h-screen bg-black text-white">
         {/* HEADER */}
-        <div className="flex w-full justify-between md:px-10 px-3 py-12 max-md:flex-col">
+        <div className="flex w-full justify-between md:px-10 px-3 py-12 md:ml-15 max-md:flex-col">
 
-        <div className="text-[15px] text-[#2edbad] mb-4 ">
+        <div className="text-[15px] text-[#2edbad] mb-4 text-left">
           <span className=" cursor-pointer">Help Center</span> ›
           Submit a request
         </div>
-        <div className="relative w-[280px]">
+        {/* <div className="relative w-[280px]">
           <IoSearchOutline className="absolute left-3 top-3 text-gray-400" />
           <input
             placeholder="Search"
             className="w-full bg-transparent border border-[#2edbad] rounded-full pl-10 pr-4 py-2 text-sm outline-none"
           />
-        </div>
+        </div> */}
         </div>
         {/* BODY */}
-        <div className="max-w-[700px] md:px-10 px-3 py-12">
+        <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 py-12">
           <h1 className="text-4xl font-bold text-left mb-15">
             Submit a request
           </h1>
@@ -706,7 +706,7 @@ an only be changed once every 6 months. ）
 
 function Field({ label, children, helper }) {
   return (
-    <div className="text-left">
+    <div className="text-left w-full">
       <label className="block text-sm mb-2">{label}</label>
       {children}
       {helper && <div className="text-xs text-gray-500 mt-1">{helper}</div>}

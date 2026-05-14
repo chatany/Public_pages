@@ -24,7 +24,7 @@ export const Menu = ({ children }) => {
 
       <div className="md:p-15 p-5">
         <div className="flex flex-col gap-5">
-          <div className="flex justify-end ">
+          {/* <div className="flex justify-end ">
             <input
               type="text"
               placeholder="Search"
@@ -34,7 +34,7 @@ export const Menu = ({ children }) => {
             border
             hover:border-[#2EDBAD] border-[#2EDBAD] focus:outline-none `}
             />
-          </div>
+          </div> */}
           <div className="flex max-md:flex-col gap-20 w-full">
             <div className="text-left">
               <div className="text-[20px] font-bold mb-10 mt-5 whitespace-nowrap max-md:hidden">

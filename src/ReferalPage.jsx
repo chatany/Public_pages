@@ -94,7 +94,7 @@ export const ReferralPage = () => {
             <ul className="text-left leading-[29px] text-[18px] text-[#686868]">
               <li>
                 1. Share your referral code or link with a friend who does not
-                have a BloFin account.
+                have a Bitzup account.
               </li>
               <li>
                 2. Your invitee can get a Welcome Bonus within their first 15

@@ -7,6 +7,7 @@ const VerifyPopup = ({
   onClose,
   onConfirm,
   onReport,
+  category
 }) => {
   if (!isOpen) return null;
 
@@ -48,7 +49,7 @@ const VerifyPopup = ({
         <p className="mt-4 text-center text-sm text-gray-400">
           The URL you queried under the{" "}
           <span className={isSuccess ? "text-green-400" : "text-red-400"}>
-            Webpage
+            {category}
           </span>{" "}
           category{" "}
           {isSuccess
@@ -57,23 +58,23 @@ const VerifyPopup = ({
         </p>
 
         {/* URL BOX */}
-        <div className="mt-4 rounded-lg bg-[#1a1d24] px-4 py-3 text-center text-sm text-gray-200">
+        <div className="mt-4 rounded-lg bg-[#1a1d24] px-4 py-3 text-center text-sm text-gray-200 text-left">
           {url}
         </div>
 
         {/* INFO TEXT */}
-        <p className="mt-4 text-sm text-gray-400">
+        <p className="mt-4 text-sm text-gray-400 text-left">
           {isSuccess
             ? "The verification result is only valid for this category. Please make sure you've selected the correct category to avoid phishing risks."
             : "Please double-check that you've selected the correct category, as an incorrect selection may affect the verification results."}
         </p>
 
         {/* SECURITY ALERT */}
-        <div className="mt-4 rounded-lg bg-[#1a1d24] p-4">
-          <p className="font-semibold text-sm">Security alerts</p>
-          <p className="text-sm text-gray-400">
-            • Contact customer service if you are still unable to confirm.
-          </p>
+        <div className="mt-4 rounded-lg bg-[#1a1d24] p-4 text-left">
+          <p className="font-semibold text-sm mb-2">Security alerts</p>
+          <ul className="list-disc pl-5 text-sm text-gray-400 space-y-1">
+            <li>Contact customer service if you are still unable to confirm.</li>
+          </ul>
         </div>
 
         {/* BUTTONS */}
@@ -87,16 +88,16 @@ const VerifyPopup = ({
             </button>
           ) : (
             <>
-              <button
+              {/* <button
                 onClick={onReport}
                 className="w-full rounded-lg bg-red-500 py-3 font-medium text-white hover:bg-red-600"
               >
                 Report
-              </button>
+              </button> */}
 
               <button
                 onClick={onConfirm || onClose}
-                className="w-full rounded-lg bg-gray-200 py-3 font-medium text-black hover:bg-gray-300"
+                className="cursor-pointer w-full rounded-lg bg-[#2EDBAD] py-3 font-medium text-black hover:bg-[#2EDBAD]/70"
               >
                 Confirm
               </button>

@@ -155,6 +155,7 @@ export const Verification = () => {
           onClose={() => setShowPopup(false)}
           type={success? "success": "error"}
           url={inputValue}
+          category={select.account_type}
         />
       )}
       <div className="bg-black min-h-screen ">
@@ -191,7 +192,7 @@ export const Verification = () => {
                       <div className="text-[15px] font-normal capitalize">
                         {select ? (
                           <div className="flex gap-3 items-center">
-                            <div>{select.icon}</div>
+                            <div><img src={`/${select.account_type}.svg`} alt={select.account_type} /></div>
                             {select.account_type}{" "}
                           </div>
                         ) : (
@@ -219,8 +220,8 @@ export const Verification = () => {
                             <li
                               key={ind}
                               className={`flex ${
-                                dark ? "" : "hover:bg-[#F5F5F5]"
-                              } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer`}
+                                dark ? "hover:bg-[#2B3139]" : "hover:bg-[#F5F5F5]"
+                              } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer transition-colors duration-200`}
                               onClick={() => {
                                 setSelect(coin);
                                 setOpen(!open);
@@ -228,7 +229,7 @@ export const Verification = () => {
                             >
                               <div className="flex items-center justify-between w-full gap-2">
                                 <div className="flex gap-2 items-center">
-                                  {/* <div>{coin.icon}</div> */}
+                                  <div><img src={`/${coin.account_type}.svg`} alt={coin.account_type} /></div>
                                   <span className="font-medium">
                                     {coin.account_type}
                                   </span>
@@ -262,12 +263,12 @@ export const Verification = () => {
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="relative w-[20%] max-md:w-[90%] ">
+              <div className="relative w-[90%] md:w-[40%] ">
                 <button
                   name="Email"
                   placeholder="Search"
                   onClick={handleSubmit}
-                  className={`border w-full bg-[#FFFFFF] cursor-pointer border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
+                  className={`border flex justify-center items-center gap-2 w-full bg-[#FFFFFF] cursor-pointer border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
      `}
                   // onKeyDown={(e) => {
                   //   if (e.key === "Enter") handleSubmit();
@@ -276,11 +277,11 @@ export const Verification = () => {
                   // onChange={(e) => handle("password", e)}
                   // type={showPassword ? "password" : "text"}
                 >
+                {/* <div className="cursor-pointer "> */}
+                  <IoIosSearch className="  h-6 w-6 text-black" />
+                {/* </div> */}
                   Search
                 </button>
-                <div className="cursor-pointer ">
-                  {/* <IoIosSearch className="absolute left-5 top-4 h-6 w-6 text-black" /> */}
-                </div>
               </div>
             </div>
           </div>

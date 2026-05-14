@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { socket } from "./socket";
 import { Footer } from "./foooter";
 import QRCode from "react-qr-code";
 import { GrWindows } from "react-icons/gr";
@@ -10,14 +11,15 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { BsAndroid2 } from "react-icons/bs";
 function CoinIcon({ mover }) {
   const [imgError, setImgError] = useState(false);
+  const iconSrc = mover?.coin_icon;
 
   return (
     <div className="size-8 flex items-center justify-center">
-      {!imgError && mover?.coin_icon ? (
+      {!imgError&&iconSrc  ? (
         <img
-          src={mover.coin_icon}
+          src={iconSrc}
           alt="icon"
-          className="size-8"
+          className="size-8 rounded-full"
           onError={() => setImgError(true)}
         />
       ) : (
@@ -36,32 +38,96 @@ export const Section = () => {
   const dark = true;
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
+  const latestMarketRef = useRef(null);
+  console.log(latestMarketRef.current, "latestMarketRef.current");
+
   const filteredData = () => {
     return activeTab !== "All" ? data[activeTab] : data1;
   };
+
+  console.log(filteredData(), "ee");
+
   const fetchData = async () => {
     try {
-      // setLoading(true);
+      // 1. Fetch Bitzup Exchange Info (Primary Data)
+      const bitzupRes = await fetch("https://test.bitzup.com/market/exchangeInfoPublic");
+      if (!bitzupRes.ok) throw new Error("Bitzup API failed");
+      const bitzupData = await bitzupRes.json();
 
-      const response = await fetch(
-        "https://api.bitzup.com/market/exchangeinfo",
+      // 2. Fetch CoinGecko Markets (For Icons)
+      const coingeckoRes = await fetch(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false",
       );
-
-      if (!response.ok) {
-        throw new Error("Request failed");
+      
+      let iconMap = {};
+      if (coingeckoRes.ok) {
+        const coingeckoData = await coingeckoRes.json();
+        // Create a map for quick lookup: symbol -> image_url
+        coingeckoData.forEach(coin => {
+          iconMap[coin.symbol.toUpperCase()] = coin.image;
+        });
       }
 
-      const result = await response.json();
-      setData(result);
+      // 3. Inject Icons into Bitzup Data
+      const finalData = {};
+      Object.keys(bitzupData).forEach(category => {
+        finalData[category] = bitzupData[category].map(item => ({
+          ...item,
+          coin_icon_url: iconMap[item.base_asset_symbol] || null
+        }));
+      });
+
+      setData(finalData);
+      // For the search list (data1), we can flatten the categories or use a specific one
+      setData1(Object.values(finalData).flat());
     } catch (err) {
-      setError(err.message);
-    } finally {
-      // setLoading(false);
+      console.error("Fetch error:", err);
     }
   };
   useEffect(() => {
     fetchData();
     // fetchData1();
+  }, []);
+
+  useEffect(() => {
+    const handleMarket = (event) => {
+      try {
+        const socketData = JSON.parse(event);
+        if (socketData) {
+          latestMarketRef.current = socketData;
+
+          setData((prevData) => {
+            const updatedData = { ...prevData };
+
+            // Loop through each category in the current data (Hot, Gainers, etc.)
+            Object.keys(updatedData).forEach((category) => {
+              updatedData[category] = updatedData[category].map((item) => {
+                // Find if the socket data has an update for this specific pair_symbol
+                // Socket data might be a category-based object or a flat array
+                const update = Array.isArray(socketData)
+                  ? socketData.find((s) => s.pair_symbol === item.pair_symbol)
+                  : socketData[category]?.find(
+                      (s) => s.pair_symbol === item.pair_symbol,
+                    );
+
+                return update ? { ...item, ...update } : item;
+              });
+            });
+
+            return updatedData;
+          });
+        }
+      } catch (err) {
+        console.error("Market socket error:", err);
+      }
+    };
+
+    socket.emit("market");
+    socket.on("market", handleMarket);
+
+    return () => {
+      socket.off("market", handleMarket);
+    };
   }, []);
   const items = ["2.svg", "1.svg", "3.svg", "4.svg"];
 
@@ -155,208 +221,169 @@ export const Section = () => {
         </div>
       </div>
 
-      <div className="flex md:justify-center mt-10  md:p-[0px_60px_0px_60px]">
-        <div className="flex justify-center flex-col">
-          <div className="flex justify-between">
-            <div className="flex gap-1 overflow-x-auto">
-              {tabs.map((tab) => (
+      <div className="flex md:justify-center mt-10 md:px-[60px] px-4">
+        <div className="flex justify-center flex-col w-full">
+          {/* Tabs and View More */}
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex gap-4 md:gap-8 overflow-x-auto custom-scroll pb-2">
+              {Object.keys(data).map((tab) => (
                 <div
-                  name="item1"
                   key={tab}
-                  onClick={() => {
-                    setActiveTab(tab);
-                  }}
-                  className={`py-2 md:px-[30px] px-[10px] rounded-md text-[16px] md:text-[50px] whitespace-nowrap cursor-pointer font-semibold
-                ${activeTab === tab ? " " : "text-[#585757]"}`}
+                  onClick={() => setActiveTab(tab)}
+                  className={`py-2 whitespace-nowrap cursor-pointer font-bold text-sm md:text-[40px] transition-all
+                ${activeTab === tab ? "text-white" : "text-[#585757]"}`}
                 >
-                  {tab}
+                  {tab === "Hot" && "🔥"} {tab}
                   {activeTab === tab && (
-                    <div className="flex w-full justify-center">
-                      <div className="w-[60%] border-b-4 border-white"></div>
-                    </div>
+                    <div className="h-[1px] bg-white w-[50%] mt-1 rounded-full" />
                   )}
                 </div>
               ))}
             </div>
-            <div className="flex gap-1 items-center md:text-[20px] text-[12px] whitespace-nowrap">
-              View More <BiChevronRight className="size-6" />
-            </div>
           </div>
-          <div className="overflow-y-auto overflow-x-auto h-[400px] text-center md:custom-scroll w-full ">
-            <table className="w-full table-fixed">
-              <thead className="">
-                <tr className="font-light text-[16px] ">
-                  <th
-                    className={`text-left md:text-[20px] text-[12px] font-semibold top-0 sticky p-[20px] ${
-                      dark ? "bg-[#000000]" : "bg-white"
+
+          {/* Market List */}
+          <div className="w-full">
+            {/* Header */}
+            <div className="grid grid-cols-3 md:grid-cols-5  text-xs md:text-[20px] font-normal px-2 md:px-6 py-4">
+              <div className="text-left">Coin</div>
+              <div className="text-right">Current Price</div>
+              <div className="text-right">Change</div>
+              <div className="text-right max-md:hidden">24h Volume</div>
+              <div className="text-right max-md:hidden">Action</div>
+            </div>
+
+            {/* Rows */}
+            <div className="flex flex-col">
+              {filteredData()?.map((mover, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-3 md:grid-cols-5 px-2 md:px-6 py-5 hover:bg-white/5 transition-all items-center cursor-pointer border-t border-white/5"
+                >
+                  {/* Coin Column */}
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <CoinIcon mover={mover} />
+                    <div className="flex flex-col">
+                      <span className="font-normal text-white text-left text-sm md:text-xl">
+                        {mover?.base_asset_symbol}
+                      </span>
+                      <span className="text-[10px] text-left md:text-[12px] text-gray-500 font-medium">
+                        {mover?.coin_name}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Price Column */}
+                  <div className="text-right font-normal text-white text-sm md:text-md">
+                    ${mover?.current_price}
+                  </div>
+
+                  {/* Change Column */}
+                  <div
+                    className={`text-right font-normal text-sm md:text-[18px] ${
+                      mover?.change_in_price > 0
+                        ? "text-[#2EBD85]"
+                        : "text-[#F6465D]"
                     }`}
                   >
-                    Coin
-                  </th>
-                  <th
-                    className={`${
-                      dark ? "bg-[#000000]" : "bg-white"
-                    } text-right md:text-[20px] text-[12px] font-semibold top-0 sticky md:p-[20px] p-[10px]`}
-                  >
-                    Coin Price
-                  </th>
-                  <th
-                    className={`text-right md:text-[20px] text-[12px] font-semibold md:p-[20px] p-[10px] ${
-                      dark ? "bg-[#000000]" : "bg-white"
-                    } top-0 sticky`}
-                  >
-                    24H Change
-                  </th>
-                  <th
-                    className={`text-right md:text-[20px] max-md:hidden text-[12px] font-semibold md:p-[20px] p-[10px] ${
-                      dark ? "bg-[#000000]" : "bg-white"
-                    } top-0 sticky`}
-                  >
-                    24h Volume
-                  </th>
-                  <th
-                    className={`text-right max-md:hidden md:text-[20px] text-[12px] font-semibold  p-[0px_40px_0px_0px] ${
-                      dark ? "bg-[#000000]" : "bg-white"
-                    } top-0 sticky`}
-                  >
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.isArray(filteredData()) && filteredData()?.length > 0 ? (
-                  <>
-                    {filteredData()?.map((mover, index) => (
-                      <tr
-                        key={index}
-                        className={` cursor-pointer  md:text-[20px] text-[12px]  `}
-                      >
-                        <td className="text-center p-5 text-nowrap p-[0px_20px_20px_20px] ">
-                          <div className="flex gap-3 items-center w-full ">
-                            {/* <div className="">
-                              <img
-                                src={mover?.coin_icon}
-                                alt="icon"
-                                className="size-8"
-                                onError={(e) => {
-                                  e.currentTarget.style.display = "none";
-                                  e.currentTarget.nextSibling.style.display =
-                                    "flex";
-                                }}
-                              />
+                    {mover?.change_in_price > 0 ? "+" : ""}
+                    {mover?.change_in_price}%
+                  </div>
 
-                              <div className="hidden md:text-[20px] text-[15px] font-bold size-8 bg-white text-black rounded-full items-center justify-center">
-                                {mover?.base_asset_symbol?.[0]}
-                              </div>
-                            </div> */}
-                            {
-                              <CoinIcon
-                                mover={mover}
-                                key={mover.base_asset_symbol}
-                              />
-                            }
+                  {/* Desktop Only: Volume */}
+                  <div className="text-right text-gray-400 font-normal max-md:hidden md:text-md">
+                    {mover?.volume}
+                  </div>
 
-                            <div className="flex flex-col text-left">
-                              <div className="font-medium text-sm">
-                                {mover?.base_asset_symbol}
-                              </div>
-                              <div className="[11px]">{mover?.coin_name}</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-right text-nowrap p-[0px_20px_20px_20px]">
-                          <div>
-                            <div className="md:text-[20px] text-[15px] text-gray-400">
-                              ${mover?.current_price}
-                            </div>
-                          </div>
-                        </td>
-                        <td className="text-right text-nowrap p-[0px_20px_20px_20px]">
-                          <div
-                            className={`font-semibold md:text-[20px] text-[15px] text-nowrap p-1 rounded-md ${
-                              mover?.change_in_price > 0
-                                ? "text-[#2EBD85]"
-                                : "text-[#F6465D]"
-                            }
-              `}
-                          >
-                            {mover?.change_in_price > 0 ? "+" : " "}
-                            {mover?.change_in_price}%
-                          </div>
-                        </td>
-                        <td className="text-right text-nowrap max-md:hidden p-[0px_20px_20px_20px]">
-                          <div>
-                            <div className="md:text-[20px] text-[15px] text-gray-400">
-                              {mover?.volume}
-                            </div>
-                          </div>
-                        </td>
-                        <td
-                          className={`text-right max-md:hidden  p-[0px_26px_20px_20px] text-black `}
-                        >
-                          <button
-                            onClick={() => window.location.href = "/trade/spot"}
-                            className={`${
-                              dark ? "bg-[#2EDBAD]" : " text-[#2EDBAD]"
-                            } rounded-[20px] p-[8px_20px_8px_20px] text-[16px] cursor-pointer`}
-                          >
-                            Trade
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </>
-                ) : (
-                  <tr>
-                    <td colSpan={4}>
-                      <div className="h-full w-full flex justify-center items-center"></div>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+                  {/* Desktop Only: Action */}
+                  <div
+                    className="text-right max-md:hidden"
+                    onClick={() =>
+                      (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
+                    }
+                  >
+                    <button className="bg-[#2EDBAD] cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
+                      Trade
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+      </div>
+      <div
+        className="items-center cursor-pointer flex justify-center gap-2"
+        onClick={() => (window.location.href = `/trade/spot/BTCUSDT`)}
+      >
+        {" "}
+        View all 2500+ Coins <FaChevronRight className="size-3" />
       </div>
       <div>
-
-      <div className="text-center text-[30px] p-3 font-bold md:hidden">
-        Trade Crypto Anywhere Anytime
-      </div>
-      <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
-        <div className="md:w-[50%] w-full justify-center flex ">
-          <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
-            <img
-              src="./home.gif"
-              className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20"
-            />
-            <div className="absolute bg-[#2EDBAD] blur-[200px]  h-[60%] w-50 rounded-full"></div>
-          </div>
+        <div className="text-center text-[30px] p-3 font-bold md:hidden">
+          Trade Crypto Anywhere Anytime
         </div>
-        <div className=" flex w-full justify-center text-[12px] gap-5 md:hidden">
-          <div className="flex flex-col items-center font-bold gap-1">
-            <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
-              <BsAndroid2 className="size-4" />
+        <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
+          <div className="md:w-[50%] w-full justify-center flex ">
+            <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
+              <img
+                src="./home.gif"
+                className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20"
+              />
+              <div className="absolute bg-[#2EDBAD] blur-[200px]  h-[60%] w-50 rounded-full"></div>
             </div>
-            <div>Android</div>
           </div>
-          <div className="flex flex-col items-center font-bold gap-1">
-            <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center">
-              <FaGooglePlay className="size-4" />
-            </div>
-            <div>Google Play</div>
+          <div className=" flex w-full justify-center items-center text-[12px] gap-5 md:hidden">
+              <div className="flex flex-wrap justify-center gap-3 mt-4">
+                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+                  <a
+                    href="https://apps.apple.com/app/bitzup/id6749609757"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 1.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="App Store"
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 2.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="Google Play"
+                    />
+                  </a>
+                  <a
+                    href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 3.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="Android"
+                    />
+                  </a>
+                  {/* </div> */}
+                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+                  {/* </div> */}
+                </div>
           </div>
-        </div>
-        <div className="md:w-[50%] max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
-          <div>
-            <div className="text-[30px] md:text-[50px] font-bold text-center">
-              Trade Crypto
+          <div className="md:w-[50%] h-full max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
+            <div>
               <div className="text-[30px] md:text-[50px] font-bold text-center">
-                Anywhere Anytime
+                Trade Crypto
+                <div className="text-[30px] md:text-[50px] font-bold text-center">
+                  Anywhere Anytime
+                </div>
               </div>
             </div>
-          </div>
-          <div className="bg-[#181818] max-w-[400px] flex max-h-[220px] rounded-[10px]">
+            <div className="bg-[#181818] max-w-[400px] flex max-h-[220px] rounded-[10px]">
             <div className="w-[40%] p-3 border border-white rounded-2xl">
               {" "}
               <QRCode
@@ -378,28 +405,52 @@ export const Section = () => {
               </div>
             </div>
           </div>
-          <div className="flex gap-[60px]">
-            <div className="w-full flex justify-center flex-col items-center">
+            <div className="flex gap-[60px] h">
               <div>
-                <AiTwotoneCloseCircle className="size-7" />
+                {/* <div className="mb-2 text-left">or Download App</div> */}
+                <div className="flex gap-3 mt-4">
+                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+                  <a
+                    href="https://apps.apple.com/app/bitzup/id6749609757"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 1.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="App Store"
+                    />
+                  </a>
+                  <a
+                    href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 2.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="Google Play"
+                    />
+                  </a>
+                  <a
+                    href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="/Group 3.png"
+                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      alt="Android"
+                    />
+                  </a>
+                  {/* </div> */}
+                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+                  {/* </div> */}
+                </div>
               </div>
-              <div className="capitalize text-[20px] font-bold">macos</div>
-            </div>
-            <div className="w-full flex justify-center flex-col items-center">
-              <div>
-                <GrWindows className="size-7" />
-              </div>
-              <div className="capitalize text-[20px] font-bold">windows</div>
-            </div>
-            <div className="w-full flex justify-center flex-col items-center">
-              <div>
-                <AiFillApi className="size-7" />
-              </div>
-              <div className="capitalize text-[20px] font-bold">APi</div>
             </div>
           </div>
         </div>
-      </div>
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:p-[0px_60px_0px_60px]">
         <div className="font-bold text-[50px]">How to Get Started</div>
@@ -412,8 +463,8 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Register and claim exclusive newcomer rewards.
                 </div>
-                <button 
-                  onClick={() => window.location.href = "/trade/register"}
+                <button
+                  onClick={() => (window.location.href = "/trade/register")}
                   className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30"
                 >
                   Register now <FaArrowRightLong />
@@ -425,10 +476,10 @@ export const Section = () => {
               <div className="text-left">
                 <div className="text-[22px] font-bold">Quick Buy</div>
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
-                  Buy crypto in a few easy steps. .
+                  Buy or deposit crypto in a few easy steps. .
                 </div>
-                <button 
-                  onClick={() => window.location.href = "/trade/spot"}
+                <button
+                  onClick={() => (window.location.href = "/trade/spot")}
                   className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
                 >
                   Buy Crypto <FaArrowRightLong />
@@ -442,8 +493,8 @@ export const Section = () => {
                 <div className="text-[14px] text-[#B2ADAD] font-normal">
                   Sell and buy crypto, copy trade, and more. .
                 </div>
-                <button 
-                  onClick={() => window.location.href = "/trade/spot"}
+                <button
+                  onClick={() => (window.location.href = "/trade/spot")}
                   className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
                 >
                   Trade Now <FaArrowRightLong />
@@ -458,8 +509,8 @@ export const Section = () => {
       </div>
       <div className="text-[30px] font-bold md:hidden">How to Get Started</div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        <div 
-          onClick={() => window.location.href = "/trade/register"}
+        <div
+          onClick={() => (window.location.href = "/trade/register")}
           className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Create Account</div>
@@ -467,8 +518,8 @@ export const Section = () => {
             <FaChevronRight />
           </div>
         </div>
-        <div 
-          onClick={() => window.location.href = "/trade/spot"}
+        <div
+          onClick={() => (window.location.href = "/trade/spot")}
           className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Quick Buy</div>
@@ -476,8 +527,8 @@ export const Section = () => {
             <FaChevronRight />
           </div>
         </div>
-        <div 
-          onClick={() => window.location.href = "/trade/spot"}
+        <div
+          onClick={() => (window.location.href = "/trade/spot")}
           className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Start Trading</div>
@@ -598,8 +649,8 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      
-      <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
+
+      {/* <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
         <div className="text-[30px] md:text-[50px] md:w-[60%] w-full mb-10   font-bold">
           Worldwide Buzz Media on Your Narrative
         </div>
@@ -612,7 +663,7 @@ export const Section = () => {
           {" "}
           <PromoSlider items={8} />
         </div>
-      </div>
+      </div> */}
       {/* <PrivacyPolicy/> */}
       {/* <Menu  children={<PrivacysPolicy/>}/> */}
       <Footer />
