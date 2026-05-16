@@ -98,7 +98,6 @@ export const Verification = () => {
       }
 
       const result = await response.json();
-      console.log(result,"poi");
       
       // if(result?.verified)
       setData(result);

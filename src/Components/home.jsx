@@ -13,8 +13,6 @@ export const Home = () => {
       </Helmet>
       <Navbar />
       <Hero />
-      {/* <MobileDrawer open={true} onClose={() => console.log("kk")
-      } /> */}
       <Partners />
       <Section/>
     </div>

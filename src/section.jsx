@@ -39,13 +39,11 @@ export const Section = () => {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const latestMarketRef = useRef(null);
-  console.log(latestMarketRef.current, "latestMarketRef.current");
 
   const filteredData = () => {
     return activeTab !== "All" ? data[activeTab] : data1;
   };
 
-  console.log(filteredData(), "ee");
 
   const fetchData = async () => {
     try {
