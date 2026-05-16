@@ -101,7 +101,7 @@ export const CarrierPage = () => {
               <button className="bg-primary h-12 md:w-44 px-8 text-sm md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
                 Job Openings
               </button>
-              <button className="bg-surface-2 h-12 md:w-44 flex text-3xl items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
+              <button className="bg-surface-2 h-12 md:w-44 flex text-sm items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
                 <AiFillLinkedin className="size-4" /> View LinkedIn
               </button>
             </div>
