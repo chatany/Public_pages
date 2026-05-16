@@ -319,7 +319,7 @@ export const Section = () => {
                       (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                     }
                   >
-                    <button className="bgbrand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
+                    <button className="bg-brand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
                       Trade
                     </button>
                   </div>
@@ -343,21 +343,33 @@ export const Section = () => {
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
           <div className="md:w-[50%] w-full flex justify-center items-center relative py-10">
             {/* Glow/Backlight Effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green/20 blur-[7.5rem] h-[70%] w-[60%] rounded-full z-0"></div>
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 mx-auto h-[18rem] w-[18rem] rounded-full bg-brand-green/10 blur-3xl" />
 
             {/* Mobile Mockup Frame */}
-            <div className="relative z-20 p-2.5 bg-surface rounded-[3rem] border-[8px] border-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform hover:scale-105 duration-500">
-              {/* Device Notch/Speaker */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-border rounded-b-2xl z-30"></div>
+            <div className="relative z-20 p-4 bg-surface-1 rounded-[3rem] border-2 border-border shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 duration-500">
+              {/* Front bezel */}
+              <div className="absolute inset-0 rounded-[2.6rem] border border-black/10 pointer-events-none" />
 
-              <video
-                src="/Mobile.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-3xl object-cover"
-              />
+              {/* Speaker / notch */}
+              <div className="absolute left-1/2 top-4 -translate-x-1/2 flex items-center gap-2">
+                <div className="h-1.5 w-16 rounded-full bg-surface-2/80" />
+                <div className="h-2 w-2 rounded-full bg-surface-2/80" />
+              </div>
+
+              {/* Side buttons */}
+              <div className="absolute right-0 top-[25%] h-20 w-1.5 rounded-l-full bg-surface-2/80" />
+              <div className="absolute left-0 top-[30%] h-16 w-1.5 rounded-r-full bg-surface-2/80" />
+
+              <div className="relative overflow-hidden rounded-[2.2rem] bg-black border border-black/20">
+                <video
+                  src="/Mobile.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-[2.2rem] object-cover"
+                />
+              </div>
             </div>
           </div>
           <div className=" flex w-full justify-center items-center text-xs gap-5 md:hidden">
