@@ -172,7 +172,7 @@ export const Section = () => {
           ].map((item, ind) => (
             <div
               key={ind}
-              className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
+              className="w-full rounded-xl border border-border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
             >
               <div className="absolute h-full w-full hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 z-50"></div>
               <img
