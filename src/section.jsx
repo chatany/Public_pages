@@ -15,15 +15,15 @@ function CoinIcon({ mover }) {
 
   return (
     <div className="size-8 flex items-center justify-center">
-      {!imgError&&iconSrc  ? (
+      {!imgError && iconSrc ? (
         <img
           src={iconSrc}
-          alt="icon"
+          alt={`${mover?.base_asset_symbol || "coin"} icon`}
           className="size-8 rounded-full"
           onError={() => setImgError(true)}
         />
       ) : (
-        <div className="md:text-[20px] text-[15px] font-bold size-8 bg-white text-black rounded-full flex items-center justify-center">
+        <div className="md:text-lg text-sm font-bold size-8 bg-surface-2 text-primary rounded-full flex items-center justify-center">
           {mover?.base_asset_symbol?.[0]}
         </div>
       )}
@@ -31,8 +31,8 @@ function CoinIcon({ mover }) {
   );
 }
 export const Section = () => {
-  const tabs = ["Hot", "Gainers", "Losers", "New"];
-  const [activeTab, setActiveTab] = useState(tabs[0]);
+  // const tabs = ["Top", "Hot", "Gainers", "Falling", "New"];
+  const [activeTab, setActiveTab] = useState(null);
   const [active, setActive] = useState(0);
   const [imgError, setImgError] = useState(false);
   const dark = true;
@@ -50,36 +50,40 @@ export const Section = () => {
   const fetchData = async () => {
     try {
       // 1. Fetch Bitzup Exchange Info (Primary Data)
-      const bitzupRes = await fetch("https://test.bitzup.com/market/exchangeInfoPublic");
+      const bitzupRes = await fetch(
+        `${import.meta.env.VITE_API_BASE}/market/exchangeInfoPublic`,
+      );
       if (!bitzupRes.ok) throw new Error("Bitzup API failed");
       const bitzupData = await bitzupRes.json();
 
       // 2. Fetch CoinGecko Markets (For Icons)
-      const coingeckoRes = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false",
-      );
-      
-      let iconMap = {};
-      if (coingeckoRes.ok) {
-        const coingeckoData = await coingeckoRes.json();
-        // Create a map for quick lookup: symbol -> image_url
-        coingeckoData.forEach(coin => {
-          iconMap[coin.symbol.toUpperCase()] = coin.image;
-        });
-      }
+      // const coingeckoRes = await fetch(
+      //   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false",
+      // );
 
-      // 3. Inject Icons into Bitzup Data
-      const finalData = {};
-      Object.keys(bitzupData).forEach(category => {
-        finalData[category] = bitzupData[category].map(item => ({
-          ...item,
-          coin_icon_url: iconMap[item.base_asset_symbol] || null
-        }));
-      });
+      // let iconMap = {};
+      // if (coingeckoRes.ok) {
+      //   const coingeckoData = await coingeckoRes.json();
+      //   // Create a map for quick lookup: symbol -> image_url
+      //   coingeckoData.forEach(coin => {
+      //     iconMap[coin.symbol.toUpperCase()] = coin.image;
+      //   });
+      // }
 
-      setData(finalData);
+      // // 3. Inject Icons into BitZup Data
+      // const finalData = {};
+      // Object.keys(bitzupData).forEach(category => {
+      //   finalData[category] = bitzupData[category].map(item => ({
+      //     ...item,
+      //     coin_icon_url: iconMap[item.base_asset_symbol] || null
+      //   }));
+      // });
+
+      setData(bitzupData);
+
+      setActiveTab(Object.keys(bitzupData)[0]);
       // For the search list (data1), we can flatten the categories or use a specific one
-      setData1(Object.values(finalData).flat());
+      // setData1(Object.values(finalData).flat());
     } catch (err) {
       console.error("Fetch error:", err);
     }
@@ -129,7 +133,12 @@ export const Section = () => {
       socket.off("market", handleMarket);
     };
   }, []);
-  const items = ["2.svg", "1.svg", "3.svg", "4.svg"];
+  const items = [
+    "promo-banner-2.svg",
+    "promo-banner-1.svg",
+    "promo-banner-3.svg",
+    "promo-banner-4.svg",
+  ];
 
   const visibleCards = 2;
   const totalSlides = items.length - visibleCards + 1;
@@ -153,17 +162,22 @@ export const Section = () => {
 
   return (
     <div className="w-full flex flex-col gap-10">
-      <div className="flex justify-center  md:p-[0px_60px_0px_60px]">
-        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-[5%]  max-md:hidden mt-20 ">
-          {["2.svg", "1.svg", "3.svg", "4.svg"].map((item, ind) => (
+      <div className="flex justify-center  md:px-16">
+        <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-8  max-md:hidden mt-20 ">
+          {[
+            "promo-banner-2.svg",
+            "promo-banner-1.svg",
+            "promo-banner-3.svg",
+            "promo-banner-4.svg",
+          ].map((item, ind) => (
             <div
               key={ind}
               className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
             >
-              <div className="absolute h-full w-full hover:bg-linear-to-b from-[#2EDBAD]/0  via-[#2EDBAD]/0 to-[#2EDBAD]/50 z-50"></div>
+              <div className="absolute h-full w-full hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 z-50"></div>
               <img
                 src={item}
-                alt=""
+                alt={`BitZup platform promotion ${ind + 1}`}
                 className="w-full h-full z-60 rounded-xl"
               />
             </div>
@@ -173,13 +187,13 @@ export const Section = () => {
       <div className="flex justify-center gap-3 mt-1 max-md:hidden ">
         <button
           onClick={prev}
-          className=" rounded-[3px] border border-[#4C4B4B] flex items-center justify-center transition"
+          className=" rounded-[3px] border border-border flex items-center justify-center transition"
         >
           <BiChevronLeft className="size-6" />
         </button>
         <button
           onClick={next}
-          className="rounded-[3px] border border-[#4C4B4B] flex items-center justify-center transition"
+          className="rounded-[3px] border border-border flex items-center justify-center transition"
         >
           <BiChevronRight className="size-6" />
         </button>
@@ -192,11 +206,11 @@ export const Section = () => {
           >
             {items.map((item, ind) => (
               <div key={ind} className="min-w-[50%] px-3">
-                <div className="w-full rounded-2xl border border-white/70 bg-black relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#2EDBAD]/40 opacity-0 hover:opacity-100 transition-opacity z-10" />
+                <div className="w-full rounded-2xl border  bg-black relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-green/40 opacity-0 hover:opacity-100 transition-opacity z-10" />
                   <img
                     src={item}
-                    alt=""
+                    alt={`BitZup promotion banner ${ind + 1}`}
                     className="w-full h-full object-cover rounded-2xl"
                   />
                 </div>
@@ -208,20 +222,20 @@ export const Section = () => {
         <div className="flex justify-center gap-3 mt-6">
           <button
             onClick={prev}
-            className=" rounded-[3px] border border-[#4C4B4B] flex items-center justify-center transition"
+            className=" rounded-[3px] border border-border flex items-center justify-center transition"
           >
             <BiChevronLeft className="size-6" />
           </button>
           <button
             onClick={next}
-            className="rounded-[3px] border border-[#4C4B4B] flex items-center justify-center transition"
+            className="rounded-[3px] border border-border flex items-center justify-center transition"
           >
             <BiChevronRight className="size-6" />
           </button>
         </div>
       </div>
 
-      <div className="flex md:justify-center mt-10 md:px-[60px] px-4">
+      <div className="flex md:justify-center mt-10 md:px-16 px-4">
         <div className="flex justify-center flex-col w-full">
           {/* Tabs and View More */}
           <div className="flex justify-between items-center mb-6">
@@ -230,12 +244,12 @@ export const Section = () => {
                 <div
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`py-2 whitespace-nowrap cursor-pointer font-bold text-sm md:text-[40px] transition-all
-                ${activeTab === tab ? "text-white" : "text-[#585757]"}`}
+                  className={`py-3 whitespace-nowrap cursor-pointer font-bold text-lg md:text-2xl transition-all relative
+                ${activeTab === tab ? "text-primary" : "text-secondary hover:text-primary"}`}
                 >
                   {tab === "Hot" && "🔥"} {tab}
                   {activeTab === tab && (
-                    <div className="h-[1px] bg-white w-[50%] mt-1 rounded-full" />
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-brand-green w-full rounded-full" />
                   )}
                 </div>
               ))}
@@ -245,7 +259,7 @@ export const Section = () => {
           {/* Market List */}
           <div className="w-full">
             {/* Header */}
-            <div className="grid grid-cols-3 md:grid-cols-5  text-xs md:text-[20px] font-normal px-2 md:px-6 py-4">
+            <div className="grid grid-cols-3 md:grid-cols-5  text-xs md:text-xl font-normal px-2 md:px-6 py-4">
               <div className="text-left">Coin</div>
               <div className="text-right">Current Price</div>
               <div className="text-right">Change</div>
@@ -258,32 +272,35 @@ export const Section = () => {
               {filteredData()?.map((mover, index) => (
                 <div
                   key={index}
-                  className="grid grid-cols-3 md:grid-cols-5 px-2 md:px-6 py-5 hover:bg-white/5 transition-all items-center cursor-pointer border-t border-white/5"
+                  className="grid grid-cols-3 md:grid-cols-5 px-6 h-16 hover:bg-surface transition-all items-center cursor-pointer border-border group"
+                  onClick={() =>
+                    (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
+                  }
                 >
                   {/* Coin Column */}
-                  <div className="flex items-center gap-2 md:gap-4">
+                  <div className="flex items-center gap-4">
                     <CoinIcon mover={mover} />
                     <div className="flex flex-col">
-                      <span className="font-normal text-white text-left text-sm md:text-xl">
+                      <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-sm md:text-lg">
                         {mover?.base_asset_symbol}
                       </span>
-                      <span className="text-[10px] text-left md:text-[12px] text-gray-500 font-medium">
+                      <span className="text-xs text-secondary font-medium">
                         {mover?.coin_name}
                       </span>
                     </div>
                   </div>
 
                   {/* Price Column */}
-                  <div className="text-right font-normal text-white text-sm md:text-md">
+                  <div className="text-right font-mono text-primary text-lg">
                     ${mover?.current_price}
                   </div>
 
                   {/* Change Column */}
                   <div
-                    className={`text-right font-normal text-sm md:text-[18px] ${
+                    className={`text-right font-mono text-lg ${
                       mover?.change_in_price > 0
-                        ? "text-[#2EBD85]"
-                        : "text-[#F6465D]"
+                        ? "text-trading-up"
+                        : "text-trading-down"
                     }`}
                   >
                     {mover?.change_in_price > 0 ? "+" : ""}
@@ -291,7 +308,7 @@ export const Section = () => {
                   </div>
 
                   {/* Desktop Only: Volume */}
-                  <div className="text-right text-gray-400 font-normal max-md:hidden md:text-md">
+                  <div className="text-right text-secondary font-mono max-md:hidden">
                     {mover?.volume}
                   </div>
 
@@ -302,7 +319,7 @@ export const Section = () => {
                       (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                     }
                   >
-                    <button className="bg-[#2EDBAD] cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
+                    <button className="bgbrand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
                       Trade
                     </button>
                   </div>
@@ -320,92 +337,101 @@ export const Section = () => {
         View all 2500+ Coins <FaChevronRight className="size-3" />
       </div>
       <div>
-        <div className="text-center text-[30px] p-3 font-bold md:hidden">
+        <div className="text-center text-2xl p-3 font-bold md:hidden">
           Trade Crypto Anywhere Anytime
         </div>
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
-          <div className="md:w-[50%] w-full justify-center flex ">
-            <div className=" rounded-full p-20 w-full backdrop-blur flex justify-center relative items-center">
-              <img
-                src="./home.gif"
-                className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20"
+          <div className="md:w-[50%] w-full flex justify-center items-center relative py-10">
+            {/* Glow/Backlight Effect */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green/20 blur-[7.5rem] h-[70%] w-[60%] rounded-full z-0"></div>
+
+            {/* Mobile Mockup Frame */}
+            <div className="relative z-20 p-2.5 bg-surface rounded-[3rem] border-[8px] border-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform hover:scale-105 duration-500">
+              {/* Device Notch/Speaker */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-border rounded-b-2xl z-30"></div>
+
+              <video
+                src="/Mobile.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-3xl object-cover"
               />
-              <div className="absolute bg-[#2EDBAD] blur-[200px]  h-[60%] w-50 rounded-full"></div>
             </div>
           </div>
-          <div className=" flex w-full justify-center items-center text-[12px] gap-5 md:hidden">
-              <div className="flex flex-wrap justify-center gap-3 mt-4">
-                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
-                  <a
-                    href="https://apps.apple.com/app/bitzup/id6749609757"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      src="/Group 1.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
-                      alt="App Store"
-                    />
-                  </a>
-                  <a
-                    href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      src="/Group 2.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
-                      alt="Google Play"
-                    />
-                  </a>
-                  <a
-                    href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      src="/Group 3.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
-                      alt="Android"
-                    />
-                  </a>
-                  {/* </div> */}
-                  {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
-                  {/* </div> */}
-                </div>
+          <div className=" flex w-full justify-center items-center text-xs gap-5 md:hidden">
+            <div className="flex flex-wrap justify-center gap-3 mt-4">
+              {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+              <a
+                href="https://apps.apple.com/app/bitzup/id6749609757"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/apple-badge.png"
+                  className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="App Store"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/google-play-badge.png"
+                  className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="Google Play"
+                />
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/android-badge.png"
+                  className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="Android"
+                />
+              </a>
+              {/* </div> */}
+              {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+              {/* </div> */}
+            </div>
           </div>
           <div className="md:w-[50%] h-full max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
             <div>
-              <div className="text-[30px] md:text-[50px] font-bold text-center">
+              <div className="text-2xl md:text-3xl font-bold text-center text-primary">
                 Trade Crypto
-                <div className="text-[30px] md:text-[50px] font-bold text-center">
+                <div className="text-2xl md:text-3xl font-bold text-center text-primary">
                   Anywhere Anytime
                 </div>
               </div>
             </div>
-            <div className="bg-[#181818] max-w-[400px] flex max-h-[220px] rounded-[10px]">
-            <div className="w-[40%] p-3 border border-white rounded-2xl">
-              {" "}
-              <QRCode
-                className="w-full h-full bg-white p-2 rounded-md"
-                value={""}
-              />
-            </div>
-            <div className="w-[60%] flex flex-col justify-between  p-5">
-              <div className="">
-                <div className="text-[15px] font-normal leading-[100%] whitespace-nowrap">
-                  Scan to download app
+            <div className="max-w-sm flex max-h-56 p-4 gap-6 bg-surface rounded-md">
+              <div className="w-[40%] p-2 border border-border rounded-lg bg-white">
+                <QRCode
+                  className="w-full h-full"
+                  value={"https://bitzup.com/download"}
+                />
+              </div>
+              <div className="w-[60%] flex flex-col justify-between py-2">
+                <div>
+                  <div className="text-eyebrow text-secondary mb-1">
+                    Scan to download
+                  </div>
+                  <div className="text-xl font-bold text-primary">
+                    iOS & Android
+                  </div>
                 </div>
-                <div className="text-[26px] font-bold whitespace-nowrap">
-                  iOS & Android
+                <div className="text-sm text-secondary hover:text-brand-green cursor-pointer transition-colors font-medium">
+                  More Download Options
                 </div>
               </div>
-              <div className="text-[14px] font-normal capitalize whitespace-nowrap">
-                More Download Options
-              </div>
             </div>
-          </div>
-            <div className="flex gap-[60px] h">
+            <div className="flex gap-16">
               <div>
                 {/* <div className="mb-2 text-left">or Download App</div> */}
                 <div className="flex gap-3 mt-4">
@@ -416,8 +442,8 @@ export const Section = () => {
                     rel="noreferrer"
                   >
                     <img
-                      src="/Group 1.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      src="/apple-badge.png"
+                      className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
                       alt="App Store"
                     />
                   </a>
@@ -427,8 +453,8 @@ export const Section = () => {
                     rel="noreferrer"
                   >
                     <img
-                      src="/Group 2.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      src="/google-play-badge.png"
+                      className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
                       alt="Google Play"
                     />
                   </a>
@@ -438,8 +464,8 @@ export const Section = () => {
                     rel="noreferrer"
                   >
                     <img
-                      src="/Group 3.png"
-                      className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity"
+                      src="/android-badge.png"
+                      className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
                       alt="Android"
                     />
                   </a>
@@ -452,100 +478,110 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:p-[0px_60px_0px_60px]">
-        <div className="font-bold text-[50px]">How to Get Started</div>
+      <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:px-16">
+        <div className="font-bold text-3xl text-center">How to Get Started</div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-10">
             <div className="flex gap-5">
-              <div className="font-bold text-[42px] w-7.5">1</div>
+              <div className="font-bold text-3xl w-7.5">1</div>
               <div className="text-left">
-                <div className="text-[22px] font-bold">Create an Account</div>
-                <div className="text-[14px] text-[#B2ADAD] font-normal">
+                <div className="text-lg font-bold">Create an Account</div>
+                <div className="text-sm text-muted font-normal">
                   Register and claim exclusive newcomer rewards.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/register")}
-                  className="text-[10px] bg-[#2EDBAD] justify-center p-2 text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer w-30"
+                  className="text-xs bg-brand-green justify-center p-2 text-black rounded-full mt-2 flex gap-1 items-center cursor-pointer w-32"
                 >
                   Register now <FaArrowRightLong />
                 </button>
               </div>
             </div>
             <div className="flex gap-5">
-              <div className="font-bold text-[42px] w-7.5">2</div>
+              <div className="font-bold text-3xl w-7.5">2</div>
               <div className="text-left">
-                <div className="text-[22px] font-bold">Quick Buy</div>
-                <div className="text-[14px] text-[#B2ADAD] font-normal">
+                <div className="text-lg font-bold">Quick Buy</div>
+                <div className="text-sm text-secondary font-normal">
                   Buy or deposit crypto in a few easy steps.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
-                  className="text-[10px] justify-center bg-[#353535] w-30 p-2 text-black hover:bg-[#2EDBAD] rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
+                  className="text-xs justify-center bg-surface-2 w-32 p-2 text-black hover:bg-brand-green rounded-full mt-2 flex gap-1 items-center cursor-pointer"
                 >
                   Buy Crypto <FaArrowRightLong />
                 </button>
               </div>
             </div>
             <div className="flex gap-5">
-              <div className="font-bold text-[42px] w-7.5">3</div>
+              <div className="font-bold text-3xl w-7.5">3</div>
               <div className="text-left">
-                <div className="text-[22px] font-bold">Start Trading</div>
-                <div className="text-[14px] text-[#B2ADAD] font-normal">
+                <div className="text-lg font-bold">Start Trading</div>
+                <div className="text-sm text-secondary font-normal">
                   Sell and buy crypto, copy trade, and more.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
-                  className="text-[10px] bg-[#353535] justify-center p-2 w-30 hover:bg-[#2EDBAD] text-black rounded-[20px] mt-2 flex gap-1 items-center cursor-pointer"
+                  className="text-xs bg-surface-2 justify-center p-2 w-32 hover:bg-brand-green text-black rounded-full mt-2 flex gap-1 items-center cursor-pointer"
                 >
                   Trade Now <FaArrowRightLong />
                 </button>
               </div>
             </div>
           </div>
-          <div className="w-[420px] h-[320px] rounded-[30px] bg-[#131516]">
-            <img src="" />
+          <div className="w-[26.25rem] h-80 rounded-xl bg-surface overflow-hidden">
+            <img
+              src="/feature-summary.png"
+              className="w-full h-full object-cover"
+              alt="How to get started illustration"
+            />
           </div>
         </div>
       </div>
-      <div className="text-[30px] font-bold md:hidden">How to Get Started</div>
+      <div className=" w-full text-2xl font-bold md:hidden text-center ">
+        How to Get Started
+      </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
         <div
           onClick={() => (window.location.href = "/trade/register")}
-          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+          className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Create Account</div>
-          <div className="bg-[#131516] p-2 rounded-md">
+          <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
         </div>
         <div
           onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+          className=" border-primary border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Quick Buy</div>
-          <div className="bg-[#131516] p-2 rounded-md">
+          <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
         </div>
         <div
           onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-[#FFFFFF] border-1 w-full rounded-[8px] items-center flex justify-between p-4 cursor-pointer"
+          className=" border-primary border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Start Trading</div>
-          <div className="bg-[#131516] p-2 rounded-md">
+          <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
         </div>
       </div>
-      <div className="flex flex-col mt-10 md:p-[0px_60px_0px_60px]">
-        <div className="font-bold md:text-[50px] text-[30px] mb-15">
-          Escort Every Trade
+      <div className="flex flex-col mt-10 md:px-16">
+        <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
+          How We Protect Every Trade
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-60 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 ">
           <div className="flex flex-col items-center gap-5 max-md:hidden">
-            <img src="/secure-shield 1.svg" className="h-[40px] w-[40px]" />
-            <div className="text-[20px] font-bold">Secure Smart Contracts</div>
-            <div className="text-[14px] font-semibold text-[#686868]">
+            <img
+              src="/secure-shield 1.svg"
+              className="size-10"
+              alt="Secure Smart Contracts"
+            />
+            <div className="text-lg font-bold">Secure Smart Contracts</div>
+            <div className="text-sm font-semibold text-muted">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Vestibulum sagittis commodo nunc non malesuada. Cras consequat
               diam sed
@@ -553,9 +589,13 @@ export const Section = () => {
           </div>
 
           <div className="flex flex-col items-center gap-5 max-md:hidden">
-            <img src="/reserve 1.svg" className="h-[40px] w-[40px]" />
-            <div className="text-[20px] font-bold">Reserve Audit Proof</div>
-            <div className="text-[14px] font-semibold text-[#686868]">
+            <img
+              src="/reserve 1.svg"
+              className="size-10"
+              alt="Reserve Audit Proof"
+            />
+            <div className="text-lg font-bold">Reserve Audit Proof</div>
+            <div className="text-sm font-semibold text-muted">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Vestibulum sagittis commodo nunc non malesuada. Cras consequat
               diam sed
@@ -563,11 +603,15 @@ export const Section = () => {
           </div>
 
           <div className="flex flex-col items-center gap-5 max-md:hidden">
-            <img src="/wallet 1.svg" className="h-[40px] w-[40px]" />
-            <div className="text-[20px] font-bold">
+            <img
+              src="/wallet 1.svg"
+              className="size-10"
+              alt="Cold and Hot Wallet Storage"
+            />
+            <div className="text-lg font-bold">
               Cold/Hot Wallet based Storage
             </div>
-            <div className="text-[14px] font-normal text-[#686868] ">
+            <div className="text-sm font-normal text-muted ">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Vestibulum sagittis commodo nunc non malesuada. Cras consequat
               diam sed
@@ -578,13 +622,15 @@ export const Section = () => {
           <div className="flex flex-col md:hidden gap-2">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/secure-shield 1.svg" className="size-7" />
+                <img
+                  src="/secure-shield 1.svg"
+                  className="size-7"
+                  alt="Secure Shield"
+                />
               </div>
               <div className="text-left flex flex-col gap-1">
-                <div className="text-[20px] font-bold">
-                  Secure Smart Contracts
-                </div>
-                <div className="text-[10px] text-[#B2ADAD]">
+                <div className="text-lg font-bold">Secure Smart Contracts</div>
+                <div className="text-xs text-secondary">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -594,11 +640,15 @@ export const Section = () => {
           <div className="flex flex-col md:hidden">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/reserve 1.svg" className="size-7" />
+                <img
+                  src="/reserve 1.svg"
+                  className="size-7"
+                  alt="Reserve Proof"
+                />
               </div>
               <div className="text-left flex flex-col gap-1">
-                <div className="text-[20px] font-bold">Reserve Audit Proof</div>
-                <div className="text-[10px] text-[#B2ADAD]">
+                <div className="text-lg font-bold">Reserve Audit Proof</div>
+                <div className="text-xs text-secondary">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -608,13 +658,17 @@ export const Section = () => {
           <div className="flex flex-col md:hidden">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
-                <img src="/wallet 1.svg" className="size-6" />
+                <img
+                  src="/wallet 1.svg"
+                  className="size-6"
+                  alt="Secure Wallet"
+                />
               </div>
               <div className="text-left flex flex-col gap-1">
-                <div className="text-[20px] font-bold">
+                <div className="text-lg font-bold">
                   Cold/Hot Wallet based Storage
                 </div>
-                <div className="text-[10px] text-[#B2ADAD]">
+                <div className="text-xs text-secondary">
                   {" "}
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 </div>
@@ -623,47 +677,39 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="  md:p-15 grid grid-cols-2 md:grid-cols-4  gap-10 justify-evenly bg-[#131516] flex-wrap mt-10 p-[20px_0px_20px_0px]">
+      <div className="md:p-16 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly bg-surface flex-wrap mt-10 py-6">
         <div>
-          <div className="md:text-[49px] text-[30px] font-bold">$19.64B</div>
-          <div className="md:text-[20px] text-[15px] font-semibold text-[#B2ADAD]">
+          <div className="md:text-3xl text-2xl font-bold text-center">
+            $19.64B
+          </div>
+          <div className="text-eyebrow text-secondary text-center">
             24h Volume
           </div>
         </div>
         <div>
-          <div className="md:text-[49px] text-[30px] font-bold">4,100+</div>
-          <div className="md:text-[20px] text-[15px] font-semibold text-[#B2ADAD]">
+          <div className="md:text-3xl text-2xl font-bold text-center">
+            4,100+
+          </div>
+          <div className="text-eyebrow text-secondary text-center">
             Cryptocurrencies
           </div>
         </div>
         <div>
-          <div className="md:text-[49px] text-[30px] font-bold">10.16%</div>
-          <div className="md:text-[20px] text-[15px] font-semibold text-[#B2ADAD]">
+          <div className="md:text-3xl text-2xl font-bold text-center">
+            10.16%
+          </div>
+          <div className="text-eyebrow text-secondary text-center">
             Simple Earn APR
           </div>
         </div>
         <div>
-          <div className="md:text-[49px] text-[30px] font-bold">124%</div>
-          <div className="md:text-[20px] text-[15px] font-semibold text-[#B2ADAD]">
+          <div className="md:text-3xl text-2xl font-bold text-center">124%</div>
+          <div className="text-eyebrow text-secondary text-center">
             Total Reserve Ratio
           </div>
         </div>
       </div>
 
-      {/* <div className=" md:p-15 p-5 flex flex-col items-center w-full mt-10">
-        <div className="text-[30px] md:text-[50px] md:w-[60%] w-full mb-10   font-bold">
-          Worldwide Buzz Media on Your Narrative
-        </div>
-        <div className="grid md:grid-cols-3 grid-cols-1 md:hidden  gap-10 w-full">
-          <div className="w-full rounded-[15px] border-2 h-50"></div>
-          <div className="w-full rounded-[15px] border-2 h-50"></div>
-          <div className="w-full rounded-[15px] border-2 h-50"></div>
-        </div>
-        <div className="max-md:hidden w-full">
-          {" "}
-          <PromoSlider items={8} />
-        </div>
-      </div> */}
       {/* <PrivacyPolicy/> */}
       {/* <Menu  children={<PrivacysPolicy/>}/> */}
       <Footer />

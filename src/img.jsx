@@ -20,7 +20,7 @@ export default function Carousel() {
   const translateX = -(active * 100);
 
   return (
-    <div className="w-full bg-black py-20 overflow-hidden">
+    <div className="w-full bg-background py-20 overflow-hidden">
       {/* Carousel */}
       <div className="mx-auto overflow-hidden">
         <div
@@ -28,11 +28,8 @@ export default function Carousel() {
           style={{ transform: `translateX(${translateX}%)` }}
         >
           {items.map((_, i) => (
-            <div
-              key={i}
-              className="min-w-[33.3333%] px-4"
-            >
-              <div className="h-[300px] rounded-3xl border-[1px] border-white"></div>
+            <div key={i} className="min-w-[33.3333%] px-4">
+              <div className="h-72 rounded-3xl border border-border"></div>
             </div>
           ))}
         </div>
@@ -45,7 +42,7 @@ export default function Carousel() {
             key={i}
             onClick={() => setActive(i)}
             className={`w-3 h-3 rounded-full transition ${
-              active === i ? "bg-white" : "bg-white/40"
+              active === i ? "bg-brand-green" : "bg-muted/40"
             }`}
           />
         ))}

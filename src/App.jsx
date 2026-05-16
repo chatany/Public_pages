@@ -1,56 +1,69 @@
+import { lazy, Suspense } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home } from "./Components/home";
-import { AmlPolicy } from "./Components/AMLPolicy";
 import { Menu } from "./menu";
-import { RiskPolicy } from "./Components/Risk";
-import { TradePolicy } from "./Components/TradePolicy";
-import { CookiePolicy } from "./Components/cookiePolicy";
-import { PrivacyPolicy } from "./privacyPolicy";
 import ScrollToTop from "./Components/custom";
-import { UserAgreement } from "./Components/userPolicy";
-import { Terms } from "./Components/userAgreement";
-import { ReferralPage } from "./ReferalPage";
-import { CarrierPage } from "./CarrierPage";
-import { AutoInvest } from "./AotoInvest";
-import { Verification } from "./VerificationPage";
-import { Vip } from "./Vip";
-import SubmitRequestForm from "./Components/submit/request";
+
+// Lazy loaded components
+const Home = lazy(() => import("./Components/home").then(module => ({ default: module.Home })));
+const AmlPolicy = lazy(() => import("./Components/AMLPolicy").then(module => ({ default: module.AmlPolicy })));
+const RiskPolicy = lazy(() => import("./Components/Risk").then(module => ({ default: module.RiskPolicy })));
+const TradePolicy = lazy(() => import("./Components/TradePolicy").then(module => ({ default: module.TradePolicy })));
+const CookiePolicy = lazy(() => import("./Components/cookiePolicy").then(module => ({ default: module.CookiePolicy })));
+const PrivacyPolicy = lazy(() => import("./privacyPolicy").then(module => ({ default: module.PrivacyPolicy })));
+const UserAgreement = lazy(() => import("./Components/userPolicy").then(module => ({ default: module.UserAgreement })));
+const Terms = lazy(() => import("./Components/userAgreement").then(module => ({ default: module.Terms })));
+const ReferralPage = lazy(() => import("./ReferalPage").then(module => ({ default: module.ReferralPage })));
+const CarrierPage = lazy(() => import("./CarrierPage").then(module => ({ default: module.CarrierPage })));
+const AutoInvest = lazy(() => import("./AotoInvest").then(module => ({ default: module.AutoInvest })));
+const Verification = lazy(() => import("./VerificationPage").then(module => ({ default: module.Verification })));
+const Vip = lazy(() => import("./Vip").then(module => ({ default: module.Vip })));
+const SubmitRequestForm = lazy(() => import("./Components/submit/request"));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen bg-bg text-brand-green">
+    <div className="animate-pulse text-xl font-bold tracking-widest">BitZup...</div>
+  </div>
+);
+
 export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Routes>
-        <Route element={<Home />} path="/" />
-        <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
-        <Route element={<ReferralPage />} path="/refferal" />
-        <Route element={<CarrierPage />} path="/carrier" />
-        <Route element={<Vip/>} path="/vip"/>
-        <Route element={<AutoInvest />} path="/invest" />
-        <Route element={<Verification />} path="/verification" />
-        <Route element={<SubmitRequestForm/>} path="/request"/>
-        <Route
-          element={<Menu children={<RiskPolicy />} />}
-          path="/risk-disclosure"
-        />
-        <Route
-          element={<Menu children={<TradePolicy />} />}
-          path="/trading-policy"
-        />
-        <Route
-          element={<Menu children={<CookiePolicy />} />}
-          path="/cookies-policy"
-        />
-        <Route
-          element={<Menu children={<PrivacyPolicy />} />}
-          path="/privacy-policy"
-        />
-        <Route
-          element={<Menu children={<UserAgreement />} />}
-          path="/user-agreement"
-        />
-        <Route element={<Menu children={<Terms />} />} path="/terms-of-use" />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route element={<Home />} path="/" />
+          <Route element={<Menu children={<AmlPolicy />} />} path="/aml-policy" />
+          <Route element={<ReferralPage />} path="/referral" />
+          <Route element={<CarrierPage />} path="/careers" />
+          <Route element={<Vip/>} path="/vip"/>
+          <Route element={<AutoInvest />} path="/invest" />
+          <Route element={<Verification />} path="/verification" />
+          <Route element={<SubmitRequestForm/>} path="/request"/>
+          <Route
+            element={<Menu children={<RiskPolicy />} />}
+            path="/risk-disclosure"
+          />
+          <Route
+            element={<Menu children={<TradePolicy />} />}
+            path="/trading-policy"
+          />
+          <Route
+            element={<Menu children={<CookiePolicy />} />}
+            path="/cookies-policy"
+          />
+          <Route
+            element={<Menu children={<PrivacyPolicy />} />}
+            path="/privacy-policy"
+          />
+          <Route
+            element={<Menu children={<UserAgreement />} />}
+            path="/user-agreement"
+          />
+          <Route element={<Menu children={<Terms />} />} path="/terms-of-use" />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

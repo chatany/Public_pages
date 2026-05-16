@@ -1,14 +1,20 @@
+import { Helmet } from "react-helmet-async";
+
 export const UserAgreement = () => {
   return (
     <div>
+      <Helmet>
+        <title>User Agreement - BitZup</title>
+        <meta name="description" content="Read the BitZup User Agreement to understand the terms and conditions for using our platform and services." />
+      </Helmet>
       <div className="text-left">
-        <div className="text-[36px] font-bold mb-20">User Agreement</div>
+        <h1 className="text-3xl font-bold mb-20">User Agreement</h1>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             IMPORTANT
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             This User Agreement is concluded between you ("You" or "User") and
             BitZup Exchange Limited or BitZup Trading Platform ("we", "us",
             "our", "ours", "BitZup", or, the "Platform"). By using, accessing,
@@ -34,10 +40,10 @@ export const UserAgreement = () => {
             or trading Digital Assets, you can access our Risk Disclosure
             Statement at www.BitZup.com
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             IMPORTANT
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             It is your sole responsibility to ensure that the computer used for
             the trade and liquidity of Digital Assets is secure. Due to web page
             display and safety considerations, it is strongly recommended that
@@ -45,10 +51,10 @@ export const UserAgreement = () => {
             BitZup. Users shall bear the responsibility themselves for the
             losses or damages suffered as a result thereof.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             2 PROHIBITED, RESTRICTED AND SANCTION COUNTRIES
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             You must ensure that you are not a resident of Prohibited, Sanction
             or Restricted Countries. Currently, BitZup does not provide
             Services, nor do we accept registration of Users or trade
@@ -85,10 +91,10 @@ export const UserAgreement = () => {
             the earliest possible opportunity if you have become resident in any
             of the foregoing Prohibited Countries
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             RISK DISCLOSURE
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             Notwithstanding our Risk Disclosure Statement available at:
             www.BitZup.com to further your understanding of the risks associated
             with trading in Digital Assets, BitZup hereby reminds you of the
@@ -155,10 +161,10 @@ export const UserAgreement = () => {
               debt fraud or alleged crimes.
             </li>
           </ul>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             4. ELIGIBILITY
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             By registering for an BitZup Account or using or otherwise accessing
             BitZup Services, you represent and warrant that: (i) as an
             individual, you are of legal age to form a binding contract under
@@ -181,10 +187,10 @@ export const UserAgreement = () => {
             limited to regulations on anti-money laundering, anti-corruption,
             and counter-terrorist financing.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             5. REGISTRATION
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             All Users must apply for a BitZup Account before using BitZup
             Services. When you register an BitZup Account, you must provide the
             information identified in this Agreement or otherwise as requested
@@ -200,10 +206,10 @@ export const UserAgreement = () => {
             governed by the provisions of this Agreement, unless otherwise
             stated in this Agreement or the Legal Documents.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             6. LEGAL REQUIREMENTS
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             Please note that there are legal requirements in various countries
             which may restrict the products and services that BitZup can
             lawfully provide. Accordingly, some products and services and
@@ -219,10 +225,10 @@ export const UserAgreement = () => {
             time to time at their discretion at any time without prior
             notification.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             7. ACCOUNT SECURITY MANAGEMENT AND USER INFORMATION
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             BitZup does not guarantee uninterrupted availability of its services
             at any specific time, nor does it ensure that the platform will be
             free from unexpected outages or network congestion. As a result,
@@ -244,7 +250,7 @@ export const UserAgreement = () => {
             suspend, or impose further limitations on access to the Platform and
             its services at its sole discretion, without prior notice.
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) Users should create passwords in accordance with relevant
               rules of BitZup and relevant prompts of BitZup (passwords include
@@ -291,10 +297,10 @@ export const UserAgreement = () => {
               severally liable.
             </li>
           </ul>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             8. TERMINATION
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             If a User discovers that a third person fraudulently uses or
             embezzles the User's account and password, or such third person’s
             use of the User’s account involves any absence of requisite and due
@@ -317,7 +323,7 @@ export const UserAgreement = () => {
             User and without assuming any responsibility to such User or any
             third party. The aforementioned events include:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) BitZup believes that the information provided by the User is
               not authentic, valid or complete, e.g, where the User registers
@@ -392,14 +398,14 @@ export const UserAgreement = () => {
             User uses the services provided by BitZup; furthermore, BitZup may
             continue keeping relevant information of the User.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             BITZUP SERVICES
           </div>
           <div>
             (13) Notwithstanding the foregoing, the Services provided by BitZup
             as provided for under this Agreement shall include the following
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) User accounts: a User account will be generated upon a User’s
               registration with BitZup. The User account will record the User's
@@ -499,7 +505,7 @@ export const UserAgreement = () => {
             part of the Services, whenever BitZup determines in BitZup’s sole
             discretion that:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>(a) the User may have breached this Agreement; or</li>
             <li>
               (b) the proper functioning of the BitZup Platform is in jeopardy.
@@ -509,7 +515,7 @@ export const UserAgreement = () => {
             (16) For the purposes of Clause 15 (b), the proper functioning of
             BitZup will be in jeopardy in the following circumstances:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) when a computer or telecommunications network ceases to
               operate or function as a result of an accident;
@@ -560,7 +566,7 @@ export const UserAgreement = () => {
             (17) When you use BitZup Services, you agree and undertake to comply
             with the following provisions:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) During the use of BitZup Services, all activities you carry
               out should comply with the requirements of applicable laws and
@@ -649,7 +655,7 @@ export const UserAgreement = () => {
             under relevant regulations without your consent or prior notice.
             Examples of such actions include, but are not limited to:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>Blocking and closing order requests;</li>
             <li>Freezing your account;</li>
             <li>Reporting the incident to the authorities;</li>
@@ -671,7 +677,7 @@ export const UserAgreement = () => {
             constitutes any of the prohibited businesses. These prohibited
             businesses include:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) Unlicensed money service businesses, including but not limited
               to, payment services providers, the sale of money orders or
@@ -785,7 +791,7 @@ export const UserAgreement = () => {
             actual Prohibited Businesses to a law enforcement agency, regulator,
             or any other authority.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             ACCOUNT RESTRICTIONS
           </div>
           <div>
@@ -794,7 +800,7 @@ export const UserAgreement = () => {
             have the right, at any time and in our absolute sole discretion, to
             implement the following measures on your Account:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>(a) Blocking and closing order requests;</li>
             <li>(b) Freezing your account and any assets contained therein;</li>
             <li>
@@ -865,63 +871,63 @@ export const UserAgreement = () => {
             any such account has committed a violation of this Agreement, the
             Legal Documents, or the Applicable Laws or Regulations.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             FEES
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             LEGAL RISKS
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             (23) BitZup has the right to set Service charges according to this Agreement. BitZup also has the right to formulate and adjust the Service charges, and set specific service charges for you to use the Service(s) and terminate any promotional efforts at any time and from time to time, at BitZup's absolute sole discretion.
           </div>
           <div>(24) Unless otherwise stated or agreed upon, you agree that BitZup has the right to deduct the abovementioned service charges directly from the assets of your account.</div>
           <div>(25) At BitZup's sole discretion, regional or country-specific pricing may vary based on the User’s residence or location.</div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             Changes in laws and regulations can significantly impact the value
             of Digital Assets. This risk is unpredictable and may differ across
             jurisdictions. Additionally, engaging in activities that violate
             applicable laws or regulations could result in substantial financial
             losses.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
            LIABILITIES
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             (26) BitZup is responsible for providing BitZup services to you according to the status quo and availability. BitZup, however, makes no express or implied warranty with respect to the Services, including but not limited to the applicability, absence of error or omission, sustainability, accuracy, reliability, suitability for a particular purpose of the Services. At the same time, BitZup makes no commitment or guarantee to the validity, accuracy, correctness, reliability, quality, stability, integrity and timeliness of the technology and information involved in the BitZup service.
           </div>
           <div>(27) Notwithstanding the afore, BitZup is responsible for reviewing the text of information released by the digital asset project owners, however it does not guarantee or assume any responsibility for the accuracy, completeness or legality of such information. The Users shall make decisions based on their independent judgment and shall engage their own advisors and/or conduct their own research. If Users conduct digital asset transactions based on such information, the risks arising therefrom shall be borne exclusively by the Users themselves, and the Users have no right to propose any legal claim to BitZup on the basis of such risks. Any dispute between a User and the digital asset project owner arising from or related to the transaction shall be settled by and between the parties to the dispute themselves, and the Platform shall not bear any transaction risk or legal liability whatsoever.</div>
-          <div className="text-left font-normal text-[15px] leading-8 ">
+          <div className="text-left font-normal text-sm leading-8 ">
             (28) DISCLAIMER OF WARRANTIES: TO THE MAXIMUM EXTENT PERMITTED UNDER APPLICABLE LAW, BitZup SERVICES, BitZup MATERIALS AND ANY PRODUCT, SERVICE OR OTHER ITEM PROVIDED BY OR ON BEHALF OF BitZup ARE OFFERED ON AN “AS IS” AND “AS AVAILABLE” BASIS, AND BitZup EXPRESSLY DISCLAIMS, AND YOU WAIVE, ANY AND ALL OTHER WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT OR WARRANTIES ARISING FROM COURSE OF PERFORMANCE, COURSE OF DEALING OR USAGE IN TRADE. WITHOUT LIMITING THE FOREGOING, BitZup DOES NOT REPRESENT OR WARRANT THAT THE SITE, BitZup SERVICES OR BitZup MATERIALS ARE ACCURATE, COMPLETE, RELIABLE, CURRENT, ERROR-FREE, OR FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. BitZup DOES NOT GUARANTEE THAT ANY ORDER WILL BE EXECUTED, ACCEPTED, RECORDED OR REMAIN OPEN. EXCEPT FOR THE EXPRESS STATEMENTS, AGREEMENTS AND RULES SET FORTH IN this Agreement, YOU HEREBY ACKNOWLEDGE AND AGREE THAT YOU HAVE NOT RELIED UPON ANY OTHER STATEMENT OR AGREEMENT, WHETHER WRITTEN OR ORAL, WITH RESPECT TO YOUR USE AND ACCESS OF BitZup SERVICES. WITHOUT LIMITING THE FOREGOING, YOU HEREBY UNDERSTAND AND AGREE THAT BitZup WILL NOT BE LIABLE FOR ANY LOSSES OR DAMAGES ARISING OUT OF OR RELATING TO: (A) ANY INACCURACY, DEFECT OR OMISSION OF DIGITAL ASSETS PRICE DATA, (B) ANY ERROR OR DELAY IN THE TRANSMISSION OF SUCH DATA, (C) INTERRUPTION IN ANY SUCH DATA, (D) REGULAR OR UNSCHEDULED MAINTENANCE CARRIED OUT BY BitZup AND SERVICE INTERRUPTION AND CHANGE RESULTING FROM SUCH MAINTENANCE, (E) ANY DAMAGES INCURRED BY OTHER USERS’ ACTIONS, OMISSIONS OR VIOLATION OF this Agreement, (F) ANY DAMAGE CAUSED BY ILLEGAL ACTIONS OF OTHER THIRD PARTIES OR ACTIONS WITHOUT AUTHORIZED BY BitZup; AND (G) OTHER EXEMPTIONS MENTIONED IN DISCLAIMERS AND PLATFORM RULES ISSUED BY BitZup.THE DISCLAIMER OF IMPLIED WARRANTIES CONTAINED HEREIN MAY NOT APPLY IF AND TO THE EXTENT IT IS PROHIBITED BY APPLICABLE LAW OF THE JURISDICTION IN WHICH YOU RESIDE.
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             (29) DISCLAIMER OF DAMAGES AND LIMITATION OF LIABILITY: TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL BitZup AND THEIR RESPECTIVE SHAREHOLDERS, MEMBERS, DIRECTORS, OFFICERS, EMPLOYEES, ATTORNEYS, AGENTS, REPRESENTATIVES, SUPPLIERS OR CONTRACTORS BE LIABLE FOR ANY INCIDENTAL, INDIRECT, SPECIAL, PUNITIVE, CONSEQUENTIAL OR SIMILAR DAMAGES OR LIABILITIES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF DATA, INFORMATION, REVENUE, PROFITS OR OTHER BUSINESSES OR FINANCIAL BENEFITS) ARISING OUT OF BitZup SERVICES, ANY PERFORMANCE OR NON-PERFORMANCE OF BitZup SERVICES, OR ANY OTHER PRODUCT, SERVICE OR OTHER ITEM PROVIDED BY OR ON BEHALF OF BitZup AND ITS AFFILIATES, WHETHER UNDER CONTRACT, STATUTE, STRICT LIABILITY OR OTHER THEORY EVEN IF BitZup HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES EXCEPT TO THE EXTENT OF A FINAL JUDICIAL DETERMINATION THAT SUCH DAMAGES WERE A RESULT OF BitZup’S GROSS NEGLIGENCE, FRAUD, WILLFUL MISCONDUCT OR INTENTIONAL VIOLATION OF LAW. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION MAY NOT APPLY TO YOU.NOTWITHSTANDING THE FOREGOING, IN NO EVENT WILL THE LIABILITY OF BitZup, ITS AFFILIATES AND THEIR RESPECTIVE SHAREHOLDERS, MEMBERS, DIRECTORS, OFFICERS, EMPLOYEES, ATTORNEYS, AGENTS, REPRESENTATIVES, SUPPLIERS OR CONTRACTORS ARISING OUT OF SERVICES OFFERED BY OR ON BEHALF OF BitZup AND ITS AFFILIATES, ANY PERFORMANCE OR NON-PERFORMANCE OF BitZup SERVICES, OR ANY OTHER PRODUCT, SERVICE OR OTHER ITEM, WHETHER UNDER CONTRACT, STATUTE, STRICT LIABILITY OR OTHER THEORY, EXCEED THE AMOUNT OF THE TRANSACTION FEES PAID BY YOU TO BitZup UNDER this Agreement IN THE THREEMONTH PERIOD IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM FOR LIABILITY.
           </div>
 
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             (30) You agree to indemnify and hold harmless BitZup, their affiliates, contractors, licensors, and their respective directors, officers, employees and agents from and against any claims, actions, proceedings, investigations, demands, suits, costs, expenses and damages (including attorneys’ fees, fines or penalties imposed by any regulatory authority) arising out of or related to (i) your use of, or conduct in connection with, BitZup Services, (ii) your breach or our enforcement of this Agreement, or (iii) your violation of any applicable law, regulation, or rights of any third party during your use of BitZup Services. If you are obligated to indemnify BitZup,, contractors, licensors, and their respective directors, officers, employees or agents pursuant to this Agreement, BitZup will have the right, in its sole discretion, to control any action or proceeding and to determine whether BitZup wishes to settle, and if so, on what terms.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
            INTELLECTUAL PROPERTY
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
            (31) All intellectual properties included in BitZup, including, but not limited to, website logos, databases, website design, text and graphics, software, photos, videos, music, sounds and any combinations of the aforementioned files, and the intellectual property rights of software compilation, associated source code and software (including small applications and scripts) shall be owned by BitZup. You may not copy, modify, copy, transmit or use any of the foregoing materials or content for commercial purposes.
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
            (32)&gt;Upon accepting this Agreement, it shall be deemed that you, on the basis of your own free will, have transferred and assigned exclusively and free of charge to BitZup all copyright of any form of information that you have published on BitZup, including, but not limited to copyrights, distribution rights, lease rights, exhibition rights, performance rights, projection rights, broadcasting rights, information network communication rights, production rights, adaptation rights, translation rights, compilation rights and other transferable rights that copyright owners are entitled to, and BitZup shall have the right to sue for any infringement on such copyright and obtain full compensation for such infringement. This Agreement shall apply to any content that is published by you on BitZup and is protected by copyright law, regardless of whether the content is generated before or after the signing of this Agreement.
           </div>
-          <div className="text-left font-semibold text-[15px] leading-8 mt-8">
+          <div className="text-left font-semibold text-sm leading-8 mt-8">
             (33) You will not be deemed to have been transferred any intellectual property rights to you by BitZup when you log in to BitZup or use BitZup's Service.&gt;
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             This Trading Policy is governed by the laws of the Republic of
             Trinidad and Tobago, and any disputes arising under this policy
             shall be subject to the jurisdiction of the courts of Trinidad and
             Tobago.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
            INTELLECTUAL PROPERTY
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-sm leading-8">
             by using the BitZup platform, users acknowledge that they have read,
             understood, and agreed to be bound by this Trading Policy.
           </div>

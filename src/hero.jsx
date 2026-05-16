@@ -1,45 +1,64 @@
-import { FaArrowRightLong } from "react-icons/fa6";
+import { ArrowRight } from "lucide-react";
 import { IoLogoApple } from "react-icons/io";
 import QRCode from "react-qr-code";
 
 export default function Hero() {
   return (
-    <section className=" flex max-md:flex-col max-md:gap-5 md:p-15 p-3 justify-between">
+    <section className=" flex max-md:flex-col max-md:gap-6 md:p-16 p-4 justify-between">
       {/* Left Content */}
-      <div className=" z-10 w-full md:w-[50%] flex flex-col text-left border-amber-300">
-        <h1 className="text-[25px] md:text-[50px] font-bold text-white leading-tight text-left">
-          Bitzup - Where Whales are Made
+      <div className=" z-10 w-full md:w-[50%] flex flex-col text-left">
+        <h1 className="text-3xl md:text-5xl font-bold text-primary leading-tight text-left">
+          BitZup: Where Crypto Traders Become Market Leaders
         </h1>
 
         {/* Input */}
         <div className="flex items-center gap-3 mt-8 max-md:hidden">
-          <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit md:rounded-[41px] rounded-[6px] gap-2">
-            <div className="flex font-semibold text-black gap-1 items-center text-[18px]">
+          <button className="btn-primary">
+            <div className="flex font-semibold text-black gap-2 items-center text-lg">
               <img src="gift.svg" className="size-6" /> Sign up now
             </div>
-            {/* <FaArrowRightLong className="size-5 text-black md:hidden" /> */}
           </button>
         </div>
 
         {/* Continue With */}
-        <div className="flex  mt-8 text-gray-400 text-sm w-full gap-[100px] max-md:hidden">
+        <div className="flex mt-8 text-secondary text-sm w-full gap-24 max-md:hidden">
           <div>
             {/* <div className="mb-2">or Download App</div> */}
             <div className="flex gap-3">
               {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
-                <a href="https://apps.apple.com/app/bitzup/id6749609757" target="_blank" rel="noreferrer">
-                  <img src="/Group 1.png" className="w-auto h-[45px] cursor-pointer hover:opacity-80 transition-opacity" alt="App Store" />
-                </a>
-                <a href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN" target="_blank" rel="noreferrer">
-                  <img src="/Group 2.png" className="w-auto h-[45px] cursor-pointer hover:opacity-80 transition-opacity" alt="Google Play" />
-                </a>
-                <a
-                  href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="/Group 3.png" className="w-auto h-[45px] cursor-pointer hover:opacity-80 transition-opacity" alt="Android" />
-                </a>
+              <a
+                href="https://apps.apple.com/app/bitzup/id6749609757"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/apple-badge.png"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="App Store"
+                />
+              </a>
+              <a
+                href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/google-play-badge.png"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="Google Play"
+                />
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src="/android-badge.png"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  alt="Android"
+                />
+              </a>
               {/* </div> */}
               {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
               {/* </div> */}
@@ -57,35 +76,55 @@ export default function Hero() {
 
       {/* Right Circle */}
       <div className=" flex  max-md:justify-end">
-        <div className="md:w-[320px] md:h-[320px] w-[260px] h-[150px] rounded-full bg-gradient-to-br bg-[#131516]" />
+        <div className="md:size-80 w-64 h-36 rounded-full bg-surface" />
       </div>
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
-         <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[40px] w-fit rounded-[41px] rounded-[6px] gap-2">
-            <div className="flex font-semibold text-black gap-1 items-center text-[18px]">
-              <img src="gift.svg" className="size-6" /> Sign up now
-            </div>
-            {/* <FaArrowRightLong className="size-5 text-black md:hidden" /> */}
-          </button>
+        <button className="btn-primary h-12 w-fit px-8">
+          <div className="flex font-semibold text-black gap-2 items-center text-lg">
+            <img src="gift.svg" className="size-6" alt="Gift rewards icon" />{" "}
+            Sign up now
+          </div>
+        </button>
       </div>
       <div className="flex gap-3 md:hidden">
-              {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
-                <a href="https://apps.apple.com/app/bitzup/id6749609757" target="_blank" rel="noreferrer">
-                  <img src="/Group 1.png" className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity" alt="App Store" />
-                </a>
-                <a href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN" target="_blank" rel="noreferrer">
-                  <img src="/Group 2.png" className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity" alt="Google Play" />
-                </a>
-                <a
-                  href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src="/Group 3.png" className="w-auto h-[40px] cursor-pointer hover:opacity-80 transition-opacity" alt="Android" />
-                </a>
-              {/* </div> */}
-              {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
-              {/* </div> */}
-            </div>
+        {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+        <a
+          href="https://apps.apple.com/app/bitzup/id6749609757"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="/apple-badge.png"
+            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            alt="App Store"
+          />
+        </a>
+        <a
+          href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="/google-play-badge.png"
+            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            alt="Google Play"
+          />
+        </a>
+        <a
+          href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img
+            src="/android-badge.png"
+            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            alt="Android"
+          />
+        </a>
+        {/* </div> */}
+        {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
+        {/* </div> */}
+      </div>
     </section>
   );
 }

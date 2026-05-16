@@ -1,11 +1,17 @@
+import { Helmet } from "react-helmet-async";
+
 export const Terms = () => {
   return (
     <div>
+      <Helmet>
+        <title>Terms of Use - BitZup</title>
+        <meta name="description" content="Read the BitZup Terms of Use to understand the legal agreement between you and BitZup regarding your use of our platform." />
+      </Helmet>
       <div className="text-left">
-        <div className="text-[36px] font-bold mb-20">Terms of Use</div>
+        <div className="text-2xl font-bold mb-20">Terms of Use</div>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-base leading-8">
             Effective as of 1st Day of July, Month, 2025 Thank you for visiting
             BitZup.com. By visiting, accessing or using BitZup Exchange Limited,
             REGD. No.C2025061600037 , 116 Abercromby Street Port of Spain
@@ -15,11 +21,11 @@ export const Terms = () => {
             you have read, understood and accepted and consented to the Terms of
             Use (the “Terms”) set out below.
           </div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             BY MAKING USE OR SIGNING UP FOR BITZUP.COM SERVICES, YOU ACKNOWLEDGE
             AND AGREE THAT:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               (a) The digital currencies themselves are not offered by any
               financial institution, corporation and/or BitZup.
@@ -67,7 +73,7 @@ export const Terms = () => {
             </li>
           </ul>
           <div>ABOUT</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. BitZup mainly serves as a global online platform for digital
               assets trading, and provides users with a trading platform and
@@ -95,7 +101,7 @@ export const Terms = () => {
             </li>
           </ul>
           <div>INTRODUCTION</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. By accessing, using, visiting and by clicking “ Sign up” on the
               BitZup Platform, you acknowledge that you accept and agree to be
@@ -147,7 +153,7 @@ export const Terms = () => {
             </li>
           </ul>
           <div>REGISTRATION</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. All users must apply for a BitZup account
               at www.BitZup.com before using BitZup. When you register a BitZup
@@ -177,7 +183,7 @@ export const Terms = () => {
             </li>
           </ul>
           <div>ELIGIBILITY</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. If you are an individual, you agree that by accessing or using
               the BitZup Platform, you represent, agree and warrant that you are
@@ -225,7 +231,7 @@ export const Terms = () => {
             </li>
           </ul>
           <div>USER IDENTITY VERIFICATION</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. Your registration of an account with BitZup will be deemed your
               agreement to provide required personal information for identity
@@ -381,7 +387,7 @@ export const Terms = () => {
             and expense which may be suffered or incurred by BitZup arising out
             of or in relation to:
           </div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
              You use or conduct the BitZup Services.
             </li>
@@ -403,7 +409,7 @@ export const Terms = () => {
           </ul>
           <div>FORCE MAJEURE</div>
           <div>1. Neither party shall be liable for any delay or failure to perform any of their obligations under these Terms, provided such delay or failure to perform are not the result of a party’s fraud, gross negligence or wilful default, and is caused by a force majeure event, including, but not limited to:</div>
-          <ul className="list-disc pl-6 leading-[32px] space-y-2">
+          <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
              Acts of God, fire, storm, tempest, explosion, flood, earthquake, subsidence or any other natural physical disasters.
             </li>

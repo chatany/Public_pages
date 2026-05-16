@@ -7,16 +7,15 @@ const VerifyPopup = ({
   onClose,
   onConfirm,
   onReport,
-  category
+  category,
 }) => {
   if (!isOpen) return null;
 
   const isSuccess = type === "success";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-      <div className="w-[420px] rounded-2xl border border-gray-800 bg-[#0f1115] p-8 text-white shadow-2xl">
-
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/70 backdrop-blur-sm">
+      <div className="w-[420px] rounded-2xl border border-border bg-surface p-8 text-white shadow-2xl">
         {/* ICON */}
         <div className="flex justify-center">
           <div
@@ -30,16 +29,16 @@ const VerifyPopup = ({
               }`}
             >
               {isSuccess ? (
-                <IoCheckmark className="text-2xl text-white" />
+                <IoCheckmark className="text-xl text-white" />
               ) : (
-                <IoClose className="text-2xl text-white" />
+                <IoClose className="text-xl text-white" />
               )}
             </div>
           </div>
         </div>
 
         {/* TITLE */}
-        <h2 className="mt-6 text-center text-xl font-semibold">
+        <h2 className="mt-6 text-center text-lg font-semibold">
           {isSuccess
             ? "Bitzup official channel"
             : "Not a Bitzup official channel"}
@@ -58,7 +57,7 @@ const VerifyPopup = ({
         </p>
 
         {/* URL BOX */}
-        <div className="mt-4 rounded-lg bg-[#1a1d24] px-4 py-3 text-center text-sm text-gray-200 text-left">
+        <div className="mt-4 rounded-lg bg-surface px-4 py-3 text-center text-sm text-gray-200 text-left">
           {url}
         </div>
 
@@ -70,10 +69,12 @@ const VerifyPopup = ({
         </p>
 
         {/* SECURITY ALERT */}
-        <div className="mt-4 rounded-lg bg-[#1a1d24] p-4 text-left">
+        <div className="mt-4 rounded-lg bg-surface p-4 text-left">
           <p className="font-semibold text-sm mb-2">Security alerts</p>
           <ul className="list-disc pl-5 text-sm text-gray-400 space-y-1">
-            <li>Contact customer service if you are still unable to confirm.</li>
+            <li>
+              Contact customer service if you are still unable to confirm.
+            </li>
           </ul>
         </div>
 
@@ -97,7 +98,7 @@ const VerifyPopup = ({
 
               <button
                 onClick={onConfirm || onClose}
-                className="cursor-pointer w-full rounded-lg bg-[#2EDBAD] py-3 font-medium text-black hover:bg-[#2EDBAD]/70"
+                className="cursor-pointer w-full rounded-lg bgbrand-green py-3 font-medium text-black hover:bgbrand-green/70"
               >
                 Confirm
               </button>

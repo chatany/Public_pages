@@ -1,126 +1,103 @@
-import { FaArrowRightLong } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
+import { Gift, Share2, UserPlus, Trophy } from "lucide-react";
 
 export const ReferralPage = () => {
   return (
     <>
-    <Navbar/>
-    <div className="bg-black min-h-screen ">
+      <Helmet>
+        <title>Refer Friends to BitZup — Earn Up to 30% Commission</title>
+        <meta name="description" content="Refer friends to BitZup and earn up to 30% of their trading fees. Share your link, track rewards in real time, and build passive crypto income." />
+      </Helmet>
+      <Navbar/>
+    <div className="bg-bg min-h-screen text-primary">
       <div className="flex items-center max-md:flex-col  justify-between md:p-20 p-5">
         <div className=" md:text-left text-center flex flex-col gap-10">
-          <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[50px]">
+          <h1 className="md:text-3xl text-2xl font-bold md:text-left text-center leading-tight">
             30% Commission Rebate.
             <br className="max-md:hidden" /> Invite Your Friends Now.
-          </div>
-          <div className="text-[18px] font-bold leading-[100%] text-[#686868] max-md:hidden">
+          </h1>
+          <p className="text-base font-bold text-secondary max-md:hidden">
             Get 30% of your friends' trading fees. Invite now and profit
             together.
-          </div>
+          </p>
           <div className="w-full flex max-md:justify-center">
-            <button className="bg-[#2EDBAD] h-[47px] w-[180px] text-[18px]  p-1 font-bold text-black rounded-[33px]">
+            <button className="btn-primary w-48">
               Invite Now
             </button>
           </div>
-          <div className="text-[18px] font-bold leading-[100%] text-[#686868] md:hidden">
+          <p className="text-base font-bold text-secondary md:hidden">
             Get 30% of your friends' trading fees. Invite now and profit
             together.
-          </div>
+          </p>
         </div>
         <div className="mt-10">
-          <div className="bg-[#131516] rounded-full  md:size-96.5 size-73" />
+          <div className="bg-surface rounded-full md:size-96 size-72" />
         </div>
       </div>
-      <div className="flex justify-center flex-col items-center md:p-20 p-5">
-        <div className="text-[35px] font-bold mb-10">How To Refer Your Friends</div>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-10 w-full text-black">
-          <div className="col-span-1 flex flex-col gap-5 text-white">
-            <div className="bg-[#131516] md:h-[240px] h-[120px] w-full rounded-[10px] col-span-1 p-2">
-              <div className=" md:hidden flex h-full w-full justify-center items-center gap-3">
-                <div className="text-[35px] font-bold w-[20%] text-right p-4 text-white">
-                  01
-                </div>
-                <div className="text-[16px] w-[70%] text-left font-bold">
-                  Share your referral link with friends
-                </div>
-              </div>
-              <div>
-                <div className="text-[35px] font-bold w-[20%] h-full  mt-10 text-right  text-white max-md:hidden">
-                  01
-                </div>
-              </div>
+      <div className="flex justify-center flex-col items-center md:p-20 p-6">
+        <h2 className="text-2xl font-bold mb-12">How To Refer Your Friends</h2>
+        <div className="grid md:grid-cols-3 grid-cols-1 gap-8 w-full">
+          {/* Step 1 */}
+          <div className="flex flex-col gap-6">
+            <div className="card h-48 md:h-60 flex flex-col justify-between">
+              <div className="text-2xl font-bold text-secondary">01</div>
+              {/* <Share2 className="size-8 text-brand-green" strokeWidth={1.5} /> */}
             </div>
-            <div className="text-white text-[22px] max-md:hidden font-bold">
+            <div className="text-lg font-bold text-primary">
               Share your referral link with friends
             </div>
           </div>
-          <div className="col-span-1 flex flex-col gap-5 text-white">
-            <div className="bg-[#131516] md:h-[240px] h-[120px] w-full rounded-[10px] col-span-1">
-              <div className=" md:hidden flex h-full w-full justify-center items-center gap-3">
-                <div className="text-[35px] font-bold w-[20%] text-right p-4">
-                  02
-                </div>
-                <div className="text-[16px] w-[70%] text-left font-bold">
-                  Refer friends to sign up and buy crypto worth over $50
-                </div>
-              </div>
-              <div className="text-[35px] font-bold w-[20%] text-right max-md:hidden h-full  mt-10">02</div>
+          
+          {/* Step 2 */}
+          <div className="flex flex-col gap-6">
+            <div className="card h-48 md:h-60 flex flex-col justify-between">
+              <div className="text-2xl font-bold text-secondary">02</div>
+              {/* <UserPlus className="size-8 text-brand-green" strokeWidth={1.5} /> */}
             </div>
-            <div className="text-[22px] font-bold text-white font-bold text-left max-md:hidden">
+            <div className="text-lg font-bold text-primary text-left">
               Refer friends to sign up and buy crypto worth over $50
             </div>
           </div>
-          <div className="col-span-1 flex flex-col gap-5">
-            <div className="bg-[#131516] md:h-[240px] h-[120px] w-full rounded-[10px] col-span-1">
-              <div className=" md:hidden flex h-full w-full justify-center items-center gap-3">
-                <div className="text-[35px] font-bold w-[20%] text-right p-4 text-white">
-                  03
-                </div>
-                <div className="text-[16px] text-white font-bold w-[70%] text-left">
-                  Receive 100 USD trading fee rebate voucher each
-                </div>
-              </div>
-              <div className="text-[35px] font-bold w-[20%] h-full  mt-10 text-right text-white max-md:hidden">03</div>
+
+          {/* Step 3 */}
+          <div className="flex flex-col gap-6">
+            <div className="card h-48 md:h-60 flex flex-col justify-between">
+              <div className="text-2xl font-bold text-secondary">03</div>
+              {/* <Trophy className="size-8 text-brand-green" strokeWidth={1.5} /> */}
             </div>
-            <div className="text-[22px] font-bold text-white max-md:hidden">
+            <div className="text-lg font-bold text-primary">
               Receive 100 USD trading fee rebate voucher each
             </div>
           </div>
         </div>
-        <div className="text-left mt-30">
-          <div className="text-[35px] font-bold mb-10">Rules</div>
-          <div>
-            {" "}
-            <ul className="text-left leading-[29px] text-[18px] text-[#686868]">
-              <li>
-                1. Share your referral code or link with a friend who does not
-                have a Bitzup account.
-              </li>
-              <li>
-                2. Your invitee can get a Welcome Bonus within their first 15
-                days of registration. You will receive 30% of your invitee's
-                trading fees as a reward
-              </li>
-              <li>
-                3. You will receive only one reward type per referral, based on
-                your account status when your invitees register: the regular
-                referral reward if they sign up before you become an Affiliate,
-                or the Affiliate-level referral reward if they sign up
-                afterwards.
-              </li>
-            </ul>
-          </div>
+        <div className="text-left w-full mt-24">
+          <h2 className="text-2xl font-bold mb-8">Rules</h2>
+          <ul className="text-left space-y-4 text-base text-secondary">
+            <li>
+              1. Share your referral code or link with a friend who does not
+              have a BitZup account.
+            </li>
+            <li>
+              2. Your invitee can get a Welcome Bonus within their first 15
+              days of registration. You will receive 30% of your invitee's
+              trading fees as a reward.
+            </li>
+            <li>
+              3. You will receive only one reward type per referral, based on
+              your account status when your invitees register.
+            </li>
+          </ul>
         </div>
       </div>
-      <div className="flex flex-col mt-30 gap-5 items-center bg-[#131516] md:p-[40px_0px_40px_0px] p-[40px_0px_40px_0px] mt-10">
-        <div className="font-bold text-[35px] md:text-[50px]">
-         Start Earning Now !
-        </div>
-        <button className="p-[10px_20px_10px_20px] cursor-pointer flex justify-center items-center bg-[#2EDBAD] md:h-[58px] h-[30px] w-fit rounded-[41px] rounded-[6px] gap-2">
-          <div className="flex max-md:hidden font-semibold text-black gap-1 items-center justify-center md:w-[180px] text-[18px]">
-            <button src="gift.svg" className="text-[20px] rounded-[20px] text-[16px]" > Log In</button>
-          </div>
-          <button className={`w-[120px] h-[47px] text-black md:hidden rounded-[33px] font-bold text-[16px] text-center`} >Invite Now</button>
+      <div className="flex flex-col gap-8 items-center bg-surface py-16 mt-24">
+        <h2 className="font-bold text-2xl md:text-3xl text-primary">
+         Start Earning Now!
+        </h2>
+        <button className="btn-primary px-12">
+          <Gift className="size-6" strokeWidth={1.5} />
+          Invite Now
         </button>
       </div>
     <Footer isShow={false}/>
@@ -128,3 +105,4 @@ export const ReferralPage = () => {
     </>
   );
 };
+export default ReferralPage;

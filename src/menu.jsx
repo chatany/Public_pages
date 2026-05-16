@@ -13,8 +13,8 @@ export const Menu = ({ children }) => {
     { name: "Trading policy", link: "/trading-policy" },
     { name: "Risk Disclosure", link: "/risk-disclosure" },
     { name: "Cookies Policy", link: "/cookies-policy" },
-    {name: "User Agreement",link:"/user-agreement"},
-    {name: "Terms of use",link:"/terms-of-use"},
+    { name: "User Agreement", link: "/user-agreement" },
+    { name: "Terms of use", link: "/terms-of-use" },
     { name: "Privacy Policy", link: "/privacy-policy" },
   ];
   const [open, setOpen] = React.useState(false);
@@ -32,17 +32,17 @@ export const Menu = ({ children }) => {
             w-80 capitalize rounded-[40px]
             h-6 p-4 text-[1rem] 
             border
-            hover:border-[#2EDBAD] border-[#2EDBAD] focus:outline-none `}
+            hover:borderbrand-green borderbrand-green focus:outline-none `}
             />
           </div> */}
           <div className="flex max-md:flex-col gap-20 w-full">
             <div className="text-left">
-              <div className="text-[20px] font-bold mb-10 mt-5 whitespace-nowrap max-md:hidden">
+              <div className="text-xl font-bold mb-10 mt-5 whitespace-nowrap max-md:hidden">
                 Articles in this Section{" "}
               </div>
               <div
                 onClick={() => setShow(!show)}
-                className="md:hidden flex justify-between p-5 border-b border-t p-2 border-[#525252]"
+                className="md:hidden flex justify-between p-5 border-b border-t p-2 border-border"
               >
                 <div>Articles in this Section </div>
                 <div>
@@ -58,7 +58,7 @@ export const Menu = ({ children }) => {
                   {menuItems.map((item, index) => (
                     <li
                       key={index}
-                      className="text-[#2EDBAD] hover:underline cursor-pointer whitespace-nowrap text-[20px]"
+                      className="textbrand-green hover:underline cursor-pointer whitespace-nowrap text-lg"
                     >
                       <Link to={item.link}>{item.name}</Link>
                     </li>
@@ -71,7 +71,7 @@ export const Menu = ({ children }) => {
                     {menuItems.map((item, index) => (
                       <li
                         key={index}
-                        className="text-[#2EDBAD] hover:underline cursor-pointer whitespace-nowrap text-[20px]"
+                        className="textbrand-green hover:underline cursor-pointer whitespace-nowrap text-xl"
                       >
                         <Link to={item.link}>{item.name}</Link>
                       </li>

@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useRef, useState } from "react";
 import { FaAngleDown, FaSortDown } from "react-icons/fa6";
 import { IoMdCheckmark } from "react-icons/io";
@@ -64,7 +65,7 @@ export default function SubmitRequestForm() {
   const methedsArr = [
     "Futures Trading issue",
     "Account closure request",
-    "Change/Add Refferal code",
+    "Change/Add Referral code",
     "Transaction History",
     "Deposit not credited",
   ];
@@ -83,7 +84,7 @@ export default function SubmitRequestForm() {
   };
 
   const inputClass =
-    "w-full bg-transparent border border-white rounded-lg px-4 py-3 outline-none focus:border-[#2EDBAD] text-sm";
+    "w-full bg-transparent border border-white rounded-lg px-4 py-3 outline-none focus:borderbrand-green text-sm";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,31 +93,37 @@ export default function SubmitRequestForm() {
 
   return (
     <>
+      <Helmet>
+        <title>Submit a Request - BitZup</title>
+        <meta
+          name="description"
+          content="Need help? Submit a request to BitZup support. Our team is here to assist you with any questions or issues you may have."
+        />
+      </Helmet>
       <Navbar />
       <div className="min-h-screen bg-black text-white">
         {/* HEADER */}
         <div className="flex w-full justify-between md:px-10 px-3 py-12 md:ml-15 max-md:flex-col">
-
-        <div className="text-[15px] text-[#2edbad] mb-4 text-left">
-          <span className=" cursor-pointer">Help Center</span> ›
-          Submit a request
-        </div>
-        {/* <div className="relative w-[280px]">
+          <div className="text-base textbrand-green mb-4 text-left">
+            <span className=" cursor-pointer">Help Center</span> › Submit a
+            request
+          </div>
+          {/* <div className="relative w-[280px]">
           <IoSearchOutline className="absolute left-3 top-3 text-gray-400" />
           <input
             placeholder="Search"
-            className="w-full bg-transparent border border-[#2edbad] rounded-full pl-10 pr-4 py-2 text-sm outline-none"
+            className="w-full bg-transparent border borderbrand-green rounded-full pl-10 pr-4 py-2 text-sm outline-none"
           />
         </div> */}
         </div>
         {/* BODY */}
         <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 py-12">
-          <h1 className="text-4xl font-bold text-left mb-15">
+          <h1 className="text-3xl font-bold text-left mb-15">
             Submit a request
           </h1>
           <Field label="Please choose a request type below"></Field>
           <div
-            className="relative  cursor-pointer focus:border-[#2EDBAD] mb-6"
+            className="relative  cursor-pointer focus:borderbrand-green mb-6"
             ref={popupRef}
             onClick={() => setOpen(!open)}
           >
@@ -140,8 +147,8 @@ export default function SubmitRequestForm() {
               <div
                 className={`absolute z-10 mt-2 w-full shadow-xl  ${
                   dark
-                    ? "bg-[#17181A] text-[#EAECEF]"
-                    : "bg-[#FFFFFF] text-[#262030]"
+                    ? "bg-surface text-primary"
+                    : "bg-white text-secondary"
                 } rounded-xl  max-h-[300px] custom-scroll overflow-y-auto`}
               >
                 <ul>
@@ -150,7 +157,7 @@ export default function SubmitRequestForm() {
                       <li
                         key={ind}
                         className={`flex ${
-                          dark ? "" : "hover:bg-[#F5F5F5]"
+                          dark ? "" : "hover:bg-primary"
                         } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer`}
                         onClick={() => {
                           setSelect(coin);
@@ -212,10 +219,10 @@ export default function SubmitRequestForm() {
               </Field>
 
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
+                <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form.file ? "text-white" : "text-[#2EDBAD]"}`}
+                    className={`${form.file ? "text-white" : "textbrand-green"}`}
                   >
                     {form.file ? form.file.name : "Add file or drop files here"}
                   </span>
@@ -245,7 +252,7 @@ export default function SubmitRequestForm() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -312,11 +319,9 @@ hear how we can make your experience better."
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
+                <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
-                  <span
-                    className={`${form1.file ? "text-white" : ""}`}
-                  >
+                  <span className={`${form1.file ? "text-white" : ""}`}>
                     {form1.file
                       ? form1.file.name
                       : "Add file or drop files here"}
@@ -347,7 +352,7 @@ hear how we can make your experience better."
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -412,10 +417,10 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
+                <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form2.file ? "text-white" : "text-[#2EDBAD]"}`}
+                    className={`${form2.file ? "text-white" : "textbrand-green"}`}
                   >
                     {form2.file
                       ? form2.file.name
@@ -447,7 +452,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -527,10 +532,10 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border border-[#2B3139] rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
+                <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form3.file ? "text-white" : "text-[#2EDBAD]"}`}
+                    className={`${form3.file ? "text-white" : "textbrand-green"}`}
                   >
                     {form3.file
                       ? form3.file.name
@@ -562,7 +567,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>
@@ -654,10 +659,10 @@ an only be changed once every 6 months. ）
               {/* File Upload */}
               {/* File Upload */}
               <Field label="Attachments (Optional)">
-                <label className="w-full border  rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:border-[#2EDBAD] transition">
+                <label className="w-full border  rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
-                    className={`${form4.file ? "text-white" : "text-[#2EDBAD]"}`}
+                    className={`${form4.file ? "text-white" : "textbrand-green"}`}
                   >
                     {form4.file
                       ? form4.file.name
@@ -689,7 +694,7 @@ an only be changed once every 6 months. ）
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full bg-[#2EDBAD] text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
                 Submit Request
               </button>

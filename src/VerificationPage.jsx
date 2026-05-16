@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useEffect, useRef, useState } from "react";
 import { CiFacebook } from "react-icons/ci";
 import { FaSearch, FaSortDown, FaTelegramPlane } from "react-icons/fa";
@@ -28,6 +29,7 @@ export const Verification = () => {
   const methedsArr = [
     {
       name: "Website",
+      
       icon: <IoIosLink className="size-5" />,
       placeholder: "Please enter the link",
     },
@@ -88,7 +90,7 @@ export const Verification = () => {
       // setLoading(true);
 
       const response = await fetch(
-        "https://test.bitzup.com/market/official-id-type",
+        `${import.meta.env.VITE_API_BASE}/market/official-id-type`,
       );
 
       if (!response.ok) {
@@ -119,7 +121,7 @@ export const Verification = () => {
       };
 
       const response = await fetch(
-        "https://test.bitzup.com/market/verify-official",
+        `${import.meta.env.VITE_API_BASE}/market/verify-official`,
         {
           method: "POST", // 👈 important
           headers: {
@@ -148,6 +150,10 @@ export const Verification = () => {
   }, [methodsArr]);
   return (
     <>
+      <Helmet>
+        <title>BitZup KYC Verification — Secure Your Account</title>
+        <meta name="description" content="Complete your BitZup KYC in minutes. Upload your ID and selfie to unlock trading, higher withdrawal limits, and a fully secured account." />
+      </Helmet>
       <Navbar />
       {showPopup && (
         <VerifyPopup
@@ -158,16 +164,16 @@ export const Verification = () => {
           category={select.account_type}
         />
       )}
-      <div className="bg-black min-h-screen ">
+      <div className="bg-bg min-h-screen ">
         <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
-              <div className="md:text-[54px] text-[45px] font-bold md:text-left text-center leading-[100%] mt-15">
-                Bitzup Official Verification
+              <div className="md:text-3xl text-3xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
+                BitZup Official Verification
               </div>
-              <div className="md:text-[18px] text-[12px] font-bold md:leading-[25px]  text-[#686868]  text-center">
-                Please use Bitzup Verify to check whether the source officially
-                represents Bitzup <br className="max-md:hidden" /> including
+              <div className="md:text-base text-xs font-bold md:leading-6  text-muted  text-center">
+                Please use BitZup Verify to check whether the source officially
+                represents BitZup <br className="max-md:hidden" /> including
                 website link, email address, Discord ID, Twitter account, or
                 Telegram ID.
               </div>
@@ -180,16 +186,13 @@ export const Verification = () => {
                   ref={popupRef}
                 >
                   <div
-                    className={`
-    border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-sm text-white outline-none
-     
-    `}
+                    className="border bg-surface border-border rounded-full px-5 h-14 text-sm text-primary outline-none"
                   >
                     <div
                       className="w-full flex justify-between h-full p-2 items-center"
                       onClick={() => setOpen(!open)}
                     >
-                      <div className="text-[15px] font-normal capitalize">
+                      <div className="text-sm font-normal capitalize">
                         {select ? (
                           <div className="flex gap-3 items-center">
                             <div><img src={`/${select.account_type}.svg`} alt={select.account_type} /></div>
@@ -210,8 +213,8 @@ export const Verification = () => {
                     <div
                       className={`absolute z-10 mt-2 w-full shadow-xl  ${
                         dark
-                          ? "bg-[#17181A] text-[#EAECEF]"
-                          : "bg-[#FFFFFF] text-[#262030]"
+                          ? "bg-surface-2 text-primary"
+                          : "bg-bg text-primary"
                       } rounded-xl  max-h-[300px] custom-scroll overflow-y-auto`}
                     >
                       <ul>
@@ -220,7 +223,7 @@ export const Verification = () => {
                             <li
                               key={ind}
                               className={`flex ${
-                                dark ? "hover:bg-[#2B3139]" : "hover:bg-[#F5F5F5]"
+                                dark ? "hover:bg-border" : "hover:bg-surface"
                               } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer transition-colors duration-200`}
                               onClick={() => {
                                 setSelect(coin);
@@ -258,18 +261,17 @@ export const Verification = () => {
                   placeholder={select?.placeholder || "Please enter the link."}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  className="w-full border bg-[#131516] border-[#131516] rounded-full px-5 h-[57px] text-[15px] font-normal text-[#686868] outline-none "
+                  className="w-full border bg-surface border-border rounded-full px-5 h-14 text-sm font-normal text-primary outline-none "
                 />
               </div>
             </div>
             <div className="flex justify-center">
               <div className="relative w-[90%] md:w-[40%] ">
-                <button
+              <button
                   name="Email"
                   placeholder="Search"
-                  onClick={handleSubmit}
-                  className={`border flex justify-center items-center gap-2 w-full bg-[#FFFFFF] cursor-pointer border-[#FFFFFF] rounded-full px-12 h-[57px] text-sm text-black outline-none
-     `}
+                onClick={handleSubmit}
+                  className="border flex justify-center items-center gap-2 w-full bg-primary cursor-pointer border-border rounded-full px-12 h-14 text-sm text-bg outline-none"
                   // onKeyDown={(e) => {
                   //   if (e.key === "Enter") handleSubmit();
                   // }}
@@ -278,10 +280,10 @@ export const Verification = () => {
                   // type={showPassword ? "password" : "text"}
                 >
                 {/* <div className="cursor-pointer "> */}
-                  <IoIosSearch className="  h-6 w-6 text-black" />
+                  <IoIosSearch className="  h-6 w-6 text-bg" />
                 {/* </div> */}
-                  Search
-                </button>
+                Search
+              </button>
               </div>
             </div>
           </div>

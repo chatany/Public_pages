@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /orders
+Disallow: /assets
+
+Sitemap: https://bitzup.com/sitemap.xml

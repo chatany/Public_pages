@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { AiFillLinkedin } from "react-icons/ai";
 import { BsTwitterX } from "react-icons/bs";
@@ -23,30 +24,43 @@ export const CarrierPage = () => {
     },
     {
       src: "/Insight.svg",
-      title: "Insight",
+      title: "Data-Driven",
       subtitle:
-        "Accurately understanding user needs and keenly sensing industry changes.",
+        "Accurately understanding user needs through data-driven decisions and keenly sensing industry changes.",
     },
   ];
   const whyBitzupArr1 = [
     {
       src: "/compensation.svg",
-      title: "Competitive Compensation Package",
+      title: "Web3 Compensation",
+      subtitle:
+        "Top-of-market base pay, USDT or USDC compensation option, equity in early-stage Web3 projects.",
     },
     {
       src: "/vision.svg",
-      title: "Broad and Far-reaching International Vision",
+      title: "Global Team",
+      subtitle:
+        "Distributed team across 12+ countries. Annual offsites. Real ownership over what you ship.",
     },
   ];
   const whyBitzupArr = [
-    { src: "/flexible.svg", title: "Flexible Working Hours" },
+    {
+      src: "/flexible.svg",
+      title: "Work-Life Balance",
+      subtitle:
+        "Flexible hours, four-day work weeks during quiet seasons, no on-call rotations outside of engineering.",
+    },
     {
       src: "/pathways.svg",
-      title: "Fair and Transparent Promotion Pathways",
+      title: "Rapid Growth",
+      subtitle:
+        "Promotion cycles every six months. Clear leveling bands published internally. Internal mobility across teams.",
     },
     {
       src: "/reward.svg",
-      title: "Innovative and Diverse Reward Mechanisms",
+      title: "Elite Ecosystem",
+      subtitle:
+        "Build with people who've shipped at Binance, Coinbase, Stripe, and Goldman. 18 languages spoken in the company Slack.",
     },
   ];
   const positions = [
@@ -65,150 +79,180 @@ export const CarrierPage = () => {
   ];
   return (
     <>
-    <Navbar/>
-    <div className="bg-black text-white min-h-screen ">
-      <div className="flex items-center max-md:flex-col  justify-between md:p-15 p-5 ">
-        <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
-          <div className="md:text-[54px] text-[35px] font-bold md:text-left text-center leading-[100%]">
-            Career Opportunities
-          </div>
-          <div className="text-[18px] font-bold leading-[100%] text-[#686868] max-md:hidden">
-            Start your career journey with Gate and explore unlimited
-            opportunities.
-          </div>
-          <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
-            <button className="bg-[#FFFFFF] md:h-[53px] h-[38px] text-[11px] md:text-[18px] w-[110px] md:w-[180px] p-1 font-bold text-black rounded-[30px]">
-              Job Openings
-            </button>
-            <button className="bg-[#4C4B4B] md:h-[53px] h-[38px] md:w-[180px]  flex items-center justify-center gap-0.5 w-[110px] text-[11px] md:text-[18px] w-f p-1 font-bold text-[#FFFFFF] rounded-[30px]">
-              <AiFillLinkedin className="md:size-4 size-2.5" /> View Linkedin
-            </button>
-          </div>
-          {/* <div className="text-[18px] font-bold leading-[100%] text-[#686868] md:hidden">
-           Start your career journey with Gate and explore unlimited opportunities.
-          </div> */}
-        </div>
-        <div className="mt-10">
-          <div className="bg-[#131516] rounded-full  md:size-96.5 size-73" />
-        </div>
-      </div>
-      <div className="flex  justify-center items-center mt-10 font-bold md:p-15 p-5">
-        <div
-          className={`flex  ${
-            true
-              ? "border-[#333B47] bg-[#131516]"
-              : "border-[#EDEDED] bg-[#F4F5F7]"
-          } border text-[#8E8E92] rounded-[43px] max-w-[447px] overflow-hidden p-0.5 h-[57px] w-full`}
-        >
-          <div
-            onClick={() => setActiveItem("Buy")}
-            className={`relative md:px-6 px-2 py-[1px] rounded-[43px] text-[13px] whitespace-nowrap cursor-pointer flex items-center justify-center w-full
-          ${activeItem === "Buy" ? "bg-[#2EDBAD] text-black" : " bg-transparent"}
-          transition-all duration-300
-        `}
-          >
-            Discover our Culture
-          </div>
-          <div
-            onClick={() => setActiveItem("Sell")}
-            className={`relative md:px-6 px-2 py-[1px] cursor-pointer text-[13px] rounded-[43px] whitespace-nowrap flex items-center justify-center w-full
-          ${activeItem === "Sell" ? "bg-[#2edbad] text-black" : "bg-transparent"}
-          transition-all duration-300
-        `}
-          >
-            Explore our values
-          </div>
-        </div>
-      </div>
-      <div className="mt-30 md:p-15 p-5">
-        <div className="md:text-[45px] text-[32px] font-bold mb-10">Our Core Values</div>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
-          {coreValues?.map((item, ind) => (
-            <div
-              className="flex flex-col gap-5 items-center p-5 rounded-[10px] border-[1px] min-h-[250px] border-[#ffffff]"
-              key={ind}
-            >
-              <div>
-                <img src={item?.src} className="md:size-16 size-12" />
-              </div>
-              <div className="text-[22px] font-bold">{item.title}</div>
-              <div className="text-[14px] font-normal text-[#686868]">
-                {item.subtitle}
-              </div>
+      <Helmet>
+        <title>Careers at BitZup — Build Your Future in Crypto</title>
+        <meta
+          name="description"
+          content="Explore open roles at BitZup. Join a global team building the next generation of crypto trading, earn, and Web3 products — with competitive pay and flexible hours."
+        />
+      </Helmet>
+      <Navbar />
+      <div className="bg-background text-primary min-h-screen ">
+        <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
+          <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
+            <div className="text-3xl md:text-5xl font-bold md:text-left text-center leading-tight">
+              Join the Future of Crypto
             </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-30 md:p-15 p-5">
-        <div className="md:text-[45px] text-[32px] font-bold mb-10">Why Bitzup ?</div>
-        <div className="flex flex-col gap-10">
-          <div className="grid md:grid-cols-2  grid-cols-1 gap-10">
-            {whyBitzupArr1?.map((item, ind) => (
-              <div
-                className={`flex flex-col gap-5 items-center justify-center p-5 rounded-[10px] border-[1px] h-[250px] border-[#ffffff] `}
-                key={ind}
-              >
-                <div>
-                  <img src={item?.src} className="md:size-16 size-12" />
-                </div>
-                <div className="text-[22px] font-bold">{item.title}</div>
-              </div>
-            ))}
-          </div>
-          <div className="grid md:grid-cols-6  grid-cols-1 gap-10">
-            {whyBitzupArr?.map((item, ind) => (
-              <div
-                className={`flex flex-col gap-5 items-center justify-center p-5 rounded-[10px] border-[1px] h-[250px] border-[#ffffff] col-span-2`}
-                key={ind}
-              >
-                <div>
-                  <img src={item?.src} />
-                </div>
-                <div className="text-[22px] font-bold">{item.title}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="mt-30 md:p-15 p-5">
-        <div className="md:text-[45px] text-[32px] font-bold mb-10">
-          Positions open, waiting just for you!
-        </div>
-        <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
-          {positions?.map((item, ind) => (
-            <div
-              className="flex md:flex-col md:gap-5 justify-between items-center p-5 rounded-[10px] md:h-[250px] h-[95px] border-[1px] border-[#ffffff]"
-              key={ind}
-            >
-              <div>
-                <img src={item?.src} className="max-md:size-8 size-16" />
-              </div>
-              <div className="md:text-[22px] text-[16px] font-bold">
-                {item.title}
-              </div>
-              <button className="bg-[#353535] md:h-[47px] h-[33px] md:w-[180px] w-[120px] text-[#FFFFFF] flex justify-center items-center text-[18px] w-f p-1 font-bold  rounded-[33px]">
-                <LuMoveRight cl />
+            <div className="text-base font-bold text-secondary max-md:hidden">
+              Start your career journey with BitZup and explore unlimited
+              opportunities.
+            </div>
+            <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
+              <button className="bg-primary h-12 md:w-44 px-8 text-sm md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
+                Job Openings
+              </button>
+              <button className="bg-surface-2 h-12 md:w-44 flex text-3xl items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
+                <AiFillLinkedin className="size-4" /> View LinkedIn
               </button>
             </div>
-          ))}
+          </div>
+          <div className="mt-10">
+            <div className="bg-surface rounded-full md:size-96 size-64" />
+          </div>
         </div>
-      </div>
-      <div className="md:text-[45px] text-[32px] font-bold mt-30 md:p-15 p-5">
-        Discover More Media Reports and Build the <br className="max-md:hidden" /> Crypto Future Together
-        with Bitzup
-      </div>
-      <div className="flex  justify-center items-center gap-5 mt-10 md:p-15 p-5">
-        <div className="bg-[#131516] p-2 rounded-[12px]">
-
-        <FaYoutube className="size-8 max-md:size-6 bg-[#131516]" />
+        <div className="flex justify-center items-center mt-10 font-bold md:px-16 p-5">
+          <div
+            className={`flex border-border bg-surface text-secondary rounded-full max-w-md overflow-hidden p-0.5 h-14 w-full`}
+          >
+            <div
+              onClick={() => setActiveItem("Buy")}
+              className={`relative md:px-6 px-2 py-[1px] rounded-full text-sm font-bold whitespace-nowrap cursor-pointer flex items-center justify-center w-full
+          ${activeItem === "Buy" ? "bg-brand-green text-black" : " bg-transparent"}
+          transition-all duration-300
+        `}
+            >
+              Discover our Culture
+            </div>
+            <div
+              onClick={() => setActiveItem("Sell")}
+              className={`relative md:px-6 px-2 py-[1px] cursor-pointer text-sm font-bold rounded-full whitespace-nowrap flex items-center justify-center w-full
+          ${activeItem === "Sell" ? "bg-brand-green text-black" : "bg-transparent"}
+          transition-all duration-300
+        `}
+            >
+              Explore our values
+            </div>
+          </div>
         </div>
-        <div className="bg-[#131516] p-2 rounded-[12px]">
-
-        <BsTwitterX className="size-8 max-md:size-6 bg-[#131516] " />
+        <div className="mt-20 md:px-16 p-5">
+          <div className="text-2xl md:text-3xl text-center font-bold mb-10">
+            Our Core Values
+          </div>
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
+            {coreValues?.map((item, ind) => (
+              <div
+                className="flex flex-col gap-5 items-center p-8 rounded-xl border border-border min-h-[15.625rem] bg-surface"
+                key={ind}
+              >
+                <div>
+                  <img
+                    src={item?.src}
+                    alt={item.title}
+                    className="size-12 md:size-16"
+                  />
+                </div>
+                <div className="text-xl font-bold text-primary">
+                  {item.title}
+                </div>
+                <div className="text-sm font-medium text-secondary text-center leading-relaxed">
+                  {item.subtitle}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+        <div className="mt-20 md:px-16 p-5">
+          <div className="text-2xl md:text-3xl text-center font-bold mb-10">
+            Why BitZup?
+          </div>
+          <div className="flex flex-col gap-10">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
+              {whyBitzupArr1?.map((item, ind) => (
+                <div
+                  className="flex flex-col gap-5 items-center justify-center p-8 rounded-xl border border-border min-h-[15.625rem] bg-surface"
+                  key={ind}
+                >
+                  <div>
+                    <img
+                      src={item?.src}
+                      alt={item.title}
+                      className="size-12 md:size-16"
+                    />
+                  </div>
+                  <div className="text-xl font-bold text-primary">
+                    {item.title}
+                  </div>
+                  <div className="text-sm font-medium text-secondary text-center leading-relaxed">
+                    {item.subtitle}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
+              {whyBitzupArr?.map((item, ind) => (
+                <div
+                  className="flex flex-col gap-5 items-center justify-center p-8 rounded-xl border border-border min-h-[15.625rem] bg-surface"
+                  key={ind}
+                >
+                  <div>
+                    <img
+                      src={item?.src}
+                      alt={item.title}
+                      className="size-12 md:size-16"
+                    />
+                  </div>
+                  <div className="text-xl font-bold text-primary">
+                    {item.title}
+                  </div>
+                  <div className="text-sm font-medium text-secondary text-center leading-relaxed">
+                    {item.subtitle}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-20 md:px-16 p-5">
+          <div className="text-2xl md:text-3xl font-bold mb-10">
+            Positions open, waiting just for you!
+          </div>
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
+            {positions?.map((item, ind) => (
+              <div
+                className="flex md:flex-col md:gap-5 justify-between items-center p-8 rounded-xl border border-border md:h-64 h-24 bg-surface transition-all hover:border-brand-green group"
+                key={ind}
+              >
+                <div>
+                  <img
+                    src={item?.src}
+                    alt={item.title}
+                    className="size-8 md:size-16"
+                  />
+                </div>
+                <div className="md:text-xl text-base font-bold text-primary group-hover:text-brand-green transition-colors">
+                  {item.title}
+                </div>
+                <button className="bg-surface-2 size-10 md:h-12 md:w-44 text-primary flex justify-center items-center rounded-full hover:bg-brand-green hover:text-black transition-all">
+                  <LuMoveRight className="size-5" />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="text-2xl md:text-3xl font-bold mt-20 md:px-16 p-5 leading-tight text-center">
+          Discover More Media Reports and Build the{" "}
+          <br className="max-md:hidden" /> Crypto Future Together with BitZup
+        </div>
+        <div className="flex justify-center items-center gap-5 mt-10 md:px-16 p-5">
+          <div className="bg-surface p-3 rounded-xl border border-border hover:border-brand-green transition-all cursor-pointer">
+            <FaYoutube className="size-8 text-primary" />
+          </div>
+          <div className="bg-surface p-3 rounded-xl border border-border hover:border-brand-green transition-all cursor-pointer">
+            <BsTwitterX className="size-8 text-primary" />
+          </div>
+        </div>
+        <Footer isShow={false} />
       </div>
-    <Footer isShow={false}/>
-    </div>
     </>
   );
 };

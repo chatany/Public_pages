@@ -9,7 +9,7 @@ export default function Partners() {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden md:border-t md:border-b border-[#9C9C9C]/40">
+    <div className="relative w-full overflow-hidden md:border-t md:border-b border-border">
       {/* Gradient fades */}
       {/* <div className="absolute left-0 top-0 h-full w-24 bg-linear-to-r from-black to-transparent z-10" />
       <div className="absolute right-0 top-0 h-full w-24 bg-linear-to-l from-black to-transparent z-10" /> */}
@@ -20,7 +20,8 @@ export default function Partners() {
           <img
             key={i}
             src={`/${item}`}
-            className="mx-12 py-6 w-[120px] text-[20px] whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300"
+            alt={`${item.split(".")[0]} partner logo`}
+            className="mx-12 py-6 w-28 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300"
           />
         ))}
       </div>

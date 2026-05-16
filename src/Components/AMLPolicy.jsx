@@ -1,14 +1,20 @@
+import { Helmet } from "react-helmet-async";
+
 export const AmlPolicy = () => {
   return (
     <div>
+      <Helmet>
+        <title>BitZup AML & CFT Policy</title>
+        <meta name="description" content="Read BitZup's Anti-Money Laundering and Counter-Financing of Terrorism policy. How we screen users, monitor activity, and comply with FIU regulations." />
+      </Helmet>
       <div className="text-left">
-        <div className="text-[36px] font-bold mb-20">AML POLICY</div>
+        <div className="text-2xl font-bold mb-20">AML POLICY</div>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             1. PURPOSE AND SCOPE
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-base leading-8">
             This AML/CFT Policy outlines the measures adopted by BitZup to
             prevent its services from being used for money laundering (ML),
             terrorist financing (TF), and proliferation financing (PF). It
@@ -33,10 +39,10 @@ export const AmlPolicy = () => {
               id‘BitZup’ of you are a natural person.
             </li>
           </ul>
-          <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+          <div className="text-left font-semibold text-lg leading-8 mt-8">
             2. OBJECTIVE
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-base leading-8">
             The objective of this Know Your Customer (KYC) and Anti-Money
             Laundering/CounterTerrorism Financing (AML/CFT) Policy is to
             establish a robust and comprehensive framework that effectively
@@ -61,7 +67,7 @@ export const AmlPolicy = () => {
             for illegal purposes while fostering trust within the virtual
             digital asset ecosystem.
           </div>
-          <div className="text-left font-normal text-[15px] leading-8">
+          <div className="text-left font-normal text-base leading-8">
             <div>1. Email address(es)</div>
             <div>2. Name</div>
             <div>3. Gender</div>
@@ -84,22 +90,22 @@ export const AmlPolicy = () => {
             </div>
           </div>
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           DEFINITIONS
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           “Applicable Law” shall mean any applicable statute, law, regulation,
           ordinance, rule, judgement, order, decree, by-law, approval from the
           concerned authority, government resolution, order, directive,
           guideline, policy, requirement, or other governmental restriction
           applicable in Trinidad and Tobago.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           “Customer“/”User” shall mean any Person using/accessing the Platform
           or website or interacting with it in any manner for buying, selling,
           depositing or withdrawing virtual digital assets;
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Enhanced Due Diligence (EDD) means additional, stricter measures
           applied to high-risk customers to mitigate the risks of money
           laundering, terrorism financing, and other financial crimes. It
@@ -109,10 +115,10 @@ export const AmlPolicy = () => {
           including the Proceeds of Crime Act, Anti-Terrorism Act, local
           regulations, when dealing with customers classified as high-risk.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           “Person” means an individual who is above eighteen (18) years of age.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           “Politically Exposed Persons” (PEPs) are individuals who are or have
           been entrusted with prominent public functions, including the Heads of
           States/Governments, senior politicians, senior government or judicial
@@ -129,10 +135,10 @@ export const AmlPolicy = () => {
           these compliance tasks, the company remains ultimately responsible for
           meeting all regulatory requirements.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           RESTRICTION OF USE
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           BitZup is a registered and regulated listed business under the laws of
           Trinidad and Tobago, operating in accordance with the regulatory
           requirements set forth by the authorities and in compliance with the
@@ -159,10 +165,10 @@ export const AmlPolicy = () => {
           years, in accordance with data retention and regulatory requirements,
           to facilitate audits, investigations, and regulatory reviews.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           3. CUSTOMER DUE DILIGENCE (CDD)
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           BitZup will implement a comprehensive, risk-based approach to Know
           Your Customer (KYC) and Customer Due Diligence (CDD) procedures,
           either directly or through qualified third-party service providers.
@@ -189,10 +195,10 @@ export const AmlPolicy = () => {
           and proactive in identifying and addressing financial crime risks as
           they arise.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           4. Periodic Re-KYC Updation
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           As part of our ongoing commitment to maintaining strong Anti-Money
           Laundering (AML) and Counter-Terrorist Financing (CFT) controls, our
           company implements a structured process for conducting periodic Know
@@ -216,35 +222,35 @@ export const AmlPolicy = () => {
           detecting and mitigating risks associated with money laundering,
           terrorism financing, and other financial crimes.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           2. Our security procedures mean that we may ask you to verify your id
           BitZup to protect you against unauthorized access to your account
           password. We recommend that you use a unique password for your BitZup
           account that is not utilized for other online accounts and to sign off
           when you finish using a shared computer.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           5. RISK ASSESSMENT
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           BitZup shall:
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Develop and maintain a documented Risk-Based Approach (RBA)
           identifying risks across clients, services, delivery channels,
           jurisdictions, and transactions
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Conduct annual ML/TF risk assessments
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Classify customers as low, medium, or high risk and apply controls
           accordingly.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           6. Travel Rule
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           In accordance with guidelines, our company shall comply with the
           "Travel Rule" by ensuring that specific identifying information about
           the originator and beneficiary is transmitted with every transfer of
@@ -257,17 +263,17 @@ export const AmlPolicy = () => {
           compliance with anti-money laundering and counterterrorist financing
           regulations.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Personal Information is kept to enable your continued use of BitZup
           Services and/or for as long as it is required in order to fulfil the
           relevant purposes described in this Privacy Policy, and/or as may be
           required by law either for tax and accounting purposes and/or
           compliance with Anti-Money Laundering laws.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           7. RECORD KEEPING
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           The company is committed to maintaining comprehensive and accurate
           records in full compliance with the regulatory requirements of
           Trinidad and Tobago and international standards, including the
@@ -281,7 +287,7 @@ export const AmlPolicy = () => {
           asset transfers to ensure traceability and transparency in
           cross-border and domestic crypto transactions.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Furthermore, complete logs of submitted suspicious transactions,
           internal investigations, and compliance reviews will be securely
           retained. Comprehensive user information—including account history,
@@ -296,10 +302,10 @@ export const AmlPolicy = () => {
           investigations while contributing to the prevention and detection of
           money laundering, terrorism financing, and other financial crimes.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           8. TRANSACTION MONITORING & REPORTING
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           The company will implement a comprehensive transaction monitoring
           system that includes both real-time surveillance and post-facto
           (retrospective) monitoring to effectively identify unusual,
@@ -312,7 +318,7 @@ export const AmlPolicy = () => {
           detailed reviews of historical transactions to detect patterns or
           anomalies that may not have been immediately apparent.
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Upon identifying a suspicious transaction, the company will adhere
           strictly to its legal obligation to prepare and submit suspicious
           transactions to the authorities of Trinidad and Tobago, ensuring that
@@ -327,10 +333,10 @@ export const AmlPolicy = () => {
           submitting log of all suspicious transactions, internal escalations,
           investigations, and compliance reviews.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           9. INTERNAL CONTROLS & AUDIT
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           The company will establish and maintain comprehensive internal
           policies, procedures, and controls designed to ensure continuous
           compliance with Anti-Money Laundering (AML) and Counter-Terrorist
@@ -356,10 +362,10 @@ export const AmlPolicy = () => {
           the company is committed to fostering a culture of compliance,
           operational integrity, and proactive risk management.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           9. INTERNAL CONTROLS & AUDIT
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           The company will establish and maintain comprehensive internal
           policies, procedures, and controls designed to ensure continuous
           compliance with Anti-Money Laundering (AML) and Counter-Terrorist
@@ -385,10 +391,10 @@ export const AmlPolicy = () => {
           the company is committed to fostering a culture of compliance,
           operational integrity, and proactive risk management.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           10. COMPLIANCE OFFICER
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           A dedicated Compliance Officer will be formally appointed to oversee
           the company's Anti-Money Laundering (AML) and Counter-Terrorist
           Financing (CFT) framework in accordance with the legal and regulatory
@@ -414,10 +420,10 @@ export const AmlPolicy = () => {
           authorities regarding AML/CFT compliance matters, audits, inquiries,
           and reporting obligations.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           11. TRAINING
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           Ongoing training programs are conducted for employees involved in
           AML/KYC processes, including the onboarding team responsible for
           collecting and verifying customer information and documents.
@@ -437,10 +443,10 @@ export const AmlPolicy = () => {
           of their induction process to ensure alignment with the company's
           AML/CFT compliance standards. Hence,
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           13. DATA PROTECTION
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           All customer data and compliance records will be collected, stored,
           processed, and managed in full compliance with the provisions of the
           Data Protection Act of Trinidad and Tobago. This ensures that all
@@ -461,10 +467,10 @@ export const AmlPolicy = () => {
           including access, correction, and protection of personal information,
           will be fully respected and upheld.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           14. MONITORING OF TRANSACTIONS
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           The company will implement a robust and comprehensive transaction
           monitoring system designed specifically from a KYC/AML compliance
           perspective. This system will continuously monitor all customer
@@ -483,10 +489,10 @@ export const AmlPolicy = () => {
           maintains a strong, effective defence against financial crime while
           safeguarding the integrity of its operations.
         </div>
-        <div className="text-left font-semibold text-[20px] leading-8 mt-8">
+        <div className="text-left font-semibold text-lg leading-8 mt-8">
           15. REVIEW AND UPDATE
         </div>
-        <div className="text-left font-normal text-[15px] leading-8">
+        <div className="text-left font-normal text-base leading-8">
           This AML/CFT policy will be reviewed annually or upon significant
           regulatory or operational changes.
         </div>
