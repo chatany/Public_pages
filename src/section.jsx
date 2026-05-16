@@ -172,7 +172,7 @@ export const Section = () => {
           ].map((item, ind) => (
             <div
               key={ind}
-              className="w-full rounded-xl border border-border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
+              className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
             >
               <div className="absolute h-full w-full hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 z-50"></div>
               <img
@@ -343,12 +343,12 @@ export const Section = () => {
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
           <div className="md:w-[50%] w-full flex justify-center items-center relative py-10">
             {/* Glow/Backlight Effect */}
-            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 mx-auto h-[18rem] w-[18rem] rounded-full bg-brand-green/10 blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green blur-[7.5rem] h-[70%] w-[60%] rounded-full z-0"></div>
 
             {/* Mobile Mockup Frame */}
             <div className="relative z-20 p-4 bg-surface-1 rounded-[3rem] border-2 border-border shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 duration-500">
               {/* Front bezel */}
-              <div className="absolute inset-0 rounded-[2.6rem] border border-black/10 pointer-events-none" />
+              {/* <div className="absolute inset-0 rounded-[2.6rem] border border-black/10 pointer-events-none" /> */}
 
               {/* Speaker / notch */}
               <div className="absolute left-1/2 top-4 -translate-x-1/2 flex items-center gap-2">
