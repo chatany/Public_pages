@@ -338,37 +338,21 @@ export const Section = () => {
           Trade Crypto Anywhere Anytime
         </div>
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
-          <div className="md:w-[50%] w-full flex justify-center items-center relative py-10">
-            {/* Glow/Backlight Effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green blur-[7.5rem] h-[70%] w-[60%] rounded-full z-base"></div>
-
-            {/* Mobile Mockup Frame */}
-            <div className="relative z-base p-4 bg-surface-1 rounded-2xl border-2 border-border shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 duration-500">
-              {/* Front bezel */}
-              {/* <div className="absolute inset-0 rounded-2xl border border-black/10 pointer-events-none" /> */}
-
-              {/* Speaker / notch */}
-              <div className="absolute left-1/2 top-4 -translate-x-1/2 flex items-center gap-2">
-                <div className="h-1.5 w-16 rounded-full bg-surface-2/80" />
-                <div className="h-2 w-2 rounded-full bg-surface-2/80" />
-              </div>
-
-              {/* Side buttons */}
-              <div className="absolute right-0 top-[25%] h-20 w-1.5 rounded-l-full bg-surface-2/80" />
-              <div className="absolute left-0 top-[30%] h-16 w-1.5 rounded-r-full bg-surface-2/80" />
-
-              <div className="relative overflow-hidden rounded-2xl bg-black border border-black/20">
-                <video
-                  src="/Mobile.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-2xl object-cover"
-                />
-              </div>
+       <div className="md:w-[50%] w-full justify-center flex ">
+          <div className=" rounded-full p-20  w-full backdrop-blur flex justify-center relative items-center">
+            <div className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20 rounded-4xl overflow-hidden relative flex justify-center items-center">
+              <video
+                src="/Mobile(2).mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover rounded-4xl"
+              />
             </div>
+            <div className="absolute bg-[#2EDBAD]  blur-[200px]  h-[60%] w-50 rounded-full"></div>
           </div>
+        </div>
           <div className=" flex w-full justify-center items-center text-xs gap-5 md:hidden">
             <div className="flex flex-wrap justify-center gap-3 mt-4">
               {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}

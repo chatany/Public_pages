@@ -56,6 +56,7 @@
   --ease-bitzup: cubic-bezier(0.4, 0, 0.2, 1);
   --animate-marquee: marquee 25s linear infinite;
   --radius-full: 9999px;
+  --radius-4xl: 2.5rem; /* 40px */
 
   /* Z-INDEX SCALE (Tiered System) */
   --z-base: 0;
@@ -104,6 +105,12 @@
 
 .text-eyebrow {
   @apply text-xs font-bold tracking-eyebrow uppercase;
+}
+
+/* Ensure all buttons have a minimum touch-target size of 44x44px for mobile accessibility */
+button {
+  min-height: 44px;
+  min-width: 44px;
 }
 
 /* STANDARDIZED COMPONENTS */

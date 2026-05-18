@@ -296,7 +296,7 @@ export default function Navbar() {
               </span>
 
               <button
-                className="h-9 px-5 rounded-md  text-bg text-sm font-semibold  hover:bg-brand-green-d  bg-brand-green gap-2 flex justify-center items-center hover:opacity-90 transition-all"
+                className="h-11 px-5 rounded-md  text-bg text-sm font-semibold  hover:bg-brand-green-d  bg-brand-green gap-2 flex justify-center items-center hover:opacity-90 transition-all"
                 onClick={() => (window.location.href = `${MAIN_SITE}/register`)}
               >
                 <img src="/gift.svg" className="size-4" alt="" />
@@ -380,13 +380,17 @@ export default function Navbar() {
             </div>
           )}
 
-          <MdOutlineMenu
-            className="size-6 cursor-pointer md:hidden text-primary"
-            onClick={() => setOpenPopup(true)}
-            strokeWidth={1.5}
-            aria-label="Open Mobile Menu"
-            role="button"
-          />
+          <button
+            onClick={() => setOpenPopup(!openPopup)}
+            className="md:hidden flex items-center justify-center text-primary min-w-[44px] min-h-[44px] hover:text-brand-green transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-green"
+            aria-label={openPopup ? "Close menu" : "Open menu"}
+            aria-expanded={openPopup}
+          >
+            <MdOutlineMenu
+              className="size-6"
+              strokeWidth={1.5}
+            />
+          </button>
 
           <div
             className="relative h-full flex items-center"
@@ -432,7 +436,7 @@ export default function Navbar() {
 function Icon({ children, className = "" }) {
   return (
     <div
-      className={`w-9 h-9 flex items-center justify-center rounded-full text-secondary hover:bg-surface-2 hover:text-brand-green cursor-pointer transition-all duration-200 ${className}`}
+      className={`w-11 h-11 flex items-center justify-center rounded-full text-secondary hover:bg-surface-2 hover:text-brand-green cursor-pointer transition-all duration-200 ${className}`}
     >
       {children}
     </div>

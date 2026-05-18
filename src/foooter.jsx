@@ -241,41 +241,41 @@ export const Footer = ({ isShow = true }) => {
             {/* ABOUT */}
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">About</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
+              <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/careers"}>Careers</Link>
+                  <Link to={"/careers"} className="block p-3 -my-1.5 -mx-3">Careers</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/aml-policy"}>AML Policy</Link>
+                  <Link to={"/aml-policy"} className="block p-3 -my-1.5 -mx-3">AML Policy</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/cookies-policy"}>Cookie Policy</Link>
+                  <Link to={"/cookies-policy"} className="block p-3 -my-1.5 -mx-3">Cookie Policy</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/privacy-policy"}>Privacy Notice</Link>
+                  <Link to={"/privacy-policy"} className="block p-3 -my-1.5 -mx-3">Privacy Notice</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/risk-disclosure"}>Risk Disclosure</Link>
+                  <Link to={"/risk-disclosure"} className="block p-3 -my-1.5 -mx-3">Risk Disclosure</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/trading-policy"}>Trading Policy</Link>
+                  <Link to={"/trading-policy"} className="block p-3 -my-1.5 -mx-3">Trading Policy</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/user-agreement"}>User Agreement</Link>
+                  <Link to={"/user-agreement"} className="block p-3 -my-1.5 -mx-3">User Agreement</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/terms-of-use"}>Terms of use</Link>
+                  <Link to={"/terms-of-use"} className="block p-3 -my-1.5 -mx-3">Terms of use</Link>
                 </li>
               </ul>
 
               {/* SERVICE SECTION */}
               <h3 className="text-xl font-semibold mb-4 mt-8">Service</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
+              <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/referral">Referral</Link>
+                  <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/vip">VIP Program</Link>
+                  <Link to="/vip" className="block p-3 -my-1.5 -mx-3">VIP Program</Link>
                 </li>
               </ul>
             </div>
@@ -283,24 +283,24 @@ export const Footer = ({ isShow = true }) => {
             {/* PRODUCT */}
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
+              <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>Buy Crypto</a>
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Buy Crypto</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/futures/BTCUSDT`}>Futures Trading</a>
+                  <a href={`${MAIN_SITE}/futures/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Futures Trading</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>Spot Trading</a>
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Spot Trading</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/subscription`}>Earn</a>
+                  <a href={`${MAIN_SITE}/subscription`} className="block p-3 -my-1.5 -mx-3">Earn</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/invest">Auto Invest</Link>
+                  <Link to="/invest" className="block p-3 -my-1.5 -mx-3">Auto Invest</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/convert`}>Convert</a>
+                  <a href={`${MAIN_SITE}/convert`} className="block p-3 -my-1.5 -mx-3">Convert</a>
                 </li>
               </ul>
             </div>
@@ -308,21 +308,21 @@ export const Footer = ({ isShow = true }) => {
             {/* TRADES */}
             <div className="text-left">
               <h3 className="text-xl font-semibold mb-4">Trades</h3>
-              <ul className="space-y-2 text-gray-300 text-sm">
+              <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`}>BTCUSDT</a>
+                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">BTCUSDT</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/ETHUSDT`}>ETHUSDT</a>
+                  <a href={`${MAIN_SITE}/spot/ETHUSDT`} className="block p-3 -my-1.5 -mx-3">ETHUSDT</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/DOGEUSDT`}>DOGEUSDT</a>
+                  <a href={`${MAIN_SITE}/spot/DOGEUSDT`} className="block p-3 -my-1.5 -mx-3">DOGEUSDT</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/SOLUSDT`}>SOLUSDT</a>
+                  <a href={`${MAIN_SITE}/spot/SOLUSDT`} className="block p-3 -my-1.5 -mx-3">SOLUSDT</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/XRPUSDT`}>XRP USDT</a>
+                  <a href={`${MAIN_SITE}/spot/XRPUSDT`} className="block p-3 -my-1.5 -mx-3">XRP USDT</a>
                 </li>
               </ul>
             </div>
@@ -330,20 +330,20 @@ export const Footer = ({ isShow = true }) => {
             {/* SUPPORT */}
             <div>
               <h3 className="text-xl font-semibold mb-4 text-left">Support</h3>
-              <ul className="space-y-2 text-gray-300 text-sm text-left">
+              <ul className="text-gray-300 text-sm text-left flex flex-col">
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href="https://support.bitzup.com/support/home">
+                  <a href="https://support.bitzup.com/support/home" className="block p-3 -my-1.5 -mx-3">
                     Support Center
                   </a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/request">Submit a request</Link>
+                  <Link to="/request" className="block p-3 -my-1.5 -mx-3">Submit a request</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/vip`}>Fee Schedule</a>
+                  <a href={`${MAIN_SITE}/vip`} className="block p-3 -my-1.5 -mx-3">Fee Schedule</a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/verification">Official Verification</Link>
+                  <Link to="/verification" className="block p-3 -my-1.5 -mx-3">Official Verification</Link>
                 </li>
               </ul>
             </div>
@@ -376,14 +376,14 @@ export const Footer = ({ isShow = true }) => {
                       >
                         {ele.link.startsWith("/trade") ? (
                           <a
-                            className="hover:text-brand-green hover:underline block py-1"
+                            className="hover:text-brand-green hover:underline block p-3 -my-1.5 -mx-3"
                             href={ele.link}
                           >
                             {ele.name}
                           </a>
                         ) : (
                           <Link
-                            className="hover:text-brand-green hover:underline block py-1"
+                            className="hover:text-brand-green hover:underline block p-3 -my-1.5 -mx-3"
                             to={ele.link}
                           >
                             {ele.name}
