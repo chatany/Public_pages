@@ -159,7 +159,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="h-[64px] w-full bg-background  border-b border-border z-[1000] relative">
+    <header className="h-[64px] w-full bg-background  border-b border-border z-sticky relative">
       <div className="mx-auto h-full px-6 flex items-center justify-between">
         {/* LEFT */}
         <div className="flex items-center gap-8 h-full">
@@ -228,12 +228,12 @@ export default function Navbar() {
                   {hasDropdown && hoveredItem === item && (
                     <>
                       {/* hover bridge */}
-                      <div className="absolute top-full left-0 w-full h-5 z-[998]" />
+                      <div className="absolute top-full left-0 w-full h-5 z-dropdown" />
 
                       <div
                         onMouseEnter={() => setHoveredItem(item)}
                         onMouseLeave={() => setHoveredItem(null)}
-                        className="absolute top-full left-0 mt-0 w-[340px] bg-surface border border-border rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999] hidden lg:block"
+                        className="absolute top-full left-0 mt-0 w-[340px] bg-surface border border-border rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown hidden lg:block"
                       >
                         {navConfig[item].map((subItem, index) => (
                           <button
@@ -320,8 +320,8 @@ export default function Navbar() {
 
               {openDropdown === "profile" && (
                 <>
-                  <div className="absolute top-full right-0 w-full h-5 z-[998]" />
-                  <div className="absolute top-full right-0 mt-0 w-[280px] bg-surface border border-border rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999] overflow-hidden">
+                  <div className="absolute top-full right-0 w-full h-5 z-dropdown" />
+                  <div className="absolute top-full right-0 mt-0 w-[280px] bg-surface border border-border rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown overflow-hidden">
                     {/* User Header */}
                     <div className="p-5 border-b border-border">
                       <div className="flex items-center gap-3">
@@ -399,8 +399,8 @@ export default function Navbar() {
 
             {showQR && (
               <>
-                <div className="absolute top-full right-0 w-full h-5 z-[998]" />
-                <div className="absolute top-full right-0 mt-0 p-4 bg-surface border border-surface-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-[999]">
+                <div className="absolute top-full right-0 w-full h-5 z-dropdown" />
+                <div className="absolute top-full right-0 mt-0 p-4 bg-surface border border-surface-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown">
                   <div className="bg-white p-2 rounded-lg">
                     <QRCode
                       value="https://bitzup.com/download"

@@ -257,7 +257,7 @@
 
 //   const renderCurrencySelect = () => (
 //     <div className="bg-[#0B0E11] fixed inset-0 z-[1001] flex items-center justify-center p-4">
-//       <div className="w-full md:w-[450px] bg-[#1E2329] rounded-[30px] border border-white/5 overflow-hidden">
+//       <div className="w-full md:w-[450px] bg-[#1E2329] rounded-2xl border border-white/5 overflow-hidden">
 //         <div className="p-6 border-b border-[#2B3139] flex items-center justify-between">
 //           <button
 //             onClick={() => setView("main")}
@@ -308,7 +308,7 @@
 
 //   const renderPaymentSelect = () => (
 //     <div className="bg-[#0B0E11] fixed inset-0 z-[1001] flex items-center justify-center p-4">
-//       <div className="w-full md:w-[500px] bg-[#1E2329] rounded-[30px] border border-white/5 overflow-hidden">
+//       <div className="w-full md:w-[500px] bg-[#1E2329] rounded-2xl border border-white/5 overflow-hidden">
 //         <div className="p-6 border-b border-[#2B3139] flex items-center justify-between">
 //           <button
 //             onClick={() => setView("main")}

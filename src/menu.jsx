@@ -29,7 +29,7 @@ export const Menu = ({ children }) => {
               type="text"
               placeholder="Search"
               className={`
-            w-80 capitalize rounded-[40px]
+            w-80 capitalize rounded-full
             h-6 p-4 text-[1rem] 
             border
             hover:borderbrand-green borderbrand-green focus:outline-none `}

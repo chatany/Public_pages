@@ -58,7 +58,7 @@ export default function MobileDrawer({ open, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-dropdown bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         onClick={onClose}
@@ -66,7 +66,7 @@ export default function MobileDrawer({ open, onClose }) {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm 
+        className={`fixed top-0 right-0 z-modal h-full w-[85%] max-w-sm 
         bg-surface text-white shadow-2xl
         overflow-y-auto overscroll-contain
         transform transition-transform duration-300 ease-out

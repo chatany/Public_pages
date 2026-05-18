@@ -45,6 +45,13 @@ export default {
         'trading-up': 'var(--trading-up)',
         'trading-down': 'var(--trading-down)',
       },
+      zIndex: {
+        'base': '0',
+        'dropdown': '100',
+        'sticky': '200',
+        'modal': '1000',
+        'toast': '1100',
+      },
     },
   },
   plugins: [],

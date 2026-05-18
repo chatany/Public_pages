@@ -55,6 +55,30 @@
   /* MOTION TOKENS */
   --ease-bitzup: cubic-bezier(0.4, 0, 0.2, 1);
   --animate-marquee: marquee 25s linear infinite;
+  --radius-full: 9999px;
+
+  /* Z-INDEX SCALE (Tiered System) */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 1000;
+  --z-toast: 1100;
+}
+
+@utility z-base {
+  z-index: var(--z-base);
+}
+@utility z-dropdown {
+  z-index: var(--z-dropdown);
+}
+@utility z-sticky {
+  z-index: var(--z-sticky);
+}
+@utility z-modal {
+  z-index: var(--z-modal);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
 }
 
 [data-theme="light"] {

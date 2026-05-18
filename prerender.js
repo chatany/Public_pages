@@ -11,8 +11,9 @@ const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
 // Exact SEO metadata mapping extracted from components
 const seoData = {
   "/": {
-    "title": "Buy & Trade Bitcoin, Ethereum & 100+ Cryptos | BitZup",
-    "description": "Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup. Tight spreads, low fees, high-APY earn products, and bank-grade security. Sign up in minutes."
+    "title": "BitZup — Crypto exchange for serious traders",
+    "description": "Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup. Low fees, deep liquidity, built for VIP and institutional traders.",
+    "ogDescription": "Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup."
   },
   "/aml-policy": {
     "title": "BitZup AML & CFT Policy",
@@ -80,32 +81,44 @@ function run() {
 
   Object.entries(seoData).forEach(([route, meta]) => {
     const { title, description } = meta;
+    const ogDesc = meta.ogDescription || description;
+    const themeColor = meta.themeColor || '#0B0E11';
     console.log(`📝 Pre-rendering route: "${route}"`);
 
     // Build the dynamic SEO, Open Graph and Twitter tags block
     const seoTags = `
     <title>${title}</title>
+    <meta name="title" content="${title}" />
     <meta name="description" content="${description}" />
+    <meta name="theme-color" content="${themeColor}" />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bitzup.com${route}" />
     <meta property="og:title" content="${title}" />
-    <meta property="og:description" content="${description}" />
-    <meta property="og:image" content="https://bitzup.com/Bitzup.png" />
+    <meta property="og:description" content="${ogDesc}" />
+    <meta property="og:image" content="https://bitzup.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://bitzup.com${route}" />
     <meta name="twitter:title" content="${title}" />
-    <meta name="twitter:description" content="${description}" />
-    <meta name="twitter:image" content="https://bitzup.com/Bitzup.png" />
-    `;
+    <meta name="twitter:description" content="${ogDesc}" />
+    <meta name="twitter:image" content="https://bitzup.com/og-image.png" />
 
-    // First, remove any existing description tag from the base template to avoid duplicates
-    let modifiedHtml = baseHtml.replace(/<meta[^>]*?name="description"[^>]*?>/gi, '');
-    // Then, replace the title tag with our dynamic SEO tags block
-    modifiedHtml = modifiedHtml.replace(/<title>[\s\S]*?<\/title>/i, seoTags.trim());
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://bitzup.com${route === '/' ? '' : route}" />`;
+
+    // Strip out all pre-existing SEO, Open Graph, Twitter and title tags from base template to avoid duplicates
+    let modifiedHtml = baseHtml;
+    modifiedHtml = modifiedHtml.replace(/<title>[\s\S]*?<\/title>/gi, '');
+    modifiedHtml = modifiedHtml.replace(/<meta[^>]*?(name|property)="(title|description|theme-color|og:type|og:url|og:title|og:description|og:image|og:image:width|og:image:height|twitter:card|twitter:url|twitter:title|twitter:description|twitter:image)"[^>]*?>/gi, '');
+    modifiedHtml = modifiedHtml.replace(/<link[^>]*?rel="canonical"[^>]*?>/gi, '');
+
+    // Insert the dynamic SEO tags right after the <meta charset="UTF-8" /> tag
+    modifiedHtml = modifiedHtml.replace(/<meta charset="UTF-8" \/>/i, `<meta charset="UTF-8" />\n${seoTags.trim()}`);
 
     if (route === '/') {
       // For home page, overwrite the main index.html file in dist/

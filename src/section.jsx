@@ -44,7 +44,6 @@ export const Section = () => {
     return activeTab !== "All" ? data[activeTab] : data1;
   };
 
-
   const fetchData = async () => {
     try {
       // 1. Fetch Bitzup Exchange Info (Primary Data)
@@ -172,12 +171,12 @@ export const Section = () => {
               key={ind}
               className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
             >
-              <div className="absolute h-full w-full hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 z-50"></div>
               <img
                 src={item}
                 alt={`BitZup platform promotion ${ind + 1}`}
-                className="w-full h-full z-60 rounded-xl"
+                className="w-full h-full rounded-xl"
               />
+              <div className="absolute inset-0 hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 transition-colors duration-300 pointer-events-none"></div>
             </div>
           ))}
         </div>
@@ -185,13 +184,13 @@ export const Section = () => {
       <div className="flex justify-center gap-3 mt-1 max-md:hidden ">
         <button
           onClick={prev}
-          className=" rounded-[3px] border border-border flex items-center justify-center transition"
+          className=" rounded-md border border-border flex items-center justify-center transition"
         >
           <BiChevronLeft className="size-6" />
         </button>
         <button
           onClick={next}
-          className="rounded-[3px] border border-border flex items-center justify-center transition"
+          className="rounded-md border border-border flex items-center justify-center transition"
         >
           <BiChevronRight className="size-6" />
         </button>
@@ -205,12 +204,12 @@ export const Section = () => {
             {items.map((item, ind) => (
               <div key={ind} className="min-w-[50%] px-3">
                 <div className="w-full rounded-2xl border  bg-black relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-green/40 opacity-0 hover:opacity-100 transition-opacity z-10" />
                   <img
                     src={item}
                     alt={`BitZup promotion banner ${ind + 1}`}
                     className="w-full h-full object-cover rounded-2xl"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-green/40 opacity-0 hover:opacity-100 transition-opacity" />
                 </div>
               </div>
             ))}
@@ -220,13 +219,13 @@ export const Section = () => {
         <div className="flex justify-center gap-3 mt-6">
           <button
             onClick={prev}
-            className=" rounded-[3px] border border-border flex items-center justify-center transition"
+            className=" rounded-md border border-border flex items-center justify-center transition"
           >
             <BiChevronLeft className="size-6" />
           </button>
           <button
             onClick={next}
-            className="rounded-[3px] border border-border flex items-center justify-center transition"
+            className="rounded-md border border-border flex items-center justify-center transition"
           >
             <BiChevronRight className="size-6" />
           </button>
@@ -341,12 +340,12 @@ export const Section = () => {
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
           <div className="md:w-[50%] w-full flex justify-center items-center relative py-10">
             {/* Glow/Backlight Effect */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green blur-[7.5rem] h-[70%] w-[60%] rounded-full z-0"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green blur-[7.5rem] h-[70%] w-[60%] rounded-full z-base"></div>
 
             {/* Mobile Mockup Frame */}
-            <div className="relative z-20 p-4 bg-surface-1 rounded-[3rem] border-2 border-border shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 duration-500">
+            <div className="relative z-base p-4 bg-surface-1 rounded-2xl border-2 border-border shadow-[0_30px_80px_rgba(0,0,0,0.25)] transition-transform hover:scale-105 duration-500">
               {/* Front bezel */}
-              {/* <div className="absolute inset-0 rounded-[2.6rem] border border-black/10 pointer-events-none" /> */}
+              {/* <div className="absolute inset-0 rounded-2xl border border-black/10 pointer-events-none" /> */}
 
               {/* Speaker / notch */}
               <div className="absolute left-1/2 top-4 -translate-x-1/2 flex items-center gap-2">
@@ -358,14 +357,14 @@ export const Section = () => {
               <div className="absolute right-0 top-[25%] h-20 w-1.5 rounded-l-full bg-surface-2/80" />
               <div className="absolute left-0 top-[30%] h-16 w-1.5 rounded-r-full bg-surface-2/80" />
 
-              <div className="relative overflow-hidden rounded-[2.2rem] bg-black border border-black/20">
+              <div className="relative overflow-hidden rounded-2xl bg-black border border-black/20">
                 <video
                   src="/Mobile.mp4"
                   autoPlay
                   loop
                   muted
                   playsInline
-                  className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-[2.2rem] object-cover"
+                  className="w-64 h-[32rem] md:w-80 md:h-[40rem] rounded-2xl object-cover"
                 />
               </div>
             </div>

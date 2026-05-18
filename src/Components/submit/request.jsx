@@ -128,7 +128,7 @@ export default function SubmitRequestForm() {
           >
             <div className={inputClass}>
               <div className="w-full flex justify-between h-full  items-center">
-                <div className="text-[15px] font-normal capitalize">
+                <div className="text-sm font-normal capitalize">
                   {select ? (
                     <div className="flex gap-3 items-center">{select} </div>
                   ) : (
@@ -144,7 +144,7 @@ export default function SubmitRequestForm() {
 
             {open && (
               <div
-                className={`absolute z-10 mt-2 w-full shadow-xl  ${
+                className={`absolute z-dropdown mt-2 w-full shadow-xl  ${
                   dark
                     ? "bg-surface text-primary"
                     : "bg-white text-secondary"

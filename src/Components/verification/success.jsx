@@ -14,7 +14,7 @@ const VerifyPopup = ({
   const isSuccess = type === "success";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-bg/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-modal flex items-center justify-center bg-bg/70 backdrop-blur-sm">
       <div className="w-[420px] rounded-2xl border border-border bg-surface p-8 text-white shadow-2xl">
         {/* ICON */}
         <div className="flex justify-center">

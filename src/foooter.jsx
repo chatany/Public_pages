@@ -1,10 +1,4 @@
 import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from "@mui/material";
-import {
   FaChevronRight,
   FaInstagram,
   FaInstagramSquare,
@@ -25,6 +19,11 @@ import { Link } from "react-router-dom";
 export const Footer = ({ isShow = true }) => {
   const MAIN_SITE = "/trade";
   const [openIndex, setOpenIndex] = useState(null);
+  const [openMobileIndex, setOpenMobileIndex] = useState(null);
+
+  const toggleMobile = (index) => {
+    setOpenMobileIndex(openMobileIndex === index ? null : index);
+  };
 
   const faqData = [
     {
@@ -350,69 +349,53 @@ export const Footer = ({ isShow = true }) => {
             </div>
           </div>
         </footer>
-        <div className="md:hidden bg-surface p-3">
-          {ae?.map((item, index) => (
-            <Accordion
-              key={index}
-              className={`!p-0 !shadow-none !border-none !bg-transparent `}
-            >
-              <AccordionSummary
-                expandIcon={
-                  isOpen ? (
-                    <IoIosArrowUp
-                      className={`${
-                        dark ? "text-primary" : "text-secondary"
-                      } size-5`}
-                    />
-                  ) : (
-                    <IoIosArrowDown
-                      className={`${
-                        dark ? "text-primary" : "text-secondary"
-                      } size-5`}
-                    />
-                  )
-                }
-                aria-controls="panel1-content"
-                id="panel1-header"
-                className="!m-0 !px-0 !py-0 flex items-center  !border-none justify-between"
-              >
-                <Typography
-                  component="span"
-                  className={`${
-                    dark ? "text-primary" : "text-secondary"
-                  } text-base leading-8 pl-0 font-medium`}
+        <div className="md:hidden bg-surface p-3 space-y-2">
+          {ae?.map((item, index) => {
+            const isMobileOpen = openMobileIndex === index;
+            return (
+              <div key={index} className="border-b border-border/30 last:border-none">
+                <button
+                  onClick={() => toggleMobile(index)}
+                  className="w-full py-3 flex items-center justify-between text-left focus:outline-none"
                 >
-                  {item.ele}
-                </Typography>
-              </AccordionSummary>
-              {/* <AccordionDetails> */}
-              {item?.category?.map((ele, ind) => (
+                  <span className={`${dark ? "text-primary" : "text-secondary"} text-base font-semibold`}>
+                    {item.ele}
+                  </span>
+                  <IoIosArrowDown
+                    className={`size-4 transition-transform duration-300 ${isMobileOpen ? "rotate-180 text-brand-green" : dark ? "text-primary" : "text-secondary"}`}
+                  />
+                </button>
                 <div
-                  key={ind}
-                  className={`${
-                    dark ? "text-primary" : "text-secondary"
-                  } text-sm font-normal leading-6 text-left`}
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileOpen ? "max-h-60 pb-3" : "max-h-0"}`}
                 >
-                  {ele.link.startsWith("/trade") ? (
-                    <a
-                      className="hover:text-brand-green hover:underline "
-                      href={ele.link}
-                    >
-                      {ele.name}
-                    </a>
-                  ) : (
-                    <Link
-                      className="hover:text-brand-green hover:underline "
-                      to={ele.link}
-                    >
-                      {ele.name}
-                    </Link>
-                  )}
+                  <div className="flex flex-col gap-2 pl-2">
+                    {item?.category?.map((ele, ind) => (
+                      <div
+                        key={ind}
+                        className={`${dark ? "text-primary" : "text-secondary"} text-sm font-normal text-left`}
+                      >
+                        {ele.link.startsWith("/trade") ? (
+                          <a
+                            className="hover:text-brand-green hover:underline block py-1"
+                            href={ele.link}
+                          >
+                            {ele.name}
+                          </a>
+                        ) : (
+                          <Link
+                            className="hover:text-brand-green hover:underline block py-1"
+                            to={ele.link}
+                          >
+                            {ele.name}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              ))}
-              {/* </AccordionDetails> */}
-            </Accordion>
-          ))}
+              </div>
+            );
+          })}
           <div>
             <div className="flex gap-6 mt-4">
               <a

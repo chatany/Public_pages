@@ -210,7 +210,7 @@ export const Verification = () => {
 
                   {open && (
                     <div
-                      className={`absolute z-10 mt-2 w-full shadow-xl  ${
+                      className={`absolute z-dropdown mt-2 w-full shadow-xl  ${
                         dark
                           ? "bg-surface-2 text-primary"
                           : "bg-bg text-primary"

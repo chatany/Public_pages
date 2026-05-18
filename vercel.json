@@ -6,7 +6,7 @@
       "destination": "https://bitzup-dev-server.vercel.app/trade/:path*"
     },
     {
-      "source": "/((?!trade|aml-policy|referral|careers|vip|invest|verification|request|risk-disclosure|trading-policy|cookies-policy|privacy-policy|user-agreement|terms-of-use|assets|public).*)",
+      "source": "/((?!trade|aml-policy|referral|careers|vip|invest|verification|request|risk-disclosure|trading-policy|cookies-policy|privacy-policy|user-agreement|terms-of-use|assets|public|sitemap\\.xml|robots\\.txt|favicon\\.ico|site\\.webmanifest).*)",
       "destination": "/index.html"
     }
   ]

@@ -325,7 +325,7 @@ export const Vip = () => {
 
                   {/* {open && (
                   <div
-                    className={`absolute z-10 mt-2 w-full shadow-xl  ${
+                    className={`absolute z-dropdown mt-2 w-full shadow-xl  ${
                       true
                         ? "bg-[#17181A] text-[#EAECEF]"
                         : "bg-[#FFFFFF] text-[#262030]"

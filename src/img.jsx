@@ -29,7 +29,7 @@ export default function Carousel() {
         >
           {items.map((_, i) => (
             <div key={i} className="min-w-[33.3333%] px-4">
-              <div className="h-72 rounded-3xl border border-border"></div>
+              <div className="h-72 rounded-2xl border border-border"></div>
             </div>
           ))}
         </div>

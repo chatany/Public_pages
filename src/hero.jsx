@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <section className=" flex max-md:flex-col max-md:gap-6 md:p-16 p-4 justify-between">
       {/* Left Content */}
-      <div className=" z-10 w-full md:w-[50%] flex flex-col text-left">
+      <div className=" z-base w-full md:w-[50%] flex flex-col text-left">
         <h1 className="text-3xl md:text-5xl font-bold text-primary leading-tight text-left">
           BitZup: Where Crypto Traders Become Market Leaders
         </h1>
