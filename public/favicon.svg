@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Solid Black Background -->
   <rect width="32" height="32" rx="8" fill="#000000"/>
-  <path d="M9 7h6a5 5 0 0 1 0 10H9V7zm0 10h7a5 5 0 0 1 0 10H9v-10z" fill="#2EDBAD"/>
-  <path d="M13 10v4h2a2 2 0 0 0 0-4h-2zm0 10v4h3a2 2 0 0 0 0-4h-3z" fill="#000000"/>
+  <!-- Outer Hexagon -->
+  <polygon points="16,4 27,10 27,22 16,28 5,22 5,10" fill="none" stroke="#2EDBAD" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Letter 'b' with Upward Arrow Stem -->
+  <path d="M12,19 A4,4 0 1,0 20,19 A4,4 0 0,0 12,19 M12,19 L12,9 M9,12 L12,9 L15,12" fill="none" stroke="#2EDBAD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
