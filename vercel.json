@@ -1,11 +1,12 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/trade/:path*",
       "destination": "https://bitzup-dev-server.vercel.app/trade/:path*"
     },
     {
-      "source": "/((?!trade).*)",
+      "source": "/((?!trade|aml-policy|referral|careers|vip|invest|verification|request|risk-disclosure|trading-policy|cookies-policy|privacy-policy|user-agreement|terms-of-use|assets|public).*)",
       "destination": "/index.html"
     }
   ]
