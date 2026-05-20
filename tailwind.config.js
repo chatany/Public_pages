@@ -32,6 +32,7 @@ export default {
       colors: {
         bg: 'var(--bg)',
         surface: 'var(--surface)',
+        hover:'var(--hover)',
         'surface-2': 'var(--surface-2)',
         border: 'var(--border)',
         primary: 'var(--text-primary)',

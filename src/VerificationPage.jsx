@@ -167,7 +167,7 @@ export const Verification = () => {
         <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
-              <div className="md:text-3xl text-3xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
+              <div className="md:text-3xl text-2xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
                 BitZup Official Verification
               </div>
               <div className="md:text-base text-xs font-bold md:leading-6  text-muted  text-center">
@@ -270,17 +270,10 @@ export const Verification = () => {
                   name="Email"
                   placeholder="Search"
                 onClick={handleSubmit}
-                  className="border flex justify-center items-center gap-2 w-full bg-primary cursor-pointer border-border rounded-full px-12 h-14 text-sm text-bg outline-none"
-                  // onKeyDown={(e) => {
-                  //   if (e.key === "Enter") handleSubmit();
-                  // }}
-                  // value={userData.password}
-                  // onChange={(e) => handle("password", e)}
-                  // type={showPassword ? "password" : "text"}
+                  className="border flex  justify-center items-center gap-2 w-full bg-primary cursor-pointer border-border rounded-full px-5 h-18 text-sm text-bg outline-none"
+                 
                 >
-                {/* <div className="cursor-pointer "> */}
                   <IoIosSearch className="  h-6 w-6 text-bg" />
-                {/* </div> */}
                 Search
               </button>
               </div>

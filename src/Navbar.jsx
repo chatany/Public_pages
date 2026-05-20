@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiDownload } from "react-icons/fi";
 import { MdOutlineMenu } from "react-icons/md";
 import { TiArrowSortedDown } from "react-icons/ti";
@@ -9,11 +9,13 @@ import MobileDrawer from "./Drawer";
 import { useNavigate } from "react-router-dom";
 import QRCode from "react-qr-code";
 import { BiDownload, BiSearch } from "react-icons/bi";
+import { IoMdMenu } from "react-icons/io";
 
 export default function Navbar() {
   const [openPopup, setOpenPopup] = useState(false);
   const [selectedNav, setSelectedNav] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
+  const timeoutRef = useRef(null);
   const [showQR, setShowQR] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(
@@ -170,7 +172,7 @@ export default function Navbar() {
           >
             <img
               src="/bitzup_light_logo.png"
-              className="h-[42px] w-auto"
+              className="md:h-[42px] h-8 w-auto"
               alt="BitZup Logo"
             />
           </div>
@@ -193,13 +195,17 @@ export default function Navbar() {
                   className="relative h-full flex items-center"
                   onMouseEnter={() => {
                     if (hasDropdown) {
+                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
                       setHoveredItem(item);
                     }
                   }}
                   onMouseLeave={() => {
-                    setTimeout(() => {
-                      setHoveredItem(null);
-                    }, 50);
+                    if (hasDropdown) {
+                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                      timeoutRef.current = setTimeout(() => {
+                        setHoveredItem(null);
+                      }, 150);
+                    }
                   }}
                 >
                   {/* NAV ITEM */}
@@ -231,21 +237,28 @@ export default function Navbar() {
                       <div className="absolute top-full left-0 w-full h-5 z-dropdown" />
 
                       <div
-                        onMouseEnter={() => setHoveredItem(item)}
-                        onMouseLeave={() => setHoveredItem(null)}
-                        className="absolute top-full left-0 mt-0 w-[340px] bg-surface border border-border rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown hidden lg:block"
+                        onMouseEnter={() => {
+                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                          setHoveredItem(item);
+                        }}
+                        onMouseLeave={() => {
+                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                          timeoutRef.current = setTimeout(() => {
+                            setHoveredItem(null);
+                          }, 150);
+                        }}
+                        className="absolute top-full left-0 mt-0 w-[340px] h-fit bg-surface-2 border border-border rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown hidden lg:block"
                       >
                         {navConfig[item].map((subItem, index) => (
-                          <button
+                          <div
                             key={index}
-                            type="button"
                             onClick={() => {
                               setHoveredItem(null);
                               handleNavigate(subItem.path);
                             }}
-                            className="w-full text-left"
+                            className="w-full text-left max-h-none min-w-0"
                           >
-                            <div className="flex gap-3 px-3 bg-surface py-3 rounded-lg cursor-pointer hover:bg-surface-2 transition-all duration-200 group">
+                            <div className="flex gap-3 px-3  py-3 rounded-lg cursor-pointer h-full hover:bg-border transition-all duration-200 group">
                               {/* ICON */}
                               <div
                                 className={`${subItem.title.includes("Futures") ? "size-6 min-w-[24px]" : "size-8 min-w-[32px]"} flex items-center justify-center mt-0.5`}
@@ -273,7 +286,7 @@ export default function Navbar() {
                                 </div>
                               </div>
                             </div>
-                          </button>
+                          </div>
                         ))}
                       </div>
                     </>
@@ -296,7 +309,7 @@ export default function Navbar() {
               </span>
 
               <button
-                className="h-11 px-5 rounded-md  text-bg text-sm font-semibold  hover:bg-brand-green-d  bg-brand-green gap-2 flex justify-center items-center hover:opacity-90 transition-all"
+                className="md:h-9 h-8 px-5 rounded-md  text-bg text-xs md:text-sm font-semibold  hover:bg-brand-green-d  bg-brand-green gap-2 flex justify-center items-center hover:opacity-90 transition-all"
                 onClick={() => (window.location.href = `${MAIN_SITE}/register`)}
               >
                 <img src="/gift.svg" className="size-4" alt="" />
@@ -386,14 +399,11 @@ export default function Navbar() {
             aria-label={openPopup ? "Close menu" : "Open menu"}
             aria-expanded={openPopup}
           >
-            <MdOutlineMenu
-              className="size-6"
-              strokeWidth={1.5}
-            />
+           <IoMdMenu className="size-6" strokeWidth={1.5} />
           </button>
 
           <div
-            className="relative h-full flex items-center"
+            className="relative h-full flex items-center max-md:hidden"
             onMouseEnter={() => setShowQR(true)}
             onMouseLeave={() => setShowQR(false)}
           >

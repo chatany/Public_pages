@@ -4,10 +4,10 @@ import QRCode from "react-qr-code";
 
 export default function Hero() {
   return (
-    <section className=" flex max-md:flex-col max-md:gap-6 md:p-16 p-4 justify-between">
+    <section className="max-w-7xl mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6 py-12 md:py-16 justify-between w-full">
       {/* Left Content */}
       <div className=" z-base w-full md:w-[50%] flex flex-col text-left">
-        <h1 className="text-3xl md:text-5xl font-bold text-primary leading-tight text-left">
+        <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
           BitZup: Where Crypto Traders Become Market Leaders
         </h1>
 
@@ -33,7 +33,7 @@ export default function Hero() {
               >
                 <img
                   src="/apple-badge.png"
-                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="App Store"
                 />
               </a>
@@ -44,7 +44,7 @@ export default function Hero() {
               >
                 <img
                   src="/google-play-badge.png"
-                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="Google Play"
                 />
               </a>
@@ -55,7 +55,7 @@ export default function Hero() {
               >
                 <img
                   src="/android-badge.png"
-                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="Android"
                 />
               </a>
@@ -79,9 +79,9 @@ export default function Hero() {
         <div className="md:size-80 w-64 h-36 rounded-full bg-surface" />
       </div>
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
-        <button className="btn-primary h-12 w-fit px-8">
-          <div className="flex font-semibold text-black gap-2 items-center text-lg">
-            <img src="gift.svg" className="size-6" alt="Gift rewards icon" />{" "}
+        <button className="btn-primary h-5 w-fit px-8">
+          <div className="flex font-semibold text-black gap-2 items-center text-md">
+            <img src="gift.svg" className="size-4" alt="Gift rewards icon" />{" "}
             Sign up now
           </div>
         </button>

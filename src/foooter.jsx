@@ -106,17 +106,24 @@ export const Footer = ({ isShow = true }) => {
         { name: "Fee Schedule", link: "/fees" },
         { name: "Official Verification", link: "/verification" },
       ],
-    },
+    },{
+      ele:"Service",
+      category:[
+        {name:"Referral", link:"/referral"},
+        {name:"VIP Program", link:"/vip"},
+        {name:"Careers", link:"/careers"},
+      ]
+    }
   ];
   const dark = true;
   const isOpen = false;
   return (
     <div className="bg-background">
       {isShow && (
-        <div className="py-24 px-16 max-w-6xl mx-auto">
+        <div className="py-24 md:px-16 px-5 max-w-7xl mx-auto w-full">
           {/* FAQ Header */}
           <div className="mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold text-primary text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">
               FAQs
             </h2>
           </div>
@@ -127,13 +134,13 @@ export const Footer = ({ isShow = true }) => {
               <div key={index} className=" border-border">
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full py-8 md:py-10 flex justify-between items-center text-left group transition-all"
+                  className="w-full py-3 md:py-5 flex justify-between cursor-pointer items-center text-left group transition-all"
                 >
-                  <span className="text-lg md:text-2xl font-bold text-primary group-hover:text-brand-green transition-colors leading-tight pr-8">
+                  <span className="text-md: md:text-lg font-medium  text-primary group-hover:text-brand-green transition-colors leading-tight pr-8">
                     {item.question}
                   </span>
                   <IoIosArrowDown
-                    className={`text-primary size-5 md:size-8 transition-transform duration-300 flex-shrink-0 ${openIndex === index ? "rotate-180 text-brand-green" : ""}`}
+                    className={`text-primary size-3 md:size-5 transition-transform duration-300 flex-shrink-0 ${openIndex === index ? "rotate-180 text-brand-green" : ""}`}
                   />
                 </button>
 
@@ -142,7 +149,7 @@ export const Footer = ({ isShow = true }) => {
                     openIndex === index ? "max-h-[31.25rem] pb-10" : "max-h-0"
                   }`}
                 >
-                  <p className="text-gray-400 text-left text-sm md:text-xl font-medium leading-relaxed max-w-[1000px]">
+                  <p className="text-gray-400 text-left text-sm md:text-md font-medium leading-relaxed">
                     {item.answer}
                   </p>
                 </div>
@@ -155,7 +162,7 @@ export const Footer = ({ isShow = true }) => {
       )}
       {isShow && (
         <div className="flex flex-col gap-5 items-center bg-surface py-10 mt-10">
-          <div className="font-bold text-2xl md:text-4xl text-center">
+          <div className="font-bold text-xl md:text-3xl text-center">
             Start your crypto journey now !
           </div>
           <button className="btn-primary h-[58px] px-10">
@@ -167,8 +174,8 @@ export const Footer = ({ isShow = true }) => {
         </div>
       )}
       <div className="py-5">
-        <footer className="bg-surface text-primary px-10 py-16 max-md:hidden">
-          <div className=" grid grid-cols-1 md:grid-cols-5 gap-12">
+        <footer className="bg-surface text-primary py-16 max-md:hidden">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-5 gap-12 w-full">
             {/* LEFT SECTION */}
             <div className="space-y-6 flex flex-col w-full items-center">
               <h2 className="text-2xl font-semibold text-center">
@@ -376,14 +383,14 @@ export const Footer = ({ isShow = true }) => {
                       >
                         {ele.link.startsWith("/trade") ? (
                           <a
-                            className="hover:text-brand-green hover:underline block p-3 -my-1.5 -mx-3"
+                            className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
                             href={ele.link}
                           >
                             {ele.name}
                           </a>
                         ) : (
                           <Link
-                            className="hover:text-brand-green hover:underline block p-3 -my-1.5 -mx-3"
+                            className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
                             to={ele.link}
                           >
                             {ele.name}

@@ -67,7 +67,7 @@ export default function MobileDrawer({ open, onClose }) {
       {/* Drawer */}
       <div
         className={`fixed top-0 right-0 z-modal h-full w-[85%] max-w-sm 
-        bg-surface text-white shadow-2xl
+        bg-surface-2 text-white shadow-2xl
         overflow-y-auto overscroll-contain
         transform transition-transform duration-300 ease-out
         ${open ? "translate-x-0" : "translate-x-full"}`}
@@ -140,12 +140,12 @@ export default function MobileDrawer({ open, onClose }) {
                     isExpanded ? "max-h-80 pb-4" : "max-h-0"
                   }`}
                 >
-                  <div className="space-y-4 pl-4 border-l border-brand-green/20 ml-1">
+                  <div className="space-y-4  ">
                     {items.map((sub) => (
                       <div
                         key={sub.title}
                         onClick={() => handleNavigate(sub.path)}
-                        className="text-base text-gray-400 hover:text-white transition-colors cursor-pointer"
+                        className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                       >
                         {sub.title}
                       </div>

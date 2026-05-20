@@ -90,7 +90,7 @@ export const CarrierPage = () => {
       <div className="bg-background text-primary min-h-screen ">
         <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
-            <div className="text-3xl md:text-5xl font-bold md:text-left text-center leading-tight">
+            <div className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
               Join the Future of Crypto
             </div>
             <div className="text-base font-bold text-secondary max-md:hidden">
@@ -98,10 +98,10 @@ export const CarrierPage = () => {
               opportunities.
             </div>
             <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
-              <button className="bg-primary h-12 md:w-44 px-8 text-sm md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
+              <button className="bg-primary md:h-12 h-10 md:w-44 px-8 md:text-sm cursor-pointer text-xs md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
                 Job Openings
               </button>
-              <button className="bg-surface-2 h-12 md:w-44 flex text-sm items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
+              <button className="bg-surface-2 md:h-12 h-10 px-8 md:text-sm cursor-pointer text-xs flex items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
                 <AiFillLinkedin className="size-4" /> View LinkedIn
               </button>
             </div>
@@ -213,7 +213,7 @@ export const CarrierPage = () => {
           </div>
         </div>
         <div className="mt-20 md:px-16 p-5">
-          <div className="text-2xl md:text-3xl font-bold mb-10">
+          <div className="text-2xl md:text-3xl font-bold text-center mb-10">
             Positions open, waiting just for you!
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">

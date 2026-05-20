@@ -22,19 +22,9 @@ export const Menu = ({ children }) => {
     <div className="bg-black">
       <Navbar />
 
-      <div className="md:p-15 p-5">
+      <div className="md:p-15 ">
         <div className="flex flex-col gap-5">
-          {/* <div className="flex justify-end ">
-            <input
-              type="text"
-              placeholder="Search"
-              className={`
-            w-80 capitalize rounded-full
-            h-6 p-4 text-[1rem] 
-            border
-            hover:borderbrand-green borderbrand-green focus:outline-none `}
-            />
-          </div> */}
+          
           <div className="flex max-md:flex-col gap-20 w-full">
             <div className="text-left">
               <div className="text-xl font-bold mb-10 mt-5 whitespace-nowrap max-md:hidden">
@@ -42,7 +32,7 @@ export const Menu = ({ children }) => {
               </div>
               <div
                 onClick={() => setShow(!show)}
-                className="md:hidden flex justify-between p-5 border-b border-t p-2 border-border"
+                className="md:hidden flex justify-between p-5 border-b border-t  border-border"
               >
                 <div>Articles in this Section </div>
                 <div>
@@ -58,7 +48,7 @@ export const Menu = ({ children }) => {
                   {menuItems.map((item, index) => (
                     <li
                       key={index}
-                      className="textbrand-green hover:underline cursor-pointer whitespace-nowrap text-lg"
+                      className="text-brand-green hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
                     >
                       <Link to={item.link}>{item.name}</Link>
                     </li>
@@ -66,12 +56,12 @@ export const Menu = ({ children }) => {
                 </ul>
               </div>
               {show && (
-                <div className="flex flex-col gap-10 md:hidden ">
-                  <ul className="list-disc list-inside flex flex-col gap-4 ">
+                <div className="flex flex-col gap-10 md:hidden mt-6 p-2">
+                  <ul className="list-disc list-inside flex flex-col gap-1 ">
                     {menuItems.map((item, index) => (
                       <li
                         key={index}
-                        className="textbrand-green hover:underline cursor-pointer whitespace-nowrap text-xl"
+                        className="text-brand-green hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
                       >
                         <Link to={item.link}>{item.name}</Link>
                       </li>
@@ -80,7 +70,7 @@ export const Menu = ({ children }) => {
                 </div>
               )}
             </div>
-            <div className="flex gap-10">
+            <div className="flex gap-10 p-2">
               <div>{children}</div>
             </div>
           </div>

@@ -42,16 +42,16 @@ export const AutoInvest = () => {
         <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
             <div className="flex flex-col gap-4">
-              <h1 className="text-3xl md:text-5xl font-bold md:text-left text-center leading-tight">
+              <h1 className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
                 Recurring Buys
               </h1>
-              <div className="text-lg md:text-xl font-bold text-secondary max-w-md">
+              <div className="text-xs md:text-lg font-bold text-secondary max-w-md">
                 Auto-buy Bitcoin, Ethereum, Solana and 40+ others. Daily,
                 weekly, or monthly schedules. Start from $10.
               </div>
             </div>
             <div className="w-full flex max-md:justify-center">
-              <button className="bg-brand-green h-12 md:min-w-max px-8 text-base font-bold text-black rounded-md hover:bg-brand-green-d transition-all active:scale-95">
+              <button className="bg-brand-green md:h-12 h-8  md:min-w-max px-8 text-base font-bold text-black rounded-md hover:bg-brand-green-d transition-all active:scale-95">
                 Set up your first auto invest
               </button>
             </div>
@@ -61,9 +61,9 @@ export const AutoInvest = () => {
           </div>
         </div>
         <div className="mt-20 md:px-16 p-5">
-          <h1 className="text-2xl md:text-3xl font-bold mb-10 text-center">
+          <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center">
             Recurring buy advantages
-          </h1>
+          </h2>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
             {advantages?.map((item, ind) => (
               <div
@@ -87,17 +87,17 @@ export const AutoInvest = () => {
             ))}
           </div>
         </div>
-        <div className="text-xl md:text-4xl font-bold mt-20 md:px-16 p-5 text-secondary leading-relaxed">
+        <div className="text-xl md:text-3xl text-center font-bold mt-20 md:px-16 p-5 text-secondary leading-relaxed">
           Recurring buys give you the flexibility to decide how much and how
           often to invest.
         </div>
-        <div className="flex flex-col gap-6 items-center bg-surface py-12 mt-20">
-          <div className="font-bold text-2xl md:text-4xl text-center">
+        <div className="flex flex-col gap-6 items-center bg-surface py-12 px-6 mt-20">
+          <div className="font-bold text-xl md:text-3xl text-center">
             Set up recurring buys on the BitZup app
           </div>
           <button
             onClick={() => (window.location.href = "/trade/register")}
-            className="bg-brand-green h-12 md:h-14 px-10 text-lg font-bold text-black rounded-full hover:bg-brand-green-d transition-all active:scale-95"
+            className="bg-brand-green md:h-12 h-8  md:min-w-max px-8 text-base font-bold text-black rounded-md hover:bg-brand-green-d transition-all active:scale-95"
           >
             Set up your first auto invest
           </button>

@@ -37,37 +37,46 @@ export const ReferralPage = () => {
         </div>
       </div>
       <div className="flex justify-center flex-col items-center md:p-20 p-6">
-        <h2 className="text-2xl font-bold mb-12">How To Refer Your Friends</h2>
+        <h2 className="md:text-2xl text-xl font-bold mb-12">How To Refer Your Friends</h2>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 w-full">
           {/* Step 1 */}
           <div className="flex flex-col gap-6">
-            <div className="card h-48 md:h-60 flex flex-col justify-between">
-              <div className="text-2xl font-bold text-secondary">01</div>
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
+              <div className="text-2xl font-semibold text-secondary">01</div>
               {/* <Share2 className="size-8 text-brand-green" strokeWidth={1.5} /> */}
+            <div className=" md:hidden text-base font-bold text-primary">
+              Share your referral link with friends
             </div>
-            <div className="text-lg font-bold text-primary">
+            </div>
+            <div className=" max-md:hidden text-lg font-bold text-primary"> 
               Share your referral link with friends
             </div>
           </div>
           
           {/* Step 2 */}
           <div className="flex flex-col gap-6">
-            <div className="card h-48 md:h-60 flex flex-col justify-between">
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
               <div className="text-2xl font-bold text-secondary">02</div>
+              <div className="md:hidden text-base font-bold text-primary text-left">
+              Refer friends to sign up and buy crypto worth over $50
+            </div>
               {/* <UserPlus className="size-8 text-brand-green" strokeWidth={1.5} /> */}
             </div>
-            <div className="text-lg font-bold text-primary text-left">
+            <div className=" max-md:hidden text-lg font-bold text-primary text-left">
               Refer friends to sign up and buy crypto worth over $50
             </div>
           </div>
 
           {/* Step 3 */}
           <div className="flex flex-col gap-6">
-            <div className="card h-48 md:h-60 flex flex-col justify-between">
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
               <div className="text-2xl font-bold text-secondary">03</div>
+               <div className="md:hidden text-base font-bold text-primary">
+              Receive 100 USD trading fee rebate voucher each
+            </div>
               {/* <Trophy className="size-8 text-brand-green" strokeWidth={1.5} /> */}
             </div>
-            <div className="text-lg font-bold text-primary">
+            <div className=" max-md:hidden text-lg font-bold text-primary">
               Receive 100 USD trading fee rebate voucher each
             </div>
           </div>

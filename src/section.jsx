@@ -53,34 +53,9 @@ export const Section = () => {
       if (!bitzupRes.ok) throw new Error("Bitzup API failed");
       const bitzupData = await bitzupRes.json();
 
-      // 2. Fetch CoinGecko Markets (For Icons)
-      // const coingeckoRes = await fetch(
-      //   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false",
-      // );
-
-      // let iconMap = {};
-      // if (coingeckoRes.ok) {
-      //   const coingeckoData = await coingeckoRes.json();
-      //   // Create a map for quick lookup: symbol -> image_url
-      //   coingeckoData.forEach(coin => {
-      //     iconMap[coin.symbol.toUpperCase()] = coin.image;
-      //   });
-      // }
-
-      // // 3. Inject Icons into BitZup Data
-      // const finalData = {};
-      // Object.keys(bitzupData).forEach(category => {
-      //   finalData[category] = bitzupData[category].map(item => ({
-      //     ...item,
-      //     coin_icon_url: iconMap[item.base_asset_symbol] || null
-      //   }));
-      // });
-
       setData(bitzupData);
 
       setActiveTab(Object.keys(bitzupData)[0]);
-      // For the search list (data1), we can flatten the categories or use a specific one
-      // setData1(Object.values(finalData).flat());
     } catch (err) {
       console.error("Fetch error:", err);
     }
@@ -159,7 +134,7 @@ export const Section = () => {
 
   return (
     <div className="w-full flex flex-col gap-10">
-      <div className="flex justify-center  md:px-16">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-8  max-md:hidden mt-20 ">
           {[
             "promo-banner-2.svg",
@@ -169,7 +144,7 @@ export const Section = () => {
           ].map((item, ind) => (
             <div
               key={ind}
-              className="w-full rounded-xl border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
+              className="w-full rounded-xl border border-border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
             >
               <img
                 src={item}
@@ -203,7 +178,7 @@ export const Section = () => {
           >
             {items.map((item, ind) => (
               <div key={ind} className="min-w-[50%] px-3">
-                <div className="w-full rounded-2xl border  bg-black relative overflow-hidden">
+                <div className="w-full rounded-2xl border border-border  bg-black relative overflow-hidden">
                   <img
                     src={item}
                     alt={`BitZup promotion banner ${ind + 1}`}
@@ -232,21 +207,21 @@ export const Section = () => {
         </div>
       </div>
 
-      <div className="flex md:justify-center mt-10 md:px-16 px-4">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full mt-10">
         <div className="flex justify-center flex-col w-full">
           {/* Tabs and View More */}
           <div className="flex justify-between items-center mb-6">
-            <div className="flex gap-4 md:gap-8 overflow-x-auto custom-scroll pb-2">
+            <div className="flex gap-4 md:gap-8 overflow-x-auto no-scrollbar pb-2">
               {Object.keys(data).map((tab) => (
                 <div
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`py-3 whitespace-nowrap cursor-pointer font-bold text-lg md:text-2xl transition-all relative
+                  className={`py-3 whitespace-nowrap cursor-pointer font-bold text-lg md:text-3xl transition-all relative
                 ${activeTab === tab ? "text-primary" : "text-secondary hover:text-primary"}`}
                 >
                   {tab === "Hot" && "🔥"} {tab}
                   {activeTab === tab && (
-                    <div className="absolute bottom-0 left-0 h-0.5 bg-brand-green w-full rounded-full" />
+                    <div className="absolute bottom-0 left-0 h-0.5 bg-primary w-[60%] rounded-full" />
                   )}
                 </div>
               ))}
@@ -256,7 +231,7 @@ export const Section = () => {
           {/* Market List */}
           <div className="w-full">
             {/* Header */}
-            <div className="grid grid-cols-3 md:grid-cols-5  text-xs md:text-xl font-normal px-2 md:px-6 py-4">
+            <div className="grid grid-cols-3 md:grid-cols-5  text-xs md:text-base font-normal px-2 md:px-6 py-4">
               <div className="text-left">Coin</div>
               <div className="text-right">Current Price</div>
               <div className="text-right">Change</div>
@@ -266,10 +241,10 @@ export const Section = () => {
 
             {/* Rows */}
             <div className="flex flex-col">
-              {filteredData()?.map((mover, index) => (
+              {filteredData()?.slice(0,5).map((mover, index) => (
                 <div
                   key={index}
-                  className="grid grid-cols-3 md:grid-cols-5 px-6 h-16 hover:bg-surface transition-all items-center cursor-pointer border-border group"
+                  className="grid grid-cols-3 md:grid-cols-5 md:px-6 h-16 hover:bg-surface transition-all items-center cursor-pointer border-border group"
                   onClick={() =>
                     (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                   }
@@ -288,13 +263,13 @@ export const Section = () => {
                   </div>
 
                   {/* Price Column */}
-                  <div className="text-right font-mono text-primary text-lg">
+                  <div className="text-right  text-primary text-base">
                     ${mover?.current_price}
                   </div>
 
                   {/* Change Column */}
                   <div
-                    className={`text-right font-mono text-lg ${
+                    className={`text-right text-base ${
                       mover?.change_in_price > 0
                         ? "text-trading-up"
                         : "text-trading-down"
@@ -305,7 +280,7 @@ export const Section = () => {
                   </div>
 
                   {/* Desktop Only: Volume */}
-                  <div className="text-right text-secondary font-mono max-md:hidden">
+                  <div className="text-right text-secondary max-md:hidden">
                     {mover?.volume}
                   </div>
 
@@ -333,26 +308,24 @@ export const Section = () => {
         {" "}
         View all 2500+ Coins <FaChevronRight className="size-3" />
       </div>
-      <div>
+      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="text-center text-2xl p-3 font-bold md:hidden">
           Trade Crypto Anywhere Anytime
         </div>
-        <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full md:p-[0px_60px_0px_60px]">
-       <div className="md:w-[50%] w-full justify-center flex ">
-          <div className=" rounded-full p-20  w-full backdrop-blur flex justify-center relative items-center">
-            <div className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20 rounded-4xl overflow-hidden relative flex justify-center items-center">
+        <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full">
+          <div className="md:w-[50%] w-full justify-center flex ">
+            <div className=" rounded-full p-20  w-full backdrop-blur flex justify-center relative items-center">
               <video
-                src="/Mobile(2).mp4"
+                src="/new exp.webm"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover rounded-4xl"
+                className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20 rounded-4xl"
               />
+              <div className="absolute   blur-[500px] h-[60%] w-50 rounded-full"></div>
             </div>
-            <div className="absolute bg-[#2EDBAD]  blur-[200px]  h-[60%] w-50 rounded-full"></div>
           </div>
-        </div>
           <div className=" flex w-full justify-center items-center text-xs gap-5 md:hidden">
             <div className="flex flex-wrap justify-center gap-3 mt-4">
               {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
@@ -396,9 +369,9 @@ export const Section = () => {
           </div>
           <div className="md:w-[50%] h-full max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
             <div>
-              <div className="text-2xl md:text-3xl font-bold text-center text-primary">
+              <div className="text-3xl md:text-3xl font-bold text-center text-primary">
                 Trade Crypto
-                <div className="text-2xl md:text-3xl font-bold text-center text-primary">
+                <div className="text-3xl md:text-3xl font-bold text-center text-primary">
                   Anywhere Anytime
                 </div>
               </div>
@@ -471,7 +444,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full  md:px-16">
+      <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full max-w-7xl mx-auto px-6 md:px-8">
         <div className="font-bold text-3xl text-center">How to Get Started</div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-10">
@@ -530,7 +503,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className=" w-full text-2xl font-bold md:hidden text-center ">
+      <div className=" w-full md:text-3xl text-2xl font-bold md:hidden text-center ">
         How to Get Started
       </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
@@ -545,7 +518,7 @@ export const Section = () => {
         </div>
         <div
           onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-primary border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+          className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Quick Buy</div>
           <div className="bg-surface p-2 rounded-md">
@@ -554,7 +527,7 @@ export const Section = () => {
         </div>
         <div
           onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-primary border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+          className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
           <div>Start Trading</div>
           <div className="bg-surface p-2 rounded-md">
@@ -562,7 +535,7 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col mt-10 md:px-16">
+      <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
           How We Protect Every Trade
         </div>
@@ -611,7 +584,7 @@ export const Section = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-5 pl-9">
+        <div className="flex flex-col gap-5 md:pl-9">
           <div className="flex flex-col md:hidden gap-2">
             <div className="flex items-center gap-5">
               <div className="flex items-center gap-5 ">
@@ -670,35 +643,37 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="md:p-16 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly bg-surface flex-wrap mt-10 py-6">
-        <div>
-          <div className="md:text-3xl text-2xl font-bold text-center">
-            $19.64B
+      <div className="bg-surface mt-10 py-10 md:py-16">
+        <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly w-full">
+          <div>
+            <div className="md:text-3xl text-xl font-bold text-center">
+              $19.64B
+            </div>
+            <div className="text-eyebrow text-secondary text-center">
+              24h Volume
+            </div>
           </div>
-          <div className="text-eyebrow text-secondary text-center">
-            24h Volume
+          <div>
+            <div className="md:text-3xl text-xl font-bold text-center">
+              4,100+
+            </div>
+            <div className="text-eyebrow text-secondary text-center">
+              Cryptocurrencies
+            </div>
           </div>
-        </div>
-        <div>
-          <div className="md:text-3xl text-2xl font-bold text-center">
-            4,100+
+          <div>
+            <div className="md:text-3xl text-xl font-bold text-center">
+              10.16%
+            </div>
+            <div className="text-eyebrow text-secondary text-center">
+              Simple Earn APR
+            </div>
           </div>
-          <div className="text-eyebrow text-secondary text-center">
-            Cryptocurrencies
-          </div>
-        </div>
-        <div>
-          <div className="md:text-3xl text-2xl font-bold text-center">
-            10.16%
-          </div>
-          <div className="text-eyebrow text-secondary text-center">
-            Simple Earn APR
-          </div>
-        </div>
-        <div>
-          <div className="md:text-3xl text-2xl font-bold text-center">124%</div>
-          <div className="text-eyebrow text-secondary text-center">
-            Total Reserve Ratio
+          <div>
+            <div className="md:text-3xl text-xl font-bold text-center">124%</div>
+            <div className="text-eyebrow text-secondary text-center">
+              Total Reserve Ratio
+            </div>
           </div>
         </div>
       </div>

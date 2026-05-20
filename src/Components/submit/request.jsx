@@ -116,8 +116,8 @@ export default function SubmitRequestForm() {
         </div> */}
         </div>
         {/* BODY */}
-        <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 py-12">
-          <h1 className="text-3xl font-bold text-left mb-15">
+        <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 md:py-8 py-4">
+          <h1 className="md:text-3xl text-2xl font-bold text-left mb-15">
             Submit a request
           </h1>
           <Field label="Please choose a request type below"></Field>
@@ -710,7 +710,7 @@ an only be changed once every 6 months. ）
 
 function Field({ label, children, helper }) {
   return (
-    <div className="text-left w-full">
+    <div className="text-left w-full focus-within:border-brand-green">
       <label className="block text-sm mb-2">{label}</label>
       {children}
       {helper && <div className="text-xs text-gray-500 mt-1">{helper}</div>}
