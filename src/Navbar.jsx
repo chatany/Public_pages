@@ -214,6 +214,8 @@ export default function Navbar() {
                       if (!hasDropdown) {
                         if (item === "Markets") {
                           handleNavigate(`${MAIN_SITE}/spot`);
+                        } else if (item === "Buy Crypto") {
+                          handleNavigate(`${MAIN_SITE}/buy-crypto`);
                         }
                       }
                     }}
@@ -417,7 +419,7 @@ export default function Navbar() {
                 <div className="absolute top-full right-0 mt-0 p-4 bg-surface border border-surface-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown">
                   <div className="bg-white p-2 rounded-lg">
                     <QRCode
-                      value="https://bitzup.com/download"
+                      value={`${window.location.origin}/trade/download`}
                       size={140}
                       level="H"
                       className="bg-white p-2"

@@ -380,7 +380,7 @@ export const Section = () => {
               <div className="w-[40%] p-2 border border-border rounded-lg bg-white">
                 <QRCode
                   className="w-full h-full"
-                  value={"https://bitzup.com/download"}
+                  value={`${window.location.origin}/trade/download`}
                 />
               </div>
               <div className="w-[60%] flex flex-col justify-between py-2">

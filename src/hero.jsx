@@ -68,7 +68,7 @@ export default function Hero() {
           {/* <div className="max-md:hidden">
             <div className="mb-2">Download App</div>
             <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center p-2">
-              <QRCode value="" className="p-0.5 bg-white w-fit h-fit" />
+              <QRCode value={`${window.location.origin}/trade/download`} className="p-0.5 bg-white w-fit h-fit" />
             </div>
           </div> */}
         </div>

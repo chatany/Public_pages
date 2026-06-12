@@ -99,6 +99,14 @@ export const Footer = ({ isShow = true }) => {
       ],
     },
     {
+      ele: "Service",
+      category: [
+        { name: "Referral", link: "/referral" },
+        { name: "VIP Program", link: "/vip" },
+        { name: "Careers", link: "/careers" },
+      ],
+    },
+    {
       ele: "Support",
       category: [
         { name: "Support Center", link: "/support" },
@@ -106,13 +114,6 @@ export const Footer = ({ isShow = true }) => {
         { name: "Fee Schedule", link: "/fees" },
         { name: "Official Verification", link: "/verification" },
       ],
-    },{
-      ele:"Service",
-      category:[
-        {name:"Referral", link:"/referral"},
-        {name:"VIP Program", link:"/vip"},
-        {name:"Careers", link:"/careers"},
-      ]
     }
   ];
   const dark = true;
@@ -175,22 +176,24 @@ export const Footer = ({ isShow = true }) => {
       )}
       <div className="py-5">
         <footer className="bg-surface text-primary py-16 max-md:hidden">
-          <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-5 gap-12 w-full">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-6 gap-8 w-full">
             {/* LEFT SECTION */}
-            <div className="space-y-6 flex flex-col w-full items-center">
-              <h2 className="text-2xl font-semibold text-center">
+            <div className="space-y-6 flex flex-col w-full items-start">
+              <h2 className="text-2xl font-semibold text-left">
                 Trade Crypto Anywhere Anytime
               </h2>
 
-              <div className="size-32">
-                <QRCode className="w-full h-full bg-white  p-2" value={""} />
-                <p className="text-xs text-gray-400 mt-1 text-center">
+              <div className="flex flex-col items-start">
+                <div className="size-32">
+                  <QRCode className="w-full h-full bg-white  p-2" value={`${window.location.origin}/trade/download`} />
+                </div>
+                <p className="text-xs text-gray-400 mt-1 text-left">
                   Scan to download app
                 </p>
               </div>
 
-              <div>
-                <h3 className="text-lg font-semibold mb-3 text-center">
+              <div className="text-left">
+                <h3 className="text-lg font-semibold mb-3">
                   Community
                 </h3>
                 <div className="flex gap-6">
@@ -250,9 +253,6 @@ export const Footer = ({ isShow = true }) => {
               <h3 className="text-xl font-semibold mb-4">About</h3>
               <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/careers"} className="block p-3 -my-1.5 -mx-3">Careers</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
                   <Link to={"/aml-policy"} className="block p-3 -my-1.5 -mx-3">AML Policy</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
@@ -272,17 +272,6 @@ export const Footer = ({ isShow = true }) => {
                 </li>
                 <li className="hover:text-brand-green hover:underline ">
                   <Link to={"/terms-of-use"} className="block p-3 -my-1.5 -mx-3">Terms of use</Link>
-                </li>
-              </ul>
-
-              {/* SERVICE SECTION */}
-              <h3 className="text-xl font-semibold mb-4 mt-8">Service</h3>
-              <ul className="text-gray-300 text-sm flex flex-col">
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/vip" className="block p-3 -my-1.5 -mx-3">VIP Program</Link>
                 </li>
               </ul>
             </div>
@@ -330,6 +319,22 @@ export const Footer = ({ isShow = true }) => {
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
                   <a href={`${MAIN_SITE}/spot/XRPUSDT`} className="block p-3 -my-1.5 -mx-3">XRP USDT</a>
+                </li>
+              </ul>
+            </div>
+
+            {/* SERVICE */}
+            <div className="text-left">
+              <h3 className="text-xl font-semibold mb-4">Service</h3>
+              <ul className="text-gray-300 text-sm flex flex-col">
+                <li className="hover:text-brand-green hover:underline cursor-pointer">
+                  <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
+                </li>
+                <li className="hover:text-brand-green hover:underline cursor-pointer">
+                  <Link to="/vip" className="block p-3 -my-1.5 -mx-3">VIP Program</Link>
+                </li>
+                <li className="hover:text-brand-green hover:underline cursor-pointer">
+                  <Link to="/careers" className="block p-3 -my-1.5 -mx-3">Careers</Link>
                 </li>
               </ul>
             </div>

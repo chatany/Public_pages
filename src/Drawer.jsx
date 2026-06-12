@@ -108,7 +108,7 @@ export default function MobileDrawer({ open, onClose }) {
         <div className="px-6 space-y-1">
           {/* Static Top Item */}
           <div
-            onClick={() => handleNavigate("/trade/spot")}
+            onClick={() => handleNavigate("/trade/buy-crypto")}
             className="py-4 text-lg font-semibold text-white hover:text-brand-green transition-colors cursor-pointer"
           >
             Buy Crypto
