@@ -59,6 +59,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "./dist/*"
         target: "/var/www/bitzup.com"
+        strip_components: 1
 
     - name: Restart nginx service
       uses: appleboy/ssh-action@v1.1.0
