@@ -1,0 +1,71 @@
+name: deploy bitzup.com-prod
+
+on:
+  push:
+    branches:
+      - bitzup.com-prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js (if you're using Node.js)
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Create .env file
+      run: |
+        echo "${{ secrets.BITZUP_COM_VITE_API_BASE }}" > .env
+    
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+    - name: Install OpenVPN
+      run: |
+        # Install OpenVPN
+        sudo apt-get update
+        sudo apt-get install -y openvpn
+        # Create OpenVPN config file from secret
+        echo "${{ secrets.OPENVPN_FILE }}" > /tmp/openvpn.conf
+
+    - name: Setup OpenVPN using GitHub OpenVPN Connect Action
+      uses: kota65535/github-openvpn-connect-action@v2
+      with:
+        config_file: /tmp/openvpn.conf
+
+    - name: Verify connection
+      run: |
+        # Verify OpenVPN connection by checking IP
+        echo "Current IP address:"
+        curl -s ifconfig.me
+        echo ""
+        # Check if we're connected through VPN (this will depend on your VPN setup)
+        CURRENT_IP=$(curl -s ifconfig.me)
+        echo "Connected from IP: $CURRENT_IP"
+
+    - name: Copy dist folder to server using SCP
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        source: "./dist/*"
+        target: "/var/www/bitzup.com"
+
+    - name: Restart nginx service
+      uses: appleboy/ssh-action@v1.1.0
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          sudo chown -R ubuntu:www-data /var/www/bitzup.com/
+          sudo service nginx reload
