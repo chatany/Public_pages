@@ -16,9 +16,10 @@ const Terms = lazy(() => import("./Components/userAgreement").then(module => ({ 
 const ReferralPage = lazy(() => import("./ReferalPage").then(module => ({ default: module.ReferralPage })));
 const CarrierPage = lazy(() => import("./CarrierPage").then(module => ({ default: module.CarrierPage })));
 const AutoInvest = lazy(() => import("./AotoInvest").then(module => ({ default: module.AutoInvest })));
-const Verification = lazy(() => import("./VerificationPage").then(module => ({ default: module.Verification })));
 const Vip = lazy(() => import("./Vip").then(module => ({ default: module.Vip })));
 const SubmitRequestForm = lazy(() => import("./Components/submit/request"));
+const VipLevel = lazy(() => import("./Components/fee").then(module => ({ default: module.VipLevel })));
+const OfficialVerification = lazy(() => import("./officalVerification").then(module => ({ default: module.Verification })));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -39,8 +40,11 @@ export default function App() {
           <Route element={<CarrierPage />} path="/careers" />
           <Route element={<Vip/>} path="/vip"/>
           <Route element={<AutoInvest />} path="/invest" />
-          <Route element={<Verification />} path="/verification" />
-          <Route element={<SubmitRequestForm/>} path="/request"/>
+          <Route element={<OfficialVerification />} path="/verification" />
+          <Route element={<SubmitRequestForm/>} path="/submit-request"/>
+          <Route element={<VipLevel />} path="/fee-schedule" />
+          <Route element={<VipLevel />} path="/fees" />
+          <Route element={<OfficialVerification />} path="/official-verification" />
           <Route
             element={<Menu children={<RiskPolicy />} />}
             path="/risk-disclosure"

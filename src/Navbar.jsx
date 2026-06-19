@@ -1,41 +1,220 @@
-import { useState, useEffect, useRef } from "react";
-import { FiDownload } from "react-icons/fi";
-import { MdOutlineMenu } from "react-icons/md";
-import { TiArrowSortedDown } from "react-icons/ti";
-import { CgProfile } from "react-icons/cg";
-import { HiDownload } from "react-icons/hi";
-import { RiLogoutBoxRLine } from "react-icons/ri";
-import MobileDrawer from "./Drawer";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import QRCode from "react-qr-code";
-import { BiDownload, BiSearch } from "react-icons/bi";
-import { IoMdMenu } from "react-icons/io";
+
+// Icon imports
+import { VscAccount } from "react-icons/vsc";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import { IoDownloadOutline, IoSunnyOutline } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { CgProfile } from "react-icons/cg";
+import { RiLogoutBoxRLine } from "react-icons/ri";
+import { PiCopyLight } from "react-icons/pi";
+import { BsMoon } from "react-icons/bs";
+import { TiArrowSortedDown } from "react-icons/ti";
+import { BiSupport, BiCreditCard, BiWallet } from "react-icons/bi";
+import { FiRefreshCw } from "react-icons/fi";
+import { MdDashboardCustomize } from "react-icons/md";
+import { LuWallet } from "react-icons/lu";
+import { HiOfficeBuilding } from "react-icons/hi";
+import { FaUserLarge } from "react-icons/fa6";
+import { FaUserPlus } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+
+import MobileDrawer from "./Drawer";
+import { apiRequest, BASE_URL } from "./Components/fee";
+import { DepositPopup } from "./Components/DepositPopup";
+
+const MAIN_SITE = "/trade";
+
+const MenuItem = [
+  {
+    icon: <MdDashboardCustomize className="size-5" />,
+    name: "Dashboard",
+    path: "/dashboard",
+  },
+  { icon: <LuWallet className="size-5" />, name: "Assets", path: "/assets" },
+  {
+    icon: <HiOfficeBuilding className="size-5" />,
+    name: "Orders",
+    path: "/orders",
+  },
+  {
+    icon: <FaUserLarge className="size-5" />,
+    name: "Account",
+    path: "/trade/Identity",
+  },
+  {
+    icon: <FaUserPlus className="size-5" />,
+    name: "Referral",
+    path: "/referral",
+  },
+  { icon: <CiLogout className="size-5" />, name: "Log Out" },
+];
+
+const data = [
+  {
+    category: "Buy Crypto",
+    item: [
+      {
+        title: "Buy Crypto",
+        description: "Visa, Mastercard, and more",
+        path: `${MAIN_SITE}/buy-crypto`,
+        iconUrlLight: <BiCreditCard className="w-5 h-5" />,
+        iconUrlDark: <BiCreditCard className="w-5 h-5" />,
+      },
+      {
+        title: "Crypto Deposit",
+        description: "Deposit crypto to your account instantly",
+        path: `${MAIN_SITE}/crypto/deposit`,
+        iconUrlLight: <BiWallet className="w-5 h-5" />,
+        iconUrlDark: <BiWallet className="w-5 h-5" />,
+      },
+      {
+        title: "Auto-Invest",
+        description: "Auto-buy crypto on your schedule",
+        path: "/invest",
+        iconUrlLight: <FiRefreshCw className="w-5 h-5" />,
+        iconUrlDark: <FiRefreshCw className="w-5 h-5" />,
+      },
+      {
+        title: "OTC Trading",
+        description: "Large trades for institutions & individuals",
+        path: `${MAIN_SITE}/otc`,
+        iconUrlLight: "/swapWhite.png",
+        iconUrlDark: "/swapBlack.png",
+      },
+    ],
+  },
+  {
+    category: "Spot",
+    item: [
+      {
+        title: "Spot",
+        description: "Buy and sell on the Spot market with advanced tools",
+        path: `${MAIN_SITE}/spot/BTCUSDT`,
+        iconUrlLight: "/tr-white.png",
+        iconUrlDark: "/tr-black.png",
+      },
+      {
+        title: "Convert",
+        description: "Convert crypto with one click",
+        path: `${MAIN_SITE}/convert`,
+        iconUrlLight: "/convertWhite.png",
+        iconUrlDark: "/convertBlack.png",
+      },
+      {
+        title: "Auto invest",
+        description: "Invest in crypto with one click",
+        path: "/invest",
+        iconUrlLight: "/autoWhite.png",
+        iconUrlDark: "/autoBlack.png",
+      },
+    ],
+  },
+  {
+    category: "Futures",
+    item: [
+      {
+        title: "USDⓈ-M Futures",
+        description: "Contracts settled in USDT",
+        path: `${MAIN_SITE}/futures/BTCUSDT`,
+        iconUrlLight: "/futuresWhite.png",
+        iconUrlDark: "/futuresBlack.png",
+      },
+    ],
+  },
+  {
+    category: "Earn",
+    item: [
+      {
+        title: "BitZup Earn",
+        description: "Earn passive income on 300+ crypto assets with Staking",
+        path: `${MAIN_SITE}/subscription`,
+        iconUrlLight: "/earnWhite.png",
+        iconUrlDark: "/earnBlack.png",
+      },
+    ],
+  },
+  {
+    category: "More",
+    item: [
+      {
+        title: "VIP & Institutional",
+        description: "Your trusted digital asset platform for VIPs and institutions",
+        path: "/vip",
+        iconUrlLight: "/vipWhite.png",
+        iconUrlDark: "/vipBlack.png",
+      },
+      {
+        title: "OTC Trading",
+        description: "Personalized, private, and secure OTC trading for professionals",
+        path: `${MAIN_SITE}/otc`,
+        iconUrlLight: "/swapWhite.png",
+        iconUrlDark: "/swapBlack.png",
+      },
+      {
+        title: "Referral Program",
+        description: "Invite friends to earn either a commission rebate or a one-time reward",
+        path: "/referral",
+        iconUrlLight: "/referralWhite.png",
+        iconUrlDark: "/referralBlack.png",
+      },
+    ],
+  },
+];
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const dark = true;
+
+  const isTabActive = (item) => {
+    const path = location.pathname;
+    if (item === "Buy Crypto") {
+      return path.startsWith("/buy-crypto");
+    }
+    if (item === "Spot") {
+      return (
+        path.startsWith("/spot") ||
+        path.startsWith("/convert") ||
+        path.startsWith("/invest")
+      );
+    }
+    if (item === "Futures") {
+      return path.startsWith("/futures");
+    }
+    if (item === "Earn") {
+      return path.startsWith("/subscription") || path.startsWith("/earn");
+    }
+    if (item === "More") {
+      return path.startsWith("/vip") || path.startsWith("/referral");
+    }
+    return false;
+  };
+
   const [openPopup, setOpenPopup] = useState(false);
-  const [selectedNav, setSelectedNav] = useState(null);
-  const [hoveredItem, setHoveredItem] = useState(null);
-  const timeoutRef = useRef(null);
-  const [showQR, setShowQR] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [profile, setProfile] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [openDeposit, setOpenDeposit] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("isLoggedIn") === "true",
   );
   const [userProfile, setUserProfile] = useState({
     email: "user@example.com",
+    uid: "51297991",
     vip_level: 0,
     kyc_level: 0,
   });
 
-  const navigate = useNavigate();
-
-  const MAIN_SITE = "/trade";
-
   useEffect(() => {
-    // Check for login status changes
     const checkLogin = () => {
       setIsLoggedIn(localStorage.getItem("isLoggedIn") === "true");
     };
+    checkLogin();
     window.addEventListener("storage", checkLogin);
     window.addEventListener("userDataChanged", checkLogin);
     return () => {
@@ -44,6 +223,44 @@ export default function Navbar() {
     };
   }, []);
 
+  const fetchUserProfile = async () => {
+    try {
+      const { data, status } = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/onboarding/user/getUserProfile`,
+      });
+
+      if (status === 200 && data?.status === "1") {
+        const profileData = data?.data;
+        setUserProfile({
+          email: profileData?.email || "user@example.com",
+          uid: profileData?.uid || profileData?.user_id || "51297991",
+          vip_level: profileData?.vip_level || 0,
+          kyc_level: profileData?.kyc_level !== undefined ? profileData?.kyc_level : 0,
+        });
+      }
+
+      if (status === 400 && data?.status == 3) {
+        if (
+          data?.message == "You are not authorized" ||
+          data?.message == "Session expired, Please login again."
+        ) {
+          localStorage.removeItem("isLoggedIn");
+          setIsLoggedIn(false);
+          window.dispatchEvent(new Event("userDataChanged"));
+        }
+      }
+    } catch (err) {
+      console.error("Failed to fetch second API", err);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchUserProfile();
+    }
+  }, [isLoggedIn]);
+
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
@@ -51,43 +268,79 @@ export default function Navbar() {
     window.location.href = "/";
   };
 
-  const MenuItem = [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <CgProfile className="size-5" />,
-    },
-    {
-      name: "Assets",
-      path: "/assets",
-      icon: <HiDownload className="size-5" />,
-    },
-    {
-      name: "Orders",
-      path: "/orders",
-      icon: <TiArrowSortedDown className="size-5 -rotate-90" />,
-    },
-    {
-      name: "Security",
-      path: "/security",
-      icon: <TiArrowSortedDown className="size-5 -rotate-90" />,
-    },
-    {
-      name: "Referral",
-      path: "/referral",
-      icon: <TiArrowSortedDown className="size-5 -rotate-90" />,
-    },
-    {
-      name: "Log Out",
-      path: "#",
-      icon: <RiLogoutBoxRLine className="size-5" />,
-      action: handleLogout,
-    },
-  ];
+  const copyToClipboard = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
 
   const handleClose = () => {
     setOpenPopup(false);
   };
+
+  const handleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const [hoveredItemIndex, setHoveredItemIndex] = useState(null);
+  const [showQR, setShowQR] = useState(false);
+  const [currentItem, setCurrentItem] = useState("");
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0, width: 0 });
+  const navDropdownRef = useRef(null);
+  const navMenuItemsRef = useRef([]);
+
+  useEffect(() => {
+    let hoverTimeout;
+
+    const handleMouseLeaveDropdown = () => {
+      hoverTimeout = setTimeout(() => {
+        setHoveredItemIndex(null);
+        setCurrentItem("");
+      }, 100);
+    };
+
+    const handleMouseEnterDropdown = () => {
+      clearTimeout(hoverTimeout);
+    };
+
+    if (navDropdownRef.current) {
+      navDropdownRef.current.addEventListener(
+        "mouseleave",
+        handleMouseLeaveDropdown,
+      );
+      navDropdownRef.current.addEventListener(
+        "mouseenter",
+        handleMouseEnterDropdown,
+      );
+    }
+
+    return () => {
+      if (navDropdownRef.current) {
+        navDropdownRef.current.removeEventListener(
+          "mouseleave",
+          handleMouseLeaveDropdown,
+        );
+        navDropdownRef.current.removeEventListener(
+          "mouseenter",
+          handleMouseEnterDropdown,
+        );
+      }
+      clearTimeout(hoverTimeout);
+    };
+  }, []);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleNavigate = (path) => {
     if (path.startsWith("http") || path.startsWith("/trade")) {
@@ -97,360 +350,451 @@ export default function Navbar() {
     }
   };
 
-  const navConfig = {
-    Trade: [
-      {
-        title: "Spot",
-        desc: "Buy and sell on the Spot market with advanced tools",
-        path: `${MAIN_SITE}/spot/BTCUSDT`,
-        iconWhite: "/tr-white.png",
-        iconGreen: "/tr-green.png",
-      },
-      {
-        title: "Convert",
-        desc: "Convert crypto with one click",
-        path: `${MAIN_SITE}/convert`,
-        iconWhite: "/convertWhite.png",
-        iconGreen: "/convertGreen.png",
-      },
-      {
-        title: "Auto invest",
-        desc: "Invest in crypto with one click",
-        path: "/invest",
-        iconWhite: "/autoWhite.png",
-        iconGreen: "/autoGreen.png",
-      },
-    ],
-
-    Futures: [
-      {
-        title: "USDⓈ-M Futures",
-        desc: "Contracts settled in USDT",
-        path: `${MAIN_SITE}/futures/BTCUSDT`,
-        iconWhite: "/futuresWhite.png",
-        iconGreen: "/futuresGreen.png",
-      },
-    ],
-
-    Earn: [
-      {
-        title: "Simple Earn",
-        desc: "Earn passive income on 300+ crypto assets with Staking",
-        path: `${MAIN_SITE}/subscription`,
-        iconWhite: "/earnWhite.png",
-        iconGreen: "/earnGreen.png",
-      },
-    ],
-
-    More: [
-      {
-        title: "VIP & Institutional",
-        desc: "Your trusted digital asset platform for VIPs and institutions",
-        path: "/trade/vip",
-        iconWhite: "/vipWhite.png",
-        iconGreen: "/vipGreen.png",
-      },
-      {
-        title: "Referral Program",
-        desc: "Invite friends to earn either a commission rebate or a one-time reward",
-        path: "/trade/referral",
-        iconWhite: "/referralWhite.png",
-        iconGreen: "/referralGreen.png",
-      },
-    ],
-  };
-
   return (
-    <header className="h-[64px] w-full bg-background  border-b border-border z-sticky relative">
-      <div className="mx-auto h-full px-6 flex items-center justify-between">
-        {/* LEFT */}
-        <div className="flex items-center gap-8 h-full">
-          {/* LOGO */}
-          <div
-            className="flex items-center gap-2 cursor-pointer"
-            onClick={() => handleNavigate("/")}
-          >
-            <img
-              src="/bitzup_light_logo.png"
-              className="md:h-[42px] h-8 w-auto"
-              alt="BitZup Logo"
-            />
-          </div>
-
-          {/* MENU */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm h-full">
-            {[
-              "Buy Crypto",
-              "Trade",
-              // "Markets",
-              "Futures",
-              "Earn",
-              "More",
-            ].map((item) => {
-              const hasDropdown = !!navConfig[item];
-
-              return (
-                <div
-                  key={item}
-                  className="relative h-full flex items-center"
-                  onMouseEnter={() => {
-                    if (hasDropdown) {
-                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                      setHoveredItem(item);
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    if (hasDropdown) {
-                      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                      timeoutRef.current = setTimeout(() => {
-                        setHoveredItem(null);
-                      }, 150);
-                    }
-                  }}
-                >
-                  {/* NAV ITEM */}
-                  <div
-                    onClick={() => {
-                      if (!hasDropdown) {
-                        if (item === "Markets") {
-                          handleNavigate(`${MAIN_SITE}/spot`);
-                        } else if (item === "Buy Crypto") {
-                          handleNavigate(`${MAIN_SITE}/buy-crypto`);
-                        }
-                      }
-                    }}
-                    className="flex items-center gap-1 cursor-pointer text-pri font-medium text-sm hover:text-brand-green transition-all duration-200"
-                  >
-                    {item}
-
-                    {hasDropdown && (
-                      <TiArrowSortedDown
-                        className={`transition-all duration-300 ease-in-out ${
-                          hoveredItem === item ? "rotate-180" : ""
-                        }`}
-                      />
-                    )}
-                  </div>
-
-                  {/* DROPDOWN */}
-                  {hasDropdown && hoveredItem === item && (
-                    <>
-                      {/* hover bridge */}
-                      <div className="absolute top-full left-0 w-full h-5 z-dropdown" />
-
-                      <div
-                        onMouseEnter={() => {
-                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                          setHoveredItem(item);
-                        }}
-                        onMouseLeave={() => {
-                          if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                          timeoutRef.current = setTimeout(() => {
-                            setHoveredItem(null);
-                          }, 150);
-                        }}
-                        className="absolute top-full left-0 mt-0 w-[340px] h-fit bg-surface-2 border border-border rounded-xl p-1.5 shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown hidden lg:block"
-                      >
-                        {navConfig[item].map((subItem, index) => (
-                          <div
-                            key={index}
-                            onClick={() => {
-                              setHoveredItem(null);
-                              handleNavigate(subItem.path);
-                            }}
-                            className="w-full text-left max-h-none min-w-0"
-                          >
-                            <div className="flex gap-3 px-3  py-3 rounded-lg cursor-pointer h-full hover:bg-border transition-all duration-200 group">
-                              {/* ICON */}
-                              <div
-                                className={`${subItem.title.includes("Futures") ? "size-6 min-w-[24px]" : "size-8 min-w-[32px]"} flex items-center justify-center mt-0.5`}
-                              >
-                                <img
-                                  src={subItem.iconWhite}
-                                  alt={`${subItem.title} icon`}
-                                  className="w-full h-auto max-h-full transition-opacity duration-200 group-hover:hidden block"
-                                />
-                                <img
-                                  src={subItem.iconGreen}
-                                  alt={`${subItem.title} icon hover`}
-                                  className="w-full h-auto max-h-full transition-opacity duration-200 group-hover:block hidden"
-                                />
-                              </div>
-
-                              {/* CONTENT */}
-                              <div className="flex flex-col">
-                                <div className="font-bold text-sm text-primary group-hover:text-brand-green transition-colors">
-                                  {subItem.title}
-                                </div>
-
-                                <div className="leading-4 text-xs text-secondary mt-1">
-                                  {subItem.desc}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </div>
-              );
-            })}
-          </nav>
+    <div className="flex justify-between items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary relative z-[99]">
+      <div className="flex xl:w-[60%] items-center text-lg gap-2 font-semibold leading-6 lg:gap-8">
+        <div
+          className="text-brand-green font-semibold cursor-pointer"
+          onClick={() => handleNavigate("/")}
+        >
+          <img
+            src="/bitzup_light_logo.png"
+            className="md:h-9 h-7 w-auto"
+            alt="logo"
+          />
         </div>
-
-        {/* RIGHT */}
-        <div className="flex items-center gap-5 h-full">
-          {!isLoggedIn ? (
-            <>
-              <span
-                className="text-sm text-primary hover:text-brand-green font-medium cursor-pointer max-md:hidden transition-colors"
-                onClick={() => (window.location.href = `${MAIN_SITE}/login`)}
-              >
-                Log in
-              </span>
-
-              <button
-                className="md:h-9 h-8 px-5 rounded-md  text-bg text-xs md:text-sm font-semibold  hover:bg-brand-green-d  bg-brand-green gap-2 flex justify-center items-center hover:opacity-90 transition-all"
-                onClick={() => (window.location.href = `${MAIN_SITE}/register`)}
-              >
-                <img src="/gift.svg" className="size-4" alt="" />
-                Sign up
-              </button>
-            </>
-          ) : (
+        <div
+          className="relative flex gap-8"
+          ref={navDropdownRef}
+          onMouseLeave={() => {
+            setTimeout(() => {
+              setHoveredItemIndex(null);
+              setCurrentItem("");
+            }, 50);
+          }}
+        >
+          {["Buy Crypto", "Spot", "Futures", "Earn", "More"].map((item, i) => (
             <div
-              className="relative h-full flex items-center"
-              onMouseEnter={() => setOpenDropdown("profile")}
-              onMouseLeave={() => setOpenDropdown(null)}
+              key={i}
+              className={`hover:text-brand-green text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative ${
+                hoveredItemIndex === i ? "text-brand-green" : ""
+              }`}
+              ref={(el) => (navMenuItemsRef.current[i] = el)}
+              onMouseEnter={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const parentRect = navDropdownRef.current
+                  ? navDropdownRef.current.getBoundingClientRect()
+                  : { left: 0, top: 0 };
+                setHoveredItemIndex(i);
+                setCurrentItem(item);
+                setHoverPosition({
+                  x: rect.left - parentRect.left,
+                  y: rect.bottom - parentRect.top,
+                  width: rect.width,
+                });
+              }}
+              onClick={() => {
+                if (i === 0) {
+                  handleNavigate("/trade/buy-crypto");
+                } else if (i === 1) {
+                  handleNavigate("/trade/spot/BTCUSDT");
+                }
+              }}
             >
-              <div
-                className="p-2 rounded-full hover:bg-surface-2 transition-colors cursor-pointer text-secondary hover:text-brand-green"
-                onClick={() => handleNavigate("/dashboard")}
-                role="button"
-                aria-label="User Profile"
-              >
-                <CgProfile size={24} />
-              </div>
-
-              {openDropdown === "profile" && (
+              {item === "Futures" ? (
                 <>
-                  <div className="absolute top-full right-0 w-full h-5 z-dropdown" />
-                  <div className="absolute top-full right-0 mt-0 w-[280px] bg-surface border border-border rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown overflow-hidden">
-                    {/* User Header */}
-                    <div className="p-5 border-b border-border">
-                      <div className="flex items-center gap-3">
-                        <div className="size-10 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green">
-                          <CgProfile size={24} />
-                        </div>
-                        <div className="flex flex-col">
-                          <div className="text-sm font-bold text-primary truncate max-w-[180px]">
-                            {userProfile.email}
-                          </div>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs text-gray-400 hover:text-brand-green cursor-pointer">
-                              VIP {userProfile.vip_level}
-                            </span>
-                            <span className="text-xs px-1.5 py-0.5 rounded bg-divider text-brand-green">
-                              {userProfile.kyc_level === 0
-                                ? "Unverified"
-                                : "Verified"}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Menu Items */}
-                    <div className="py-2">
-                      {MenuItem.map((item, index) => (
-                        <div
-                          key={index}
-                          onClick={() => {
-                            if (item.action) {
-                              item.action();
-                            } else {
-                              handleNavigate(item.path);
-                            }
-                            setOpenDropdown(null);
-                          }}
-                          className={`flex items-center gap-3 px-5 py-3 hover:bg-surface-2 transition-colors cursor-pointer group ${
-                            item.name === "Log Out"
-                              ? "border-t border-border mt-2"
-                              : ""
-                          }`}
-                        >
-                          <div className="text-gray-400 group-hover:text-brand-green">
-                            {item.icon}
-                          </div>
-                          <div className="text-sm text-white group-hover:text-brand-green">
-                            {item.name}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <span>🔥</span>
+                  <span
+                    className={`${isTabActive(item) ? "text-brand-green" : ""}`}
+                  >
+                    Futures
+                  </span>
                 </>
+              ) : (
+                <div
+                  className={`${isTabActive(item) ? "text-brand-green" : ""}`}
+                >
+                  {item}
+                </div>
+              )}
+              <div
+                className={`transition-transform duration-300 ${isTabActive(item) ? "text-brand-green" : ""} ${
+                  i === hoveredItemIndex || isTabActive(item)
+                    ? "rotate-180 "
+                    : ""
+                }`}
+              >
+                <TiArrowSortedDown />
+              </div>
+              {isTabActive(item) && (
+                <div className="absolute -bottom-[5px] left-0 right-0 h-[1.5px] text-center bg-brand-green z-10" />
               )}
             </div>
+          ))}
+          {hoveredItemIndex !== null && (
+            <>
+              <div className="absolute right-0 top-full w-full h-5 z-999" />
+              <div
+                className="absolute mt-5 w-80 border   bg-recessed text-text-primary border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:block transition-all duration-200 ease-in-out"
+                style={{
+                  top: `${hoverPosition.y}px`,
+                  left: `${hoverPosition.x}px`,
+                }}
+                onMouseEnter={() => {
+                  // Keep menu open on mouse enter
+                }}
+                onMouseLeave={() => {
+                  setTimeout(() => {
+                    setHoveredItemIndex(null);
+                    setCurrentItem("");
+                  }, 50);
+                }}
+              >
+                {data?.map(
+                  (item, idx) =>
+                    item.category === currentItem && (
+                      <div className="" key={idx}>
+                        {item?.item.map((ele, index) => (
+                          <a
+                            key={index}
+                            href={ele.path || "#"}
+                            onClick={(e) => {
+                              if (!e.ctrlKey && !e.metaKey && e.button === 0) {
+                                e.preventDefault();
+                                setHoveredItemIndex(null);
+                                setCurrentItem("");
+                                handleNavigate(ele.path);
+                              }
+                            }}
+                            className="flex hover:bg-lift hover:text-brand-green hover:bg-[#1E2329] gap-3 px-2 py-2 cursor-pointer rounded transition-colors duration-150 group text-left items-start no-underline"
+                          >
+                            <div
+                              className={`${ele.title.includes("Futures") ? "size-6 min-w-[24px]" : "size-8 min-w-[32px]"} flex items-center justify-center mt-0.5`}
+                            >
+                              {typeof (dark
+                                ? ele?.iconUrlLight
+                                : ele?.iconUrlDark) === "string" ? (
+                                <img
+                                  src={
+                                    dark ? ele?.iconUrlLight : ele?.iconUrlDark
+                                  }
+                                  className="w-full h-auto max-h-full block"
+                                  alt={ele.title}
+                                />
+                              ) : dark ? (
+                                ele?.iconUrlLight
+                              ) : (
+                                ele?.iconUrlDark
+                              )}
+                            </div>
+                            <div className="flex flex-col">
+                              <div className="font-bold text-sm text-text-primary  flex gap-2">
+                                {ele.title}
+                              </div>
+                              <div className="leading-tight text-xs text-muted mt-0.5">
+                                {ele.description}
+                              </div>
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    ),
+                )}
+              </div>
+            </>
           )}
+        </div>
+      </div>
 
-          <button
-            onClick={() => setOpenPopup(!openPopup)}
-            className="md:hidden flex items-center justify-center text-primary min-w-[44px] min-h-[44px] hover:text-brand-green transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-green"
-            aria-label={openPopup ? "Close menu" : "Open menu"}
-            aria-expanded={openPopup}
-          >
-           <IoMdMenu className="size-6" strokeWidth={1.5} />
-          </button>
-
+      {/* Right Navbar */}
+      <div className="flex md:gap-5 gap-2 lg:gap-4 items-center md:mt-0 justify-between lg:pr-10 pr-4 cursor-pointer">
+        {isLoggedIn && (
           <div
-            className="relative h-full flex items-center max-md:hidden"
-            onMouseEnter={() => setShowQR(true)}
-            onMouseLeave={() => setShowQR(false)}
+            className="font-medium leading-6 bg-brand-green text-xs hover:bg-brand-green-d text-black rounded-sm px-3 py-1 h-8 flex items-center gap-1.5 transition-colors"
+            onClick={() => setOpenDeposit(true)}
           >
-            <Icon aria-label="Download App" role="button">
-              <BiDownload className="size-5" strokeWidth={1.5} />
-            </Icon>
-
-            {showQR && (
+            Add Funds
+          </div>
+        )}
+        {isLoggedIn && (
+          <div
+            className="relative"
+            onMouseEnter={() => setOpenDropdown("profile")}
+            onMouseLeave={() => setOpenDropdown(null)}
+            onClick={() => {
+              setProfile(true);
+              setTimeout(() => handleNavigate("/dashboard"), 200);
+            }}
+            onDoubleClick={() => handleNavigate("/dashboard")}
+          >
+            <CgProfile className="hover:text-brand-green h-6 w-6 text-text-primary" />
+            {openDropdown === "profile" && !isMobile && (
               <>
-                <div className="absolute top-full right-0 w-full h-5 z-dropdown" />
-                <div className="absolute top-full right-0 mt-0 p-4 bg-surface border border-surface-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.55)] z-dropdown">
-                  <div className="bg-white p-2 rounded-lg">
-                    <QRCode
-                      value={`${window.location.origin}/trade/download`}
-                      size={140}
-                      level="H"
-                      className="bg-white p-2"
-                    />
-                  </div>
-                  <div className="mt-3 text-center">
-                    <p className="text-primary font-bold text-sm">
-                      Download App
-                    </p>
-                    <p className="text-muted text-xs mt-0.5">
-                      Scan to trade on the go
-                    </p>
+                <div className="absolute right-0 top-full w-full h-5" />
+                <div className="absolute w-[280px] mt-5 bg-surface-2 border border-border text-text-primary right-0 z-50 rounded-sm overflow-hidden animate-fadeIn shadow-2xl">
+                  <div>
+                    <div className="flex flex-col p-4 border-b border-border/70 text-left">
+                      <div className="flex gap-2.5 items-center min-w-0">
+                        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-surface border border-border flex items-center justify-center">
+                          <VscAccount className="w-6 h-6 text-text-muted" />
+                        </div>
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="truncate font-semibold text-sm text-text-primary">
+                            {userProfile?.email?.split("@")[0] || "User"}
+                          </div>
+                          <div className="flex gap-1 items-center text-xs text-text-muted mt-0.5">
+                            <span>{copied ? "Copied!" : `UID: ${userProfile?.uid}`}</span>
+                            <PiCopyLight
+                              className="cursor-pointer text-xs text-text-muted hover:text-brand-green transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                copyToClipboard(userProfile?.uid || "51297991");
+                              }}
+                            />
+                          </div>
+                          <div className="flex gap-1.5 items-center mt-1.5">
+                            <span
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleNavigate("/vip");
+                              }}
+                              className="bg-brand-warning/15 border border-brand-warning/30 text-brand-warning-text text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex-shrink-0 cursor-pointer"
+                            >
+                              VIP {userProfile?.vip_level || 0}
+                            </span>
+                            <span
+                              className={`text-[9px] px-1.5 py-0.5 rounded font-semibold border capitalize tracking-wider ${
+                                userProfile?.kyc_level === 1
+                                  ? "bg-brand-green/15 border-brand-green/30 text-brand-green"
+                                  : "bg-brand-warning/15 border-brand-warning/30 text-brand-warning-text"
+                              }`}
+                            >
+                              {userProfile?.kyc_level === 1 ? "Verified" : "Unverified"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col p-1.5 gap-[2px] text-left">
+                      {MenuItem.map((item, index) => (
+                        <a
+                          className={`flex items-center hover:bg-lift px-3.5 py-2.5 gap-3 transition-colors duration-150 rounded-sm group no-underline ${
+                            index === MenuItem?.length - 1
+                              ? "border-t border-border/70 mt-1.5 pt-3"
+                              : ""
+                          }`}
+                          key={index}
+                          href={item?.path || "#"}
+                          onClick={(e) => {
+                            if (!e.ctrlKey && !e.metaKey && e.button === 0) {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              if (item?.name === "Log Out") {
+                                handleLogout();
+                              } else {
+                                handleNavigate(item?.path);
+                              }
+                              setOpenDropdown(null);
+                            }
+                          }}
+                        >
+                          <div className="text-text-muted group-hover:text-brand-green transition-colors duration-150">
+                            {item?.icon}
+                          </div>
+                          <div className="text-text-muted text-base font-semibold group-hover:text-brand-green transition-colors duration-150">
+                            {item?.name}
+                          </div>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </>
             )}
+            {isMobile && openDropdown === "profile" && (
+              <div className="fixed inset-0 z-9999 bg-bg text-text-primary w-full h-full overflow-y-auto p-4 animate-fadeIn">
+                <div className="flex justify-between items-center mb-6 pb-2 border-b border-border/70">
+                  <h2 className="text-lg font-bold">My Account</h2>
+                  <button
+                    className="text-text-secondary hover:text-text-primary text-xl p-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenDropdown(null);
+                    }}
+                  >
+                    ✖
+                  </button>
+                </div>
+                <div className="flex items-center bg-surface border border-border rounded-lg p-4 mb-6 text-left">
+                  <div className="flex gap-3 items-center min-w-0">
+                    <div className="h-12 w-12 rounded-full overflow-hidden flex-shrink-0 bg-recessed border border-border flex items-center justify-center">
+                      <VscAccount className="w-8 h-8 text-text-muted" />
+                    </div>
+                    <div className="flex flex-col min-w-0">
+                      <div className="font-semibold text-text-primary truncate">
+                        {userProfile?.email}
+                      </div>
+                      <div className="flex gap-1.5 items-center text-[11px] text-text-muted mt-0.5">
+                        <span>{copied ? "Copied!" : `UID: ${userProfile?.uid}`}</span>
+                        <PiCopyLight
+                          className="cursor-pointer text-xs"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            copyToClipboard(userProfile?.uid);
+                          }}
+                        />
+                      </div>
+                      <div className="flex gap-1.5 items-center mt-1.5">
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOpenDropdown(null);
+                            handleNavigate("/vip");
+                          }}
+                          className="bg-brand-warning/15 border border-brand-warning/30 text-brand-warning-text text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex-shrink-0 cursor-pointer"
+                        >
+                          VIP {userProfile?.vip_level || 0}
+                        </span>
+                        <span
+                          className={`text-[9px] px-1.5 py-0.5 rounded font-semibold border uppercase tracking-wider ${
+                            userProfile?.kyc_level === 1
+                              ? "bg-brand-green/15 border-brand-green/30 text-brand-green"
+                              : "bg-brand-warning/15 border-brand-warning/30 text-brand-warning-text"
+                          }`}
+                        >
+                          {userProfile?.kyc_level === 1 ? "Verified" : "Unverified"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-1 bg-surface border border-border rounded-sm p-2 text-left">
+                  {MenuItem.map((item, index) => (
+                    <a
+                      key={index}
+                      className={`flex items-center hover:bg-lift p-3 gap-3 rounded-lg group no-underline ${
+                        index === MenuItem?.length - 1
+                          ? "border-t border-border/70 mt-2 pt-4"
+                          : ""
+                      }`}
+                      href={item?.path || "#"}
+                      onClick={(e) => {
+                        if (!e.ctrlKey && !e.metaKey && e.button === 0) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          setOpenDropdown(null);
+                          setProfile(false);
+                          if (item?.name === "Log Out") {
+                            handleLogout();
+                          } else {
+                            handleNavigate(item?.path);
+                          }
+                        }
+                      }}
+                    >
+                      <div className="text-text-secondary group-hover:text-brand-green transition-colors">
+                        {item?.icon}
+                      </div>
+                      <div className="text-text-primary text-sm font-semibold group-hover:text-brand-green transition-colors">
+                        {item?.name}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
+        )}
+        <div className="relative">
+          <IoMdNotificationsOutline
+            className="h-6 w-6 cursor-pointer max-md:hidden text-text-primary hover:text-brand-green"
+            onClick={() => handleNavigate("/trade/notification")}
+          />
+          <IoMdNotificationsOutline
+            className="h-6 w-6 cursor-pointer md:hidden text-text-primary hover:text-brand-green"
+            onClick={() => handleNavigate("/trade/notification")}
+          />
         </div>
-
-        <MobileDrawer open={openPopup} onClose={handleClose} />
+        {!isLoggedIn && (
+          <>
+            <div
+              className="hover:text-brand-green rounded-sm text-xs font-semibold bg-surface border border-border leading-6 px-3 py-1.5 transition-colors cursor-pointer md:flex hidden"
+              onClick={() => handleNavigate("/trade/login")}
+            >
+              Log In
+            </div>
+            <div
+              className="text-xs font-semibold leading-6 text-black bg-brand-green hover:bg-brand-green-d rounded-sm px-3 py-1.5 transition-colors cursor-pointer"
+              onClick={() => handleNavigate("/trade/register")}
+            >
+              Sign Up
+            </div>
+          </>
+        )}
+        <div
+          className="relative"
+          onMouseEnter={() => setShowQR(true)}
+          onMouseLeave={() => setShowQR(false)}
+        >
+          <IoDownloadOutline className="hover:text-brand-green h-6 w-6 md:flex hidden text-text-primary" />
+          {showQR && (
+            <>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-full h-6 z-[9999]" />
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-5 p-4 bg-surface border border-surface-2 rounded-xl z-99 shadow-2xl">
+                <div className="bg-white p-2 rounded-lg">
+                  <QRCode
+                    value={`${window.location.origin}/trade/download`}
+                    size={140}
+                    level="H"
+                    className="bg-white p-2"
+                  />
+                </div>
+                <div className="mt-3 text-center">
+                  <p className="text-primary font-bold text-sm">Download App</p>
+                  <p className="text-muted text-xs mt-0.5 font-normal">
+                    Scan to trade on the go
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+        <div onClick={() => setOpenPopup(true)} className="lg:hidden flex" title="Menu">
+          <RxHamburgerMenu className="hover:text-brand-green h-6 w-6 lg:hidden flex text-text-primary" />
+        </div>
+        <div title="Help Center">
+          <a
+            href="https://support.bitzup.com/support/home"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BiSupport className="hover:text-brand-green h-6 w-6 md:flex hidden text-text-primary" />
+          </a>
+        </div>
+        {isLoggedIn && (
+          <div title="Logout">
+            <RiLogoutBoxRLine
+              className="hover:text-brand-green h-6 w-6 text-text-primary"
+              onClick={handleLogout}
+            />
+          </div>
+        )}
+        {isDarkMode ? (
+          <div title="Theme" className="hover:text-brand-green sm:flex hidden h-6 w-6 items-center justify-center text-text-primary" onClick={handleTheme}>
+            <IoSunnyOutline className="h-6 w-6" />
+          </div>
+        ) : (
+          <div title="Theme" className="hover:text-brand-green sm:flex hidden h-6 w-6 items-center justify-center text-text-primary" onClick={handleTheme}>
+            <BsMoon className="h-6 w-6" />
+          </div>
+        )}
       </div>
-    </header>
-  );
-}
 
-function Icon({ children, className = "" }) {
-  return (
-    <div
-      className={`w-11 h-11 flex items-center justify-center rounded-full text-secondary hover:bg-surface-2 hover:text-brand-green cursor-pointer transition-all duration-200 ${className}`}
-    >
-      {children}
+      {openDeposit && (
+        <DepositPopup popup={openDeposit} setPopup={setOpenDeposit} />
+      )}
+      <MobileDrawer open={openPopup} onClose={handleClose} />
     </div>
   );
 }

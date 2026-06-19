@@ -27,39 +27,39 @@ export const Footer = ({ isShow = true }) => {
 
   const faqData = [
     {
-      question: "What is cryptocurrency exchange?",
+      question: "What is a cryptocurrency exchange?",
       answer:
-        "A cryptocurrency exchange is a digital marketplace that allows users to trade cryptocurrencies for other assets, such as conventional fiat money or different digital currencies. BitZup provides a high-performance environment with deep liquidity and top-tier security for all your trading needs.",
+        "A crypto exchange is an online platform where you buy, sell and trade digital assets like Bitcoin and Ethereum for other cryptocurrencies or regular money. BitZup brings deep liquidity, 4,100+ markets and bank-grade security into one place.",
     },
     {
       question: "What products does BitZup offer?",
       answer:
-        "BitZup offers a comprehensive suite of digital asset services, including Spot Trading with advanced charting tools, USDT-settled Futures contracts, Simple Earn for passive income, and a secure Wallet for managing your assets across multiple chains.",
+        "Everything in one account: instant Buy/Convert, Spot trading with pro charts, USDT-settled Futures, Simple Earn for passive yield, copy trading, and a secure multi-chain wallet.",
     },
     {
-      question: "How do I buy Bitcoin and other Cryptocurrencies on BitZup?",
+      question: "How do I buy Bitcoin on BitZup?",
       answer:
-        "Buying crypto on BitZup is simple. You can use our 'Convert' feature for instant swaps, or trade on the 'Spot' market for more control. We support various deposit methods to ensure you can start building your portfolio quickly and safely.",
+        "Sign up, verify your account, then add funds by card, bank transfer or crypto deposit. Use Convert for instant swaps or Spot for full control — your first buy takes minutes.",
     },
     {
-      question: "How to trade Cryptocurrencies on BitZup?",
+      question: "How do I trade crypto on BitZup?",
       answer:
-        "To start trading, simply log in to your account, navigate to the 'Trade' section, and choose between Spot or Futures. Our intuitive interface allows you to place limit, market, or trigger orders with ease, supported by real-time order books and depth charts.",
+        "Log in, open Trade, and choose Spot or Futures. Place market, limit or trigger orders with real-time order books, depth charts and TradingView integration.",
     },
     {
-      question: "How can I track cryptocurrency prices?",
+      question: "How can I track crypto prices?",
       answer:
-        "You can track real-time prices for over 300+ crypto assets directly on our Markets page. We provide 24-hour volume, price change percentages, and detailed candlestick charts powered by TradingView integration.",
+        "Track live prices for 4,100+ assets on our Markets page, with 24h volume, price changes and TradingView candlestick charts — on web and the BitZup app.",
     },
     {
-      question: "Is BitZup safe for crypto trading?",
+      question: "Is BitZup safe?",
       answer:
-        "BitZup employs bank-grade security protocols, including multi-sig cold storage custody for user funds, regular reserve audits, and smart-contract verification. We prioritize platform integrity with 24/7 monitoring and advanced encryption to ensure your assets are protected at all times.",
+        "Yes. We use multi-sig cold storage, publish regular proof-of-reserves audits, audit our smart contracts, and monitor the platform 24/7 with bank-grade encryption.",
     },
     {
-      question: "How to trade Cryptocurrencies on BitZup?",
+      question: "What are BitZup's trading fees?",
       answer:
-        "To start trading on the BitZup Crypto Exchange Platform, simply log in to your account, navigate to the 'Trade' section, and choose between Spot or Futures. Our intuitive interface allows you to place limit, market, or trigger orders with ease.",
+        "BitZup keeps fees among the lowest in crypto, with maker/taker discounts up to 67% for VIPs. See the full Fee Schedule for spot, futures and withdrawal costs.",
     },
   ];
 
@@ -109,10 +109,10 @@ export const Footer = ({ isShow = true }) => {
     {
       ele: "Support",
       category: [
-        { name: "Support Center", link: "/support" },
-        { name: "Submit a request", link: "/request" },
-        { name: "Fee Schedule", link: "/fees" },
-        { name: "Official Verification", link: "/verification" },
+        { name: "Support Center", link: "https://support.bitzup.com/support/home" },
+        { name: "Submit a request", link: "/submit-request" },
+        { name: "Fee Schedule", link: "/fee-schedule" },
+        { name: "Official Verification", link: "/official-verification" },
       ],
     }
   ];
@@ -164,13 +164,18 @@ export const Footer = ({ isShow = true }) => {
       {isShow && (
         <div className="flex flex-col gap-5 items-center bg-surface py-10 mt-10">
           <div className="font-bold text-xl md:text-3xl text-center">
-            Start your crypto journey now !
+            Your first trade is minutes away
           </div>
-          <button className="btn-primary h-[58px] px-10">
+          <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
+            Create your free account and claim your new-user rewards today.
+          </div>
+          <button className="btn-primary h-[58px] px-10" onClick={() => window.location.href = "/trade/register"}>
             <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-lg">
-              <img src="gift.svg" className="size-6" /> Sign up now
+              Create free account
             </div>
-            <FaArrowRightLong className="size-5 text-black md:hidden" />
+            <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
+              Create free account
+            </div>
           </button>
         </div>
       )}
@@ -349,13 +354,13 @@ export const Footer = ({ isShow = true }) => {
                   </a>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/request" className="block p-3 -my-1.5 -mx-3">Submit a request</Link>
+                  <Link to="/submit-request" className="block p-3 -my-1.5 -mx-3">Submit a request</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/vip`} className="block p-3 -my-1.5 -mx-3">Fee Schedule</a>
+                  <Link to="/fee-schedule" className="block p-3 -my-1.5 -mx-3">Fee Schedule</Link>
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/verification" className="block p-3 -my-1.5 -mx-3">Official Verification</Link>
+                  <Link to="/official-verification" className="block p-3 -my-1.5 -mx-3">Official Verification</Link>
                 </li>
               </ul>
             </div>
@@ -386,7 +391,7 @@ export const Footer = ({ isShow = true }) => {
                         key={ind}
                         className={`${dark ? "text-primary" : "text-secondary"} text-sm font-normal text-left`}
                       >
-                        {ele.link.startsWith("/trade") ? (
+                        {ele.link.startsWith("/trade") || ele.link.startsWith("http") ? (
                           <a
                             className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
                             href={ele.link}

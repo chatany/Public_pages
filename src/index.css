@@ -24,22 +24,32 @@
   --text-3xl--line-height: 1.2;
   --text-3xl--letter-spacing: -0.01em;
 
-  /* THEME TOKENS - DARK (DEFAULT) */
-  --color-bg: #000000;
-  --color-surface: #131516;
-  --color-surface-2: #17181A;
-  --color-border: #2B3139;
-  --color-hover: #1E2329;
-  
-  --color-primary: #EAECEF;
-  --color-secondary: #B2B8C2;
-  --color-muted: #848E9C;
-  
-  --color-brand-green: #2EDBAD;
-  --color-brand-green-d: #2EBD85;
-  --color-brand-red: #F6465D;
-  --color-brand-amber: #FFDFAD;
-  --color-brand-blue: #60A5FA;
+  /* THEME TOKENS */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-recessed: var(--recessed);
+  --color-lift: var(--lift);
+  --color-lift-selected: var(--lift-selected);
+  --color-border: var(--border);
+  --color-primary: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-brand-green: var(--brand-green);
+  --color-brand-green-text: var(--brand-green-text);
+  --color-brand-green-d: var(--brand-green-d);
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-text: var(--brand-red-text);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-text: var(--brand-blue-text);
+  --color-brand-warning: var(--brand-warning);
+  --color-brand-warning-text: var(--brand-warning-text);
+  --color-brand-green-trading: var(--brand-green-trading);
+  --color-brand-green-trading-text: var(--brand-green-trading-text);
+  --color-brand-background: var(--brand-background);
   
   /* SOCIAL BRAND COLORS */
   --color-telegram: #24A1DE;
@@ -84,19 +94,21 @@
 }
 
 [data-theme="light"] {
-  --color-bg: #FFFFFF;
-  --color-surface: #F5F7FA;
-  --color-surface-2: #EDF1F5;
-  --color-border: #D5DBE2;
-  
-  --color-primary: #131516;
-  --color-secondary: #4C525A;
-  --color-muted: #6B767C;
-  
-  /* Brand colors usually remain consistent or have minor adjustments */
-  --color-brand-green: #2EDBAD;
-  --color-brand-green-d: #2EBD85;
-  --color-brand-red: #F6465D;
+  --bg: #FFFFFF;
+  --surface: #F5F7FA;
+  --surface-2: #EDF1F5;
+  --recessed: #FFFFFF;
+  --lift: #E2E8F0;
+  --lift-selected: #E2E8F0;
+  --border: #D5DBE2;
+  --text-primary: #131516;
+  --text-secondary: #4C525A;
+  --text-muted: #6B767C;
+  --brand-green-text: #16C784;
+  --brand-red-text: #E03A52;
+  --brand-blue-text: #1F6FD6;
+  --brand-warning-text: #B5740B;
+  --brand-green-trading-text: #0E9E5E;
 }
 
 /* TYPOGRAPHY COMPONENTS */
@@ -144,11 +156,34 @@ button {
 }
 
 :root {
+  --bg: #000000;
+  --surface: #131516;
+  --surface-2: #17181a;
+  --recessed: #0b0d0f;
+  --lift: #1f232b;
+  --lift-selected: #2a3038;
+  --border: #2b3139;
+  --text-primary: #eaecef;
+  --text-secondary: #b2b8c2;
+  --text-muted: #848e9c;
+  --brand-green: #2edbad;
+  --brand-green-text: #16c784;
+  --brand-green-d: #2ebd85;
+  --brand-red: #f6465d;
+  --brand-red-text: #f6465d;
+  --brand-blue: #60a5fa;
+  --brand-blue-text: #60a5fa;
+  --brand-warning: #ffdfad;
+  --brand-warning-text: #ffdfad;
+  --brand-green-trading: #16c784;
+  --brand-green-trading-text: #16c784;
+  --brand-background: #00000080;
+
   font-family: "Inter Variable";
   line-height: 1.5;
   font-weight: 400;
-  color: var(--color-primary);
-  background-color: var(--color-bg);
+  color: var(--text-primary);
+  background-color: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -184,7 +219,7 @@ button {
   display: none; /* Chrome, Safari, Opera */
 }
 .marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 .custom-scroll {
   -ms-overflow-style: auto; /* IE and Edge */

@@ -8,8 +8,8 @@ export const Home = () => {
   return (
     <div className=" min-h-screen bg-black flex justify-center flex-col">
       <Helmet>
-        <title>Buy & Trade Bitcoin, Ethereum & 100+ Cryptos | BitZup</title>
-        <meta name="description" content="Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup. Tight spreads, low fees, high-APY earn products, and bank-grade security. Sign up in minutes." />
+        <title>BitZup: Buy, Trade & Earn Bitcoin, Ethereum & 4,100+ Crypto</title>
+        <meta name="description" content="Buy, sell and trade 4,100+ cryptocurrencies on BitZup with some of the lowest fees in crypto. Beginner-friendly, pro-grade tools, bank-level security." />
       </Helmet>
       <Navbar />
       <Hero />
