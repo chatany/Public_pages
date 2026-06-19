@@ -24,8 +24,8 @@ import { CiLogout } from "react-icons/ci";
 import MobileDrawer from "./Drawer";
 import { apiRequest, BASE_URL } from "./Components/fee";
 import { DepositPopup } from "./Components/DepositPopup";
-import { useAuth } from "../../../futures/Bitzup/src/Hooks/useAuth";
 import { useDeviceInfo } from "./Hooks/useDeviceInfo";
+import { useAuth } from "./useAuth";
 
 const MAIN_SITE = "/trade";
 
