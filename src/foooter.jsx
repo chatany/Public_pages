@@ -29,6 +29,7 @@ export const Footer = ({ isShow = true }) => {
 
   const faqData = [
     {
+      
       question: "What is a cryptocurrency exchange?",
       answer:
         "A crypto exchange is an online platform where you buy, sell and trade digital assets like Bitcoin and Ethereum for other cryptocurrencies or regular money. BitZup brings deep liquidity, 4,100+ markets and bank-grade security into one place.",
