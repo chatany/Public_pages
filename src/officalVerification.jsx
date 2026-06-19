@@ -29,39 +29,38 @@ export const Verification = () => {
   const methedsArr = [
     {
       name: "Website",
-      
       icon: <IoIosLink className="size-5" />,
-      placeholder: "Please enter the link",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "Email",
       icon: <IoIosMail className="size-5" />,
-      placeholder: "Please enter the full information to verify",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "Telegram",
       icon: <FaTelegramPlane className="size-5" />,
-      placeholder: "Please enter the link or @username",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "X(Twitter)",
       icon: <FaSquareXTwitter className="size-5" />,
-      placeholder: "Please enter the link or @username",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "Wechat",
       icon: <IoLogoWechat className="size-5" />,
-      placeholder: "Please enter the link or @username",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "FaceBook",
       icon: <CiFacebook className="size-5" />,
-      placeholder: "Please enter the link or @username",
+      placeholder: "Paste a link, email, phone number or handle",
     },
     {
       name: "Phone",
       icon: <IoMdPhonePortrait className="size-5" />,
-      placeholder: "Please enter the phone number",
+      placeholder: "Paste a link, email, phone number or handle",
     },
   ];
   const methodsArr = data
@@ -87,8 +86,6 @@ export const Verification = () => {
 
   const fetchData = async () => {
     try {
-      // setLoading(true);
-
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE}/market/official-id-type`,
       );
@@ -98,18 +95,13 @@ export const Verification = () => {
       }
 
       const result = await response.json();
-      
-      // if(result?.verified)
       setData(result);
     } catch (err) {
-      setError(err.message);
-    } finally {
-      // setLoading(false);
+      setErrors(err.message);
     }
   };
   useEffect(() => {
     fetchData();
-    // fetchData1();
   }, []);
 
   const handleSubmit = async () => {
@@ -122,11 +114,11 @@ export const Verification = () => {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE}/market/verify-official`,
         {
-          method: "POST", // 👈 important
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(payload), // 👈 JSON send
+          body: JSON.stringify(payload),
         },
       );
 
@@ -136,9 +128,10 @@ export const Verification = () => {
 
       const result = await response.json();
       setShowPopup(true);
-      // setData(result);
       if (result?.verified) {
        setSuccess(result?.verified)
+      } else {
+       setSuccess(false);
       }
     } catch (err) {}
   };
@@ -150,8 +143,8 @@ export const Verification = () => {
   return (
     <>
       <Helmet>
-        <title>BitZup KYC Verification — Secure Your Account</title>
-        <meta name="description" content="Complete your BitZup KYC in minutes. Upload your ID and selfie to unlock trading, higher withdrawal limits, and a fully secured account." />
+        <title>Official Verification — Confirm Genuine BitZup Channels</title>
+        <meta name="description" content="Protect yourself from scams. Verify that an email, website, phone number or social account genuinely belongs to BitZup before you act." />
       </Helmet>
       <Navbar />
       {showPopup && (
@@ -160,7 +153,7 @@ export const Verification = () => {
           onClose={() => setShowPopup(false)}
           type={success? "success": "error"}
           url={inputValue}
-          category={select.account_type}
+          category={select?.account_type}
         />
       )}
       <div className="bg-bg min-h-screen ">
@@ -168,13 +161,10 @@ export const Verification = () => {
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
               <div className="md:text-3xl text-2xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
-                BitZup Official Verification
+                Verify it's really BitZup
               </div>
-              <div className="md:text-base text-xs font-bold md:leading-6  text-muted  text-center">
-                Please use BitZup Verify to check whether the source officially
-                represents BitZup <br className="max-md:hidden" /> including
-                website link, email address, Discord ID, Twitter account, or
-                Telegram ID.
+              <div className="md:text-base text-xs font-bold md:leading-6 text-muted text-center max-w-xl">
+                Scammers impersonate exchanges. Before you trust a message, link or caller, check here to confirm it's an official BitZup channel.
               </div>
             </div>
 
@@ -235,7 +225,6 @@ export const Verification = () => {
                                   <span className="font-medium">
                                     {coin.account_type}
                                   </span>
-                                  {/* <span className="text-gray-500 text-sm">{coin.coin}</span> */}
                                 </div>
                                 {select?.account_type === coin.account_type && (
                                   <div>
@@ -257,7 +246,7 @@ export const Verification = () => {
               </div>
               <div className="w-[60%] max-md:w-full">
                 <input
-                  placeholder={select?.placeholder || "Please enter the link."}
+                  placeholder={select?.placeholder || "Paste a link, email, phone number or handle"}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   className="w-full border bg-surface border-border rounded-full px-5 h-14 text-sm font-normal text-primary outline-none "
@@ -274,7 +263,7 @@ export const Verification = () => {
                  
                 >
                   <IoIosSearch className="  h-6 w-6 text-bg" />
-                Search
+                Verify
               </button>
               </div>
             </div>

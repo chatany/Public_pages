@@ -63,11 +63,11 @@ export default function SubmitRequestForm() {
     file: null,
   });
   const methedsArr = [
-    "Futures Trading issue",
-    "Account closure request",
-    "Change/Add Referral code",
+    "Trading",
+    "Account",
+    "Referral",
     "Transaction History",
-    "Deposit not credited",
+    "Deposits & Withdrawals",
   ];
   const handleChange = (key, value) => {
     if (methedsArr[0] === select) {
@@ -93,10 +93,10 @@ export default function SubmitRequestForm() {
   return (
     <>
       <Helmet>
-        <title>Submit a Request - BitZup</title>
+        <title>Submit a Request — BitZup Support</title>
         <meta
           name="description"
-          content="Need help? Submit a request to BitZup support. Our team is here to assist you with any questions or issues you may have."
+          content="Contact BitZup support. Submit a request for help with your account, trading, deposits, withdrawals or verification — our team typically replies within 24 hours."
         />
       </Helmet>
       <Navbar />
@@ -117,10 +117,16 @@ export default function SubmitRequestForm() {
         </div>
         {/* BODY */}
         <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 md:py-8 py-4">
-          <h1 className="md:text-3xl text-2xl font-bold text-left mb-15">
+          <h1 className="md:text-3xl text-2xl font-bold text-left mb-3">
             Submit a request
           </h1>
-          <Field label="Please choose a request type below"></Field>
+          <p className="text-sm text-gray-400 text-left mb-8">
+            Tell us what's going on and our support team will get back to you — usually within 24 hours.
+          </p>
+          <Field
+            label="Category"
+            helper="Pick the topic that fits best (Account, Deposits & withdrawals, Trading, Verification, Security, Other) so we route you to the right team."
+          ></Field>
           <div
             className="relative  cursor-pointer focus:borderbrand-green mb-6"
             ref={popupRef}
@@ -185,12 +191,14 @@ export default function SubmitRequestForm() {
               </div>
             )}
           </div>
+
           {select === methedsArr[0] && (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Request Type */}
-
               {/* Email */}
-              <Field label="Your email address">
+              <Field
+                label="Email"
+                helper="Use the email linked to your BitZup account so we can verify and reply."
+              >
                 <input
                   className={inputClass}
                   value={form.email}
@@ -199,7 +207,7 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Subject */}
-              <Field label="Subject">
+              <Field label="Subject" helper="One line summarizing the issue.">
                 <input
                   className={inputClass}
                   value={form.subject}
@@ -208,7 +216,10 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Description */}
-              <Field label="Description">
+              <Field
+                label="Description"
+                helper="What happened, when, and any error messages or transaction IDs. The more detail, the faster we can help."
+              >
                 <textarea
                   rows={6}
                   className={`${inputClass} resize-none`}
@@ -217,7 +228,10 @@ export default function SubmitRequestForm() {
                 />
               </Field>
 
-              <Field label="Attachments (Optional)">
+              <Field
+                label="Attachments"
+                helper="Add screenshots if they help (PNG/JPG, max 10MB each). Never share your password, 2FA codes or seed phrase."
+              >
                 <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
@@ -253,16 +267,17 @@ export default function SubmitRequestForm() {
                 type="submit"
                 className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
-                Submit Request
+                Submit request
               </button>
             </form>
           )}
           {select === methedsArr[1] && (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Request Type */}
-
               {/* Email */}
-              <Field label="Your email address">
+              <Field
+                label="Email"
+                helper="Use the email linked to your BitZup account so we can verify and reply."
+              >
                 <input
                   className={inputClass}
                   value={form1.email}
@@ -271,7 +286,7 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Subject */}
-              <Field label="Subject">
+              <Field label="Subject" helper="One line summarizing the issue.">
                 <input
                   className={inputClass}
                   value={form1.subject}
@@ -280,7 +295,10 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Description */}
-              <Field label="Description">
+              <Field
+                label="Description"
+                helper="What happened, when, and any error messages or transaction IDs. The more detail, the faster we can help."
+              >
                 <textarea
                   rows={6}
                   className={`${inputClass} resize-none`}
@@ -300,10 +318,8 @@ export default function SubmitRequestForm() {
 
               {/* Optional */}
               <Field
-                label="May we ask the reason for your account closure request?
-"
-                helper="We’re sorry to see you go. Is there something we can do to change your mind? Your feedback matters — and we’d love to
-hear how we can make your experience better."
+                label="May we ask the reason for your account closure request?"
+                helper="We’re sorry to see you go. Is there something we can do to change your mind? Your feedback matters — and we’d love to hear how we can make your experience better."
               >
                 <textarea
                   rows={6}
@@ -313,11 +329,11 @@ hear how we can make your experience better."
                 />
               </Field>
 
-              {/* Coin */}
-
               {/* File Upload */}
-              {/* File Upload */}
-              <Field label="Attachments (Optional)">
+              <Field
+                label="Attachments"
+                helper="Add screenshots if they help (PNG/JPG, max 10MB each). Never share your password, 2FA codes or seed phrase."
+              >
                 <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span className={`${form1.file ? "text-white" : ""}`}>
@@ -353,16 +369,17 @@ hear how we can make your experience better."
                 type="submit"
                 className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
-                Submit Request
+                Submit request
               </button>
             </form>
           )}
           {select === methedsArr[2] && (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Request Type */}
-
               {/* Email */}
-              <Field label="Your email address">
+              <Field
+                label="Email"
+                helper="Use the email linked to your BitZup account so we can verify and reply."
+              >
                 <input
                   className={inputClass}
                   value={form2.email}
@@ -371,7 +388,7 @@ hear how we can make your experience better."
               </Field>
 
               {/* Subject */}
-              <Field label="Subject">
+              <Field label="Subject" helper="One line summarizing the issue.">
                 <input
                   className={inputClass}
                   value={form2.subject}
@@ -380,7 +397,10 @@ hear how we can make your experience better."
               </Field>
 
               {/* Description */}
-              <Field label="Description">
+              <Field
+                label="Description"
+                helper="What happened, when, and any error messages or transaction IDs. The more detail, the faster we can help."
+              >
                 <textarea
                   rows={6}
                   className={`${inputClass} resize-none`}
@@ -400,11 +420,8 @@ hear how we can make your experience better."
 
               {/* Optional */}
               <Field
-                label="New referral link
-"
-                helper="Please enter the referral link or invitation code you would like to change or add（Please note that the referral relationship 
-an only be changed once every 6 months. ）
-"
+                label="New referral link"
+                helper="Please enter the referral link or invitation code you would like to change or add (Please note that the referral relationship can only be changed once every 6 months.)"
               >
                 <input
                   className={inputClass}
@@ -414,8 +431,10 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* File Upload */}
-              {/* File Upload */}
-              <Field label="Attachments (Optional)">
+              <Field
+                label="Attachments"
+                helper="Add screenshots if they help (PNG/JPG, max 10MB each). Never share your password, 2FA codes or seed phrase."
+              >
                 <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
@@ -453,16 +472,17 @@ an only be changed once every 6 months. ）
                 type="submit"
                 className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
-                Submit Request
+                Submit request
               </button>
             </form>
           )}
           {select === methedsArr[3] && (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Request Type */}
-
               {/* Email */}
-              <Field label="Your email address">
+              <Field
+                label="Email"
+                helper="Use the email linked to your BitZup account so we can verify and reply."
+              >
                 <input
                   className={inputClass}
                   value={form3.email}
@@ -471,7 +491,7 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* Subject */}
-              <Field label="Subject">
+              <Field label="Subject" helper="One line summarizing the issue.">
                 <input
                   className={inputClass}
                   value={form3.subject}
@@ -480,7 +500,10 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* Description */}
-              <Field label="Description">
+              <Field
+                label="Description"
+                helper="What happened, when, and any error messages or transaction IDs. The more detail, the faster we can help."
+              >
                 <textarea
                   rows={6}
                   className={`${inputClass} resize-none`}
@@ -500,11 +523,8 @@ an only be changed once every 6 months. ）
 
               {/* Optional */}
               <Field
-                label="Time period
-
-"
-                helper="Please provide the time range you wish to export
-"
+                label="Time period"
+                helper="Please provide the time range you wish to export"
               >
                 <input
                   className={inputClass}
@@ -515,9 +535,7 @@ an only be changed once every 6 months. ）
 
               {/* Coin */}
               <Field
-                label="Please select the transaction history you wish to export
-
-"
+                label="Please select the transaction history you wish to export"
               >
                 <input
                   className={inputClass}
@@ -526,11 +544,11 @@ an only be changed once every 6 months. ）
                 />
               </Field>
 
-              {/* Network */}
-
               {/* File Upload */}
-              {/* File Upload */}
-              <Field label="Attachments (Optional)">
+              <Field
+                label="Attachments"
+                helper="Add screenshots if they help (PNG/JPG, max 10MB each). Never share your password, 2FA codes or seed phrase."
+              >
                 <label className="w-full border border-border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
@@ -568,16 +586,17 @@ an only be changed once every 6 months. ）
                 type="submit"
                 className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
-                Submit Request
+                Submit request
               </button>
             </form>
           )}
           {select === methedsArr[4] && (
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Request Type */}
-
               {/* Email */}
-              <Field label="Your email address">
+              <Field
+                label="Email"
+                helper="Use the email linked to your BitZup account so we can verify and reply."
+              >
                 <input
                   className={inputClass}
                   value={form4.email}
@@ -586,7 +605,7 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* Subject */}
-              <Field label="Subject">
+              <Field label="Subject" helper="One line summarizing the issue.">
                 <input
                   className={inputClass}
                   value={form4.subject}
@@ -595,7 +614,10 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* Description */}
-              <Field label="Description">
+              <Field
+                label="Description"
+                helper="What happened, when, and any error messages or transaction IDs. The more detail, the faster we can help."
+              >
                 <textarea
                   rows={6}
                   className={`${inputClass} resize-none`}
@@ -633,7 +655,7 @@ an only be changed once every 6 months. ）
 
               {/* Network */}
               <Field
-                label="Network (block chain)"
+                label="Network (blockchain)"
                 helper="Please select the correct network chain"
               >
                 <input
@@ -656,9 +678,11 @@ an only be changed once every 6 months. ）
               </Field>
 
               {/* File Upload */}
-              {/* File Upload */}
-              <Field label="Attachments (Optional)">
-                <label className="w-full border  rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
+              <Field
+                label="Attachments"
+                helper="Add screenshots if they help (PNG/JPG, max 10MB each). Never share your password, 2FA codes or seed phrase."
+              >
+                <label className="w-full border rounded-lg px-4 py-3 flex justify-between items-center cursor-pointer focus:borderbrand-green transition">
                   {/* LEFT TEXT */}
                   <span
                     className={`${form4.file ? "text-white" : "textbrand-green"}`}
@@ -695,13 +719,31 @@ an only be changed once every 6 months. ）
                 type="submit"
                 className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
               >
-                Submit Request
+                Submit request
               </button>
             </form>
           )}
+
+          {/* Info Sections */}
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-white/10 pt-10 text-left">
+            <div>
+              <h3 className="text-lg font-semibold mb-3">What happens next</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                You'll get a confirmation email with a ticket number, and you can track replies in your inbox or your Support dashboard. Most requests are answered within 24 hours.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold mb-3">Before you submit</h3>
+              <p className="text-sm text-gray-400 leading-relaxed">
+                Many answers are instant in our <a href="/support" className="textbrand-green hover:underline">Support Center</a> — try a quick search first.
+                {" "}
+                Check <a href="/official-verification" className="textbrand-green hover:underline">Official Verification</a> before acting on any email, link or caller claiming to be BitZup.
+              </p>
+            </div>
         </div>
       </div>
-      <Footer isShow={false} />
+    </div>
+    <Footer isShow={false} />
     </>
   );
 }

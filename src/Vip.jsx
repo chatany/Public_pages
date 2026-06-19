@@ -58,10 +58,10 @@ export const Vip = () => {
   return (
     <>
       <Helmet>
-        <title>BitZup VIP — Lower Fees, Higher Limits, Elite Perks</title>
+        <title>BitZup VIP Program — Lowest Trading Fees & Elite Perks</title>
         <meta
           name="description"
-          content="Become a BitZup VIP. Unlock the lowest trading fees, higher withdrawal limits, priority support, and exclusive rewards built for high-volume traders."
+          content="Unlock up to 67% off trading fees, free token airdrops and a dedicated wealth manager with BitZup VIP. Fast-track your tier with the VIP+1 Pass."
         />
       </Helmet>
       <Navbar />
@@ -84,11 +84,10 @@ export const Vip = () => {
               </div>
               <div className="flex items-center flex-col p-5 gap-5">
                 <div className="md:text-3xl text-2xl font-bold md:text-left text-center leading-[100%]">
-                  Maximum Perks, Minimum Fees.
+                  Trade more. Pay less. Get rewarded.
                 </div>
-                <div className="md:text-base text-xs font-bold leading-[100%]  text-center">
-                  Reach 30,000 USDT in asset balance to become a VIP and enjoy
-                  fee discounts!
+                <div className="md:text-base text-xs font-bold leading-relaxed text-center max-w-xl">
+                  Hold 30,000 USDT or trade at volume to unlock VIP — up to 67% off fees, exclusive airdrops, and white-glove support.
                 </div>
               </div>
               <div className="flex  justify-center items-center mt-5 font-bold md:p-15 p-5">
@@ -106,7 +105,7 @@ export const Vip = () => {
           transition-all duration-300
         `}
                   >
-                    Try Out VIP
+                    Become a VIP
                   </div>
                   <div
                     onClick={() => setActiveItem("Sell")}
@@ -115,14 +114,14 @@ export const Vip = () => {
           transition-all duration-300
         `}
                   >
-                    View Progress
+                    View my progress
                   </div>
                 </div>
               </div>
             </div>
             <div className="flex justify-center ">
               <div className="md:text-3xl text-2xl font-bold md:text-left text-center leading-[100%]">
-                Elite VIP Privileges
+                Privileges reserved for BitZup VIPs
               </div>
             </div>
           </div>
@@ -131,76 +130,56 @@ export const Vip = () => {
           <div className="grid md:grid-cols-4 grid-cols-1 gap-5">
             <div className="border-border border-[1px] rounded-xl min-h-[200px]">
               <div className="flex flex-col gap-2 items-center justify-center h-full w-full">
-                <div className="text-3xl text-brand-amber font-bold">67%</div>
-                <div className="text-muted text-xs font-bold">Off</div>
-                <div className="text-lg font-bold text-white">
-                  Lowest fee rate{" "}
+                <div className="text-3xl text-brand-amber font-bold">67% Off</div>
+                <div className="text-lg font-bold text-white mt-2">
+                  Up to 67% off fees
                 </div>
-                <div className="text-primary text-xs font-bold">
-                  Ultra-low VIP transaction fees
+                <div className="text-primary text-xs font-bold text-center px-4">
+                  The lowest transaction fees on the platform, applied automatically.
                 </div>
               </div>
             </div>
             <div className="border-border border-[1px] rounded-xl  min-h-[200px]">
               <div className="flex flex-col gap-2 items-center text-center justify-center h-full w-full">
-                <div className="text-3xl  text-brand-amber font-bold">300+</div>
-                <div className="text-muted text-xs font-bold">
-                  USDT Per user
+                <div className="text-3xl  text-brand-amber font-bold">300+ USDT</div>
+                <div className="text-lg font-bold text-white mt-2">
+                  Free token airdrops
                 </div>
-                <div className="text-lg font-bold text-white">
-                  Free airdrops{" "}
-                </div>
-                <div className="text-primary text-xs font-bold">
-                  VIP3 and above can claim new <br /> token airdrops twice a
-                  month
+                <div className="text-primary text-xs font-bold text-center px-4">
+                  VIP3 and above claim new-token airdrops twice a month (300+ USDT in value).
                 </div>
               </div>
             </div>
             <div className="border-border border-[1px] rounded-xl  min-h-[200px]">
               <div className="flex flex-col gap-2 items-center justify-center h-full w-full">
-                <div className="text-3xl  text-brand-amber font-bold">3M+</div>
-                <div className="text-muted text-xs font-bold">
-                  {" "}
-                  Quarterly promotion pool
+                <div className="text-3xl  text-brand-amber font-bold">$3M+</div>
+                <div className="text-lg font-bold text-white mt-2">
+                  $3M+ quarterly reward pool
                 </div>
-                <div className="text-lg font-bold text-white">
-                  Trade to claim airdrops{" "}
-                </div>
-                <div className="text-primary text-xs font-bold">
-                  Exclusive trading rewards for VIPs
+                <div className="text-primary text-xs font-bold text-center px-4">
+                  Trade to earn from VIP-only promotions and prize pools.
                 </div>
               </div>
             </div>
             <div className="border-border border-[1px] rounded-xl  min-h-[200px]">
               <div className="flex flex-col gap-2 items-center justify-center h-full w-full">
-                <div className="text-3xl  text-brand-amber font-bold">
-                  100K+
+                <div className="text-3xl  text-brand-amber font-bold">100K+</div>
+                <div className="text-lg font-bold text-white mt-2">
+                  Premier Wealth Hub
                 </div>
-                <div className="text-muted text-xs font-bold">
-                  High-net-worth users
-                </div>
-                <div className="text-lg font-bold text-white">
-                  VIP Premier Wealth Hub{" "}
-                </div>
-                <div className="text-primary text-xs font-bold">
-                  Exclusive trading rewards for VIPs
+                <div className="text-primary text-xs font-bold text-center px-4">
+                  Join 100K+ high-net-worth traders with dedicated support and market insights.
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex max-md:flex-col justify-between items-center mt-20 p-10">
-          <div></div>
-          <div className="flex items-center gap-5">
-            <div className="font-bold md:text-3xl text-base text-white ">
-              Requirement
-            </div>
-            <div className="font-bold md:text-3xl text-base text-muted">
-              Transaction Fees
-            </div>
+        <div className="flex flex-col items-center gap-2 mt-20">
+          <div className="font-bold md:text-3xl text-xl text-white text-center">
+            Find your VIP level
           </div>
-          <div className="font-normal text-muted text-xs">
-            Check VIP requirements
+          <div className="text-sm text-secondary text-center px-4 max-w-xl">
+            The more you hold and trade, the less you pay. Every tier lowers your maker and taker fees automatically.
           </div>
         </div>
         <div className=" flex items-center justify-center p-5">
@@ -230,14 +209,10 @@ export const Vip = () => {
           </div>
         </div>
         <div className="text-base font-medium leading-[29px] text-muted w-full p-[0px_40px_0px_40px] text-left">
-          Trading volume from 
-          <span className="text-brand-amber"> zero-fee trading pairs </span>will
-          not be counted toward VIP trading volume. For VIP6 and VIP7,
-          API-generated trading volume must not exceed 20% of their total
-          spot/futures trading volume.
+          Volume from zero-fee pairs doesn't count toward VIP tiers. For VIP6–VIP7, API trading must stay under 20% of total spot/futures volume.
         </div>
         <div className="md:text-3xl text-2xl font-bold md:text-center text-center leading-[100%] mt-30">
-          Apply for a VIP Pass
+          Fast-track with the VIP+1 Pass
         </div>
         <div className="flex mt-20 h-full">
           <div className="border-border border-r-[0.5px] w-[45%] p-10 max-md:hidden flex min-h-full flex-col justify-between">
@@ -257,19 +232,11 @@ export const Vip = () => {
               </div> */}
               <div>
                 <div className="text-left font-semibold text-lg leading-8 mt-8">
-                  Additional perks for VIP+1 pass
+                  Fast-track with the VIP+1 Pass
                 </div>
-                <ul className="list-disc pl-6 leading-[32px] space-y-2 text-left text-muted">
-                  <li>
-                    Get the BitZup VIP+1 Pass and unlock the lowest fees on the
-                    platform (down to 33% of standard),
-                  </li>
-                  <li>VIP-only Earn products</li>
-                  <li>
-                    and 2× the Launchpool staking allocation — for as long as
-                    you trade with us.
-                  </li>
-                </ul>
+                <p className="text-sm text-secondary text-left mt-2 leading-relaxed">
+                  Already a VIP on another exchange? Bring your status to BitZup. The VIP+1 Pass unlocks our lowest fees (as low as 33% of standard), VIP-only Earn products, and 2× Launchpool allocation — for as long as you trade with us.
+                </p>
               </div>
             </div>
             <div className="w-full flex max-md:justify-center mb-10">
@@ -279,9 +246,14 @@ export const Vip = () => {
             </div>
           </div>
           <div className="w-[55%] max-md:w-full  text-left md:p-15 p-2">
-            <div className="text-lg font-bold whitespace-nowrap mb-5 max-md:hidden">
-              How to apply
+            <div className="text-lg font-bold whitespace-nowrap mb-1">
+              Apply in two minutes
             </div>
+            <p className="text-xs text-muted mb-5 leading-relaxed">
+              1. Enter your BitZup UID and preferred contact method (e.g. Telegram).<br />
+              2. Upload proof of your current VIP status and 30-day trading volume or asset balance.<br />
+              Accepted: PNG, JPG, JPEG — up to 3 files, max 10MB each. Our VIP team replies within 1–2 business days.
+            </p>
             <div>
               <div className="form-label mb-4">BitZup UID</div>
               <div>
@@ -373,15 +345,13 @@ export const Vip = () => {
               </div>
             </div>
             <div className="mt-5">
-              Upload a screenshot showing your VIP status from another exchange,
-              along with proof of your 30-day trading volume or assets.
+              Upload proof of VIP status and 30-day trading volume/balance
             </div>
             <div className="bg-surface flex justify-center items-center md:h-28 h-20 w-20 md:w-28  rounded-xl cursor-pointer  mt-5 border-[0.8px]  border-dashed">
               <IoIosAdd />
             </div>
             <div className="text-muted mt-5">
-              Only PNG, JPG, and JPEG formats are supported. Max size of 10MB
-              per file, up to 3 files.
+              Accepted: PNG, JPG, JPEG — up to 3 files, max 10MB each.
             </div>
             <div className="w-full flex max-md:justify-center mt-5">
               <button className="btn-secondary w-full">Submit</button>
@@ -398,15 +368,18 @@ export const Vip = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col mt-32 gap-12 items-center py-16 bg-surface">
+        <div className="flex flex-col mt-32 gap-6 items-center py-16 bg-surface">
           <h2 className="font-bold text-2xl md:text-3xl text-primary text-center">
-            Become a BitZup VIP to enjoy high fee discounts
+            Ready for VIP treatment?
           </h2>
+          <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
+            Lower fees, bigger rewards and a team in your corner — start your VIP journey today.
+          </p>
           <button
-            className="btn-primary px-12"
+            className="btn-primary px-12 animate-pulse"
             onClick={() => (window.location.href = "/trade/register")}
           >
-            Join Now
+            Become a VIP
           </button>
         </div>
         <Footer isShow={false} />

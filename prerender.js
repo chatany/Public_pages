@@ -11,25 +11,25 @@ const TEMPLATE_PATH = path.join(DIST_DIR, 'index.html');
 // Exact SEO metadata mapping extracted from components
 const seoData = {
   "/": {
-    "title": "BitZup — Crypto exchange for serious traders",
-    "description": "Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup. Low fees, deep liquidity, built for VIP and institutional traders.",
-    "ogDescription": "Trade Bitcoin, Ethereum, and 100+ digital assets on BitZup."
+    "title": "BitZup: Buy, Trade & Earn Bitcoin, Ethereum & 4,100+ Crypto",
+    "description": "Buy, sell and trade 4,100+ cryptocurrencies on BitZup with some of the lowest fees in crypto. Beginner-friendly, pro-grade tools, bank-level security.",
+    "ogDescription": "Buy, sell and trade 4,100+ cryptocurrencies on BitZup."
   },
   "/aml-policy": {
     "title": "BitZup AML & CFT Policy",
     "description": "Read BitZup's Anti-Money Laundering and Counter-Financing of Terrorism policy. How we screen users, monitor activity, and comply with FIU regulations."
   },
   "/referral": {
-    "title": "Refer Friends to BitZup — Earn Up to 30% Commission",
-    "description": "Refer friends to BitZup and earn up to 30% of their trading fees. Share your link, track rewards in real time, and build passive crypto income."
+    "title": "BitZup Referral Program — Earn 30% Trading-Fee Commission",
+    "description": "Invite friends to BitZup and earn up to 30% of their trading fees. Share your referral link, they get a welcome bonus, you both earn real crypto."
   },
   "/careers": {
-    "title": "Careers at BitZup — Build Your Future in Crypto",
-    "description": "Explore open roles at BitZup. Join a global team building the next generation of crypto trading, earn, and Web3 products — with competitive pay and flexible hours."
+    "title": "Careers at BitZup — Build the Future of Crypto",
+    "description": "Join BitZup and help build a crypto exchange used by millions. Remote-first roles in engineering, product, marketing and more. See open positions."
   },
   "/vip": {
-    "title": "BitZup VIP — Lower Fees, Higher Limits, Elite Perks",
-    "description": "Become a BitZup VIP. Unlock the lowest trading fees, higher withdrawal limits, priority support, and exclusive rewards built for high-volume traders."
+    "title": "BitZup VIP Program — Lowest Trading Fees & Elite Perks",
+    "description": "Unlock up to 67% off trading fees, free token airdrops and a dedicated wealth manager with BitZup VIP. Fast-track your tier with the VIP+1 Pass."
   },
   "/invest": {
     "title": "Auto Invest Crypto on BitZup — DCA Made Simple",
@@ -39,9 +39,21 @@ const seoData = {
     "title": "BitZup KYC Verification — Secure Your Account",
     "description": "Complete your BitZup KYC in minutes. Upload your ID and selfie to unlock trading, higher withdrawal limits, and a fully secured account."
   },
-  "/request": {
-    "title": "Submit a Request - BitZup",
-    "description": "Need help? Submit a request to BitZup support. Our team is here to assist you with any questions or issues you may have."
+  "/submit-request": {
+    "title": "Submit a Request — BitZup Support",
+    "description": "Contact BitZup support. Submit a request for help with your account, trading, deposits, withdrawals or verification — our team typically replies within 24 hours."
+  },
+  "/support": {
+    "title": "BitZup Support Center — Help, Guides & 24/7 Service",
+    "description": "Get help with your BitZup account, deposits, withdrawals, trading and security. Browse help articles or reach our support team 24/7."
+  },
+  "/fee-schedule": {
+    "title": "BitZup Fee Schedule — Spot, Futures & Withdrawal Fees",
+    "description": "See BitZup's transparent trading fees: low spot and futures maker/taker rates, VIP discounts up to 67%, and clear deposit and withdrawal costs. No hidden fees."
+  },
+  "/official-verification": {
+    "title": "Official Verification — Confirm Genuine BitZup Channels",
+    "description": "Protect yourself from scams. Verify that an email, website, phone number or social account genuinely belongs to BitZup before you act."
   },
   "/risk-disclosure": {
     "title": "Risk Disclosure - BitZup",

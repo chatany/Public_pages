@@ -14,53 +14,53 @@ export const CarrierPage = () => {
       src: "/innovation.svg",
       title: "Innovation",
       subtitle:
-        "Reconstructing thought frameworks to find better solutions; challenging established notions to continuously evolve with agility.",
+        "We question defaults and rebuild from first principles to ship better solutions, fast.",
     },
     {
       src: "/Collaboration.svg",
       title: "Collaboration",
       subtitle:
-        "Guided by mutual benefit, actively embracing openness and sharing, partnering with users and collaborators to foster a thriving and sustainable industry environment.",
+        "We win together: open by default, sharing freely with users and partners alike.",
     },
     {
       src: "/Insight.svg",
-      title: "Data-Driven",
+      title: "Data-driven",
       subtitle:
-        "Accurately understanding user needs through data-driven decisions and keenly sensing industry changes.",
+        "We let evidence lead, reading the market and our users to make sharper decisions.",
     },
   ];
   const whyBitzupArr1 = [
     {
       src: "/compensation.svg",
-      title: "Web3 Compensation",
+      title: "Web3-native pay",
       subtitle:
-        "Top-of-market base pay, USDT or USDC compensation option, equity in early-stage Web3 projects.",
+        "Top-of-market salaries, optional pay in USDT or USDC, and equity in early-stage Web3 upside.",
     },
     {
       src: "/vision.svg",
-      title: "Global Team",
+      title: "Truly global",
       subtitle:
-        "Distributed team across 12+ countries. Annual offsites. Real ownership over what you ship.",
+        "A distributed team across 12+ countries, annual offsites, and real ownership of what you ship.",
     },
   ];
   const whyBitzupArr = [
     {
       src: "/flexible.svg",
-      title: "Work-Life Balance",
+      title: "Balance that's real",
       subtitle:
-        "Flexible hours, four-day work weeks during quiet seasons, no on-call rotations outside of engineering.",
+        "Flexible hours, four-day weeks in quiet seasons, and no on-call outside engineering.",
     },
     {
       src: "/pathways.svg",
-      title: "Rapid Growth",
+      title: "Grow fast",
       subtitle:
-        "Promotion cycles every six months. Clear leveling bands published internally. Internal mobility across teams.",
+        "Promotion cycles every six months, transparent leveling, and mobility across teams.",
     },
     {
       src: "/reward.svg",
-      title: "Elite Ecosystem",
+      title: "Elite peers",
       subtitle:
-        "Build with people who've shipped at Binance, Coinbase, Stripe, and Goldman. 18 languages spoken in the company Slack.",
+        "Build alongside people who've shipped at Binance, Coinbase, Stripe and Goldman. 18 languages in our Slack.",
     },
   ];
   const positions = [
@@ -80,10 +80,10 @@ export const CarrierPage = () => {
   return (
     <>
       <Helmet>
-        <title>Careers at BitZup — Build Your Future in Crypto</title>
+        <title>Careers at BitZup — Build the Future of Crypto</title>
         <meta
           name="description"
-          content="Explore open roles at BitZup. Join a global team building the next generation of crypto trading, earn, and Web3 products — with competitive pay and flexible hours."
+          content="Join BitZup and help build a crypto exchange used by millions. Remote-first roles in engineering, product, marketing and more. See open positions."
         />
       </Helmet>
       <Navbar />
@@ -91,18 +91,17 @@ export const CarrierPage = () => {
         <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
             <div className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
-              Join the Future of Crypto
+              Build the future of crypto with us
             </div>
             <div className="text-base font-bold text-secondary max-md:hidden">
-              Start your career journey with BitZup and explore unlimited
-              opportunities.
+              We're a remote-first team building a crypto exchange for millions of traders. Bring your craft — we'll give you the ownership to do your best work.
             </div>
             <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
               <button className="bg-primary md:h-12 h-10 md:w-44 px-8 md:text-sm cursor-pointer text-xs md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
-                Job Openings
+                See open roles
               </button>
               <button className="bg-surface-2 md:h-12 h-10 px-8 md:text-sm cursor-pointer text-xs flex items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
-                <AiFillLinkedin className="size-4" /> View LinkedIn
+                <AiFillLinkedin className="size-4" /> Follow us on LinkedIn
               </button>
             </div>
           </div>
@@ -136,7 +135,7 @@ export const CarrierPage = () => {
         </div>
         <div className="mt-20 md:px-16 p-5">
           <div className="text-2xl md:text-3xl text-center font-bold mb-10">
-            Our Core Values
+            What we value
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
             {coreValues?.map((item, ind) => (
@@ -163,7 +162,7 @@ export const CarrierPage = () => {
         </div>
         <div className="mt-20 md:px-16 p-5">
           <div className="text-2xl md:text-3xl text-center font-bold mb-10">
-            Why BitZup?
+            Why you'll love working here
           </div>
           <div className="flex flex-col gap-10">
             <div className="grid md:grid-cols-2 grid-cols-1 gap-10">
@@ -213,8 +212,11 @@ export const CarrierPage = () => {
           </div>
         </div>
         <div className="mt-20 md:px-16 p-5">
-          <div className="text-2xl md:text-3xl font-bold text-center mb-10">
-            Positions open, waiting just for you!
+          <div className="text-2xl md:text-3xl font-bold text-center mb-4">
+            Find your role
+          </div>
+          <div className="text-sm md:text-base text-secondary text-center mb-10 max-w-xl mx-auto">
+            We're hiring across Product, Engineering, Marketing, Technical Support, Legal & Compliance, and Investment Products.
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
             {positions?.map((item, ind) => (
@@ -240,16 +242,15 @@ export const CarrierPage = () => {
           </div>
         </div>
         <div className="text-2xl md:text-3xl font-bold mt-20 md:px-16 p-5 leading-tight text-center">
-          Discover More Media Reports and Build the{" "}
-          <br className="max-md:hidden" /> Crypto Future Together with BitZup
+          Don't see your role?
         </div>
-        <div className="flex justify-center items-center gap-5 mt-10 md:px-16 p-5">
-          <div className="bg-surface p-3 rounded-xl border border-border hover:border-brand-green transition-all cursor-pointer">
-            <FaYoutube className="size-8 text-primary" />
-          </div>
-          <div className="bg-surface p-3 rounded-xl border border-border hover:border-brand-green transition-all cursor-pointer">
-            <BsTwitterX className="size-8 text-primary" />
-          </div>
+        <div className="text-sm md:text-base text-secondary text-center mt-2 max-w-xl mx-auto">
+          We're always meeting great people. Send us your profile and we'll reach out when there's a fit.
+        </div>
+        <div className="flex justify-center items-center mt-8 mb-10">
+          <button className="btn-primary px-10">
+            Submit your profile
+          </button>
         </div>
         <Footer isShow={false} />
       </div>

@@ -98,7 +98,7 @@ const VerifyPopup = ({
 
               <button
                 onClick={onConfirm || onClose}
-                className="cursor-pointer w-full rounded-lg bgbrand-green py-3 font-medium text-black hover:bgbrand-green/70"
+                className="cursor-pointer w-full rounded-lg bg-brand-green py-3 font-medium text-black hover:bgbrand-green/70"
               >
                 Confirm
               </button>

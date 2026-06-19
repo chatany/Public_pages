@@ -209,6 +209,16 @@ export const Section = () => {
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full mt-10">
         <div className="flex justify-center flex-col w-full">
+          {/* Ticker heading and sub */}
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+              Live crypto prices, updated every second
+            </h2>
+            <p className="text-sm md:text-base text-secondary mt-2">
+              Track Bitcoin, Ethereum and 4,100+ coins in real time. Tap any
+              market to trade in seconds.
+            </p>
+          </div>
           {/* Tabs and View More */}
           <div className="flex justify-between items-center mb-6">
             <div className="flex gap-4 md:gap-8 overflow-x-auto no-scrollbar pb-2">
@@ -241,76 +251,82 @@ export const Section = () => {
 
             {/* Rows */}
             <div className="flex flex-col">
-              {filteredData()?.slice(0,5).map((mover, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-3 md:grid-cols-5 md:px-6 h-16 hover:bg-surface transition-all items-center cursor-pointer border-border group"
-                  onClick={() =>
-                    (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
-                  }
-                >
-                  {/* Coin Column */}
-                  <div className="flex items-center gap-4">
-                    <CoinIcon mover={mover} />
-                    <div className="flex flex-col">
-                      <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-sm md:text-lg">
-                        {mover?.base_asset_symbol}
-                      </span>
-                      <span className="text-xs text-secondary font-medium">
-                        {mover?.coin_name}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Price Column */}
-                  <div className="text-right  text-primary text-base">
-                    ${mover?.current_price}
-                  </div>
-
-                  {/* Change Column */}
+              {filteredData()
+                ?.slice(0, 5)
+                .map((mover, index) => (
                   <div
-                    className={`text-right text-base ${
-                      mover?.change_in_price > 0
-                        ? "text-trading-up"
-                        : "text-trading-down"
-                    }`}
-                  >
-                    {mover?.change_in_price > 0 ? "+" : ""}
-                    {mover?.change_in_price}%
-                  </div>
-
-                  {/* Desktop Only: Volume */}
-                  <div className="text-right text-secondary max-md:hidden">
-                    {mover?.volume}
-                  </div>
-
-                  {/* Desktop Only: Action */}
-                  <div
-                    className="text-right max-md:hidden"
+                    key={index}
+                    className="grid grid-cols-3 md:grid-cols-5 md:px-6 h-16 hover:bg-surface transition-all items-center cursor-pointer border-border group"
                     onClick={() =>
                       (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                     }
                   >
-                    <button className="bg-brand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
-                      Trade
-                    </button>
+                    {/* Coin Column */}
+                    <div className="flex items-center gap-4">
+                      <CoinIcon mover={mover} />
+                      <div className="flex flex-col">
+                        <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-sm md:text-lg">
+                          {mover?.base_asset_symbol}
+                        </span>
+                        <span className="text-xs text-secondary font-medium">
+                          {mover?.coin_name}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Price Column */}
+                    <div className="text-right  text-primary text-base">
+                      ${mover?.current_price}
+                    </div>
+
+                    {/* Change Column */}
+                    <div
+                      className={`text-right text-base ${
+                        mover?.change_in_price > 0
+                          ? "text-trading-up"
+                          : "text-trading-down"
+                      }`}
+                    >
+                      {mover?.change_in_price > 0 ? "+" : ""}
+                      {mover?.change_in_price}%
+                    </div>
+
+                    {/* Desktop Only: Volume */}
+                    <div className="text-right text-secondary max-md:hidden">
+                      {mover?.volume}
+                    </div>
+
+                    {/* Desktop Only: Action */}
+                    <div
+                      className="text-right max-md:hidden"
+                      onClick={() =>
+                        (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
+                      }
+                    >
+                      <button className="bg-brand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
+                        Trade
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
       </div>
       <div
-        className="items-center cursor-pointer flex justify-center gap-2"
+        className="items-center cursor-pointer flex justify-center gap-2 hover:text-brand-green transition-colors font-semibold"
         onClick={() => (window.location.href = `/trade/spot/BTCUSDT`)}
       >
         {" "}
-        View all 2500+ Coins <FaChevronRight className="size-3" />
+        View all 4,100+ coins <FaChevronRight className="size-3" />
       </div>
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="text-center text-2xl p-3 font-bold md:hidden">
-          Trade Crypto Anywhere Anytime
+          Your portfolio, in your pocket
+          <p className="text-xs font-normal text-secondary mt-1">
+            Buy, trade and track your crypto on the BitZup app for iOS and
+            Android.
+          </p>
         </div>
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full">
           <div className="md:w-[50%] w-full justify-center flex ">
@@ -370,11 +386,13 @@ export const Section = () => {
           <div className="md:w-[50%] h-full max-md:hidden  w-full flex flex-col gap-10 items-center h-full">
             <div>
               <div className="text-3xl md:text-3xl font-bold text-center text-primary">
-                Trade Crypto
-                <div className="text-3xl md:text-3xl font-bold text-center text-primary">
-                  Anywhere Anytime
-                </div>
+                Your portfolio, in your pocket
               </div>
+              <p className="text-sm text-secondary text-center   leading-relaxed">
+                Buy, trade and track your crypto on the BitZup app for iOS and
+                Android.
+                <br /> Scan the code to download.
+              </p>
             </div>
             <div className="max-w-sm flex max-h-56 p-4 gap-6 bg-surface rounded-md">
               <div className="w-[40%] p-2 border border-border rounded-lg bg-white">
@@ -445,15 +463,19 @@ export const Section = () => {
         </div>
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full max-w-7xl mx-auto px-6 md:px-8">
-        <div className="font-bold text-3xl text-center">How to Get Started</div>
+        <div className="font-bold text-3xl text-center">
+          Start trading crypto in 3 simple steps
+        </div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-10">
             <div className="flex gap-5">
               <div className="font-bold text-3xl w-7.5">1</div>
               <div className="text-left">
-                <div className="text-lg font-bold">Create an Account</div>
+                <div className="text-lg font-bold">
+                  Create your free account
+                </div>
                 <div className="text-sm text-muted font-normal">
-                  Register and claim exclusive newcomer rewards.
+                  Sign up in under 2 minutes and claim your new-user rewards.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/register")}
@@ -466,9 +488,10 @@ export const Section = () => {
             <div className="flex gap-5">
               <div className="font-bold text-3xl w-7.5">2</div>
               <div className="text-left">
-                <div className="text-lg font-bold">Quick Buy</div>
+                <div className="text-lg font-bold">Add funds</div>
                 <div className="text-sm text-secondary font-normal">
-                  Buy or deposit crypto in a few easy steps.
+                  Buy crypto with your card or bank transfer, or deposit from
+                  another wallet.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
@@ -481,9 +504,9 @@ export const Section = () => {
             <div className="flex gap-5">
               <div className="font-bold text-3xl w-7.5">3</div>
               <div className="text-left">
-                <div className="text-lg font-bold">Start Trading</div>
+                <div className="text-lg font-bold">Start trading</div>
                 <div className="text-sm text-secondary font-normal">
-                  Sell and buy crypto, copy trade, and more.
+                  Trade spot and futures, or copy top traders automatically.
                 </div>
                 <button
                   onClick={() => (window.location.href = "/trade/spot")}
@@ -504,14 +527,14 @@ export const Section = () => {
         </div>
       </div>
       <div className=" w-full md:text-3xl text-2xl font-bold md:hidden text-center ">
-        How to Get Started
+        Start trading crypto in 3 simple steps
       </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
         <div
           onClick={() => (window.location.href = "/trade/register")}
           className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
         >
-          <div>Create Account</div>
+          <div>Create your free account</div>
           <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
@@ -520,7 +543,7 @@ export const Section = () => {
           onClick={() => (window.location.href = "/trade/spot")}
           className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
-          <div>Quick Buy</div>
+          <div>Add funds</div>
           <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
@@ -529,7 +552,7 @@ export const Section = () => {
           onClick={() => (window.location.href = "/trade/spot")}
           className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
         >
-          <div>Start Trading</div>
+          <div>Start trading</div>
           <div className="bg-surface p-2 rounded-md">
             <FaChevronRight />
           </div>
@@ -537,20 +560,19 @@ export const Section = () => {
       </div>
       <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
-          How We Protect Every Trade
+          Your security is engineered in, not bolted on
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 ">
           <div className="flex flex-col items-center gap-5 max-md:hidden">
             <img
               src="/secure-shield 1.svg"
               className="size-10"
-              alt="Secure Smart Contracts"
+              alt="Audited smart contracts"
             />
-            <div className="text-lg font-bold">Secure Smart Contracts</div>
-            <div className="text-sm font-semibold text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum sagittis commodo nunc non malesuada. Cras consequat
-              diam sed
+            <div className="text-lg font-bold">Audited smart contracts</div>
+            <div className="text-sm font-semibold text-muted text-center">
+              Every contract is independently audited and battle-tested before
+              it goes live, so your funds are protected at the code level.
             </div>
           </div>
 
@@ -558,13 +580,12 @@ export const Section = () => {
             <img
               src="/reserve 1.svg"
               className="size-10"
-              alt="Reserve Audit Proof"
+              alt="Proof-of-reserves"
             />
-            <div className="text-lg font-bold">Reserve Audit Proof</div>
-            <div className="text-sm font-semibold text-muted">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum sagittis commodo nunc non malesuada. Cras consequat
-              diam sed
+            <div className="text-lg font-bold">Proof-of-reserves</div>
+            <div className="text-sm font-semibold text-muted text-center">
+              We hold your assets 1:1 and publish regular reserve audits. Verify
+              our backing yourself, any time.
             </div>
           </div>
 
@@ -572,15 +593,12 @@ export const Section = () => {
             <img
               src="/wallet 1.svg"
               className="size-10"
-              alt="Cold and Hot Wallet Storage"
+              alt="Cold & hot wallet storage"
             />
-            <div className="text-lg font-bold">
-              Cold/Hot Wallet based Storage
-            </div>
-            <div className="text-sm font-normal text-muted ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Vestibulum sagittis commodo nunc non malesuada. Cras consequat
-              diam sed
+            <div className="text-lg font-bold">Cold & hot wallet storage</div>
+            <div className="text-sm font-normal text-muted text-center ">
+              The vast majority of assets sit in offline cold storage, with
+              multi-signature controls guarding every withdrawal.
             </div>
           </div>
         </div>
@@ -595,10 +613,11 @@ export const Section = () => {
                 />
               </div>
               <div className="text-left flex flex-col gap-1">
-                <div className="text-lg font-bold">Secure Smart Contracts</div>
+                <div className="text-lg font-bold">Audited smart contracts</div>
                 <div className="text-xs text-secondary">
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Every contract is independently audited and battle-tested
+                  before it goes live, so your funds are protected at the code
+                  level.
                 </div>
               </div>
             </div>
@@ -613,10 +632,10 @@ export const Section = () => {
                 />
               </div>
               <div className="text-left flex flex-col gap-1">
-                <div className="text-lg font-bold">Reserve Audit Proof</div>
+                <div className="text-lg font-bold">Proof-of-reserves</div>
                 <div className="text-xs text-secondary">
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  We hold your assets 1:1 and publish regular reserve audits.
+                  Verify our backing yourself, any time.
                 </div>
               </div>
             </div>
@@ -632,11 +651,11 @@ export const Section = () => {
               </div>
               <div className="text-left flex flex-col gap-1">
                 <div className="text-lg font-bold">
-                  Cold/Hot Wallet based Storage
+                  Cold & hot wallet storage
                 </div>
                 <div className="text-xs text-secondary">
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  The vast majority of assets sit in offline cold storage, with
+                  multi-signature controls guarding every withdrawal.
                 </div>
               </div>
             </div>
@@ -644,13 +663,18 @@ export const Section = () => {
         </div>
       </div>
       <div className="bg-surface mt-10 py-10 md:py-16">
+        <div className="text-center mb-8">
+          <h2 className="text-xl md:text-2xl font-bold text-primary">
+            Trusted by traders worldwide
+          </h2>
+        </div>
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly w-full">
           <div>
             <div className="md:text-3xl text-xl font-bold text-center">
               $19.64B
             </div>
             <div className="text-eyebrow text-secondary text-center">
-              24h Volume
+              Traded in 24h
             </div>
           </div>
           <div>
@@ -658,7 +682,7 @@ export const Section = () => {
               4,100+
             </div>
             <div className="text-eyebrow text-secondary text-center">
-              Cryptocurrencies
+              Coins listed
             </div>
           </div>
           <div>
@@ -666,13 +690,15 @@ export const Section = () => {
               10.16%
             </div>
             <div className="text-eyebrow text-secondary text-center">
-              Simple Earn APR
+              APR on Simple Earn
             </div>
           </div>
           <div>
-            <div className="md:text-3xl text-xl font-bold text-center">124%</div>
+            <div className="md:text-3xl text-xl font-bold text-center">
+              100%+
+            </div>
             <div className="text-eyebrow text-secondary text-center">
-              Total Reserve Ratio
+              Reserves, independently audited
             </div>
           </div>
         </div>

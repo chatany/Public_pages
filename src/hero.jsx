@@ -8,15 +8,19 @@ export default function Hero() {
       {/* Left Content */}
       <div className=" z-base w-full md:w-[50%] flex flex-col text-left">
         <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
-          BitZup: Where Crypto Traders Become Market Leaders
+          Buy, trade and earn crypto - all in one place
         </h1>
+        <p className="text-base text-secondary mt-4 text-left">
+          Join millions trading Bitcoin, Ethereum and 4,100+ coins on BitZup. Some of the lowest fees in crypto, tools that grow with you, and security you can verify.
+        </p>
 
         {/* Input */}
         <div className="flex items-center gap-3 mt-8 max-md:hidden">
-          <button className="btn-primary">
-            <div className="flex font-semibold text-black gap-2 items-center text-lg">
-              <img src="gift.svg" className="size-6" /> Sign up now
-            </div>
+          <button className="btn-primary" onClick={() => window.location.href = "/trade/register"}>
+            Create free account
+          </button>
+          <button className="btn-secondary" onClick={() => window.location.href = "/trade/spot"}>
+            Explore markets
           </button>
         </div>
 
@@ -76,14 +80,11 @@ export default function Hero() {
 
       {/* Right Circle */}
       <div className=" flex  max-md:justify-end">
-        <div className="md:size-80 w-64 h-36 rounded-full bg-surface" />
+        <img src="/hero.png" className="md:size-90" />
       </div>
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
-        <button className="btn-primary h-5 w-fit px-8">
-          <div className="flex font-semibold text-black gap-2 items-center text-md">
-            <img src="gift.svg" className="size-4" alt="Gift rewards icon" />{" "}
-            Sign up now
-          </div>
+        <button className="btn-primary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/register"}>
+          Create free account
         </button>
       </div>
       <div className="flex gap-3 md:hidden">

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Menu } from "./menu";
@@ -16,16 +16,31 @@ const Terms = lazy(() => import("./Components/userAgreement").then(module => ({ 
 const ReferralPage = lazy(() => import("./ReferalPage").then(module => ({ default: module.ReferralPage })));
 const CarrierPage = lazy(() => import("./CarrierPage").then(module => ({ default: module.CarrierPage })));
 const AutoInvest = lazy(() => import("./AotoInvest").then(module => ({ default: module.AutoInvest })));
-const Verification = lazy(() => import("./VerificationPage").then(module => ({ default: module.Verification })));
 const Vip = lazy(() => import("./Vip").then(module => ({ default: module.Vip })));
 const SubmitRequestForm = lazy(() => import("./Components/submit/request"));
+const VipLevel = lazy(() => import("./Components/fee").then(module => ({ default: module.VipLevel })));
+const OfficialVerification = lazy(() => import("./officalVerification").then(module => ({ default: module.Verification })));
 
 // Loading fallback component
-const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-bg text-brand-green">
-    <div className="animate-pulse text-xl font-bold tracking-widest">BitZup...</div>
-  </div>
-);
+const PageLoader = ({ className }) => {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return (
+    <div className={`preloader preloader2 ${className || ""}`}>
+      <div className="loading-container">
+        <div className="loading"></div>
+        <div id="loading-icon">
+          <img src="/Bitzup.png" alt="Loading..." />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default function App() {
   return (
@@ -39,8 +54,11 @@ export default function App() {
           <Route element={<CarrierPage />} path="/careers" />
           <Route element={<Vip/>} path="/vip"/>
           <Route element={<AutoInvest />} path="/invest" />
-          <Route element={<Verification />} path="/verification" />
-          <Route element={<SubmitRequestForm/>} path="/request"/>
+          <Route element={<OfficialVerification />} path="/verification" />
+          <Route element={<SubmitRequestForm/>} path="/submit-request"/>
+          <Route element={<VipLevel />} path="/fee-schedule" />
+          <Route element={<VipLevel />} path="/fees" />
+          <Route element={<OfficialVerification />} path="/official-verification" />
           <Route
             element={<Menu children={<RiskPolicy />} />}
             path="/risk-disclosure"
