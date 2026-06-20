@@ -58,19 +58,31 @@ export default function MobileDrawer({ open, onClose }) {
     <>
       {/* Overlay */}
       <div
-        className={`fixed inset-0 z-dropdown bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-          open ? "opacity-100 visible" : "opacity-0 invisible"
+        role="button"
+        tabIndex={0}
+        aria-label="Close menu"
+        className={`fixed inset-0 z-dropdown bg-black/60 backdrop-blur-sm transition-opacity duration-300 cursor-pointer ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={onClose}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            onClose();
+          }
+        }}
       />
 
       {/* Drawer */}
       <div
+        style={{
+          transform: open ? "translate3d(0, 0, 0)" : "translate3d(100%, 0, 0)",
+          WebkitTransform: open ? "translate3d(0, 0, 0)" : "translate3d(100%, 0, 0)",
+        }}
         className={`fixed top-0 right-0 z-modal h-full w-[85%] max-w-sm 
         bg-surface-2 text-white shadow-2xl
         overflow-y-auto overscroll-contain
-        transform transition-transform duration-300 ease-out
-        ${open ? "translate-x-0" : "translate-x-full"}`}
+        transition-transform duration-300 ease-out
+        ${open ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-border">
