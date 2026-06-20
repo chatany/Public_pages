@@ -80,7 +80,14 @@ export default function Hero() {
 
       {/* Right Circle */}
       <div className=" flex  max-md:justify-end">
-        <img src="/hero.png" className="md:size-90" />
+        <video
+          src="/B Video.mp4"
+          className="md:size-90 object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
       </div>
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
         <button className="btn-primary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/register"}>
