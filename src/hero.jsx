@@ -82,7 +82,7 @@ export default function Hero() {
       <div className=" flex  max-md:justify-end">
         <video
           src="/B Video.mp4"
-          className="md:size-90 object-cover"
+          className="md:size-110 object-cover"
           autoPlay
           loop
           muted
