@@ -86,12 +86,14 @@ const data = [
         iconUrlLight: "/swapWhite.png",
         iconUrlDark: "/swapBlack.png",
       },
+
+      
     ],
   },
 
 
 
-  
+
   {
     category: "Spot",
     item: [
