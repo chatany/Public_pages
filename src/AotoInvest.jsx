@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 
 export const AutoInvest = () => {
+    console.log("Auto Invest component");
   const advantages = [
     {
       src: "/innovation.svg",

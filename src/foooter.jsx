@@ -22,7 +22,7 @@ export const Footer = ({ isShow = true }) => {
   const MAIN_SITE = "/trade";
   const [openIndex, setOpenIndex] = useState(null);
   const [openMobileIndex, setOpenMobileIndex] = useState(null);
-
+  console.log("Footer component");
   const toggleMobile = (index) => {
     setOpenMobileIndex(openMobileIndex === index ? null : index);
   };

@@ -87,7 +87,7 @@ const data = [
         iconUrlDark: "/swapBlack.png",
       },
 
-      
+
     ],
   },
 
@@ -176,7 +176,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const dark = true;
-
+  console.log("Navbar component");
   const isTabActive = (item) => {
     const path = location.pathname;
     if (item === "Buy Crypto") {

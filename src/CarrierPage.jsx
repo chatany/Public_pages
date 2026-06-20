@@ -8,6 +8,7 @@ import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 
 export const CarrierPage = () => {
+    console.log("carrier p component");
   const [activeItem, setActiveItem] = useState("Buy");
   const coreValues = [
     {
