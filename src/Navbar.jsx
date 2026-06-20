@@ -314,6 +314,8 @@ export default function Navbar() {
       clearTimeout(hoverTimeout);
     };
 
+    
+
     if (navDropdownRef.current) {
       navDropdownRef.current.addEventListener(
         "mouseleave",
