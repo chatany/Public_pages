@@ -6,6 +6,7 @@ import { FaSquareXTwitter, FaYoutube } from "react-icons/fa6";
 import { LuMoveRight } from "react-icons/lu";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
+import Button from "./Common/Button";
 
 export const CarrierPage = () => {
     console.log("carrier p component");
@@ -98,19 +99,24 @@ export const CarrierPage = () => {
               We're a remote-first team building a crypto exchange for millions of traders. Bring your craft — we'll give you the ownership to do your best work.
             </div>
             <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
-              <button className="bg-primary md:h-12 h-10 md:w-44 px-8 md:text-sm cursor-pointer text-xs md:text-base font-bold text-bg rounded-md hover:opacity-90 transition-all">
+              <Button 
+              variant="primary "
+              className="h-12">
                 See open roles
-              </button>
-              <button className="bg-surface-2 md:h-12 h-10 px-8 md:text-sm cursor-pointer text-xs flex items-center justify-center gap-2 font-bold text-primary rounded-md hover:bg-surface-2/80 transition-all">
+              </Button>
+              <Button 
+              className="h-12"
+              variant="secondary flex gap-2"
+              >
                 <AiFillLinkedin className="size-4" /> Follow us on LinkedIn
-              </button>
+              </Button>
             </div>
           </div>
           <div className="mt-10">
             <div className="bg-surface rounded-full md:size-96 size-64" />
           </div>
         </div>
-        <div className="flex justify-center items-center mt-10 font-bold md:px-16 p-5">
+        {/* <div className="flex justify-center items-center mt-10 font-bold md:px-16 p-5">
           <div
             className={`flex border-border bg-surface text-secondary rounded-full max-w-md overflow-hidden p-0.5 h-14 w-full`}
           >
@@ -133,7 +139,7 @@ export const CarrierPage = () => {
               Explore our values
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="mt-20 md:px-16 p-5">
           <div className="text-2xl md:text-3xl text-center font-bold mb-10">
             What we value
@@ -249,9 +255,9 @@ export const CarrierPage = () => {
           We're always meeting great people. Send us your profile and we'll reach out when there's a fit.
         </div>
         <div className="flex justify-center items-center mt-8 mb-10">
-          <button className="btn-primary px-10">
+          <Button className="btn-primary px-10">
             Submit your profile
-          </button>
+          </Button>
         </div>
         <Footer isShow={false} />
       </div>

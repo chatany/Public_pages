@@ -212,7 +212,7 @@ export default function Navbar() {
   const deviceInfo = useDeviceInfo();
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/app-release.apk";
+    link.href = "https://download.bitzup.com/app-release.apk";
     link.download = "bitzup.apk";
     link.click();
   };
@@ -234,8 +234,8 @@ export default function Navbar() {
       if (status === 200 && data?.status === "1") {
         const profileData = data?.data;
         setUserProfile({
-          email: profileData?.email || "user@example.com",
-          uid: profileData?.uid || profileData?.user_id || "51297991",
+          email: profileData?.email ,
+          uid: profileData?.uid ,
           vip_level: profileData?.vip_level || 0,
           kyc_level: profileData?.kyc_level !== undefined ? profileData?.kyc_level : 0,
         });
@@ -358,10 +358,18 @@ export default function Navbar() {
   }, []);
 
   const handleNavigate = (path) => {
-    if (path.startsWith("http") || path.startsWith("/trade")) {
-      window.location.href = path;
+    let targetPath = path;
+    if (isLoggedIn) {
+      if (path === "/referral") {
+        targetPath = "/trade/reffrral";
+      } else if (path === "/invest") {
+        targetPath = "/trade/auto-invest";
+      }
+    }
+    if (targetPath.startsWith("http") || targetPath.startsWith("/trade")) {
+      window.location.href = targetPath;
     } else {
-      navigate(path);
+      navigate(targetPath);
     }
   };
 
@@ -542,7 +550,7 @@ export default function Navbar() {
             }}
             onDoubleClick={() => handleNavigate("/trade/dashboard")}
           >
-            <CgProfile className="hover:text-brand-green h-6 w-6 text-text-primary" />
+            <CgProfile className= {`hover:text-brand-green ${openDropdown=="profile" && "text-brand-green"} h-6 w-6 text-text-primary`} />
             {openDropdown === "profile" && !isMobile && (
               <>
                 <div className="absolute right-0 top-full w-full h-5" />
@@ -555,7 +563,7 @@ export default function Navbar() {
                         </div>
                         <div className="flex flex-col min-w-0 flex-1">
                           <div className="truncate font-semibold text-sm text-text-primary">
-                            {userProfile?.email?.split("@")[0] || "User"}
+                            {userProfile?.email}
                           </div>
                           <div className="flex gap-1 items-center text-xs text-text-muted mt-0.5">
                             <span>{copied ? "Copied!" : `UID: ${userProfile?.uid}`}</span>
@@ -563,20 +571,11 @@ export default function Navbar() {
                               className="cursor-pointer text-xs text-text-muted hover:text-brand-green transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                copyToClipboard(userProfile?.uid || "51297991");
+                                copyToClipboard(userProfile?.uid );
                               }}
                             />
                           </div>
                           <div className="flex gap-1.5 items-center mt-1.5">
-                            <span
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleNavigate("/vip");
-                              }}
-                              className="bg-brand-warning/15 border border-brand-warning/30 text-brand-warning-text text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex-shrink-0 cursor-pointer"
-                            >
-                              VIP {userProfile?.vip_level || 0}
-                            </span>
                             <span
                               className={`text-[9px] px-1.5 py-0.5 rounded font-semibold border capitalize tracking-wider ${
                                 userProfile?.kyc_level === 1
@@ -584,7 +583,16 @@ export default function Navbar() {
                                   : "bg-brand-warning/15 border-brand-warning/30 text-brand-warning-text"
                               }`}
                             >
-                              {userProfile?.kyc_level === 1 ? "Verified" : "Unverified"}
+                              {userProfile?.kyc_level === 1 ? "Verified" : "Not Verified"}
+                            </span>
+                            <span
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleNavigate("/vip");
+                              }}
+                              className="bg-brand-warning/15 border border-brand-warning/30 text-brand-warning-text text-[9px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider flex-shrink-0 cursor-pointer"
+                            >
+                              VIP {userProfile?.vip_level}
                             </span>
                           </div>
                         </div>
@@ -753,7 +761,9 @@ export default function Navbar() {
           onMouseLeave={() => setShowQR(false)}
         >
           <IoDownloadOutline
-            className="hover:text-brand-green h-6 w-6 md:flex hidden text-text-primary cursor-pointer"
+            className={`hover:text-brand-green h-6 w-6 md:flex hidden cursor-pointer ${
+              showQR ? "text-brand-green" : "text-text-primary"
+            }`}
             onClick={handleDownload}
           />
      

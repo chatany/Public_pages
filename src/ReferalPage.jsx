@@ -1,9 +1,26 @@
 import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import { Gift, Share2, UserPlus, Trophy } from "lucide-react";
+import Button from "./Common/Button";
+import { useAuth } from "./useAuth";
 
 export const ReferralPage = () => {
+  const isLoggedIn = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/trade/referral", { replace: true });
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (isLoggedIn) {
+    return null;
+  }
+
   return (
     <>
       <Helmet>
@@ -21,9 +38,9 @@ export const ReferralPage = () => {
             Share your BitZup link and earn up to 30% commission on every trade your friends make — paid in real crypto. They get a welcome bonus; you both win.
           </p>
           <div className="w-full flex max-md:justify-center">
-            <button className="btn-primary w-64">
+            <Button variant="primary">
               Get my referral link
-            </button>
+            </Button>
           </div>
           <p className="text-base font-bold text-secondary md:hidden">
             Share your BitZup link and earn up to 30% commission on every trade your friends make — paid in real crypto. They get a welcome bonus; you both win.
@@ -100,10 +117,10 @@ export const ReferralPage = () => {
         <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
           The more friends you invite, the more you earn — with no limit on referrals.
         </p>
-        <button className="btn-primary px-12">
+        <Button variant="primary h-12">
           <Gift className="size-6" strokeWidth={1.5} />
           Get my referral link
-        </button>
+        </Button>
       </div>
     <Footer isShow={false}/>
     </div>

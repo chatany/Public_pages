@@ -15,6 +15,7 @@ import { IoLogoWechat } from "react-icons/io5";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import VerifyPopup from "./Components/verification/success";
+import Button from "./Common/Button";
 
 export const Verification = () => {
   const dark = true;
@@ -175,7 +176,7 @@ export const Verification = () => {
                   ref={popupRef}
                 >
                   <div
-                    className="border bg-surface border-border rounded-full px-5 h-14 text-sm text-primary outline-none"
+                    className="border bg-recessed border-border rounded-sm px-5 h-14 text-sm text-primary outline-none"
                   >
                     <div
                       className="w-full flex justify-between h-full p-2 items-center"
@@ -188,7 +189,7 @@ export const Verification = () => {
                             {select.account_type}{" "}
                           </div>
                         ) : (
-                          "Select Method"
+                          <div className="text-text-muted">Select Method</div>
                         )}
                       </div>
 
@@ -202,7 +203,7 @@ export const Verification = () => {
                     <div
                       className={`absolute z-dropdown mt-2 w-full shadow-xl  ${
                         dark
-                          ? "bg-surface-2 text-primary"
+                          ? "bg-recessed text-primary"
                           : "bg-bg text-primary"
                       } rounded-xl  max-h-[300px] custom-scroll overflow-y-auto`}
                     >
@@ -212,15 +213,15 @@ export const Verification = () => {
                             <li
                               key={ind}
                               className={`flex ${
-                                dark ? "hover:bg-border" : "hover:bg-surface"
-                              } items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer transition-colors duration-200`}
+                                dark ? "hover:bg-lift" : ""
+                              } ${select?.account_type === coin.account_type ?"bg-lift text-text-primary":" text-text-muted"}  hover:text-text-primary items-center justify-between w-full p-[16px_12px_16px_12px] rounded-lg cursor-pointer transition-colors duration-200`}
                               onClick={() => {
                                 setSelect(coin);
                                 setOpen(!open);
                               }}
                             >
-                              <div className="flex items-center justify-between w-full gap-2">
-                                <div className="flex gap-2 items-center">
+                              <div className={`flex items-center justify-between w-full gap-2  transition-colors duration-200`}>
+                                <div className="flex gap-2 items-center ">
                                   <div><img src={`/${coin.account_type}.svg`} alt={coin.account_type} /></div>
                                   <span className="font-medium">
                                     {coin.account_type}
@@ -249,22 +250,23 @@ export const Verification = () => {
                   placeholder={select?.placeholder || "Paste a link, email, phone number or handle"}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  className="w-full border bg-surface border-border rounded-full px-5 h-14 text-sm font-normal text-primary outline-none "
+                  className="w-full border bg-surface border-border rounded-sm px-5 h-14 text-sm font-normal text-primary outline-none "
                 />
               </div>
             </div>
             <div className="flex justify-center">
-              <div className="relative w-[90%] md:w-[40%] ">
-              <button
+              <div className="relative w-full md:w-[40%] ">
+              <Button
+              variant="primary"
                   name="Email"
                   placeholder="Search"
                 onClick={handleSubmit}
-                  className="border flex  justify-center items-center gap-2 w-full bg-primary cursor-pointer border-border rounded-full px-5 h-18 text-sm text-bg outline-none"
+                className="h-12 w-full flex-gap-2"
                  
                 >
                   <IoIosSearch className="  h-6 w-6 text-bg" />
                 Verify
-              </button>
+              </Button>
               </div>
             </div>
           </div>

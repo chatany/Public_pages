@@ -1,4 +1,5 @@
 import { IoCheckmark, IoClose } from "react-icons/io5";
+import Button from "../../Common/Button";
 
 const VerifyPopup = ({
   isOpen,
@@ -57,7 +58,7 @@ const VerifyPopup = ({
         </p>
 
         {/* URL BOX */}
-        <div className="mt-4 rounded-lg bg-surface px-4 py-3 text-center text-sm text-gray-200 text-left">
+        <div className="mt-4 rounded-lg bg-recessed px-4 py-3 text-center text-sm text-gray-200 text-left">
           {url}
         </div>
 
@@ -69,7 +70,7 @@ const VerifyPopup = ({
         </p>
 
         {/* SECURITY ALERT */}
-        <div className="mt-4 rounded-lg bg-surface p-4 text-left">
+        <div className="mt-4 rounded-lg bg-recessed p-4 text-left">
           <p className="font-semibold text-sm mb-2">Security alerts</p>
           <ul className="list-disc pl-5 text-sm text-gray-400 space-y-1">
             <li>
@@ -96,12 +97,13 @@ const VerifyPopup = ({
                 Report
               </button> */}
 
-              <button
+              <Button
                 onClick={onConfirm || onClose}
-                className="cursor-pointer w-full rounded-lg bg-brand-green py-3 font-medium text-black hover:bgbrand-green/70"
+                className="w-full h-10 "
+
               >
                 Confirm
-              </button>
+              </Button>
             </>
           )}
         </div>

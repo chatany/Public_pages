@@ -32,7 +32,7 @@ export const Footer = ({ isShow = true }) => {
 
       question: "What is a cryptocurrency exchange?",
       answer:
-        "A crypto exchange is an online platform where you buy, sell and trade digital assets like Bitcoin and Ethereum for other cryptocurrencies or regular money. BitZup brings deep liquidity, 4,100+ markets and bank-grade security into one place.",
+        "A crypto exchange is an online platform where you buy, sell and trade digital assets like Bitcoin and Ethereum for other cryptocurrencies or regular money. BitZup brings deep liquidity, 2,300+ markets and bank-grade security into one place.",
     },
     {
       question: "What products does BitZup offer?",
@@ -52,7 +52,7 @@ export const Footer = ({ isShow = true }) => {
     {
       question: "How can I track crypto prices?",
       answer:
-        "Track live prices for 4,100+ assets on our Markets page, with 24h volume, price changes and TradingView candlestick charts — on web and the BitZup app.",
+        "Track live prices for 2,300+ assets on our Markets page, with 24h volume, price changes and TradingView candlestick charts — on web and the BitZup app.",
     },
     {
       question: "Is BitZup safe?",
@@ -166,20 +166,53 @@ export const Footer = ({ isShow = true }) => {
       )}
       {isShow && (
         <div className="flex flex-col gap-5 items-center bg-surface py-10 mt-10">
-          <div className="font-bold text-xl md:text-3xl text-center">
-            Your first trade is minutes away
-          </div>
-          <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
-            Create your free account and claim your new-user rewards today.
-          </div>
-          <button className="btn-primary h-[58px] px-10" onClick={() => window.location.href = "/trade/register"}>
-            <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-lg">
-              Create free account
-            </div>
-            <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
-              Create free account
-            </div>
-          </button>
+          {isLoggedIn ? (
+            <>
+              <div className="font-bold text-xl md:text-3xl text-center">
+                Start earning and trading today
+              </div>
+              <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
+                Explore our advanced trading tools, auto invest plans, or earn yield with staking.
+              </div>
+              <div className="flex flex-wrap gap-4 justify-center mt-2 max-md:px-4">
+                <button
+                  className="btn-primary h-12 px-8 flex items-center justify-center font-bold text-black rounded-md cursor-pointer transition-colors"
+                  onClick={() => window.location.href = "/trade/spot/BTCUSDT"}
+                >
+                  Trade Now
+                </button>
+                <button
+                  className="btn-secondary h-12 px-8 flex items-center justify-center font-bold rounded-md cursor-pointer transition-colors"
+                  onClick={() => window.location.href = "/invest"}
+                >
+                  Auto Invest
+                </button>
+                <button
+                  className="btn-secondary h-12 px-8 flex items-center justify-center font-bold rounded-md cursor-pointer transition-colors"
+                  onClick={() => window.location.href = "/trade/subscription"}
+                >
+                  Simple Earn
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="font-bold text-xl md:text-3xl text-center">
+                Your first trade is minutes away
+              </div>
+              <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
+                Create your free account and claim your new-user rewards today.
+              </div>
+              <button className="btn-primary h-[58px] px-10" onClick={() => window.location.href = "/trade/register"}>
+                <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-lg">
+                  Create free account
+                </div>
+                <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
+                  Create free account
+                </div>
+              </button>
+            </>
+          )}
         </div>
       )}
       <div className="py-5">
@@ -244,14 +277,7 @@ export const Footer = ({ isShow = true }) => {
                     </div>
                     <span className="text-xs opacity-60">Instagram</span>
                   </a>
-                  <div className="flex flex-col items-center gap-1 cursor-pointer group">
-                    <div
-                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                    >
-                      <FaTiktok className="text-xl" />
-                    </div>
-                    <span className="text-xs opacity-60">Tik Tok</span>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -302,16 +328,16 @@ export const Footer = ({ isShow = true }) => {
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
                   {isLoggedIn ? (
-                    <Link to="/invest" className="block p-3 -my-1.5 -mx-3">
-                      Auto Invest
-                    </Link>
-                  ) : (
                     <a
                       href="/trade/auto-invest"
                       className="block p-3 -my-1.5 -mx-3"
                     >
                       Auto Invest
                     </a>
+                  ) : (
+                    <Link to="/invest" className="block p-3 -my-1.5 -mx-3">
+                      Auto Invest
+                    </Link>
                   )}
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
@@ -347,7 +373,11 @@ export const Footer = ({ isShow = true }) => {
               <h3 className="text-xl font-semibold mb-4">Service</h3>
               <ul className="text-gray-300 text-sm flex flex-col">
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
+                  {isLoggedIn ? (
+                    <a href="/trade/reffrral" className="block p-3 -my-1.5 -mx-3">Referral</a>
+                  ) : (
+                    <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
+                  )}
                 </li>
                 <li className="hover:text-brand-green hover:underline cursor-pointer">
                   <Link to="/vip" className="block p-3 -my-1.5 -mx-3">VIP Program</Link>

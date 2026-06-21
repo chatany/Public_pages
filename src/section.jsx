@@ -9,6 +9,8 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import PromoSlider from "./img";
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { BsAndroid2 } from "react-icons/bs";
+import Button from "./Common/Button";
+import { useAuth } from "./useAuth";
 function CoinIcon({ mover }) {
   const [imgError, setImgError] = useState(false);
   const iconSrc = mover?.coin_icon;
@@ -31,6 +33,7 @@ function CoinIcon({ mover }) {
   );
 }
 export const Section = () => {
+  const isLoggedIn = useAuth();
   // const tabs = ["Top", "Hot", "Gainers", "Falling", "New"];
   const [activeTab, setActiveTab] = useState(null);
   const [active, setActive] = useState(0);
@@ -156,7 +159,7 @@ export const Section = () => {
           ))}
         </div>
       </div>
-      <div className="flex justify-center gap-3 mt-1 max-md:hidden ">
+      {/* <div className="flex justify-center gap-3 mt-1 max-md:hidden ">
         <button
           onClick={prev}
           className=" rounded-md border border-border flex items-center justify-center transition"
@@ -169,7 +172,7 @@ export const Section = () => {
         >
           <BiChevronRight className="size-6" />
         </button>
-      </div>
+      </div> */}
       <div className="md:hidden ">
         <div className="md:hidden overflow-hidden">
           <div
@@ -215,7 +218,7 @@ export const Section = () => {
               Live crypto prices, updated every second
             </h2>
             <p className="text-sm md:text-base text-secondary mt-2">
-              Track Bitcoin, Ethereum and 4,100+ coins in real time. Tap any
+              Track Bitcoin, Ethereum and 2,300+ coins in real time. Tap any
               market to trade in seconds.
             </p>
           </div>
@@ -227,11 +230,11 @@ export const Section = () => {
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`py-3 whitespace-nowrap cursor-pointer font-bold text-lg md:text-3xl transition-all relative
-                ${activeTab === tab ? "text-primary" : "text-secondary hover:text-primary"}`}
+                ${activeTab === tab ? "text-primary" : "text-muted hover:text-primary"}`}
                 >
                   {tab === "Hot" && "🔥"} {tab}
                   {activeTab === tab && (
-                    <div className="absolute bottom-0 left-0 h-0.5 bg-primary w-[60%] rounded-full" />
+                    <div className="absolute bottom-0 left-0 h-1 bg-brand-green w-full rounded-full" />
                   )}
                 </div>
               ))}
@@ -303,9 +306,9 @@ export const Section = () => {
                         (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                       }
                     >
-                      <button className="bg-brand-green cursor-pointer  text-black rounded-full px-6 py-2 text-sm font-bold hover:opacity-90 transition-all">
+                      <Button variant="primary" className="cursor-pointer  h-10 text-xs">
                         Trade
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ))}
@@ -318,7 +321,7 @@ export const Section = () => {
         onClick={() => (window.location.href = `/trade/spot/BTCUSDT`)}
       >
         {" "}
-        View all 4,100+ coins <FaChevronRight className="size-3" />
+        View all 2,300+ coins <FaChevronRight className="size-3" />
       </div>
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="text-center text-2xl p-3 font-bold md:hidden">
@@ -368,7 +371,7 @@ export const Section = () => {
                 />
               </a>
               <a
-                href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                href="https://download.bitzup.com/app-release.apk"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -443,7 +446,7 @@ export const Section = () => {
                     />
                   </a>
                   <a
-                    href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                    href="https://download.bitzup.com/app-release.apk"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -464,59 +467,115 @@ export const Section = () => {
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full max-w-7xl mx-auto px-6 md:px-8">
         <div className="font-bold text-3xl text-center">
-          Start trading crypto in 3 simple steps
+          {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
         </div>
         <div className="flex justify-between items-center">
-          <div className="flex flex-col gap-10">
-            <div className="flex gap-5">
-              <div className="font-bold text-3xl w-7.5">1</div>
-              <div className="text-left">
-                <div className="text-lg font-bold">
-                  Create your free account
+          {isLoggedIn ? (
+            <div className="flex flex-col gap-10">
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">1</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">Spot & Futures Trading</div>
+                  <div className="text-sm text-secondary font-normal">
+                    Trade Bitcoin, Ethereum, and 2,300+ coins with some of the lowest fees.
+                  </div>
+                  <Button
+                    onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
+                    variant="secondary"
+                    className="text-xs h-8 w-fit"
+                  >
+                    Trade Now <FaArrowRightLong />
+                  </Button>
                 </div>
-                <div className="text-sm text-muted font-normal">
-                  Sign up in under 2 minutes and claim your new-user rewards.
+              </div>
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">2</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">Auto Invest DCA</div>
+                  <div className="text-sm text-secondary font-normal">
+                    Dollar-cost average into your favorite cryptocurrencies automatically.
+                  </div>
+                  <Button
+                    onClick={() => (window.location.href = "/invest")}
+                    className="text-xs h-8 w-fit"
+                    variant='secondary'
+                  >
+                    Start Auto Invest <FaArrowRightLong />
+                  </Button>
                 </div>
-                <button
-                  onClick={() => (window.location.href = "/trade/register")}
-                  className="text-xs bg-brand-green justify-center p-2 text-black rounded-full mt-2 flex gap-1 items-center cursor-pointer w-32"
-                >
-                  Register now <FaArrowRightLong />
-                </button>
+              </div>
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">3</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">Simple Earn Yield</div>
+                  <div className="text-sm text-secondary font-normal">
+                    Earn high-yield passive income on 300+ crypto assets.
+                  </div>
+                  <Button
+                    className="text-xs h-8 w-fit"
+                    variant='secondary'
+                    onClick={() => (window.location.href = "/trade/subscription")}
+                  >
+                    Earn Yield <FaArrowRightLong />
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="flex gap-5">
-              <div className="font-bold text-3xl w-7.5">2</div>
-              <div className="text-left">
-                <div className="text-lg font-bold">Add funds</div>
-                <div className="text-sm text-secondary font-normal">
-                  Buy crypto with your card or bank transfer, or deposit from
-                  another wallet.
+          ) : (
+            <div className="flex flex-col gap-10">
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">1</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">
+                    Create your free account
+                  </div>
+                  <div className="text-sm text-muted font-normal">
+                    Sign up in under 2 minutes and claim your new-user rewards.
+                  </div>
+                  <Button
+                    onClick={() => (window.location.href = "/trade/register")}
+                    variant="secondary"
+                    className="text-xs h-8 w-fit"
+                  >
+                    Register now <FaArrowRightLong />
+                  </Button>
                 </div>
-                <button
-                  onClick={() => (window.location.href = "/trade/spot")}
-                  className="text-xs justify-center bg-surface-2 w-32 p-2 text-black hover:bg-brand-green rounded-full mt-2 flex gap-1 items-center cursor-pointer"
-                >
-                  Buy Crypto <FaArrowRightLong />
-                </button>
+              </div>
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">2</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">Add funds</div>
+                  <div className="text-sm text-secondary font-normal">
+                    Buy crypto with your card or bank transfer, or deposit from
+                    another wallet.
+                  </div>
+                  <Button
+                    onClick={() => (window.location.href = "/trade/spot")}
+                    className="text-xs h-8 w-fit"
+                    variant='secondary'
+                  >
+                    Buy Crypto  {" "}<FaArrowRightLong />
+                  </Button>
+                </div>
+              </div>
+              <div className="flex gap-5">
+                <div className="font-bold text-3xl w-7.5">3</div>
+                <div className="text-left flex flex-col gap-1">
+                  <div className="text-lg font-bold">Start trading</div>
+                  <div className="text-sm text-secondary font-normal">
+                    Trade spot and futures traders automatically.
+                  </div>
+                  <Button
+                    className="text-xs h-8 w-fit"
+                    variant='secondary'
+                    onClick={() => (window.location.href = "/trade/spot")}
+                  >
+                    Trade Now <FaArrowRightLong />
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="flex gap-5">
-              <div className="font-bold text-3xl w-7.5">3</div>
-              <div className="text-left">
-                <div className="text-lg font-bold">Start trading</div>
-                <div className="text-sm text-secondary font-normal">
-                  Trade spot and futures, or copy top traders automatically.
-                </div>
-                <button
-                  onClick={() => (window.location.href = "/trade/spot")}
-                  className="text-xs bg-surface-2 justify-center p-2 w-32 hover:bg-brand-green text-black rounded-full mt-2 flex gap-1 items-center cursor-pointer"
-                >
-                  Trade Now <FaArrowRightLong />
-                </button>
-              </div>
-            </div>
-          </div>
+          )}
           <div className="w-[26.25rem] h-80 rounded-xl bg-surface overflow-hidden">
             <img
               src="/feature-summary.png"
@@ -527,36 +586,70 @@ export const Section = () => {
         </div>
       </div>
       <div className=" w-full md:text-3xl text-2xl font-bold md:hidden text-center ">
-        Start trading crypto in 3 simple steps
+        {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
       </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        <div
-          onClick={() => (window.location.href = "/trade/register")}
-          className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
-        >
-          <div>Create your free account</div>
-          <div className="bg-surface p-2 rounded-md">
-            <FaChevronRight />
-          </div>
-        </div>
-        <div
-          onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
-        >
-          <div>Add funds</div>
-          <div className="bg-surface p-2 rounded-md">
-            <FaChevronRight />
-          </div>
-        </div>
-        <div
-          onClick={() => (window.location.href = "/trade/spot")}
-          className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
-        >
-          <div>Start trading</div>
-          <div className="bg-surface p-2 rounded-md">
-            <FaChevronRight />
-          </div>
-        </div>
+        {isLoggedIn ? (
+          <>
+            <div
+              onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
+              className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Spot & Futures Trading</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              onClick={() => (window.location.href = "/invest")}
+              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Auto Invest DCA</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              onClick={() => (window.location.href = "/trade/subscription")}
+              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Simple Earn Yield</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              onClick={() => (window.location.href = "/trade/register")}
+              className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Create your free account</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              onClick={() => (window.location.href = "/trade/spot")}
+              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Add funds</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+            <div
+              onClick={() => (window.location.href = "/trade/spot")}
+              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+            >
+              <div>Start trading</div>
+              <div className="bg-surface p-2 rounded-md">
+                <FaChevronRight />
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
@@ -679,7 +772,7 @@ export const Section = () => {
           </div>
           <div>
             <div className="md:text-3xl text-xl font-bold text-center">
-              4,100+
+              2,300+
             </div>
             <div className="text-eyebrow text-secondary text-center">
               Coins listed

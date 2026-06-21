@@ -1,8 +1,11 @@
 import { ArrowRight } from "lucide-react";
 import { IoLogoApple } from "react-icons/io";
 import QRCode from "react-qr-code";
+import { useAuth } from "./useAuth";
+import Button from "./Common/Button";
 
 export default function Hero() {
+  const isLoggedIn = useAuth();
   return (
     <section className="max-w-7xl mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6 py-12 md:py-16 justify-between w-full">
       {/* Left Content */}
@@ -16,12 +19,28 @@ export default function Hero() {
 
         {/* Input */}
         <div className="flex items-center gap-3 mt-8 max-md:hidden">
-          <button className="btn-primary" onClick={() => window.location.href = "/trade/register"}>
-            Create free account
-          </button>
-          <button className="btn-secondary" onClick={() => window.location.href = "/trade/spot"}>
-            Explore markets
-          </button>
+          {isLoggedIn ? (
+            <>
+              <Button className="btn-primary" onClick={() => window.location.href = "/trade/spot/BTCUSDT"}>
+                Trade Now
+              </Button>
+              <Button className="btn-secondary" onClick={() => window.location.href = "/invest"}>
+                Auto Invest
+              </Button>
+              <Button className="btn-secondary" onClick={() => window.location.href = "/trade/subscription"}>
+                Simple Earn
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button className="btn-primary" onClick={() => window.location.href = "/trade/register"}>
+                Create free account
+              </Button>
+              <Button className="btn-secondary" onClick={() => window.location.href = "/trade/spot"}>
+                Explore markets
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Continue With */}
@@ -53,7 +72,7 @@ export default function Hero() {
                 />
               </a>
               <a
-                href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+                href="https://download.bitzup.com/app-release.apk"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -90,9 +109,28 @@ export default function Hero() {
         />
       </div>
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
-        <button className="btn-primary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/register"}>
-          Create free account
-        </button>
+        {isLoggedIn ? (
+          <>
+            <Button className="btn-primary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/trade/spot/BTCUSDT"}>
+              Trade
+            </Button>
+            <Button className="btn-secondary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/invest"}>
+              Auto Invest
+            </Button>
+            <Button className="btn-secondary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/trade/subscription"}>
+              Earn
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button className="btn-primary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/register"}>
+              Create free account
+            </Button>
+            <Button className="btn-secondary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/login"}>
+              Log In
+            </Button>
+          </>
+        )}
       </div>
       <div className="flex gap-3 md:hidden">
         {/* <div className="w-10 h-10 border border-gray-600 rounded-lg flex items-center justify-center"> */}
@@ -119,7 +157,7 @@ export default function Hero() {
           />
         </a>
         <a
-          href="https://drive.google.com/file/d/1j6LthGR1st195GnqnKqWrPsnYNF3uBjt/view?usp=drive_link"
+          href="https://download.bitzup.com/app-release.apk"
           target="_blank"
           rel="noreferrer"
         >

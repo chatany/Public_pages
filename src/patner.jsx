@@ -21,7 +21,7 @@ export default function Partners() {
             key={i}
             src={`/${item}`}
             alt={`${item.split(".")[0]} partner logo`}
-            className="mx-12 py-6 w-28 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300"
+            className="mx-12 py-9 w-28 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300"
           />
         ))}
       </div>

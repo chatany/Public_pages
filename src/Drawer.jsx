@@ -1,9 +1,10 @@
-// src/components/MobileDrawer.jsx
 import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import { TiArrowSortedDown } from "react-icons/ti";
+import { useAuth } from "./useAuth";
 
 export default function MobileDrawer({ open, onClose }) {
+  const isLoggedIn = useAuth();
   const [expandedItem, setExpandedItem] = useState(null);
   const MAIN_SITE = "/trade";
 
@@ -47,10 +48,18 @@ export default function MobileDrawer({ open, onClose }) {
   };
 
   const handleNavigate = (path) => {
-    if (path.startsWith("http") || path.startsWith("/trade")) {
-      window.location.href = path;
+    let targetPath = path;
+    if (isLoggedIn) {
+      if (path === "/referral") {
+        targetPath = "/trade/referral";
+      } else if (path === "/invest") {
+        targetPath = "/trade/auto-invest";
+      }
+    }
+    if (targetPath.startsWith("http") || targetPath.startsWith("/trade")) {
+      window.location.href = targetPath;
     } else {
-      window.location.href = path; // Simplified for mobile
+      window.location.href = targetPath; // Simplified for mobile
     }
   };
 
@@ -101,19 +110,53 @@ export default function MobileDrawer({ open, onClose }) {
 
         {/* Auth Buttons */}
         <div className="px-6 py-6 space-y-3">
-          <button
-            onClick={() => handleNavigate("/trade/register")}
-            className="w-full h-12 rounded-full bg-brand-green text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-green/90 transition-colors"
-          >
-            <img src="gift.svg" className="size-5" alt="Gift rewards icon" />{" "}
-            Sign up now
-          </button>
-          <button
-            onClick={() => handleNavigate("/trade/login")}
-            className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors"
-          >
-            Log in
-          </button>
+          {isLoggedIn ? (
+            <>
+              <button
+                onClick={() => {
+                  handleNavigate("/trade/spot/BTCUSDT");
+                  onClose();
+                }}
+                className="w-full h-12 rounded-full bg-brand-green text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-green/90 transition-colors cursor-pointer"
+              >
+                Trade Now
+              </button>
+              <button
+                onClick={() => {
+                  handleNavigate("/invest");
+                  onClose();
+                }}
+                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+              >
+                Auto Invest
+              </button>
+              <button
+                onClick={() => {
+                  handleNavigate("/trade/subscription");
+                  onClose();
+                }}
+                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+              >
+                Simple Earn
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => handleNavigate("/trade/register")}
+                className="w-full h-12 rounded-full bg-brand-green text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-green/90 transition-colors cursor-pointer"
+              >
+                <img src="gift.svg" className="size-5" alt="Gift rewards icon" />{" "}
+                Sign up now
+              </button>
+              <button
+                onClick={() => handleNavigate("/trade/login")}
+                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+              >
+                Log in
+              </button>
+            </>
+          )}
         </div>
 
         {/* Menu */}

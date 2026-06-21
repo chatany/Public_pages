@@ -1,14 +1,29 @@
 import { Helmet } from "react-helmet-async";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AiFillLinkedin } from "react-icons/ai";
 import { BsTwitterX } from "react-icons/bs";
 import { FaSquareXTwitter, FaYoutube } from "react-icons/fa6";
 import { LuMoveRight } from "react-icons/lu";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
+import { useAuth } from "./useAuth";
 
 export const AutoInvest = () => {
-    console.log("Auto Invest component");
+  const isLoggedIn = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/trade/auto-invest", { replace: true });
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (isLoggedIn) {
+    return null;
+  }
+
+  console.log("Auto Invest component");
   const advantages = [
     {
       src: "/innovation.svg",
@@ -35,7 +50,7 @@ export const AutoInvest = () => {
         <title>Auto Invest Crypto on BitZup — DCA Made Simple</title>
         <meta
           name="description"
-          content="Set recurring buys for Bitcoin, Ethereum, and more on BitZup. Dollar-cost average into crypto on your schedule — daily, weekly, or monthly. Start from any amount."
+          content="Set Auto Invest Buys for Bitcoin, Ethereum, and more on BitZup. Dollar-cost average into crypto on your schedule — daily, weekly, or monthly. Start from any amount."
         />
       </Helmet>
       <Navbar />
@@ -44,7 +59,7 @@ export const AutoInvest = () => {
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
             <div className="flex flex-col gap-4">
               <h1 className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
-                Recurring Buys
+                Auto Invest Buys
               </h1>
               <div className="text-xs md:text-lg font-bold text-secondary max-w-md">
                 Auto-buy Bitcoin, Ethereum, Solana and 40+ others. Daily,
@@ -89,12 +104,12 @@ export const AutoInvest = () => {
           </div>
         </div>
         <div className="text-xl md:text-3xl text-center font-bold mt-20 md:px-16 p-5 text-secondary leading-relaxed">
-          Recurring buys give you the flexibility to decide how much and how
+          Auto Invest Buys give you the flexibility to decide how much and how
           often to invest.
         </div>
         <div className="flex flex-col gap-6 items-center bg-surface py-12 px-6 mt-20">
           <div className="font-bold text-xl md:text-3xl text-center">
-            Set up recurring buys on the BitZup app
+            Set up Auto Invest Buys on the BitZup app
           </div>
           <button
             onClick={() => (window.location.href = "/trade/register")}
