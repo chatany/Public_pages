@@ -14,29 +14,46 @@ export default function Hero() {
           Buy, trade and earn crypto - all in one place
         </h1>
         <p className="text-base text-secondary mt-4 text-left">
-          Join millions trading Bitcoin, Ethereum and 4,100+ coins on BitZup. Some of the lowest fees in crypto, tools that grow with you, and security you can verify.
+          Join millions trading Bitcoin, Ethereum and 2,300+ coins on BitZup.
+          Some of the lowest fees in crypto, tools that grow with you, and
+          security you can verify.
         </p>
 
         {/* Input */}
         <div className="flex items-center gap-3 mt-8 max-md:hidden">
           {isLoggedIn ? (
             <>
-              <Button className="btn-primary" onClick={() => window.location.href = "/trade/spot/BTCUSDT"}>
+              <Button
+                className="btn-primary"
+                onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
+              >
                 Trade Now
               </Button>
-              <Button className="btn-secondary" onClick={() => window.location.href = "/invest"}>
+              <Button
+                className="btn-secondary"
+                onClick={() => (window.location.href = "/invest")}
+              >
                 Auto Invest
               </Button>
-              <Button className="btn-secondary" onClick={() => window.location.href = "/trade/subscription"}>
+              <Button
+                className="btn-secondary"
+                onClick={() => (window.location.href = "/trade/subscription")}
+              >
                 Simple Earn
               </Button>
             </>
           ) : (
             <>
-              <Button className="btn-primary" onClick={() => window.location.href = "/trade/register"}>
+              <Button
+                className="btn-primary"
+                onClick={() => (window.location.href = "/trade/register")}
+              >
                 Create free account
               </Button>
-              <Button className="btn-secondary" onClick={() => window.location.href = "/trade/spot"}>
+              <Button
+                className="btn-secondary"
+                onClick={() => (window.location.href = "/trade/spot")}
+              >
                 Explore markets
               </Button>
             </>
@@ -111,22 +128,37 @@ export default function Hero() {
       <div className="flex items-center gap-3 mt-8 justify-between md:hidden">
         {isLoggedIn ? (
           <>
-            <Button className="btn-primary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/trade/spot/BTCUSDT"}>
+            <Button
+              className="btn-primary h-5 w-fit px-4 text-xs"
+              onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
+            >
               Trade
             </Button>
-            <Button className="btn-secondary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/invest"}>
+            <Button
+              className="btn-secondary h-5 w-fit px-4 text-xs"
+              onClick={() => (window.location.href = "/invest")}
+            >
               Auto Invest
             </Button>
-            <Button className="btn-secondary h-5 w-fit px-4 text-xs" onClick={() => window.location.href = "/trade/subscription"}>
+            <Button
+              className="btn-secondary h-5 w-fit px-4 text-xs"
+              onClick={() => (window.location.href = "/trade/subscription")}
+            >
               Earn
             </Button>
           </>
         ) : (
           <>
-            <Button className="btn-primary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/register"}>
+            <Button
+              className="btn-primary h-8 text-xs w-fit px-8"
+              onClick={() => (window.location.href = "/trade/register")}
+            >
               Create free account
             </Button>
-            <Button className="btn-secondary h-5 w-fit px-8" onClick={() => window.location.href = "/trade/login"}>
+            <Button
+              className="btn-secondary h-8 text-xs w-fit px-8"
+              onClick={() => (window.location.href = "/trade/login")}
+            >
               Log In
             </Button>
           </>
@@ -141,7 +173,7 @@ export default function Hero() {
         >
           <img
             src="/apple-badge.png"
-            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            className="w-auto md:h-10 h-8 cursor-pointer hover:opacity-80 transition-opacity"
             alt="App Store"
           />
         </a>
@@ -152,7 +184,7 @@ export default function Hero() {
         >
           <img
             src="/google-play-badge.png"
-            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            className="w-auto md:h-10 h-8 cursor-pointer hover:opacity-80 transition-opacity"
             alt="Google Play"
           />
         </a>
@@ -163,7 +195,7 @@ export default function Hero() {
         >
           <img
             src="/android-badge.png"
-            className="w-auto h-10 cursor-pointer hover:opacity-80 transition-opacity"
+            className="w-auto md:h-10 h-8 cursor-pointer hover:opacity-80 transition-opacity"
             alt="Android"
           />
         </a>

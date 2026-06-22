@@ -335,7 +335,7 @@ export const Section = () => {
           <div className="md:w-[50%] w-full justify-center flex ">
             <div className=" rounded-full p-20  w-full backdrop-blur flex justify-center relative items-center">
               <video
-                src="/new exp.webm"
+                src="/slide.mp4"
                 autoPlay
                 loop
                 muted
@@ -465,63 +465,13 @@ export const Section = () => {
           </div>
         </div>
       </div>
-      <div className="max-md:hidden flex flex-col gap-10 mt-10 w-full max-w-7xl mx-auto px-6 md:px-8">
+      <div className="max-md:hidden flex flex-col gap-10 mt-20 w-full max-w-7xl mx-auto px-6 md:px-8">
         <div className="font-bold text-3xl text-center">
           {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
         </div>
         <div className="flex justify-between items-center">
-          {isLoggedIn ? (
-            <div className="flex flex-col gap-10">
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">1</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">Spot & Futures Trading</div>
-                  <div className="text-sm text-secondary font-normal">
-                    Trade Bitcoin, Ethereum, and 2,300+ coins with some of the lowest fees.
-                  </div>
-                  <Button
-                    onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
-                    variant="secondary"
-                    className="text-xs h-8 w-fit"
-                  >
-                    Trade Now <FaArrowRightLong />
-                  </Button>
-                </div>
-              </div>
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">2</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">Auto Invest DCA</div>
-                  <div className="text-sm text-secondary font-normal">
-                    Dollar-cost average into your favorite cryptocurrencies automatically.
-                  </div>
-                  <Button
-                    onClick={() => (window.location.href = "/invest")}
-                    className="text-xs h-8 w-fit"
-                    variant='secondary'
-                  >
-                    Start Auto Invest <FaArrowRightLong />
-                  </Button>
-                </div>
-              </div>
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">3</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">Simple Earn Yield</div>
-                  <div className="text-sm text-secondary font-normal">
-                    Earn high-yield passive income on 300+ crypto assets.
-                  </div>
-                  <Button
-                    className="text-xs h-8 w-fit"
-                    variant='secondary'
-                    onClick={() => (window.location.href = "/trade/subscription")}
-                  >
-                    Earn Yield <FaArrowRightLong />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          ) : (
+   
+
             <div className="flex flex-col gap-10">
               <div className="flex gap-5">
                 <div className="font-bold text-3xl w-7.5">1</div>
@@ -534,8 +484,8 @@ export const Section = () => {
                   </div>
                   <Button
                     onClick={() => (window.location.href = "/trade/register")}
-                    variant="secondary"
-                    className="text-xs h-8 w-fit"
+                    variant={!isLoggedIn?"primary":"secondary"}
+                    className="text-xs h-8 w-fit flex gap-1"
                   >
                     Register now <FaArrowRightLong />
                   </Button>
@@ -550,8 +500,8 @@ export const Section = () => {
                     another wallet.
                   </div>
                   <Button
-                    onClick={() => (window.location.href = "/trade/spot")}
-                    className="text-xs h-8 w-fit"
+                    onClick={() => (window.location.href = "/trade/buy-crypto")}
+                    className="text-xs h-8 w-fit flex gap-1"
                     variant='secondary'
                   >
                     Buy Crypto  {" "}<FaArrowRightLong />
@@ -566,7 +516,7 @@ export const Section = () => {
                     Trade spot and futures traders automatically.
                   </div>
                   <Button
-                    className="text-xs h-8 w-fit"
+                    className="text-xs h-8 w-fit flex gap-1"
                     variant='secondary'
                     onClick={() => (window.location.href = "/trade/spot")}
                   >
@@ -575,51 +525,25 @@ export const Section = () => {
                 </div>
               </div>
             </div>
-          )}
-          <div className="w-[26.25rem] h-80 rounded-xl bg-surface overflow-hidden">
+
+          <div className="relative flex justify-center items-center">
+
+           <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
+          <div className=" rounded-xl overflow-hidden">
             <img
-              src="/feature-summary.png"
+              src="/howToTrade.svg"
               className="w-full h-full object-cover"
-              alt="How to get started illustration"
+              
             />
+          </div>
           </div>
         </div>
       </div>
-      <div className=" w-full md:text-3xl text-2xl font-bold md:hidden text-center ">
+      <div className=" w-full md:text-3xl text-2xl mt-10 font-bold md:hidden text-center ">
         {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
       </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-        {isLoggedIn ? (
-          <>
-            <div
-              onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
-              className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
-            >
-              <div>Spot & Futures Trading</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
-            </div>
-            <div
-              onClick={() => (window.location.href = "/invest")}
-              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
-            >
-              <div>Auto Invest DCA</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
-            </div>
-            <div
-              onClick={() => (window.location.href = "/trade/subscription")}
-              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
-            >
-              <div>Simple Earn Yield</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
-            </div>
-          </>
-        ) : (
+      
           <>
             <div
               onClick={() => (window.location.href = "/trade/register")}
@@ -649,7 +573,7 @@ export const Section = () => {
               </div>
             </div>
           </>
-        )}
+        
       </div>
       <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
@@ -764,7 +688,7 @@ export const Section = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly w-full">
           <div>
             <div className="md:text-3xl text-xl font-bold text-center">
-              $19.64B
+             $1.05B
             </div>
             <div className="text-eyebrow text-secondary text-center">
               Traded in 24h

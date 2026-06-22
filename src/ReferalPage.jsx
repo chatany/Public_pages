@@ -46,8 +46,9 @@ export const ReferralPage = () => {
             Share your BitZup link and earn up to 30% commission on every trade your friends make — paid in real crypto. They get a welcome bonus; you both win.
           </p>
         </div>
-        <div className="mt-10">
-          <div className="bg-surface rounded-full md:size-96 size-72" />
+        <div className="mt-10 relative flex justify-center items-center">
+          <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
+          <img src="/referral.svg" className="relative z-base md:size-96 size-72" alt="Referral"/>
         </div>
       </div>
       <div className="flex justify-center flex-col items-center md:p-20 p-6">
@@ -55,8 +56,11 @@ export const ReferralPage = () => {
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 w-full">
           {/* Step 1 */}
           <div className="flex flex-col gap-6">
-            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md   max-md:items-center">
               <div className="text-2xl font-semibold text-secondary">01</div>
+              <div className="flex justify-center items-center">
+                <img src="/referral1.svg" alt="" className="md:size-40 size-16" />
+              </div>
             <div className=" md:hidden text-base font-bold text-primary text-left">
               Share your link — Copy your unique referral link or code and send it to friends.
             </div>
@@ -68,8 +72,12 @@ export const ReferralPage = () => {
           
           {/* Step 2 */}
           <div className="flex flex-col gap-6">
-            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md   max-md:items-center">
               <div className="text-2xl font-bold text-secondary">02</div>
+               <div className="flex justify-center items-center">
+
+              <img src="/referral2.svg" className="md:size-40 size-16"/>
+               </div>
               <div className="md:hidden text-base font-bold text-primary text-left">
               They sign up & trade — Your friend registers and buys at least $50 in crypto within 15 days.
             </div>
@@ -81,8 +89,12 @@ export const ReferralPage = () => {
 
           {/* Step 3 */}
           <div className="flex flex-col gap-6">
-            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md gap-10  max-md:items-center">
+            <div className="card max-md:h-32 h-48 md:h-60 flex flex-col max-md:flex-row  max-md   max-md:items-center">
               <div className="text-2xl font-bold text-secondary">03</div>
+              <div className="flex justify-center items-center">
+
+              <img src="/referral3.svg" className="md:size-40 size-16"/>
+              </div>
                <div className="md:hidden text-base font-bold text-primary text-left">
               You both get paid — You each receive a $100 trading-fee rebate voucher, plus you keep earning 30% of their trading fees.
             </div>

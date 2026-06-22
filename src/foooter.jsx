@@ -16,6 +16,7 @@ import { useState } from "react";
 import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 import { useAuth } from "./useAuth";
+import Button from "./Common/Button";
 
 export const Footer = ({ isShow = true }) => {
   const isLoggedIn = useAuth();
@@ -203,13 +204,16 @@ export const Footer = ({ isShow = true }) => {
               <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
                 Create your free account and claim your new-user rewards today.
               </div>
-              <button className="btn-primary h-[58px] px-10" onClick={() => window.location.href = "/trade/register"}>
-                <div className="flex max-md:hidden font-semibold text-black gap-1 items-center text-lg">
+              <button onClick={() => window.location.href = "/trade/register"}>
+                <Button 
+                className="h-12"
+                variant="primary"
+                >
                   Create free account
-                </div>
-                <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
+                </Button>
+                {/* <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
                   Create free account
-                </div>
+                </div> */}
               </button>
             </>
           )}

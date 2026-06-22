@@ -374,7 +374,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary relative z-[99]">
+    <div className="flex justify-between fixed top-0  items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary  z-99">
       <div className="flex xl:w-[60%] items-center text-lg gap-2 font-semibold leading-6 lg:gap-8">
         <div
           className="text-brand-green font-semibold cursor-pointer"
