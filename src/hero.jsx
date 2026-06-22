@@ -24,34 +24,28 @@ export default function Hero() {
           {isLoggedIn ? (
             <>
               <Button
-                className="btn-primary"
+                className="primary h-10"
                 onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
               >
                 Trade Now
               </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => (window.location.href = "/invest")}
+             <Button
+                className="secondary h-10"
+                onClick={() => (window.location.href = "/trade/spot")}
               >
-                Auto Invest
-              </Button>
-              <Button
-                className="btn-secondary"
-                onClick={() => (window.location.href = "/trade/subscription")}
-              >
-                Simple Earn
+                Explore markets
               </Button>
             </>
           ) : (
             <>
               <Button
-                className="btn-primary"
+                className="primary h-10"
                 onClick={() => (window.location.href = "/trade/register")}
               >
                 Create free account
               </Button>
               <Button
-                className="btn-secondary"
+                className="secondary h-10"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
                 Explore markets
