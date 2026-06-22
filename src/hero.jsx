@@ -7,7 +7,7 @@ import Button from "./Common/Button";
 export default function Hero() {
   const isLoggedIn = useAuth();
   return (
-    <section className="max-w-7xl mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6 py-12 md:py-16 justify-between w-full">
+    <section className="max-w-7xl mt-20 mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6 py-12 md:py-16 justify-between w-full">
       {/* Left Content */}
       <div className=" z-base w-full md:w-[50%] flex flex-col text-left">
         <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
