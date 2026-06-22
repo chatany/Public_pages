@@ -11,6 +11,7 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { BsAndroid2 } from "react-icons/bs";
 import Button from "./Common/Button";
 import { useAuth } from "./useAuth";
+import { apiRequest, BASE_URL } from "./Components/fee";
 function CoinIcon({ mover }) {
   const [imgError, setImgError] = useState(false);
   const iconSrc = mover?.coin_icon;
@@ -34,6 +35,29 @@ function CoinIcon({ mover }) {
 }
 export const Section = () => {
   const isLoggedIn = useAuth();
+  const [depositInfo, setDepositInfo] = useState(false);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const { data, status } = await apiRequest({
+          method: "get",
+          url: `${BASE_URL}/onboarding/user/getUserProfile`,
+        });
+
+        if (status === 200 && data?.status === "1") {
+          setDepositInfo(!!data?.data?.depositInfo);
+        }
+      } catch (err) {
+        console.error("Failed to fetch user profile in Section:", err);
+      }
+    };
+
+    if (isLoggedIn) {
+      fetchUserProfile();
+    }
+  }, [isLoggedIn]);
+
   // const tabs = ["Top", "Hot", "Gainers", "Falling", "New"];
   const [activeTab, setActiveTab] = useState(null);
   const [active, setActive] = useState(0);
@@ -484,7 +508,7 @@ export const Section = () => {
                   </div>
                   <Button
                     onClick={() => (window.location.href = "/trade/register")}
-                    variant={!isLoggedIn?"primary":"secondary"}
+                    variant={!isLoggedIn ? "primary" : "secondary"}
                     className="text-xs h-8 w-fit flex gap-1"
                   >
                     Register now <FaArrowRightLong />
@@ -502,7 +526,7 @@ export const Section = () => {
                   <Button
                     onClick={() => (window.location.href = "/trade/buy-crypto")}
                     className="text-xs h-8 w-fit flex gap-1"
-                    variant='secondary'
+                    variant={isLoggedIn && !depositInfo ? "primary" : "secondary"}
                   >
                     Buy Crypto  {" "}<FaArrowRightLong />
                   </Button>
@@ -517,7 +541,7 @@ export const Section = () => {
                   </div>
                   <Button
                     className="text-xs h-8 w-fit flex gap-1"
-                    variant='secondary'
+                    variant={isLoggedIn && depositInfo ? "primary" : "secondary"}
                     onClick={() => (window.location.href = "/trade/spot")}
                   >
                     Trade Now <FaArrowRightLong />
@@ -547,7 +571,9 @@ export const Section = () => {
           <>
             <div
               onClick={() => (window.location.href = "/trade/register")}
-              className="border-border border w-full rounded-md items-center flex justify-between p-4 cursor-pointer"
+              className={`border w-full rounded-md items-center flex justify-between p-4 cursor-pointer ${
+                !isLoggedIn ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
+              }`}
             >
               <div>Create your free account</div>
               <div className="bg-surface p-2 rounded-md">
@@ -555,8 +581,10 @@ export const Section = () => {
               </div>
             </div>
             <div
-              onClick={() => (window.location.href = "/trade/spot")}
-              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+              onClick={() => (window.location.href = "/trade/buy-crypto")}
+              className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
+                isLoggedIn && !depositInfo ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
+              }`}
             >
               <div>Add funds</div>
               <div className="bg-surface p-2 rounded-md">
@@ -565,7 +593,9 @@ export const Section = () => {
             </div>
             <div
               onClick={() => (window.location.href = "/trade/spot")}
-              className=" border-border border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer"
+              className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
+                isLoggedIn && depositInfo ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
+              }`}
             >
               <div>Start trading</div>
               <div className="bg-surface p-2 rounded-md">
