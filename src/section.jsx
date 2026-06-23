@@ -293,7 +293,7 @@ export const Section = () => {
                       <CoinIcon mover={mover} />
                       <div className="flex flex-col">
                         <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-sm md:text-lg">
-                          {mover?.base_asset_symbol}
+                          {mover?.base_asset_symbol} {" "} ({mover?.quote_asset_symbol})
                         </span>
                         <span className="text-xs text-secondary font-medium">
                           {mover?.coin_name}
