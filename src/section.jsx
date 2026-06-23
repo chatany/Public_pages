@@ -253,7 +253,7 @@ export const Section = () => {
                 <div
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`py-3 whitespace-nowrap cursor-pointer font-bold text-lg md:text-3xl transition-all relative
+                  className={`py-3 whitespace-nowrap cursor-pointer font-bold text-base md:text-lg transition-all relative
                 ${activeTab === tab ? "text-primary" : "text-muted hover:text-primary"}`}
                 >
                   {tab === "Hot" && "🔥"} {tab}
@@ -292,8 +292,11 @@ export const Section = () => {
                     <div className="flex items-center gap-4">
                       <CoinIcon mover={mover} />
                       <div className="flex flex-col">
-                        <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-sm md:text-lg">
-                          {mover?.base_asset_symbol} {" "} ({mover?.quote_asset_symbol})
+                        <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-xs md:text-base">
+                          {mover?.base_asset_symbol} {" "} <span className=" text-xs text-text-muted">
+                            
+                            ({mover?.quote_asset_symbol})
+                            </span>
                         </span>
                         <span className="text-xs text-secondary font-medium">
                           {mover?.coin_name}
