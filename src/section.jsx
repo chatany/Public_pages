@@ -66,6 +66,25 @@ export const Section = () => {
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const latestMarketRef = useRef(null);
+  const mobileVideoRef = useRef(null);
+
+  useEffect(() => {
+    if (mobileVideoRef.current) {
+      mobileVideoRef.current.play().catch((err) => {
+        console.log("Mobile video autoplay blocked:", err);
+      });
+    }
+  }, []);
+
+  const handleVideoClick = () => {
+    if (mobileVideoRef.current) {
+      if (mobileVideoRef.current.paused) {
+        mobileVideoRef.current.play().catch((err) => console.log(err));
+      } else {
+        mobileVideoRef.current.pause();
+      }
+    }
+};
 
   const filteredData = () => {
     return activeTab !== "All" ? data[activeTab] : data1;
@@ -360,16 +379,23 @@ export const Section = () => {
         </div>
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full">
           <div className="md:w-[50%] w-full justify-center flex ">
-            <div className=" rounded-full p-20  w-full backdrop-blur flex justify-center relative items-center">
+            <div className=" rounded-full p-4 md:p-20  w-full flex justify-center relative items-center">
+              {/* Invisible interactive overlay to prevent default iOS controls trigger */}
+              <div 
+                onClick={handleVideoClick} 
+                className="absolute w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-30 rounded-4xl cursor-pointer"
+              />
               <video
-                src="/slide.mp4"
+                ref={mobileVideoRef}
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20 rounded-4xl"
-              />
-              <div className="absolute   blur-[500px] h-[60%] w-50 rounded-full"></div>
+                className="w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-20 rounded-4xl pointer-events-none"
+              >
+                <source src="/slide.mp4" type="video/mp4" />
+              </video>
+              <div className="absolute bg-brand-green/10 blur-3xl h-[60%] w-1/2 rounded-full pointer-events-none"></div>
             </div>
           </div>
           <div className=" flex w-full justify-center items-center text-xs gap-5 md:hidden">
@@ -737,7 +763,7 @@ export const Section = () => {
           </div>
           <div>
             <div className="md:text-3xl text-xl font-bold text-center">
-              10.16%
+              15%
             </div>
             <div className="text-eyebrow text-secondary text-center">
               APR on Simple Earn

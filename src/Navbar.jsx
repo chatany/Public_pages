@@ -26,6 +26,7 @@ import { apiRequest, BASE_URL } from "./Components/fee";
 import { DepositPopup } from "./Components/DepositPopup";
 import { useDeviceInfo } from "./Hooks/useDeviceInfo";
 import { useAuth } from "./useAuth";
+import Button from "./Common/Button";
 
 const MAIN_SITE = "/trade";
 
@@ -207,6 +208,7 @@ export default function Navbar() {
   const [copied, setCopied] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [openDeposit, setOpenDeposit] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const isLoggedIn =useAuth()
   const deviceInfo = useDeviceInfo();
@@ -613,7 +615,7 @@ export default function Navbar() {
                               e.preventDefault();
                               e.stopPropagation();
                               if (item?.name === "Log Out") {
-                                handleLogout();
+                                setShowLogoutConfirm(true);
                               } else {
                                 handleNavigate(item?.path);
                               }
@@ -709,7 +711,7 @@ export default function Navbar() {
                           setOpenDropdown(null);
                           setProfile(false);
                           if (item?.name === "Log Out") {
-                            handleLogout();
+                            setShowLogoutConfirm(true);
                           } else {
                             handleNavigate(item?.path);
                           }
@@ -841,7 +843,7 @@ export default function Navbar() {
           <div title="Logout">
             <RiLogoutBoxRLine
               className="hover:text-brand-green h-6 w-6 text-text-primary"
-              onClick={handleLogout}
+              onClick={() => setShowLogoutConfirm(true)}
             />
           </div>
         )}
@@ -860,6 +862,38 @@ export default function Navbar() {
         <DepositPopup popup={openDeposit} setPopup={setOpenDeposit} />
       )}
       <MobileDrawer open={openPopup} onClose={handleClose} />
+
+      {showLogoutConfirm && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fadeIn">
+          <div className="relative w-full max-w-[380px] bg-surface-2 border border-border rounded-xl p-6 shadow-2xl flex flex-col items-center">
+            <h3 className="text-lg font-bold text-text-primary text-center mb-2">
+              Confirm Log Out
+            </h3>
+            <p className="text-center text-sm text-text-muted leading-relaxed mb-6">
+              Are you sure you want to log out of your account?
+            </p>
+            <div className="flex gap-4 w-full">
+              <Button
+                variant="cancel"
+                onClick={() => setShowLogoutConfirm(false)}
+                className="flex-1 h-10 text-sm "
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  setShowLogoutConfirm(false);
+                  handleLogout();
+                }}
+                className="flex-1 h-10 text-sm "
+              >
+                Log Out
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

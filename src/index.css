@@ -443,3 +443,18 @@
   cursor: not-allowed;
   opacity: 0.5;
 }
+
+/* Hide iOS Safari default play/resume button overlay on autoPlay/loop videos */
+video::-webkit-media-controls {
+  display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+}
