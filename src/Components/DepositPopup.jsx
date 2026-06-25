@@ -18,12 +18,12 @@ export const DepositPopup = ({ popup, setPopup }) => {
   }, [popup]);
 
   const handleClose = () => {
-    navigate("/trade/crypto/deposit");
+    window.location.href="/trade/crypto/deposit"
     setPopup(!popup);
   };
 
   const handleClose1 = () => {
-    navigate("/trade/buy-crypto");
+    window.location.href="/trade/buy-crypto"
     setPopup(!popup);
   };
 
