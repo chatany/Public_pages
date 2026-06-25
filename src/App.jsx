@@ -42,7 +42,12 @@ const PageLoader = ({ className }) => {
   );
 };
 
+
+
 export default function App() {
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", "light");
+  }, []);
   return (
     <Router>
       <ScrollToTop />

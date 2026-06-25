@@ -99,7 +99,6 @@ const seoData = {
 };
 
 function run() {
-  console.log("🚀 Starting SEO Pre-renderer post-build process...");
 
   if (!fs.existsSync(TEMPLATE_PATH)) {
     console.error(
@@ -114,7 +113,6 @@ function run() {
     const { title, description } = meta;
     const ogDesc = meta.ogDescription || description;
     const themeColor = meta.themeColor || "#0B0E11";
-    console.log(`📝 Pre-rendering route: "${route}"`);
 
     // Build the dynamic SEO, Open Graph and Twitter tags block
     const seoTags = `
@@ -163,7 +161,6 @@ function run() {
     if (route === "/") {
       // For home page, overwrite the main index.html file in dist/
       fs.writeFileSync(TEMPLATE_PATH, modifiedHtml, "utf-8");
-      console.log(`✅ Successfully updated home route "/" -> dist/index.html`);
     } else {
       // For sub-routes, create a nested folder and write index.html inside it
       const targetDir = path.join(DIST_DIR, route);
@@ -172,13 +169,10 @@ function run() {
       }
       const targetFile = path.join(targetDir, "index.html");
       fs.writeFileSync(targetFile, modifiedHtml, "utf-8");
-      console.log(
-        `✅ Successfully generated sub-route "${route}" -> dist${route}/index.html`,
-      );
+    
     }
   });
 
-  console.log("🎉 Static SEO pre-rendering process completed successfully!");
 }
 
 run();

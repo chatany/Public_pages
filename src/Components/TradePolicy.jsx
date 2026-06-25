@@ -8,7 +8,7 @@ export const TradePolicy = () => {
         <meta name="description" content="Read the BitZup Trading Policy. Permitted activities, fees, compliance checks, market integrity rules, and the standards that govern every trade." />
        </Helmet>
       <div className="text-left">
-        <h1 className="text-2xl font-bold mb-20">TRADING POLICY</h1>
+        <h1 className="text-3xl font-bold mb-20">TRADING POLICY</h1>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">

@@ -7,9 +7,9 @@ import Button from "./Common/Button";
 export default function Hero() {
   const isLoggedIn = useAuth();
   return (
-    <section className="max-w-7xl mt-20 mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6 py-12 md:py-16 justify-between w-full">
+    <section className="max-w-7xl mt-30 mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6  justify-between w-full">
       {/* Left Content */}
-      <div className=" z-base w-full md:w-[50%] flex flex-col text-left">
+      <div className=" z-base w-full md:w-[50%] flex flex-col text-left gap-2">
         <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
           Buy, trade and earn crypto - all in one place
         </h1>
@@ -31,6 +31,7 @@ export default function Hero() {
               </Button>
              <Button
                 className="secondary h-10"
+                variant="secondary"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
                 Explore markets
@@ -46,6 +47,7 @@ export default function Hero() {
               </Button>
               <Button
                 className="secondary h-10"
+                variant="secondary"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
                 Explore markets
@@ -67,7 +69,7 @@ export default function Hero() {
               >
                 <img
                   src="/apple-badge.png"
-                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="App Store"
                 />
               </a>
@@ -78,7 +80,7 @@ export default function Hero() {
               >
                 <img
                   src="/google-play-badge.png"
-                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="Google Play"
                 />
               </a>
@@ -89,7 +91,7 @@ export default function Hero() {
               >
                 <img
                   src="/android-badge.png"
-                  className="w-auto h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  className="w-auto h-11 cursor-pointer hover:opacity-80 transition-opacity"
                   alt="Android"
                 />
               </a>

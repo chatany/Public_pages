@@ -5,7 +5,6 @@ import Partners from "../patner"
 import { Section } from "../section"
 
 export const Home = () => {
-  console.log("home component");
   
   return (
     <div className=" min-h-screen bg-black flex justify-center flex-col">

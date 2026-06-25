@@ -23,7 +23,6 @@ export const AutoInvest = () => {
     return null;
   }
 
-  console.log("Auto Invest component");
   const advantages = [
     {
       src: "/innovation.svg",

@@ -106,6 +106,10 @@ export const Verification = () => {
   }, []);
 
   const handleSubmit = async () => {
+    !inputValue&& setErrors("Please enter a value")
+    if(!inputValue){
+      return;
+    }
     try {
       const payload = {
         type: select.account_type,
@@ -158,7 +162,7 @@ export const Verification = () => {
         />
       )}
       <div className="bg-bg min-h-screen ">
-        <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh]">
+        <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh] mt-20">
           <div className="flex flex-col w-[60%] max-md:w-full">
             <div className="flex items-center flex-col p-5 gap-5">
               <div className="md:text-3xl text-2xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
@@ -176,7 +180,7 @@ export const Verification = () => {
                   ref={popupRef}
                 >
                   <div
-                    className="border bg-recessed border-border rounded-sm px-5 h-14 text-sm text-primary outline-none"
+                    className="border bg-recessed border-border rounded-sm px-5 h-12 text-sm text-primary outline-none"
                   >
                     <div
                       className="w-full flex justify-between h-full p-2 items-center"
@@ -250,7 +254,7 @@ export const Verification = () => {
                   placeholder={select?.placeholder || "Paste a link, email, phone number or handle"}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  className="w-full border bg-surface border-border rounded-sm px-5 h-14 text-sm font-normal text-primary outline-none "
+                  className="w-full border bg-recessed border-border rounded-sm px-5 h-12 text-sm font-normal placeholder:text-text-muted text-text-primary outline-none "
                 />
               </div>
             </div>
@@ -261,7 +265,7 @@ export const Verification = () => {
                   name="Email"
                   placeholder="Search"
                 onClick={handleSubmit}
-                className="h-12 w-full flex-gap-2"
+                className="h-10 w-full flex-gap-2"
                  
                 >
                   <IoIosSearch className="  h-6 w-6 text-bg" />

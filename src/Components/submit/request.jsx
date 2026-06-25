@@ -100,7 +100,7 @@ export default function SubmitRequestForm() {
         />
       </Helmet>
       <Navbar />
-      <div className="min-h-screen bg-black text-white">
+      <div className="min-h-screen bg-black text-white mt-20">
         {/* HEADER */}
         <div className="flex w-full justify-between md:px-10 px-3 py-12 md:ml-15 max-md:flex-col">
           <div className="text-base textbrand-green mb-4 text-left">

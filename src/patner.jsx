@@ -1,6 +1,5 @@
 export default function Partners() {
   const partners = [
-    // "CryptoSwift.svg",
     "Crystal.svg",
     "Sumsub.svg",
     "Alchemy.png",

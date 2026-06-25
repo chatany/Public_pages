@@ -22,7 +22,7 @@ export const Menu = ({ children }) => {
     <div className="bg-black">
       <Navbar />
 
-      <div className="md:p-15 ">
+      <div className="md:p-15 mt-20 ">
         <div className="flex flex-col gap-5">
           
           <div className="flex max-md:flex-col gap-20 w-full">

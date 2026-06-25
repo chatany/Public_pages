@@ -8,6 +8,7 @@ import {
   FaTelegramPlane,
   FaTiktok,
   FaTwitter,
+  FaGlobe,
 } from "react-icons/fa";
 import { FaArrowRightLong, FaXTwitter } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -17,13 +18,13 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 import { useAuth } from "./useAuth";
 import Button from "./Common/Button";
+import { BsTwitterX } from "react-icons/bs";
 
 export const Footer = ({ isShow = true }) => {
   const isLoggedIn = useAuth();
   const MAIN_SITE = "/trade";
   const [openIndex, setOpenIndex] = useState(null);
   const [openMobileIndex, setOpenMobileIndex] = useState(null);
-  console.log("Footer component");
   const toggleMobile = (index) => {
     setOpenMobileIndex(openMobileIndex === index ? null : index);
   };
@@ -139,9 +140,9 @@ export const Footer = ({ isShow = true }) => {
               <div key={index} className=" border-border">
                 <button
                   onClick={() => toggle(index)}
-                  className="w-full py-3 md:py-5 flex justify-between cursor-pointer items-center text-left group transition-all"
+                  className="w-full py-3 md:py-4 flex justify-between cursor-pointer items-center text-left group transition-all"
                 >
-                  <span className="text-md: md:text-lg font-medium  text-primary group-hover:text-brand-green transition-colors leading-tight pr-8">
+                  <span className="md:text-xl font-medium  text-primary  transition-colors leading-tight pr-8">
                     {item.question}
                   </span>
                   <IoIosArrowDown
@@ -154,7 +155,7 @@ export const Footer = ({ isShow = true }) => {
                     openIndex === index ? "max-h-[31.25rem] pb-10" : "max-h-0"
                   }`}
                 >
-                  <p className="text-gray-400 text-left text-sm md:text-md font-medium leading-relaxed">
+                  <p className="text-text-muted text-left text-sm md:text-base font-medium leading-relaxed">
                     {item.answer}
                   </p>
                 </div>
@@ -182,9 +183,9 @@ export const Footer = ({ isShow = true }) => {
                 >
                   Trade Now
                 </button>
-                <button
+                {/* <button
                   className="btn-secondary h-12 px-8 flex items-center justify-center font-bold rounded-md cursor-pointer transition-colors"
-                  onClick={() => window.location.href = "/invest"}
+                  onClick={() => window.location.href = "/auto-invest"}
                 >
                   Auto Invest
                 </button>
@@ -193,7 +194,7 @@ export const Footer = ({ isShow = true }) => {
                   onClick={() => window.location.href = "/trade/subscription"}
                 >
                   Simple Earn
-                </button>
+                </button> */}
               </div>
             </>
           ) : (
@@ -206,7 +207,7 @@ export const Footer = ({ isShow = true }) => {
               </div>
               <button onClick={() => window.location.href = "/trade/register"}>
                 <Button 
-                className="h-12"
+                className="h-10"
                 variant="primary"
                 >
                   Create free account
@@ -220,296 +221,317 @@ export const Footer = ({ isShow = true }) => {
         </div>
       )}
       <div className="py-5">
-        <footer className="bg-surface text-primary py-16 max-md:hidden">
-          <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-1 md:grid-cols-6 gap-8 w-full">
-            {/* LEFT SECTION */}
-            <div className="space-y-6 flex flex-col w-full items-start">
-              <h2 className="text-2xl font-semibold text-left">
-                Trade Crypto Anywhere Anytime
-              </h2>
-
-              <div className="flex flex-col items-start">
-                <div className="size-32">
-                  <QRCode className="w-full h-full bg-white  p-2" value={`${window.location.origin}/trade/download`} />
-                </div>
-                <p className="text-xs text-gray-400 mt-1 text-left">
-                  Scan to download app
-                </p>
+        <footer className="bg-surface text-primary py-6 max-md:hidden">
+          <div className="max-w-7xl mx-auto  w-full">
+            {/* Columns (Grid) */}
+            <div className="mb-6 ">
+              <img
+                  src="/bitzup_light_logo.png"
+                  className="h-auto w-[160px]"
+                  alt="BitZup Logo"
+                />
               </div>
-
-              <div className="text-left">
-                <h3 className="text-lg font-semibold mb-3">
-                  Community
-                </h3>
-                <div className="flex gap-6">
-                  <a
-                    href="https://t.me/bitzup_official"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
-                  >
-                    <div
-                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                    >
-                      <FaTelegram className="text-xl text-telegram" />
-                    </div>
-                    <span className="text-xs opacity-60">Telegram</span>
-                  </a>
-                  <a
-                    href="https://x.com/BitZup_Official"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
-                  >
-                    <div
-                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                    >
-                      <FaTwitter className="text-xl" />
-                    </div>
-                    <span className="text-xs opacity-60">Twitter</span>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
-                  >
-                    <div
-                      className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                    >
-                      <FaInstagram className="text-xl text-instagram" />
-                    </div>
-                    <span className="text-xs opacity-60">Instagram</span>
-                  </a>
-                  
-                </div>
-              </div>
-            </div>
-
-            {/* ABOUT */}
-            <div className="text-left">
-              <h3 className="text-xl font-semibold mb-4">About</h3>
-              <ul className="text-gray-300 text-sm flex flex-col">
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/aml-policy"} className="block p-3 -my-1.5 -mx-3">AML Policy</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/cookies-policy"} className="block p-3 -my-1.5 -mx-3">Cookie Policy</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/privacy-policy"} className="block p-3 -my-1.5 -mx-3">Privacy Notice</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/risk-disclosure"} className="block p-3 -my-1.5 -mx-3">Risk Disclosure</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/trading-policy"} className="block p-3 -my-1.5 -mx-3">Trading Policy</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/user-agreement"} className="block p-3 -my-1.5 -mx-3">User Agreement</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline ">
-                  <Link to={"/terms-of-use"} className="block p-3 -my-1.5 -mx-3">Terms of use</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* PRODUCT */}
-            <div className="text-left">
-              <h3 className="text-xl font-semibold mb-4">Product</h3>
-              <ul className="text-gray-300 text-sm flex flex-col">
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Buy Crypto</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/futures/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Futures Trading</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">Spot Trading</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/subscription`} className="block p-3 -my-1.5 -mx-3">Earn</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  {isLoggedIn ? (
-                    <a
-                      href="/trade/auto-invest"
-                      className="block p-3 -my-1.5 -mx-3"
-                    >
-                      Auto Invest
-                    </a>
-                  ) : (
-                    <Link to="/invest" className="block p-3 -my-1.5 -mx-3">
-                      Auto Invest
-                    </Link>
-                  )}
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/convert`} className="block p-3 -my-1.5 -mx-3">Convert</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* TRADES */}
-            <div className="text-left">
-              <h3 className="text-xl font-semibold mb-4">Trades</h3>
-              <ul className="text-gray-300 text-sm flex flex-col">
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block p-3 -my-1.5 -mx-3">BTCUSDT</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/ETHUSDT`} className="block p-3 -my-1.5 -mx-3">ETHUSDT</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/DOGEUSDT`} className="block p-3 -my-1.5 -mx-3">DOGEUSDT</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/SOLUSDT`} className="block p-3 -my-1.5 -mx-3">SOLUSDT</a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href={`${MAIN_SITE}/spot/XRPUSDT`} className="block p-3 -my-1.5 -mx-3">XRP USDT</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* SERVICE */}
-            <div className="text-left">
-              <h3 className="text-xl font-semibold mb-4">Service</h3>
-              <ul className="text-gray-300 text-sm flex flex-col">
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  {isLoggedIn ? (
-                    <a href="/trade/reffrral" className="block p-3 -my-1.5 -mx-3">Referral</a>
-                  ) : (
-                    <Link to="/referral" className="block p-3 -my-1.5 -mx-3">Referral</Link>
-                  )}
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/vip" className="block p-3 -my-1.5 -mx-3">VIP Program</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/careers" className="block p-3 -my-1.5 -mx-3">Careers</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* SUPPORT */}
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-left">Support</h3>
-              <ul className="text-gray-300 text-sm text-left flex flex-col">
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <a href="https://support.bitzup.com/support/home" className="block p-3 -my-1.5 -mx-3">
-                    Support Center
-                  </a>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/submit-request" className="block p-3 -my-1.5 -mx-3">Submit a request</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/fee-schedule" className="block p-3 -my-1.5 -mx-3">Fee Schedule</Link>
-                </li>
-                <li className="hover:text-brand-green hover:underline cursor-pointer">
-                  <Link to="/official-verification" className="block p-3 -my-1.5 -mx-3">Official Verification</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </footer>
-        <div className="md:hidden bg-surface p-3 space-y-2">
-          {ae?.map((item, index) => {
-            const isMobileOpen = openMobileIndex === index;
-            return (
-              <div key={index} className="border-b border-border/30 last:border-none">
-                <button
-                  onClick={() => toggleMobile(index)}
-                  className="w-full py-3 flex items-center justify-between text-left focus:outline-none"
-                >
-                  <span className={`${dark ? "text-primary" : "text-secondary"} text-base font-semibold`}>
-                    {item.ele}
+            <div className="grid grid-cols-1 md:grid-cols-6 px-6 md:px-8 gap-8 w-full">
+              {/* Column 1: LOGO, QR CODE & COMMUNITY */}
+              
+              <div className="text-left flex flex-col items-start gap-6 pr-4">
+                {/* <div className="text-2xl font-bold">BitZup</div> */}
+                
+                {/* QR Code container */}
+                <div className="flex flex-col items-start gap-2">
+                  <div className="bg-white p-2 rounded-sm w-fit shadow-md">
+                    <QRCode
+                      size={90}
+                      value={`${window.location.origin}/trade/download`}
+                    />
+                  </div>
+                  <span className="text-[10px] text-secondary font-medium select-none">
+                    Scan to download app
                   </span>
-                  <IoIosArrowDown
-                    className={`size-4 transition-transform duration-300 ${isMobileOpen ? "rotate-180 text-brand-green" : dark ? "text-primary" : "text-secondary"}`}
-                  />
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileOpen ? "max-h-60 pb-3" : "max-h-0"}`}
-                >
-                  <div className="flex flex-col gap-2 pl-2">
-                    {item?.category?.map((ele, ind) => (
-                      <div
-                        key={ind}
-                        className={`${dark ? "text-primary" : "text-secondary"} text-sm font-normal text-left`}
-                      >
-                        {ele.link.startsWith("/trade") || ele.link.startsWith("http") ? (
-                          <a
-                            className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
-                            href={ele.link}
-                          >
-                            {ele.name}
-                          </a>
-                        ) : (
-                          <Link
-                            className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
-                            to={ele.link}
-                          >
-                            {ele.name}
-                          </Link>
-                        )}
-                      </div>
-                    ))}
+                </div>
+
+                {/* Community Row */}
+                <div className="flex flex-col gap-2 w-full">
+                  <span className="text-sm font-semibold text-primary">Community</span>
+                  <div className="flex gap-3">
+                    <a
+                      href="https://t.me/bitzup_official"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
+                      title="Telegram"
+                    >
+                      <FaTelegram className="text-base text-telegram" />
+                    </a>
+                    <a
+                      href="https://x.com/BitZup_Official"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
+                      title="Twitter"
+                    >
+                      <BsTwitterX className="text-base" />
+                    </a>
+                    <a
+                      href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
+                      title="Instagram"
+                    >
+                      <FaInstagram className="text-base text-instagram" />
+                    </a>
                   </div>
                 </div>
               </div>
-            );
-          })}
-          <div>
-            <div className="flex gap-6 mt-4">
+
+              {/* Column 2: ABOUT */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">About</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/aml-policy"} className="block py-1">AML Policy</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/cookies-policy"} className="block py-1">Cookie Policy</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/privacy-policy"} className="block py-1">Privacy Notice</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/risk-disclosure"} className="block py-1">Risk Disclosure</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/trading-policy"} className="block py-1">Trading Policy</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/user-agreement"} className="block py-1">User Agreement</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to={"/terms-of-use"} className="block py-1">Terms of use</Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 3: PRODUCT */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">Product</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/buy-crypto`} className="block py-1">Buy Crypto</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/futures/BTCUSDT`} className="block py-1">Futures Trading</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block py-1">Spot Trading</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/subscription`} className="block py-1">Earn</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    {isLoggedIn ? (
+                      <a href="/trade/auto-invest" className="block py-1">Auto Invest</a>
+                    ) : (
+                      <Link to="/invest" className="block py-1">Auto Invest</Link>
+                    )}
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/convert`} className="block py-1">Convert</a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 4: TRADES */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">Trades</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/BTCUSDT`} className="block py-1">BTCUSDT</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/ETHUSDT`} className="block py-1">ETHUSDT</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/DOGEUSDT`} className="block py-1">DOGEUSDT</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/SOLUSDT`} className="block py-1">SOLUSDT</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href={`${MAIN_SITE}/spot/XRPUSDT`} className="block py-1">XRP USDT</a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 5: SERVICE */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">Service</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    {isLoggedIn ? (
+                      <a href="/trade/referral" className="block py-1">Referral</a>
+                    ) : (
+                      <Link to="/referral" className="block py-1">Referral</Link>
+                    )}
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    {isLoggedIn ? (
+                      <a href="/trade/vip" className="block py-1">VIP Program</a>
+                    ) : (
+                       <a href="/trade/vip" className="block py-1">VIP Program</a>
+                    )}
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to="/careers" className="block py-1">Careers</Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Column 6: SUPPORT */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">Support</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    <a href="https://support.bitzup.com/support/home" className="block py-1">Support Center</a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to="/submit-request" className="block py-1">Submit a request</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to="/fee-schedule" className="block py-1">Fee Schedule</Link>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <Link to="/official-verification" className="block py-1">Official Verification</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* ROW 3: Risk Warning & Language */}
+            {/* <div className="border-t border-border/40 pt-8 mt-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+              <div className="text-[10px] text-secondary font-medium leading-relaxed max-w-[600px]">
+                Risk Warning: Digital asset prices are subject to high market risk and price volatility. The value of your investment may go down or up, and you may not get back the amount invested. You are solely responsible for your investment decisions and BitZup is not liable for any losses you may incur.
+              </div>
+
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md border border-border bg-surface-2 text-xs text-text-secondary cursor-pointer hover:text-primary transition-all select-none shrink-0 self-end md:self-auto">
+                <FaGlobe className="size-3.5 text-secondary" />
+                <span>English</span>
+                <IoIosArrowDown className="size-3 text-secondary" />
+              </div>
+            </div> */}
+          </div>
+        </footer>
+        <div className="md:hidden bg-surface p-6 space-y-4">
+          {/* Logo & Copyright */}
+          <div className="pb-4 border-b border-border/30 mb-2 flex flex-col items-start">
+            <img
+              src="/bitzup_light_logo.png"
+              className="h-6 w-auto mb-2"
+              alt="BitZup Logo"
+            />
+            {/* <div className="text-[10px] text-secondary font-medium">
+              © 2023 - 2026 BITZUP.COM
+            </div> */}
+          </div>
+
+          {/* Accordion Links */}
+          <div className="space-y-1">
+            {ae?.map((item, index) => {
+              const isMobileOpen = openMobileIndex === index;
+              return (
+                <div key={index} className="border-b border-border/30 last:border-none">
+                  <button
+                    onClick={() => toggleMobile(index)}
+                    className="w-full py-3.5 flex items-center justify-between text-left focus:outline-none"
+                  >
+                    <span className={`${dark ? "text-primary" : "text-secondary"} text-base font-semibold`}>
+                      {item.ele}
+                    </span>
+                    <IoIosArrowDown
+                      className={`size-4 transition-transform duration-300 ${isMobileOpen ? "rotate-180 text-brand-green" : dark ? "text-primary" : "text-secondary"}`}
+                    />
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${isMobileOpen ? "max-h-60 pb-3" : "max-h-0"}`}
+                  >
+                    <div className="flex flex-col gap-2 pl-2">
+                      {item?.category?.map((ele, ind) => (
+                        <div
+                          key={ind}
+                          className={`${dark ? "text-primary" : "text-secondary"} text-sm font-normal text-left`}
+                        >
+                          {ele.link.startsWith("/trade") || ele.link.startsWith("http") ? (
+                            <a
+                              className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
+                              href={ele.link}
+                            >
+                              {ele.name}
+                            </a>
+                          ) : (
+                            <Link
+                              className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
+                              to={ele.link}
+                            >
+                              {ele.name}
+                            </Link>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Social Icons & Language Selector */}
+          <div className="pt-6 border-t border-border/30 flex flex-col gap-6 items-start">
+            {/* Social Icons */}
+            <div className="flex gap-4">
               <a
                 href="https://t.me/bitzup_official"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
+                className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
               >
-                <div
-                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                >
-                  <FaTelegram className="text-xl text-telegram" />
-                </div>
-                <span className="text-xs opacity-60">Telegram</span>
+                <FaTelegram className="text-base text-telegram" />
               </a>
               <a
                 href="https://x.com/BitZup_Official"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
+                className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
               >
-                <div
-                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                >
-                  <FaTwitter className="text-xl" />
-                </div>
-                <span className="text-xs opacity-60">Twitter</span>
+                <FaTwitter className="text-base" />
               </a>
               <a
                 href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1 cursor-pointer group no-underline text-inherit"
+                className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
               >
-                <div
-                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                >
-                  <FaInstagram className="text-xl text-instagram" />
-                </div>
-                <span className="text-xs opacity-60">Instagram</span>
+                <FaInstagram className="text-base text-instagram" />
               </a>
-              {/* <div className="flex flex-col items-center gap-1 cursor-pointer group">
-                <div
-                  className={`p-2 rounded-lg transition-all border ${dark ? "border-gray-700 group-hover:bg-gray-800" : "border-gray-100 group-hover:bg-gray-50"}`}
-                >
-                  <FaTiktok className="text-xl" />
-                </div>
-                <span className="text-xs opacity-60">Tik Tok</span>
-              </div> */}
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
+              >
+                <FaTiktok className="text-base" />
+              </a>
+              <a
+                href="mailto:support@bitzup.com"
+                className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
+              >
+                <TfiEmail className="text-base" />
+              </a>
+            </div>
+
+            {/* Language Dropdown */}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-md border border-border bg-surface-2 text-xs text-text-secondary cursor-pointer hover:text-primary transition-all select-none">
+              <FaGlobe className="size-3.5 text-secondary" />
+              <span>English</span>
+              <IoIosArrowDown className="size-3 text-secondary" />
             </div>
           </div>
         </div>

@@ -8,7 +8,7 @@ export const AmlPolicy = () => {
         <meta name="description" content="Read BitZup's Anti-Money Laundering and Counter-Financing of Terrorism policy. How we screen users, monitor activity, and comply with FIU regulations." />
       </Helmet>
       <div className="text-left">
-        <div className="text-2xl font-bold mb-20">AML POLICY</div>
+        <div className="text-3xl font-bold mb-20">AML POLICY</div>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">

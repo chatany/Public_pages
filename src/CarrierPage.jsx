@@ -9,7 +9,6 @@ import { Footer } from "./foooter";
 import Button from "./Common/Button";
 
 export const CarrierPage = () => {
-    console.log("carrier p component");
   const [activeItem, setActiveItem] = useState("Buy");
   const coreValues = [
     {

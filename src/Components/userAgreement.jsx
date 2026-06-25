@@ -8,7 +8,7 @@ export const Terms = () => {
         <meta name="description" content="Read the BitZup Terms of Use to understand the legal agreement between you and BitZup regarding your use of our platform." />
       </Helmet>
       <div className="text-left">
-        <div className="text-2xl font-bold mb-20">Terms of Use</div>
+        <div className="text-3xl font-bold mb-20">Terms of Use</div>
         <div className="text-left">
           <div>Effective as of 1st Day of July, Month, 2025</div>
           <div className="text-left font-normal text-base leading-8">

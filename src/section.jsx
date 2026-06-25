@@ -71,7 +71,6 @@ export const Section = () => {
   useEffect(() => {
     if (mobileVideoRef.current) {
       mobileVideoRef.current.play().catch((err) => {
-        console.log("Mobile video autoplay blocked:", err);
       });
     }
   }, []);
@@ -157,9 +156,43 @@ export const Section = () => {
     "promo-banner-3.svg",
     "promo-banner-4.svg",
   ];
-
+  const afterLoginItems=[ "promo-banner2.svg",
+            "promo-banner1.svg",
+            "promo-banner3.svg",
+            "promo-banner4.svg",]
+  const promoCards = [
+    {
+      id: "vip",
+      png: "/promo1.png",
+      svg: "/promo1.jpg",
+     
+         link: isLoggedIn ? "/trade/subscription" : "/trade/register",
+      buttonText: isLoggedIn ? "Subscribe Now" : "Join Now",
+    },
+    {
+      id: "earn",
+      png: "/promo2.png",
+      svg: "/promo2.jpg",
+     link: isLoggedIn ? "/trade/vip" : "/trade/register",
+      buttonText: isLoggedIn ? "Earn Now" : "Join Now",
+    },
+    {
+      id: "refer",
+      png: "/promo3.png",
+      svg: "promo3.jpg",
+      link: isLoggedIn ? "/trade/referral" : "/trade/register",
+      buttonText: isLoggedIn ? "Refer Now" : "Join Now",
+    },
+    {
+      id: "trade",
+      png: "/promo4.png",
+      svg: "/promo4.jpg",
+      link: isLoggedIn ? "/trade/spot/BTCUSDT" : "/trade/register",
+      buttonText: isLoggedIn ? "Trade Now" : "Join Now",
+    },
+  ];
   const visibleCards = 2;
-  const totalSlides = items.length - visibleCards + 1;
+  const totalSlides = promoCards.length - visibleCards + 1;
 
   // AUTO SLIDE
   useEffect(() => {
@@ -182,22 +215,28 @@ export const Section = () => {
     <div className="w-full flex flex-col gap-10">
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-8  max-md:hidden mt-20 ">
-          {[
-            "promo-banner-2.svg",
-            "promo-banner-1.svg",
-            "promo-banner-3.svg",
-            "promo-banner-4.svg",
-          ].map((item, ind) => (
+          {
+            promoCards.map((card, ind) => (
             <div
               key={ind}
-              className="w-full rounded-xl border border-border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105"
+              onClick={() => (window.location.href = card.link)}
+              className="w-full rounded-xl border border-border bg-transparent relative overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
             >
               <img
-                src={item}
+                src={!isLoggedIn ? card.svg : card.png}
                 alt={`BitZup platform promotion ${ind + 1}`}
                 className="w-full h-full rounded-xl"
               />
               <div className="absolute inset-0 hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 transition-colors duration-300 pointer-events-none"></div>
+              
+              {/* Button/Link Overlay */}
+              {/* {!isLoggedIn && (
+                <div className="absolute left-6 bottom-[40px] z-10">
+                  <span className="text-white font-medium text-[8px] hover:text-brand-green hover:underline transition-all cursor-pointer">
+                    {card.buttonText}
+                  </span>
+                </div>
+              )} */}
             </div>
           ))}
         </div>
@@ -222,15 +261,27 @@ export const Section = () => {
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${active * 50}%)` }}
           >
-            {items.map((item, ind) => (
+            {promoCards.map((card, ind) => (
               <div key={ind} className="min-w-[50%] px-3">
-                <div className="w-full rounded-2xl border border-border  bg-black relative overflow-hidden">
+                <div 
+                  onClick={() => (window.location.href = card.link)}
+                  className="w-full rounded-2xl border border-border  bg-black relative overflow-hidden cursor-pointer"
+                >
                   <img
-                    src={item}
+                    src={!isLoggedIn ? card.svg : card.png}
                     alt={`BitZup promotion banner ${ind + 1}`}
                     className="w-full h-full object-cover rounded-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-green/40 opacity-0 hover:opacity-100 transition-opacity" />
+                  
+                  {/* Button/Link Overlay */}
+                  {/* {!isLoggedIn && (
+                    <div className="absolute left-3 top-4 z-10">
+                      <span className="text-white font-medium text-[10px] hover:text-brand-green hover:underline transition-all cursor-pointer">
+                        {card.buttonText}
+                      </span>
+                    </div>
+                  )} */}
                 </div>
               </div>
             ))}
@@ -311,11 +362,12 @@ export const Section = () => {
                     <div className="flex items-center gap-4">
                       <CoinIcon mover={mover} />
                       <div className="flex flex-col">
-                        <span className="font-bold text-primary group-hover:text-brand-green transition-colors text-xs md:text-base">
-                          {mover?.base_asset_symbol} {" "} <span className=" text-xs text-text-muted">
+                        <span className="font-bold text-primary transition-colors text-xs md:text-base">
+                          {mover?.base_asset_symbol} {" "}
+                           {/* <span className=" text-xs text-text-muted">
                             
                             ({mover?.quote_asset_symbol})
-                            </span>
+                            </span> */}
                         </span>
                         <span className="text-xs text-secondary font-medium">
                           {mover?.coin_name}
