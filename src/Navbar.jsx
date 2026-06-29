@@ -765,7 +765,7 @@ export default function Navbar() {
             className={`hover:text-brand-green h-6 w-6 md:flex hidden cursor-pointer ${
               showQR ? "text-brand-green" : "text-text-primary"
             }`}
-            onClick={handleDownload}
+            // onClick={handleDownload}
           />
      
           {showQR && (

@@ -119,6 +119,18 @@ export const Footer = ({ isShow = true }) => {
         { name: "Fee Schedule", link: "/fee-schedule" },
         { name: "Official Verification", link: "/official-verification" },
       ],
+    },
+    {
+      ele: "Socials",
+      category: [
+        { name: "X (Twitter)", link: "https://x.com/BitZup_Official" },
+        // { name: "Community", link: "https://t.me/bitzup_official" },
+        { name: "Telegram", link: "https://t.me/bitzup_official" },
+        { name: "Instagram", link: "https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx" },
+        // { name: "Facebook", link: "#" },
+        // { name: "Reddit", link: "#" },
+        // { name: "LinkedIn", link: "#" },
+      ],
     }
   ];
   const dark = true;
@@ -224,19 +236,16 @@ export const Footer = ({ isShow = true }) => {
         <footer className="bg-surface text-primary py-6 max-md:hidden">
           <div className="max-w-7xl mx-auto  w-full">
             {/* Columns (Grid) */}
-            <div className="mb-6 ">
-              <img
-                  src="/bitzup_light_logo.png"
-                  className="h-auto w-[160px]"
-                  alt="BitZup Logo"
-                />
-              </div>
-            <div className="grid grid-cols-1 md:grid-cols-6 px-6 md:px-8 gap-8 w-full">
-              {/* Column 1: LOGO, QR CODE & COMMUNITY */}
+            <div className="grid grid-cols-1 md:grid-cols-7 px-6 md:px-8 gap-8 w-full items-start">
+              {/* Column 1: LOGO & QR CODE */}
               
               <div className="text-left flex flex-col items-start gap-6 pr-4">
                 {/* <div className="text-2xl font-bold">BitZup</div> */}
-                
+                 <img
+                  src="/LogoFooterLight.png"
+                  className="h-auto w-[100px]"
+                  alt="BitZup Logo"
+                />
                 {/* QR Code container */}
                 <div className="flex flex-col items-start gap-2">
                   <div className="bg-white p-2 rounded-sm w-fit shadow-md">
@@ -248,40 +257,6 @@ export const Footer = ({ isShow = true }) => {
                   <span className="text-[10px] text-secondary font-medium select-none">
                     Scan to download app
                   </span>
-                </div>
-
-                {/* Community Row */}
-                <div className="flex flex-col gap-2 w-full">
-                  <span className="text-sm font-semibold text-primary">Community</span>
-                  <div className="flex gap-3">
-                    <a
-                      href="https://t.me/bitzup_official"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
-                      title="Telegram"
-                    >
-                      <FaTelegram className="text-base text-telegram" />
-                    </a>
-                    <a
-                      href="https://x.com/BitZup_Official"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
-                      title="Twitter"
-                    >
-                      <BsTwitterX className="text-base" />
-                    </a>
-                    <a
-                      href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-sm bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
-                      title="Instagram"
-                    >
-                      <FaInstagram className="text-base text-instagram" />
-                    </a>
-                  </div>
                 </div>
               </div>
 
@@ -406,6 +381,44 @@ export const Footer = ({ isShow = true }) => {
                   </li>
                 </ul>
               </div>
+
+              {/* Column 7: SOCIALS */}
+              <div className="text-left">
+                <h3 className="text-base font-semibold mb-4 text-primary">Socials</h3>
+                <ul className="text-secondary text-sm flex flex-col gap-3">
+                  <li className="hover:text-brand-green transition-colors">
+                    <a
+                      href="https://x.com/BitZup_Official"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block py-1"
+                    >
+                      X (Twitter)
+                    </a>
+                  </li>
+                 
+                  <li className="hover:text-brand-green transition-colors">
+                    <a
+                      href="https://t.me/bitzup_official"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block py-1"
+                    >
+                      Telegram
+                    </a>
+                  </li>
+                  <li className="hover:text-brand-green transition-colors">
+                    <a
+                      href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block py-1"
+                    >
+                      Instagram
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             {/* ROW 3: Risk Warning & Language */}
@@ -461,10 +474,11 @@ export const Footer = ({ isShow = true }) => {
                           key={ind}
                           className={`${dark ? "text-primary" : "text-secondary"} text-sm font-normal text-left`}
                         >
-                          {ele.link.startsWith("/trade") || ele.link.startsWith("http") ? (
+                          {ele.link.startsWith("/trade") || ele.link.startsWith("http") || ele.link === "#" ? (
                             <a
                               className="hover:text-brand-green hover:underline block p-1.5 -my-1.5 -mx-3"
                               href={ele.link}
+                              {...(ele.link.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                             >
                               {ele.name}
                             </a>

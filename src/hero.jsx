@@ -29,7 +29,7 @@ export default function Hero() {
               >
                 Trade Now
               </Button>
-             <Button
+              <Button
                 className="secondary h-10"
                 variant="secondary"
                 onClick={() => (window.location.href = "/trade/spot")}
@@ -134,13 +134,7 @@ export default function Hero() {
               className="btn-secondary h-5 w-fit px-4 text-xs"
               onClick={() => (window.location.href = "/invest")}
             >
-              Auto Invest
-            </Button>
-            <Button
-              className="btn-secondary h-5 w-fit px-4 text-xs"
-              onClick={() => (window.location.href = "/trade/subscription")}
-            >
-              Earn
+              Explore markets
             </Button>
           </>
         ) : (

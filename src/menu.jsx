@@ -48,7 +48,7 @@ export const Menu = ({ children }) => {
                   {menuItems.map((item, index) => (
                     <li
                       key={index}
-                      className="text-brand-green hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
+                      className="text-text-primary hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
                     >
                       <Link to={item.link}>{item.name}</Link>
                     </li>
