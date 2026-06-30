@@ -219,7 +219,7 @@ export const Footer = ({ isShow = true }) => {
               </div>
               <button onClick={() => window.location.href = "/trade/register"}>
                 <Button 
-                className="h-10"
+                className="h-10 text-sm"
                 variant="primary"
                 >
                   Create free account

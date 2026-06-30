@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BiChevronDown, BiX } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import { FaAngleDown } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 
 export const Menu = ({ children }) => {
   const [show, setShow] = useState(false);
+  const location = useLocation();
   const menuItems = [
     { name: "AML & CFT Policy Statement", link: "/aml-policy" },
     { name: "Trading policy", link: "/trading-policy" },
@@ -45,27 +46,41 @@ export const Menu = ({ children }) => {
               </div>
               <div className="flex flex-col gap-10 max-md:hidden ">
                 <ul className="list-disc list-inside flex flex-col gap-4 ">
-                  {menuItems.map((item, index) => (
-                    <li
-                      key={index}
-                      className="text-text-primary hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
-                    >
-                      <Link to={item.link}>{item.name}</Link>
-                    </li>
-                  ))}
+                  {menuItems.map((item, index) => {
+                    const isActive = location.pathname === item.link;
+                    return (
+                      <li
+                        key={index}
+                        className={`${
+                          isActive
+                            ? "text-brand-green "
+                            : "text-text-primary hover:underline hover:text-brand-green"
+                        } cursor-pointer whitespace-nowrap text-lg`}
+                      >
+                        <Link to={item.link}>{item.name}</Link>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               {show && (
                 <div className="flex flex-col gap-10 md:hidden mt-6 p-2">
                   <ul className="list-disc list-inside flex flex-col gap-1 ">
-                    {menuItems.map((item, index) => (
-                      <li
-                        key={index}
-                        className="text-brand-green hover:underline hover:text-brand-green cursor-pointer whitespace-nowrap text-lg"
-                      >
-                        <Link to={item.link}>{item.name}</Link>
-                      </li>
-                    ))}
+                    {menuItems.map((item, index) => {
+                      const isActive = location.pathname === item.link;
+                      return (
+                        <li
+                          key={index}
+                          className={`${
+                            isActive
+                              ? "text-brand-green "
+                              : "text-text-primary hover:underline hover:text-brand-green"
+                          } cursor-pointer whitespace-nowrap text-lg`}
+                        >
+                          <Link to={item.link}>{item.name}</Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}

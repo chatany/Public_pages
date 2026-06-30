@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <section className="max-w-7xl mt-30 mx-auto px-6 md:px-8 flex max-md:flex-col max-md:gap-6  justify-between w-full">
       {/* Left Content */}
-      <div className=" z-base w-full md:w-[50%] flex flex-col text-left gap-2">
+      <div className=" z-base w-full md:w-[51%] flex flex-col text-left gap-2">
         <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
           Buy, trade and earn crypto - all in one place
         </h1>
@@ -24,13 +24,13 @@ export default function Hero() {
           {isLoggedIn ? (
             <>
               <Button
-                className="primary h-10"
+                className="primary h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
               >
                 Trade Now
               </Button>
               <Button
-                className="secondary h-10"
+                className="secondary h-10 text-sm"
                 variant="secondary"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
@@ -40,13 +40,13 @@ export default function Hero() {
           ) : (
             <>
               <Button
-                className="primary h-10"
+                className="primary h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/register")}
               >
                 Create free account
               </Button>
               <Button
-                className="secondary h-10"
+                className="secondary h-10 text-sm"
                 variant="secondary"
                 onClick={() => (window.location.href = "/trade/spot")}
               >

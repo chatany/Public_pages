@@ -772,7 +772,7 @@ export default function Navbar() {
             <>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-full h-6 z-[9999]" />
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-5 p-4 bg-recessed border border-surface-2 rounded-xl z-99 shadow-2xl flex flex-col items-center w-[180px]">
-                <div className="bg-white p-2 rounded-lg">
+                <div className="bg-white border border-border p-2 rounded-lg">
                   <QRCode
                     value={`${window.location.origin}/trade/download`}
                     size={130}
@@ -794,7 +794,7 @@ export default function Navbar() {
                     >
                       <img
                         src="/apple-badge.png"
-                        className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
+                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="App Store"
                       />
                     </a>
@@ -806,7 +806,7 @@ export default function Navbar() {
                     >
                       <img
                         src="/google-play-badge.png"
-                        className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
+                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="Google Play"
                       />
                     </a>
@@ -816,7 +816,8 @@ export default function Navbar() {
                     >
                       <img
                         src="/android-badge.png"
-                        className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
+                       
+                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="Android APK"
                       />
                     </div>

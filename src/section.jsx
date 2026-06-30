@@ -823,11 +823,10 @@ export const Section = () => {
           </div>
           <div>
             <div className="md:text-3xl text-xl font-bold text-center">
-             BACKED 1:1
-             
+             1:1
             </div>
             <div className="text-eyebrow text-secondary text-center">
-              EVERY ASSET FULLY BACKED
+              Every Asset Fully Backed
             </div>
           </div>
         </div>
