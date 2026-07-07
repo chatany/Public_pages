@@ -76,7 +76,7 @@ const data = [
       {
         title: "Auto-Invest",
         description: "Auto-buy crypto on your schedule",
-        path: `${MAIN_SITE}/invest`,
+        path: "/invest",
         iconUrlLight: <FiRefreshCw className="w-5 h-5 text-text-primary" />,
         iconUrlDark: <FiRefreshCw className="w-5 h-5 text-text-primary" />,
       },
