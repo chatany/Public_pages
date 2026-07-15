@@ -82,12 +82,13 @@ const VerifyPopup = ({
         {/* BUTTONS */}
         <div className="mt-6 flex gap-3">
           {isSuccess ? (
-            <button
+            <Button
               onClick={onClose}
-              className="w-full rounded-lg bg-gray-200 py-3 font-medium text-black hover:bg-gray-300"
+              variant="cancel"
+              className="w-full"
             >
               OK
-            </button>
+            </Button>
           ) : (
             <>
               {/* <button

@@ -289,18 +289,20 @@ export const Section = () => {
         </div>
 
         <div className="flex justify-center gap-3 mt-6">
-          <button
+          <Button
             onClick={prev}
-            className=" rounded-md border border-border flex items-center justify-center transition"
+            variant="ghost"
+            className="flex items-center justify-center p-2 rounded-md"
           >
             <BiChevronLeft className="size-6" />
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={next}
-            className="rounded-md border border-border flex items-center justify-center transition"
+            variant="ghost"
+            className="flex items-center justify-center p-2 rounded-md"
           >
             <BiChevronRight className="size-6" />
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -786,47 +788,6 @@ export const Section = () => {
                   multi-signature controls guarding every withdrawal.
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-surface mt-10 py-10 md:py-16">
-        <div className="text-center mb-8">
-          <h2 className="text-xl md:text-2xl font-bold text-primary">
-            Trusted by traders worldwide
-          </h2>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 md:px-8 grid grid-cols-2 md:grid-cols-4 gap-12 justify-evenly w-full">
-          <div>
-            <div className="md:text-3xl text-xl font-bold text-center">
-             $1.05B
-            </div>
-            <div className="text-eyebrow text-secondary text-center">
-              Traded in 24h
-            </div>
-          </div>
-          <div>
-            <div className="md:text-3xl text-xl font-bold text-center">
-              2,300+
-            </div>
-            <div className="text-eyebrow text-secondary text-center">
-              Coins listed
-            </div>
-          </div>
-          <div>
-            <div className="md:text-3xl text-xl font-bold text-center">
-              15%
-            </div>
-            <div className="text-eyebrow text-secondary text-center">
-              APR on Simple Earn
-            </div>
-          </div>
-          <div>
-            <div className="md:text-3xl text-xl font-bold text-center">
-             1:1
-            </div>
-            <div className="text-eyebrow text-secondary text-center">
-              Every Asset Fully Backed
             </div>
           </div>
         </div>

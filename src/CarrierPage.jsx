@@ -99,13 +99,13 @@ export const CarrierPage = () => {
             </div>
             <div className="w-full flex max-md:justify-center md:gap-10 gap-2 font-bold">
               <Button 
-              variant="primary "
+              variant="primary"
               className="h-12">
                 See open roles
               </Button>
               <Button 
-              className="h-12"
-              variant="secondary flex gap-2"
+              className="h-12 flex gap-2"
+              variant="secondary"
               >
                 <AiFillLinkedin className="size-4" /> Follow us on LinkedIn
               </Button>
@@ -240,9 +240,12 @@ export const CarrierPage = () => {
                 <div className="md:text-xl text-base font-bold text-primary group-hover:text-brand-green transition-colors">
                   {item.title}
                 </div>
-                <button className="bg-surface-2 size-10 md:h-12 md:w-44 text-primary flex justify-center items-center rounded-full hover:bg-brand-green hover:text-black transition-all">
+                <Button
+                  variant="ghost"
+                  className="size-10 md:h-12 md:w-44 hover:bg-brand-green hover:text-black"
+                >
                   <LuMoveRight className="size-5" />
-                </button>
+                </Button>
               </div>
             ))}
           </div>
@@ -254,7 +257,7 @@ export const CarrierPage = () => {
           We're always meeting great people. Send us your profile and we'll reach out when there's a fit.
         </div>
         <div className="flex justify-center items-center mt-8 mb-10">
-          <Button className="btn-primary px-10">
+          <Button variant="primary" className="px-10">
             Submit your profile
           </Button>
         </div>

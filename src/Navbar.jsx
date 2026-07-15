@@ -742,18 +742,20 @@ export default function Navbar() {
         </div> */}
         {!isLoggedIn && (
           <>
-            <div
-              className="hover:text-brand-green rounded-sm text-xs font-semibold bg-surface border border-border leading-6 px-3 py-1.5 transition-colors cursor-pointer md:flex hidden"
+            <Button
+              variant="ghost"
+              className="h-8 text-xs font-semibold md:flex hidden px-4"
               onClick={() => handleNavigate("/trade/login")}
             >
               Log In
-            </div>
-            <div
-              className="text-xs font-semibold leading-6 text-black bg-brand-green hover:bg-brand-green-d rounded-sm px-3 py-1.5 transition-colors cursor-pointer"
+            </Button>
+            <Button
+              variant="primary"
+              className="h-8 text-xs font-semibold px-4"
               onClick={() => handleNavigate("/trade/register")}
             >
               Sign Up
-            </div>
+            </Button>
           </>
         )}
         <div

@@ -13,6 +13,7 @@ import {
 import { IoLogoWechat } from "react-icons/io5";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
+import Button from "./Common/Button";
 
 export const Vip = () => {
   const [activeItem, setActiveItem] = useState("Sell");
@@ -240,9 +241,9 @@ export const Vip = () => {
               </div>
             </div>
             <div className="w-full flex max-md:justify-center mb-10">
-              <button className="btn-secondary w-44">
+              <Button variant="secondary" className="w-44">
                 <FaTelegramPlane className="size-5" /> Contact Us
-              </button>
+              </Button>
             </div>
           </div>
           <div className="w-[55%] max-md:w-full  text-left md:p-15 p-2">
@@ -354,7 +355,7 @@ export const Vip = () => {
               Accepted: PNG, JPG, JPEG — up to 3 files, max 10MB each.
             </div>
             <div className="w-full flex max-md:justify-center mt-5">
-              <button className="btn-secondary w-full">Submit</button>
+              <Button type="submit" variant="secondary" className="w-full">Submit</Button>
             </div>
             <div className="flex w-full justify-center md:hidden gap-4 p-2">
               <div className="text-xs text-muted border-b-[0.8px]  border-dashed">
@@ -375,12 +376,13 @@ export const Vip = () => {
           <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
             Lower fees, bigger rewards and a team in your corner — start your VIP journey today.
           </p>
-          <button
-            className="btn-primary px-12 animate-pulse"
+          <Button
+            variant="primary"
+            className="px-12 animate-pulse"
             onClick={() => (window.location.href = "/trade/register")}
           >
             Become a VIP
-          </button>
+          </Button>
         </div>
         <Footer isShow={false} />
       </div>
