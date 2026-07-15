@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useAuth } from "./useAuth";
+import Button from "./Common/Button";
 
 export default function MobileDrawer({ open, onClose }) {
   const isLoggedIn = useAuth();
@@ -112,49 +113,54 @@ export default function MobileDrawer({ open, onClose }) {
         <div className="px-6 py-6 space-y-3">
           {isLoggedIn ? (
             <>
-              <button
+              <Button
                 onClick={() => {
                   handleNavigate("/trade/spot/BTCUSDT");
                   onClose();
                 }}
-                className="w-full h-12 rounded-full bg-brand-green text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-green/90 transition-colors cursor-pointer"
+                variant="primary"
+                className="w-full h-12 font-bold"
               >
                 Trade Now
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => {
                   handleNavigate("/invest");
                   onClose();
                 }}
-                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+                variant="ghost"
+                className="w-full h-12 font-semibold"
               >
                 Auto Invest
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => {
                   handleNavigate("/trade/subscription");
                   onClose();
                 }}
-                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+                variant="ghost"
+                className="w-full h-12 font-semibold"
               >
                 Simple Earn
-              </button>
+              </Button>
             </>
           ) : (
             <>
-              <button
+              <Button
                 onClick={() => handleNavigate("/trade/register")}
-                className="w-full h-12 rounded-full bg-brand-green text-black font-bold flex items-center justify-center gap-2 hover:bg-brand-green/90 transition-colors cursor-pointer"
+                variant="primary"
+                className="w-full h-12 font-bold flex gap-2"
               >
                 <img src="gift.svg" className="size-5" alt="Gift rewards icon" />{" "}
                 Sign up now
-              </button>
-              <button
+              </Button>
+              <Button
                 onClick={() => handleNavigate("/trade/login")}
-                className="w-full h-12 rounded-full bg-divider text-white font-semibold hover:bg-surface-2 transition-colors cursor-pointer"
+                variant="ghost"
+                className="w-full h-12 font-semibold"
               >
                 Log in
-              </button>
+              </Button>
             </>
           )}
         </div>

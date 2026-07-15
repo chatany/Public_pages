@@ -5,6 +5,7 @@ import { IoMdCheckmark } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import Navbar from "../../Navbar";
 import { Footer } from "../../foooter";
+import Button from "../../Common/Button";
 
 export default function SubmitRequestForm() {
   const [open, setOpen] = useState(false);
@@ -263,12 +264,13 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                variant="primary"
+                className="w-full"
               >
                 Submit request
-              </button>
+              </Button>
             </form>
           )}
           {select === methedsArr[1] && (
@@ -365,12 +367,13 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                variant="primary"
+                className="w-full"
               >
                 Submit request
-              </button>
+              </Button>
             </form>
           )}
           {select === methedsArr[2] && (
@@ -468,12 +471,13 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                variant="primary"
+                className="w-full"
               >
                 Submit request
-              </button>
+              </Button>
             </form>
           )}
           {select === methedsArr[3] && (
@@ -582,12 +586,13 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                variant="primary"
+                className="w-full"
               >
                 Submit request
-              </button>
+              </Button>
             </form>
           )}
           {select === methedsArr[4] && (
@@ -715,12 +720,13 @@ export default function SubmitRequestForm() {
               </Field>
 
               {/* Submit */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bgbrand-green text-black py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                variant="primary"
+                className="w-full"
               >
                 Submit request
-              </button>
+              </Button>
             </form>
           )}
 

@@ -3,6 +3,7 @@ import { FaAngleRight } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../foooter";
+import Button from "../Common/Button";
 
 export const BASE_URL = import.meta.env.VITE_API_BASE || "https://api.bitzup.com";
 
@@ -184,13 +185,14 @@ export const VipLevel = () => {
           <div className="text-[32px] font-semibold text-text-primary">
             My Fee Rates
           </div>
-          <button
+          <Button
             onClick={() => setShowPopup(!showPopup)}
-            className="text-[14px] flex gap-1 items-center border border-border rounded-lg text-text-primary px-3 py-1.5 hover:bg-surface-2 transition-colors cursor-pointer"
+            variant="ghost"
+            className="text-[14px] flex gap-1 items-center px-3 py-1.5"
           >
             {(volume?.vip_level || 0) == 0 ? "Regular" : `VIP ${volume.vip_level}`}
             <FaAngleRight />
-          </button>
+          </Button>
         </div>
 
         <FeeTierModal

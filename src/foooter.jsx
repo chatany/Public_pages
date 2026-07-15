@@ -189,12 +189,13 @@ export const Footer = ({ isShow = true }) => {
                 Explore our advanced trading tools, auto invest plans, or earn yield with staking.
               </div>
               <div className="flex flex-wrap gap-4 justify-center mt-2 max-md:px-4">
-                <button
-                  className="btn-primary h-12 px-8 flex items-center justify-center font-bold text-black rounded-md cursor-pointer transition-colors"
+                <Button
+                  variant="primary"
+                  className="h-12 px-8"
                   onClick={() => window.location.href = "/trade/spot/BTCUSDT"}
                 >
                   Trade Now
-                </button>
+                </Button>
                 {/* <button
                   className="btn-secondary h-12 px-8 flex items-center justify-center font-bold rounded-md cursor-pointer transition-colors"
                   onClick={() => window.location.href = "/auto-invest"}
@@ -217,17 +218,13 @@ export const Footer = ({ isShow = true }) => {
               <div className="text-secondary text-sm md:text-base text-center max-md:px-4">
                 Create your free account and claim your new-user rewards today.
               </div>
-              <button onClick={() => window.location.href = "/trade/register"}>
-                <Button 
+              <Button 
+                onClick={() => window.location.href = "/trade/register"}
                 className="h-10 text-sm"
                 variant="primary"
-                >
-                  Create free account
-                </Button>
-                {/* <div className="flex md:hidden font-semibold text-black gap-1 items-center text-base">
-                  Create free account
-                </div> */}
-              </button>
+              >
+                Create free account
+              </Button>
             </>
           )}
         </div>

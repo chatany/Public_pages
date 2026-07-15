@@ -24,14 +24,15 @@ export default function Hero() {
           {isLoggedIn ? (
             <>
               <Button
-                className="primary h-10 text-sm"
+                variant="primary"
+                className="h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
               >
                 Trade Now
               </Button>
               <Button
-                className="secondary h-10 text-sm"
                 variant="secondary"
+                className="h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
                 Explore markets
@@ -40,14 +41,15 @@ export default function Hero() {
           ) : (
             <>
               <Button
-                className="primary h-10 text-sm"
+                variant="primary"
+                className="h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/register")}
               >
                 Create free account
               </Button>
               <Button
-                className="secondary h-10 text-sm"
                 variant="secondary"
+                className="h-10 text-sm"
                 onClick={() => (window.location.href = "/trade/spot")}
               >
                 Explore markets
@@ -125,13 +127,15 @@ export default function Hero() {
         {isLoggedIn ? (
           <>
             <Button
-              className="btn-primary h-5 w-fit px-4 text-xs"
+              variant="primary"
+              className="h-8 w-fit px-4 text-xs"
               onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
             >
               Trade
             </Button>
             <Button
-              className="btn-secondary h-5 w-fit px-4 text-xs"
+              variant="secondary"
+              className="h-8 w-fit px-4 text-xs"
               onClick={() => (window.location.href = "/invest")}
             >
               Explore markets
@@ -140,13 +144,15 @@ export default function Hero() {
         ) : (
           <>
             <Button
-              className="btn-primary h-8 text-xs w-fit px-8"
+              variant="primary"
+              className="h-8 text-xs w-fit px-8"
               onClick={() => (window.location.href = "/trade/register")}
             >
               Create free account
             </Button>
             <Button
-              className="btn-secondary h-8 text-xs w-fit px-8"
+              variant="secondary"
+              className="h-8 text-xs w-fit px-8"
               onClick={() => (window.location.href = "/trade/login")}
             >
               Log In

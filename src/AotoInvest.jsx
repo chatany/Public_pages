@@ -8,6 +8,7 @@ import { LuMoveRight } from "react-icons/lu";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import { useAuth } from "./useAuth";
+import Button from "./Common/Button";
 
 export const AutoInvest = () => {
   const isLoggedIn = useAuth();
@@ -66,9 +67,13 @@ export const AutoInvest = () => {
               </div>
             </div>
             <div className="w-full flex max-md:justify-center">
-              <button className="bg-brand-green md:h-12 h-8  md:min-w-max px-8 text-base font-bold text-black rounded-md hover:bg-brand-green-d transition-all active:scale-95">
+              <Button
+                variant="primary"
+                onClick={() => (window.location.href = "/trade/register")}
+                className="md:h-12 h-8 md:min-w-max px-8 text-base font-bold"
+              >
                 Set up your first auto invest
-              </button>
+              </Button>
             </div>
           </div>
           <div className="mt-10">
@@ -110,12 +115,13 @@ export const AutoInvest = () => {
           <div className="font-bold text-xl md:text-3xl text-center">
             Set up Auto Invest Buys on the BitZup app
           </div>
-          <button
+          <Button
             onClick={() => (window.location.href = "/trade/register")}
-            className="bg-brand-green md:h-12 h-8  md:min-w-max px-8 text-base font-bold text-black rounded-md hover:bg-brand-green-d transition-all active:scale-95"
+            variant="primary"
+            className="md:h-12 h-8 md:min-w-max px-8 text-base font-bold"
           >
             Set up your first auto invest
-          </button>
+          </Button>
         </div>
         <Footer isShow={false} />
       </div>

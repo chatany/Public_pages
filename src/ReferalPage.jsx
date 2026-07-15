@@ -129,7 +129,7 @@ export const ReferralPage = () => {
         <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
           The more friends you invite, the more you earn — with no limit on referrals.
         </p>
-        <Button variant="primary h-12">
+        <Button variant="primary" className="h-12">
           <Gift className="size-6" strokeWidth={1.5} />
           Get my referral link
         </Button>
