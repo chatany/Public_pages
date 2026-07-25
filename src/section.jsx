@@ -70,8 +70,7 @@ export const Section = () => {
 
   useEffect(() => {
     if (mobileVideoRef.current) {
-      mobileVideoRef.current.play().catch((err) => {
-      });
+      mobileVideoRef.current.play().catch((err) => {});
     }
   }, []);
 
@@ -83,7 +82,7 @@ export const Section = () => {
         mobileVideoRef.current.pause();
       }
     }
-};
+  };
 
   const filteredData = () => {
     return activeTab !== "All" ? data[activeTab] : data1;
@@ -156,24 +155,26 @@ export const Section = () => {
     "promo-banner-3.svg",
     "promo-banner-4.svg",
   ];
-  const afterLoginItems=[ "promo-banner2.svg",
-            "promo-banner1.svg",
-            "promo-banner3.svg",
-            "promo-banner4.svg",]
+  const afterLoginItems = [
+    "promo-banner2.svg",
+    "promo-banner1.svg",
+    "promo-banner3.svg",
+    "promo-banner4.svg",
+  ];
   const promoCards = [
     {
       id: "vip",
       png: "/promo1.png",
       svg: "/promo1.jpg",
-     
-         link: isLoggedIn ? "/trade/subscription" : "/trade/register",
+
+      link: isLoggedIn ? "/trade/subscription" : "/trade/register",
       buttonText: isLoggedIn ? "Subscribe Now" : "Join Now",
     },
     {
       id: "earn",
       png: "/promo2.png",
       svg: "/promo2.jpg",
-     link: isLoggedIn ? "/trade/vip" : "/trade/register",
+      link: isLoggedIn ? "/trade/vip" : "/trade/register",
       buttonText: isLoggedIn ? "Earn Now" : "Join Now",
     },
     {
@@ -215,8 +216,7 @@ export const Section = () => {
     <div className="w-full flex flex-col gap-10">
       <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-8  max-md:hidden mt-20 ">
-          {
-            promoCards.map((card, ind) => (
+          {promoCards.map((card, ind) => (
             <div
               key={ind}
               onClick={() => (window.location.href = card.link)}
@@ -228,7 +228,7 @@ export const Section = () => {
                 className="w-full h-full rounded-xl"
               />
               <div className="absolute inset-0 hover:bg-linear-to-b from-brand-green/0  via-brand-green/0 to-brand-green/50 transition-colors duration-300 pointer-events-none"></div>
-              
+
               {/* Button/Link Overlay */}
               {/* {!isLoggedIn && (
                 <div className="absolute left-6 bottom-[40px] z-10">
@@ -263,7 +263,7 @@ export const Section = () => {
           >
             {promoCards.map((card, ind) => (
               <div key={ind} className="min-w-[50%] px-3">
-                <div 
+                <div
                   onClick={() => (window.location.href = card.link)}
                   className="w-full rounded-2xl border border-border  bg-black relative overflow-hidden cursor-pointer"
                 >
@@ -273,7 +273,7 @@ export const Section = () => {
                     className="w-full h-full object-cover rounded-2xl"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-brand-green/40 opacity-0 hover:opacity-100 transition-opacity" />
-                  
+
                   {/* Button/Link Overlay */}
                   {/* {!isLoggedIn && (
                     <div className="absolute left-3 top-4 z-10">
@@ -365,8 +365,8 @@ export const Section = () => {
                       <CoinIcon mover={mover} />
                       <div className="flex flex-col">
                         <span className="font-bold text-primary transition-colors text-xs md:text-base">
-                          {mover?.base_asset_symbol} {" "}
-                           {/* <span className=" text-xs text-text-muted">
+                          {mover?.base_asset_symbol}{" "}
+                          {/* <span className=" text-xs text-text-muted">
                             
                             ({mover?.quote_asset_symbol})
                             </span> */}
@@ -406,7 +406,10 @@ export const Section = () => {
                         (window.location.href = `/trade/spot/${mover?.pair_symbol}`)
                       }
                     >
-                      <Button variant="primary" className="cursor-pointer  h-10 text-xs">
+                      <Button
+                        variant="primary"
+                        className="cursor-pointer  h-10 text-xs"
+                      >
                         Trade
                       </Button>
                     </div>
@@ -435,8 +438,8 @@ export const Section = () => {
           <div className="md:w-[50%] w-full justify-center flex ">
             <div className=" rounded-full p-4 md:p-20  w-full flex justify-center relative items-center">
               {/* Invisible interactive overlay to prevent default iOS controls trigger */}
-              <div 
-                onClick={handleVideoClick} 
+              <div
+                onClick={handleVideoClick}
                 className="absolute w-[253px] h-[500px] md:w-[320px] md:h-[620px] z-30 rounded-4xl cursor-pointer"
               />
               <video
@@ -467,7 +470,7 @@ export const Section = () => {
                 />
               </a>
               <a
-                href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                href="https://play.google.com/store/apps/details?id=com.bitzup"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -542,7 +545,7 @@ export const Section = () => {
                     />
                   </a>
                   <a
-                    href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                    href="https://play.google.com/store/apps/details?id=com.bitzup"
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -574,119 +577,123 @@ export const Section = () => {
       </div>
       <div className="max-md:hidden flex flex-col gap-10 mt-20 w-full max-w-7xl mx-auto px-6 md:px-8">
         <div className="font-bold text-3xl text-center">
-          {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
+          {isLoggedIn
+            ? "Grow your assets with BitZup"
+            : "Start trading crypto in 3 simple steps"}
         </div>
         <div className="flex justify-between items-center">
-   
-
-            <div className="flex flex-col gap-10">
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">1</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">
-                    Create your free account
-                  </div>
-                  <div className="text-sm text-muted font-normal">
-                    Sign up in under 2 minutes and claim your new-user rewards.
-                  </div>
-                  <Button
-                    onClick={() => (window.location.href = "/trade/register")}
-                    variant={!isLoggedIn ? "primary" : "secondary"}
-                    className="text-xs h-8 w-fit flex gap-1"
-                  >
-                    Register now <FaArrowRightLong />
-                  </Button>
+          <div className="flex flex-col gap-10">
+            <div className="flex gap-5">
+              <div className="font-bold text-3xl w-7.5">1</div>
+              <div className="text-left flex flex-col gap-1">
+                <div className="text-lg font-bold">
+                  Create your free account
                 </div>
-              </div>
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">2</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">Add funds</div>
-                  <div className="text-sm text-secondary font-normal">
-                    Buy crypto with your card or bank transfer, or deposit from
-                    another wallet.
-                  </div>
-                  <Button
-                    onClick={() => (window.location.href = "/trade/buy-crypto")}
-                    className="text-xs h-8 w-fit flex gap-1"
-                    variant={isLoggedIn && !depositInfo ? "primary" : "secondary"}
-                  >
-                    Buy Crypto  {" "}<FaArrowRightLong />
-                  </Button>
+                <div className="text-sm text-muted font-normal">
+                  Sign up in under 2 minutes and claim your new-user rewards.
                 </div>
-              </div>
-              <div className="flex gap-5">
-                <div className="font-bold text-3xl w-7.5">3</div>
-                <div className="text-left flex flex-col gap-1">
-                  <div className="text-lg font-bold">Start trading</div>
-                  <div className="text-sm text-secondary font-normal">
-                    Trade spot and futures traders automatically.
-                  </div>
-                  <Button
-                    className="text-xs h-8 w-fit flex gap-1"
-                    variant={isLoggedIn && depositInfo ? "primary" : "secondary"}
-                    onClick={() => (window.location.href = "/trade/spot")}
-                  >
-                    Trade Now <FaArrowRightLong />
-                  </Button>
-                </div>
+                <Button
+                  onClick={() => (window.location.href = "/trade/register")}
+                  variant={!isLoggedIn ? "primary" : "secondary"}
+                  className="text-xs h-8 w-fit flex gap-1"
+                >
+                  Register now <FaArrowRightLong />
+                </Button>
               </div>
             </div>
+            <div className="flex gap-5">
+              <div className="font-bold text-3xl w-7.5">2</div>
+              <div className="text-left flex flex-col gap-1">
+                <div className="text-lg font-bold">Add funds</div>
+                <div className="text-sm text-secondary font-normal">
+                  Buy crypto with your card or bank transfer, or deposit from
+                  another wallet.
+                </div>
+                <Button
+                  onClick={() => (window.location.href = "/trade/buy-crypto")}
+                  className="text-xs h-8 w-fit flex gap-1"
+                  variant={isLoggedIn && !depositInfo ? "primary" : "secondary"}
+                >
+                  Buy Crypto <FaArrowRightLong />
+                </Button>
+              </div>
+            </div>
+            <div className="flex gap-5">
+              <div className="font-bold text-3xl w-7.5">3</div>
+              <div className="text-left flex flex-col gap-1">
+                <div className="text-lg font-bold">Start trading</div>
+                <div className="text-sm text-secondary font-normal">
+                  Trade spot and futures traders automatically.
+                </div>
+                <Button
+                  className="text-xs h-8 w-fit flex gap-1"
+                  variant={isLoggedIn && depositInfo ? "primary" : "secondary"}
+                  onClick={() => (window.location.href = "/trade/spot")}
+                >
+                  Trade Now <FaArrowRightLong />
+                </Button>
+              </div>
+            </div>
+          </div>
 
           <div className="relative flex justify-center items-center">
-
-           <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
-          <div className=" rounded-xl overflow-hidden">
-            <img
-              src="/howToTrade.svg"
-              className="w-full h-full object-cover"
-              
-            />
-          </div>
+            <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
+            <div className=" rounded-xl overflow-hidden">
+              <img
+                src="/howToTrade.svg"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>
       <div className=" w-full md:text-3xl text-2xl mt-10 font-bold md:hidden text-center ">
-        {isLoggedIn ? "Grow your assets with BitZup" : "Start trading crypto in 3 simple steps"}
+        {isLoggedIn
+          ? "Grow your assets with BitZup"
+          : "Start trading crypto in 3 simple steps"}
       </div>
       <div className="  md:p-15 md:hidden p-3 flex flex-col gap-3 mt-10">
-      
-          <>
-            <div
-              onClick={() => (window.location.href = "/trade/register")}
-              className={`border w-full rounded-md items-center flex justify-between p-4 cursor-pointer ${
-                !isLoggedIn ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
-              }`}
-            >
-              <div>Create your free account</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
+        <>
+          <div
+            onClick={() => (window.location.href = "/trade/register")}
+            className={`border w-full rounded-md items-center flex justify-between p-4 cursor-pointer ${
+              !isLoggedIn
+                ? "border-brand-green bg-brand-green/10"
+                : "border-border bg-transparent"
+            }`}
+          >
+            <div>Create your free account</div>
+            <div className="bg-surface p-2 rounded-md">
+              <FaChevronRight />
             </div>
-            <div
-              onClick={() => (window.location.href = "/trade/buy-crypto")}
-              className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
-                isLoggedIn && !depositInfo ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
-              }`}
-            >
-              <div>Add funds</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
+          </div>
+          <div
+            onClick={() => (window.location.href = "/trade/buy-crypto")}
+            className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
+              isLoggedIn && !depositInfo
+                ? "border-brand-green bg-brand-green/10"
+                : "border-border bg-transparent"
+            }`}
+          >
+            <div>Add funds</div>
+            <div className="bg-surface p-2 rounded-md">
+              <FaChevronRight />
             </div>
-            <div
-              onClick={() => (window.location.href = "/trade/spot")}
-              className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
-                isLoggedIn && depositInfo ? "border-brand-green bg-brand-green/10" : "border-border bg-transparent"
-              }`}
-            >
-              <div>Start trading</div>
-              <div className="bg-surface p-2 rounded-md">
-                <FaChevronRight />
-              </div>
+          </div>
+          <div
+            onClick={() => (window.location.href = "/trade/spot")}
+            className={`border w-full rounded-lg items-center flex justify-between p-4 cursor-pointer ${
+              isLoggedIn && depositInfo
+                ? "border-brand-green bg-brand-green/10"
+                : "border-border bg-transparent"
+            }`}
+          >
+            <div>Start trading</div>
+            <div className="bg-surface p-2 rounded-md">
+              <FaChevronRight />
             </div>
-          </>
-        
+          </div>
+        </>
       </div>
       <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">

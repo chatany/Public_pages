@@ -36,7 +36,11 @@ const MenuItem = [
     name: "Dashboard",
     path: "/trade/dashboard",
   },
-  { icon: <LuWallet className="size-5" />, name: "Assets", path: "/trade/assets" },
+  {
+    icon: <LuWallet className="size-5" />,
+    name: "Assets",
+    path: "/trade/assets",
+  },
   {
     icon: <HiOfficeBuilding className="size-5" />,
     name: "Orders",
@@ -87,13 +91,8 @@ const data = [
         iconUrlLight: "/swapWhite.png",
         iconUrlDark: "/swapBlack.png",
       },
-
-
     ],
   },
-
-
-
 
   {
     category: "Spot",
@@ -150,21 +149,24 @@ const data = [
     item: [
       {
         title: "VIP & Institutional",
-        description: "Your trusted digital asset platform for VIPs and institutions",
+        description:
+          "Your trusted digital asset platform for VIPs and institutions",
         path: "/vip",
         iconUrlLight: "/vipWhite.png",
         iconUrlDark: "/vipBlack.png",
       },
       {
         title: "OTC Trading",
-        description: "Personalized, private, and secure OTC trading for professionals",
+        description:
+          "Personalized, private, and secure OTC trading for professionals",
         path: `${MAIN_SITE}/otc`,
         iconUrlLight: "/swapWhite.png",
         iconUrlDark: "/swapBlack.png",
       },
       {
         title: "Referral Program",
-        description: "Invite friends to earn either a commission rebate or a one-time reward",
+        description:
+          "Invite friends to earn either a commission rebate or a one-time reward",
         path: "/referral",
         iconUrlLight: "/referralWhite.png",
         iconUrlDark: "/referralBlack.png",
@@ -209,7 +211,7 @@ export default function Navbar() {
   const [openDeposit, setOpenDeposit] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
-  const isLoggedIn =useAuth()
+  const isLoggedIn = useAuth();
   const deviceInfo = useDeviceInfo();
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -224,7 +226,6 @@ export default function Navbar() {
     kyc_level: 0,
   });
 
-
   const fetchUserProfile = async () => {
     try {
       const { data, status } = await apiRequest({
@@ -235,10 +236,11 @@ export default function Navbar() {
       if (status === 200 && data?.status === "1") {
         const profileData = data?.data;
         setUserProfile({
-          email: profileData?.email ,
-          uid: profileData?.uid ,
+          email: profileData?.email,
+          uid: profileData?.uid,
           vip_level: profileData?.vip_level || 0,
-          kyc_level: profileData?.kyc_level !== undefined ? profileData?.kyc_level : 0,
+          kyc_level:
+            profileData?.kyc_level !== undefined ? profileData?.kyc_level : 0,
         });
       }
 
@@ -320,8 +322,6 @@ export default function Navbar() {
     const handleMouseEnterDropdown = () => {
       clearTimeout(hoverTimeout);
     };
-
-    
 
     if (navDropdownRef.current) {
       navDropdownRef.current.addEventListener(
@@ -551,7 +551,9 @@ export default function Navbar() {
             }}
             onDoubleClick={() => handleNavigate("/trade/dashboard")}
           >
-            <CgProfile className= {`hover:text-brand-green ${openDropdown=="profile" && "text-brand-green"} h-6 w-6 text-text-primary`} />
+            <CgProfile
+              className={`hover:text-brand-green ${openDropdown == "profile" && "text-brand-green"} h-6 w-6 text-text-primary`}
+            />
             {openDropdown === "profile" && !isMobile && (
               <>
                 <div className="absolute right-0 top-full w-full h-5" />
@@ -567,12 +569,14 @@ export default function Navbar() {
                             {userProfile?.email}
                           </div>
                           <div className="flex gap-1 items-center text-xs text-text-muted mt-0.5">
-                            <span>{copied ? "Copied!" : `UID: ${userProfile?.uid}`}</span>
+                            <span>
+                              {copied ? "Copied!" : `UID: ${userProfile?.uid}`}
+                            </span>
                             <PiCopyLight
                               className="cursor-pointer text-xs text-text-muted hover:text-brand-green transition-colors"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                copyToClipboard(userProfile?.uid );
+                                copyToClipboard(userProfile?.uid);
                               }}
                             />
                           </div>
@@ -584,7 +588,9 @@ export default function Navbar() {
                                   : "bg-brand-warning/15 border-brand-warning/30 text-brand-warning-text"
                               }`}
                             >
-                              {userProfile?.kyc_level === 1 ? "Verified" : "Not Verified"}
+                              {userProfile?.kyc_level === 1
+                                ? "Verified"
+                                : "Not Verified"}
                             </span>
                             <span
                               onClick={(e) => {
@@ -659,7 +665,9 @@ export default function Navbar() {
                         {userProfile?.email}
                       </div>
                       <div className="flex gap-1.5 items-center text-[11px] text-text-muted mt-0.5">
-                        <span>{copied ? "Copied!" : `UID: ${userProfile?.uid}`}</span>
+                        <span>
+                          {copied ? "Copied!" : `UID: ${userProfile?.uid}`}
+                        </span>
                         <PiCopyLight
                           className="cursor-pointer text-xs"
                           onClick={(e) => {
@@ -686,7 +694,9 @@ export default function Navbar() {
                               : "bg-brand-warning/15 border-brand-warning/30 text-brand-warning-text"
                           }`}
                         >
-                          {userProfile?.kyc_level === 1 ? "Verified" : "Unverified"}
+                          {userProfile?.kyc_level === 1
+                            ? "Verified"
+                            : "Unverified"}
                         </span>
                       </div>
                     </div>
@@ -769,7 +779,7 @@ export default function Navbar() {
             }`}
             // onClick={handleDownload}
           />
-     
+
           {showQR && (
             <>
               <div className="absolute top-full left-1/2 -translate-x-1/2 w-full h-6 z-[9999]" />
@@ -801,7 +811,7 @@ export default function Navbar() {
                       />
                     </a>
                     <a
-                      href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                      href="https://play.google.com/store/apps/details?id=com.bitzup"
                       target="_blank"
                       rel="noreferrer"
                       className="block w-full"
@@ -818,7 +828,6 @@ export default function Navbar() {
                     >
                       <img
                         src="/android-badge.png"
-                       
                         // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="Android APK"
                       />
@@ -829,7 +838,11 @@ export default function Navbar() {
             </>
           )}
         </div>
-        <div onClick={() => setOpenPopup(true)} className="lg:hidden flex" title="Menu">
+        <div
+          onClick={() => setOpenPopup(true)}
+          className="lg:hidden flex"
+          title="Menu"
+        >
           <RxHamburgerMenu className="hover:text-brand-green h-6 w-6 lg:hidden flex text-text-primary" />
         </div>
         <div title="Help Center">

@@ -76,7 +76,7 @@ export default function Hero() {
                 />
               </a>
               <a
-                href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+                href="https://play.google.com/store/apps/details?id=com.bitzup"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -174,7 +174,7 @@ export default function Hero() {
           />
         </a>
         <a
-          href="https://play.google.com/store/search?q=bitzup&c=apps&hl=en_IN"
+          href="https://play.google.com/store/apps/details?id=com.bitzup"
           target="_blank"
           rel="noreferrer"
         >
