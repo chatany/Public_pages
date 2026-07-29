@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const CookiePolicy = () => {
   return (
@@ -10,12 +11,12 @@ export const CookiePolicy = () => {
       <div className="text-left">
         <h1 className="text-3xl font-bold mb-20">COOKIE POLICY</h1>
         <div className="text-left">
-          <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-normal text-sm leading-8">
+          <div className="text-lg text-text-primary">Effective as of 1st Day of July, Month, 2025</div>
+          <div className="text-left font-normal text-sm leading-8 mt-8">
             At BitZup, we use cookies to improve your experience on our website,
             analyse site traffic, and ensure that the services we offer are
             tailored to your needs. This Cookie Policy explains what cookies
-            are, how we use them, and how you can manage them
+            are, how we use them, and how you can manage them.
           </div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">
             What Are Cookies?
@@ -103,9 +104,7 @@ export const CookiePolicy = () => {
           <div className="text-left font-normal text-sm leading-8">
             Upon visiting our website, a cookie banner is displayed to inform
             you of our use of cookies. By continuing to use our site you consent
-            to our use of cookies as outlined in this policy. You can withdraw
-            or modify your consent at any time by accessing the cookie settings
-            available on our website.
+            to our use of cookies as outlined in this policy. For more information on how we handle personal data, please review our <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link>.
           </div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">
             Changes to This Cookie Policy
@@ -113,8 +112,7 @@ export const CookiePolicy = () => {
           <div className="text-left font-normal text-sm leading-8">
             We may update this Cookie Policy to reflect legal requirements or
             changes in our technology and practices. All updates will be
-            published on this page with the revised effective date. We encourage
-            you to review this policy periodically to stay informed.
+            published on this page with the revised effective date. If you have any questions, please contact us at <a href="mailto:support@bitzup.com" className="text-brand-green underline hover:opacity-80">support@bitzup.com</a>.
           </div>
         </div>
       </div>

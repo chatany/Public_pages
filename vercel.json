@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/trade-options/:path*",
+      "destination": "https://bitzup-web-git-options-chatany-jangids-projects.vercel.app/trade-options/:path*"
+    },
+    {
       "source": "/trade/:path*",
       "destination": "https://bitzup-dev-server.vercel.app/trade/:path*"
     },
@@ -10,7 +14,7 @@
       "destination": "https://options-theta.vercel.app/trade-options/:path*"
     },
     {
-      "source": "/((?!trade|aml-policy|referral|careers|vip|invest|verification|submit-request|support|fee-schedule|official-verification|risk-disclosure|trading-policy|cookies-policy|privacy-policy|user-agreement|terms-of-use|assets|public|sitemap\\.xml|robots\\.txt|favicon\\.ico|site\\.webmanifest).*)",
+      "source": "/((?!trade|trade-options|aml-policy|referral|careers|vip|invest|verification|submit-request|support|fee-schedule|official-verification|risk-disclosure|trading-policy|cookies-policy|privacy-policy|user-agreement|terms-of-use|assets|public|sitemap\\.xml|robots\\.txt|favicon\\.ico|site\\.webmanifest).*)",
       "destination": "/index.html"
     }
   ]

@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const RiskPolicy = () => {
   return (
@@ -28,8 +29,8 @@ export const RiskPolicy = () => {
           </div>
           <div className="text-left font-normal text-sm leading-8">
             (A) All terms referenced in this notice that are defined in the
-            BitZup User Agreement (the "User Agreement") shall carry the same
-            meanings and interpretations as outlined in the User Agreement.
+            BitZup <Link to="/user-agreement" className="text-brand-green underline hover:opacity-80">User Agreement</Link> (the "User Agreement") shall carry the same
+            meanings and interpretations as outlined in the <Link to="/user-agreement" className="text-brand-green underline hover:opacity-80">User Agreement</Link>.
           </div>
           <div className="text-left font-normal text-sm leading-8">
             (B) This Risk Disclosure Statement (the "Statement") is an integral
@@ -203,7 +204,7 @@ export const RiskPolicy = () => {
             risks that may arise from your use of BitZup Services. Additional
             risks may exist that are specific to certain Services or Products.
             You are strongly encouraged to review the risk disclosures outlined
-            separately in the Legal Documents, including the User Agreement, for
+            separately in the Legal Documents, including the <Link to="/user-agreement" className="text-brand-green underline hover:opacity-80">User Agreement</Link>, for
             a more comprehensive understanding.
           </div>
           <div className="text-left font-normal text-sm leading-8">
@@ -221,7 +222,7 @@ export const RiskPolicy = () => {
             unauthorised transactions may not be recoverable.
           </div>
           <div className="text-left font-normal text-sm leading-8">
-            BitZup reserves the right to update or amend this Trading Policy at
+            BitZup reserves the right to update or amend this <Link to="/trading-policy" className="text-brand-green underline hover:opacity-80">Trading Policy</Link> at
             any time to reflect regulatory changes or operational improvements.
             Users will be notified of significant changes.
           </div>

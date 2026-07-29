@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const TradePolicy = () => {
   return (
@@ -20,8 +21,10 @@ export const TradePolicy = () => {
             platform. It is designed to ensure fair, transparent, and compliant
             trading operations in accordance with the laws of Trinidad and
             Tobago, including AML/CFT obligations with global and international
-            best practices. This policy shall be read with terms and conditions,
-            user agreement, risk disclosure, AML/CFT and other entity policies.
+            best practices. This policy shall be read with our <Link to="/terms-of-use" className="text-brand-green underline hover:opacity-80">Terms of Use</Link>,{" "}
+            <Link to="/user-agreement" className="text-brand-green underline hover:opacity-80">User Agreement</Link>,{" "}
+            <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure</Link>,{" "}
+            <Link to="/aml-policy" className="text-brand-green underline hover:opacity-80">AML/CFT Policy</Link> and other entity policies.
           </div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">
             2. SCOPE
@@ -88,16 +91,16 @@ This policy applies to all users of the BitZup platform, including individual tr
 
         </div>
         <div className="text-left font-normal text-base leading-8">
-        Trading fees, withdrawal fees, and any applicable service charges will be clearly listed on the BitZup website or application.
+          Trading fees, withdrawal fees, and any applicable service charges will be clearly listed on the <Link to="/fee-schedule" className="text-brand-green underline hover:opacity-80">Fee Schedule</Link> page on BitZup.
         </div>
         <div className="text-left font-normal text-base leading-8">
           Fees are subject to change based on market conditions and regulatory requirements but will be communicated transparently to users.
         </div>
         <div className="text-left font-semibold text-lg leading-8 mt-8">
-           RISK DISCLOSURE
+           <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">RISK DISCLOSURE</Link>
         </div>
         <div className="text-left font-normal text-base leading-8">
-         Users acknowledge that trading virtual digital assets involves significant risk, including the potential loss of all invested funds.
+         Users acknowledge that trading virtual digital assets involves significant risk, including the potential loss of all invested funds. Please see our full <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure</Link> statement.
         </div>
         <div className="text-left font-normal text-base leading-8">
           Price volatility, liquidity issues, and regulatory changes may impact the value and usability of VDAs.

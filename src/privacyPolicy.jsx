@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const PrivacyPolicy = () => {
   return (
@@ -10,17 +11,17 @@ export const PrivacyPolicy = () => {
       <div className="text-left">
         <h1 className="text-3xl font-bold mb-20">Privacy Notice</h1>
         <div className="text-left">
-          <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-normal text-sm leading-8">
+          <div >Effective as of 1st Day of July, Month, 2025</div>
+          <div className="text-left font-normal text-sm leading-8 mt-8">
             This Privacy Policy outlines how BitZup Exchange Limited or BitZup
             platform collects, uses, and processes your personal information
             through the BitZup websites, applications, and platforms that
             reference this Policy. The terms " we," "us," and "our" refer
             collectively to BitZup and its affiliates. BitZup encompasses a
             range of services delivered through its ecosystem, including but not
-            limited to the website (e.g., www.Bitzup.com), mobile applications,
+            limited to the website (e.g., <Link to="/" className="text-brand-green underline hover:opacity-80">www.Bitzup.com</Link>), mobile applications,
             desktop clients, applets, and any other platforms or tools developed
-            to provide BitZup Services as defined in our Terms of Use. The term
+            to provide BitZup Services as defined in our <Link to="/terms-of-use" className="text-brand-green underline hover:opacity-80">Terms of Use</Link>. The term
             "BitZup Operators" refers to all entities operating under the BitZup
             brand, including but not limited to legal entities, unincorporated
             organizations, and teams that deliver BitZup Services and bear
@@ -37,8 +38,7 @@ export const PrivacyPolicy = () => {
           </div>
           <div className="text-left font-normal text-sm leading-8">
             If you are a customer or user of our services, this Privacy Policy
-            applies in conjunction with our Terms of Use, Risk Disclosure
-            Statement, and any other applicable contractual documents,
+            applies in conjunction with our <Link to="/terms-of-use" className="text-brand-green underline hover:opacity-80">Terms of Use</Link>, <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure Statement</Link>, and any other applicable contractual documents,
             agreements, or policies. If you do not agree with the terms set out
             in this Privacy Policy regarding how your personal information is
             handled, you must refrain from using BitZup services, products,
@@ -52,8 +52,7 @@ export const PrivacyPolicy = () => {
             use of BitZup services and terminate your account
           </div>
           <div className="text-left font-normal text-sm leading-8">
-            This Privacy Policy forms an integral part of BitZup’s Terms of Use,
-            Risk Disclosure Statement, and all related agreements, policies,
+            This Privacy Policy forms an integral part of BitZup’s <Link to="/terms-of-use" className="text-brand-green underline hover:opacity-80">Terms of Use</Link>, <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure Statement</Link>, and all related agreements, policies,
             guidelines, and notices.
           </div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">
@@ -216,8 +215,7 @@ export const PrivacyPolicy = () => {
         </div>
         <div className="text-left font-normal text-sm leading-8">
           You have the right to object to our use of Personal Information for
-          advertising and marketing purposes. Please write to help@Bitzup.com’
-          to process your objection
+          advertising and marketing purposes. Please write to <a href="mailto:help@bitzup.com" className="text-brand-green underline hover:opacity-80">help@bitzup.com</a> to process your objection
         </div>
         <div className="text-left font-semibold text-lg leading-8 mt-8">
           RETENTION OF PERSONAL INFORMATION:
@@ -263,13 +261,12 @@ export const PrivacyPolicy = () => {
           CONTACT INFORMATION
         </div>
         <div className="text-left font-normal text-sm leading-8">
-          1. Our data protection officer can be contacted at support@Bitzup.com,
+          1. Our data protection officer can be contacted at <a href="mailto:support@bitzup.com" className="text-brand-green underline hover:opacity-80">support@bitzup.com</a>,
           and will work to address any questions or issues that you have with
           respect to the collection and processing of your Personal Information.
         </div>
         <div className="text-left font-normal text-sm leading-8">
-          2. If you have any requests and comments, you can send an email to
-          support@Bitzup.com with the subject “INQUIRY OF PERSONAL INFORMATION”,
+          2. If you have any requests and comments, you can send an email to <a href="mailto:support@bitzup.com" className="text-brand-green underline hover:opacity-80">support@bitzup.com</a> with the subject “INQUIRY OF PERSONAL INFORMATION”,
           which is the only valid and official email through which we will
           communicate with you
         </div>
