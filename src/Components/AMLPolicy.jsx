@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const AmlPolicy = () => {
   return (
@@ -26,12 +27,12 @@ export const AmlPolicy = () => {
           </div>
           <ul className="list-disc list-inside">
             <li>
-              1. For the purpose of this Privacy Policy, BitZup is the data
+              1. For the purpose of the <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link>, BitZup is the data
               controller for personal information collection in connection with
               the provision of BitZup Services.
             </li>
             <li>
-              2. In this Privacy Agreement, “Personal Information” means any
+              2. In the <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link>, “Personal Information” means any
               information relating to an identified or identifiable nature
               person, including, but not limited to, a name, an identification
               number, location data, an online identifier or to one or more
@@ -266,7 +267,7 @@ export const AmlPolicy = () => {
         <div className="text-left font-normal text-base leading-8">
           Personal Information is kept to enable your continued use of BitZup
           Services and/or for as long as it is required in order to fulfil the
-          relevant purposes described in this Privacy Policy, and/or as may be
+          relevant purposes described in the <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link>, and/or as may be
           required by law either for tax and accounting purposes and/or
           compliance with Anti-Money Laundering laws.
         </div>

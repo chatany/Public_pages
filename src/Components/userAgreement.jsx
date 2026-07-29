@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const Terms = () => {
   return (
@@ -10,12 +11,12 @@ export const Terms = () => {
       <div className="text-left">
         <div className="text-3xl font-bold mb-20">Terms of Use</div>
         <div className="text-left">
-          <div>Effective as of 1st Day of July, Month, 2025</div>
-          <div className="text-left font-normal text-base leading-8">
-            Effective as of 1st Day of July, Month, 2025 Thank you for visiting
-            BitZup.com. By visiting, accessing or using BitZup Exchange Limited,
+          <div className="text-lg text-text-primary">Effective as of 1st Day of July, Month, 2025</div>
+          <div className="text-left font-normal text-base leading-8 mt-8">
+            Thank you for visiting{" "}
+            <Link to="/" className="text-brand-green underline hover:opacity-80">BitZup.com</Link>. By visiting, accessing or using BitZup Exchange Limited,
             REGD. No.C2025061600037 , 116 Abercromby Street Port of Spain
-            Trinidad & Tobago or www.BitZup.com and associated mobile
+            Trinidad & Tobago or <Link to="/" className="text-brand-green underline hover:opacity-80">www.BitZup.com</Link> and associated mobile
             applications downloaded from the Apple App Store or the Googleplay
             Store (“BitZup Platform”, “BitZup”), you (“User”, “You”) agree that
             you have read, understood and accepted and consented to the Terms of
@@ -35,7 +36,7 @@ export const Terms = () => {
               digital currencies and their derivatives. For more information,
               please familiarize yourself with the risks associated with
               investing in or trading digital assets, a non-exhaustive General
-              Risk Warning can be found at www.BitZup.com
+              Risk Warning can be found at <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure</Link>
             </li>
             <li>
               (c) You shall assume all risks related to the use of BitZup
@@ -156,7 +157,7 @@ export const Terms = () => {
           <ul className="list-disc pl-6 leading-8 space-y-2">
             <li>
               1. All users must apply for a BitZup account
-              at www.BitZup.com before using BitZup. When you register a BitZup
+              at <Link to="/" className="text-brand-green underline hover:opacity-80">www.BitZup.com</Link> before using BitZup. When you register a BitZup
               account, you must provide information depending on whether you are
               an individual or acting on behalf of a legal entity set out below.
               BitZup may refuse, in its absolute sole discretion, to offer
@@ -275,8 +276,8 @@ export const Terms = () => {
             <li>
               5. You agree that to access BitZup, submission of certain
               personally identifiable information will be necessary. In this
-              connection, please review BitZup’s Privacy Policy at
-              https://BitZup.com/en/privacy for a summary of BitZup’s guidelines
+              connection, please review BitZup’s Privacy Policy at{" "}
+              <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link> for a summary of BitZup’s guidelines
               regarding the collection and use of personally identifiable
               information.
             </li>
@@ -330,7 +331,7 @@ export const Terms = () => {
           <div>
             You may, at any time, close your BitZup account on the BitZup
             Platform. If you need more information on steps to take, please
-            contact help@BitZup.com for more information.
+            contact <a href="mailto:help@BitZup.com" className="text-brand-green underline hover:opacity-80">help@BitZup.com</a> for more information.
           </div>
           <div>COMPLIANCE WITH LOCAL LAWS</div>
           <div>
@@ -434,7 +435,7 @@ export const Terms = () => {
           <div>You agree that the failure of one party to require performance of any provision under these Terms will not affect that party’s right to require performance at any time thereafter. In the same vein, the waiver of one party to seek recovery for the other party’s violation of these Terms or any provision of applicable Terms shall not constitute a waiver by that party of any subsequent breach or violation by the other party or of the provision itself.</div>
           <div>MISCELLANEOUS</div>
           <div>1. Third-Party Website Disclaimer: Any links to third-party websites from BitZup does not imply endorsement by BitZup of any product, service, information or disclaimer presented therein, nor does BitZup guarantee the accuracy of the information contained therein. If you suffer loss from using such third-party product and service, BitZup will not be liable for such loss. In addition, since BitZup has no control over the terms of use or privacy policies of third-party websites, you should read and understand those policies carefully.</div>
-          <div>2. Contact Information: If you have questions regarding these Terms, please feel free to contact BitZup for clarifications via our customer Service team at www.BitZup.com</div>
+          <div>2. Contact Information: If you have questions regarding these Terms, please feel free to contact BitZup for clarifications via our customer Service team at <Link to="/submit-request" className="text-brand-green underline hover:opacity-80">www.BitZup.com</Link></div>
         </div>
       </div>
     </div>

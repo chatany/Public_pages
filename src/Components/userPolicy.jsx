@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 export const UserAgreement = () => {
   return (
@@ -18,11 +19,11 @@ export const UserAgreement = () => {
             This User Agreement is concluded between you ("You" or "User") and
             BitZup Exchange Limited or BitZup Trading Platform ("we", "us",
             "our", "ours", "BitZup", or, the "Platform"). By using, accessing,
-            or attempting to use or access BitZup website www.BitZup.com, Apps
+            or attempting to use or access BitZup website <Link to="/" className="text-brand-green underline hover:opacity-80">www.BitZup.com</Link>, Apps
             and any other services provided by BitZup or affiliated companies
             thereof (the "Services"), it will be deemed that you have read and
             agreed to all the terms and conditions specified in this User
-            Agreement and Privacy Policy ("Agreement"), as well as the
+            Agreement and <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link> ("Agreement"), as well as the
             amendments and updates which we may make thereto, and any other
             agreements, terms, conditions, guidelines, rules, or written
             instructions, as published by BitZup on its website, Apps, or other
@@ -37,8 +38,7 @@ export const UserAgreement = () => {
             TRANSACTIONS OF DIGITAL ASSETS AND THEIR DERIVATIVES; AND (3) BITZUP
             SHALL NOT BE LIABLE FOR ANY SUCH RISKS OR ADVERSE OUTCOMES. If you
             would like to know more about the risks associated with investing in
-            or trading Digital Assets, you can access our Risk Disclosure
-            Statement at www.BitZup.com
+            or trading Digital Assets, you can access our <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure Statement</Link>.
           </div>
           <div className="text-left font-semibold text-lg leading-8 mt-8">
             IMPORTANT
@@ -95,8 +95,7 @@ export const UserAgreement = () => {
             RISK DISCLOSURE
           </div>
           <div className="text-left font-normal text-sm leading-8">
-            Notwithstanding our Risk Disclosure Statement available at:
-            www.BitZup.com to further your understanding of the risks associated
+            Notwithstanding our <Link to="/risk-disclosure" className="text-brand-green underline hover:opacity-80">Risk Disclosure Statement</Link> to further your understanding of the risks associated
             with trading in Digital Assets, BitZup hereby reminds you of the
             following:
           </div>
@@ -194,7 +193,7 @@ export const UserAgreement = () => {
             All Users must apply for a BitZup Account before using BitZup
             Services. When you register an BitZup Account, you must provide the
             information identified in this Agreement or otherwise as requested
-            by BitZup, and accept this Agreement, the Privacy Policy, and other
+            by BitZup, and accept this Agreement, the <Link to="/privacy-policy" className="text-brand-green underline hover:opacity-80">Privacy Policy</Link>, and other
             BitZup Legal Documents. BitZup may refuse, in its absolute sole
             discretion, to open a BitZup Account for you. You agree to provide
             complete and accurate information when opening an BitZup Account and
@@ -878,7 +877,7 @@ export const UserAgreement = () => {
             LEGAL RISKS
           </div>
           <div className="text-left font-normal text-sm leading-8">
-            (23) BitZup has the right to set Service charges according to this Agreement. BitZup also has the right to formulate and adjust the Service charges, and set specific service charges for you to use the Service(s) and terminate any promotional efforts at any time and from time to time, at BitZup's absolute sole discretion.
+            (23) BitZup has the right to set Service charges according to this Agreement (see <Link to="/fee-schedule" className="text-brand-green underline hover:opacity-80">Fee Schedule</Link>). BitZup also has the right to formulate and adjust the Service charges, and set specific service charges for you to use the Service(s) and terminate any promotional efforts at any time and from time to time, at BitZup's absolute sole discretion.
           </div>
           <div>(24) Unless otherwise stated or agreed upon, you agree that BitZup has the right to deduct the abovementioned service charges directly from the assets of your account.</div>
           <div>(25) At BitZup's sole discretion, regional or country-specific pricing may vary based on the User’s residence or location.</div>
