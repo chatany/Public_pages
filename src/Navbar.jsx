@@ -133,6 +133,18 @@ const data = [
     ],
   },
   {
+    category: "Alpha",
+    item: [
+      {
+        title: "Alpha Trading",
+        description: "Trade top trending Solana & EVM tokens",
+        path: `${MAIN_SITE}/alpha`,
+        iconUrlLight: "/tr-white.png",
+        iconUrlDark: "/tr-black.png",
+      },
+    ],
+  },
+  {
     category: "Earn",
     item: [
       {
@@ -193,6 +205,9 @@ export default function Navbar() {
     }
     if (item === "Futures") {
       return path.startsWith("/futures");
+    }
+    if (item === "Alpha") {
+      return path.startsWith("/alpha");
     }
     if (item === "Earn") {
       return path.startsWith("/subscription") || path.startsWith("/earn");
@@ -362,7 +377,7 @@ export default function Navbar() {
     let targetPath = path;
     if (isLoggedIn) {
       if (path === "/referral") {
-        targetPath = "/trade/reffrral";
+        targetPath = "/trade/referral";
       } else if (path === "/invest") {
         targetPath = "/trade/auto-invest";
       }
@@ -397,7 +412,7 @@ export default function Navbar() {
             }, 50);
           }}
         >
-          {["Buy Crypto", "Spot", "Futures", "Earn", "More"].map((item, i) => (
+          {["Buy Crypto", "Spot", "Futures", "Alpha", "Earn", "More"].map((item, i) => (
             <div
               key={i}
               className={` text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative ${
@@ -418,13 +433,17 @@ export default function Navbar() {
                 });
               }}
               onClick={() => {
-                if (i === 0) {
+                if (item === "Buy Crypto") {
                   handleNavigate("/trade/buy-crypto");
-                } else if (i === 1) {
+                } else if (item === "Spot") {
                   handleNavigate("/trade/spot/BTCUSDT");
+                } else if (item === "Futures") {
+                  handleNavigate("/trade/futures/BTCUSDT");
+                } else if (item === "Alpha") {
+                  handleNavigate("/trade/alpha");
                 }
               }}
-            >
+            > 
               {item === "Futures" ? (
                 <>
                   <span>🔥</span>

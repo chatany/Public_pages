@@ -30,6 +30,12 @@ export default function MobileDrawer({ open, onClose }) {
         path: `${MAIN_SITE}/futures/BTCUSDT`,
       },
     ],
+    Alpha: [
+      {
+        title: "Alpha Trading",
+        path: `${MAIN_SITE}/alpha`,
+      },
+    ],
     Earn: [
       {
         title: "Simple Earn",
