@@ -2,10 +2,14 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/trade-options/:path*",
+      "destination": "https://bitzup-web-git-options-chatany-jangids-projects.vercel.app/trade-options/:path*"
+    },
+    {
       "source": "/trade/:path*",
       "destination": "https://bitzup-dev-server.vercel.app/trade/:path*"
     },
-    {
+      {
       "source": "/trade-options/:path*",
       "destination": "https://options-theta.vercel.app/trade-options/:path*"
     },
