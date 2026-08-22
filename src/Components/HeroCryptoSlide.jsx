@@ -4,7 +4,19 @@ import Button from "../Common/Button";
 export default function HeroCryptoSlide({ isLoggedIn }) {
   return (
     <div className="w-full flex max-md:flex-col max-md:gap-6 justify-between items-center">
-      {/* Left Content */}
+      {/* Left Circle Video */}
+      <div className="flex max-md:justify-center justify-start w-full md:w-[45%]">
+        <video
+          src="/B Video.mp4"
+          className="md:size-110 object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      </div>
+
+      {/* Right Content */}
       <div className="z-base w-full md:w-[51%] flex flex-col text-left gap-2">
         <h1 className="text-2xl md:text-3xl font-bold text-primary leading-tight text-left">
           Buy, trade and earn crypto - all in one place
@@ -94,18 +106,6 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Right Circle Video */}
-      <div className="flex max-md:justify-center justify-end w-full md:w-[45%]">
-        <video
-          src="/B Video.mp4"
-          className="md:size-110 object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
       </div>
 
       {/* Mobile Buttons */}

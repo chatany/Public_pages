@@ -638,10 +638,15 @@ export const Section = () => {
 
           <div className="relative flex justify-center items-center">
             <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
-            <div className=" rounded-xl overflow-hidden">
-              <img
-                src="/howToTrade.svg"
-                className="w-full h-full object-cover"
+            <div className="rounded-xl overflow-hidden z-10 max-w-[480px]">
+              <video
+                src="/steps_video_v2.mp4"
+                className="w-full h-full object-cover rounded-xl"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
               />
             </div>
           </div>

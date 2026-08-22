@@ -1,9 +1,37 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 export default function HeroStocksSlide({ isLoggedIn }) {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
   return (
     <div className="w-full flex max-md:flex-col max-md:gap-6 justify-between items-center">
-      {/* Left Content */}
+      {/* Left Video (Slightly more compact size in continuous loop) */}
+      <div className="flex justify-center items-center w-full md:w-[46%] overflow-visible py-2 md:py-0">
+        <video
+          ref={videoRef}
+          src="/hero_markets_video_v4_intro.mp4"
+          className="w-full max-w-[420px] lg:max-w-[460px] h-auto object-contain rounded-xl"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          onEnded={() => {
+            if (videoRef.current) {
+              videoRef.current.currentTime = 0;
+              videoRef.current.play().catch(() => {});
+            }
+          }}
+        />
+      </div>
+
+      {/* Right Content */}
       <div className="z-base w-full md:w-[50%] flex flex-col text-left">
         {/* Eyebrow Badge */}
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#2edbad]/10 text-[#2edbad] border border-[#2edbad]/30 w-fit mb-4">
@@ -86,18 +114,6 @@ export default function HeroStocksSlide({ isLoggedIn }) {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Right Video */}
-      <div className="flex justify-center items-center w-full md:w-[48%] overflow-visible py-2 md:py-0">
-        <video
-          src="/hero_markets_video_v4_intro.mp4"
-          className="w-full max-w-[540px] h-auto object-contain rounded-xl"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
       </div>
 
       {/* Mobile Action Buttons */}
