@@ -96,11 +96,11 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
         </div>
       </div>
 
-      {/* Circle Video (Responsive on mobile) */}
-      <div className="flex max-md:justify-center justify-center items-center w-full md:w-[48%] md:h-full py-1 md:py-0">
+      {/* Circle Video (Big & bold like before) */}
+      <div className="flex max-md:justify-center justify-end items-center w-full md:w-[48%] md:h-full py-1 md:py-0">
         <video
           src="/B Video.mp4"
-          className="size-44 sm:size-56 md:w-full md:max-w-[440px] md:lg:max-w-[480px] md:max-h-[420px] object-contain"
+          className="size-52 sm:size-64 md:size-110 lg:size-[470px] object-cover"
           autoPlay
           loop
           muted
