@@ -8,11 +8,7 @@ export default function Partners() {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden md:border-t md:border-b border-border">
-      {/* Gradient fades */}
-      {/* <div className="absolute left-0 top-0 h-full w-24 bg-linear-to-r from-black to-transparent z-10" />
-      <div className="absolute right-0 top-0 h-full w-24 bg-linear-to-l from-black to-transparent z-10" /> */}
-
+    <div className="relative w-full overflow-hidden border-t border-b border-border bg-black">
       {/* Marquee Track */}
       <div className="flex w-max marquee">
         {[...partners, ...partners, ...partners, ...partners].map((item, i) => (
@@ -20,7 +16,7 @@ export default function Partners() {
             key={i}
             src={`/${item}`}
             alt={`${item.split(".")[0]} partner logo`}
-            className="mx-12 py-9 w-28 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300"
+            className="mx-8 md:mx-12 py-5 md:py-7 w-20 md:w-28 whitespace-nowrap grayscale hover:grayscale-0 transition-all duration-300 object-contain"
           />
         ))}
       </div>

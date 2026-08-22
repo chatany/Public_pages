@@ -259,7 +259,13 @@
   display: none; /* Chrome, Safari, Opera */
 }
 .marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee 75s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .marquee {
+    animation: marquee 50s linear infinite;
+  }
 }
 .custom-scroll {
   -ms-overflow-style: auto; /* IE and Edge */

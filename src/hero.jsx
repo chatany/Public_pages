@@ -7,9 +7,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function Hero() {
   const isLoggedIn = useAuth();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
   const touchEndX = useRef(0);
+  const touchEndY = useRef(0);
+  const pauseTimeoutRef = useRef(null);
 
   const slides = [
     {
@@ -22,16 +25,16 @@ export default function Hero() {
     },
   ];
 
-  // Auto-play timer
+  // Auto-play timer (10 seconds for comfortable reading)
   useEffect(() => {
-    if (isHovered) return;
+    if (isPaused) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 7000);
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, [isHovered, slides.length]);
+  }, [isPaused, slides.length]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -47,43 +50,56 @@ export default function Hero() {
 
   // Touch Swipe handlers
   const handleTouchStart = (e) => {
+    setIsPaused(true);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     touchStartX.current = e.targetTouches[0].clientX;
+    touchStartY.current = e.targetTouches[0].clientY;
+    touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
   };
 
   const handleTouchMove = (e) => {
     touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
   };
 
   const handleTouchEnd = () => {
-    if (!touchStartX.current || !touchEndX.current) return;
-    const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) {
-      handleNext();
-    } else if (diff < -50) {
-      handlePrev();
+    // Resume auto-play after 8 seconds of inactivity on mobile
+    pauseTimeoutRef.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 8000);
+
+    const diffX = touchStartX.current - touchEndX.current;
+    const diffY = touchStartY.current - touchEndY.current;
+
+    // Only switch if horizontal movement is dominant and exceeds 75px threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 75) {
+      if (diffX > 75) {
+        handleNext();
+      } else if (diffX < -75) {
+        handlePrev();
+      }
     }
-    touchStartX.current = 0;
-    touchEndX.current = 0;
   };
 
   return (
     <section
-      className="relative w-full pt-28 md:pt-36 pb-16 md:pb-24 bg-black flex flex-col justify-center items-center select-none group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative w-full pt-16 sm:pt-20 md:pt-24 pb-8 md:pb-10 bg-black flex flex-col justify-center items-center select-none group"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="relative max-w-7xl mx-auto px-8 md:px-16 w-full">
-        {/* Slide Carousel Frame */}
-        <div className="relative min-h-[480px] md:min-h-[520px] flex items-center overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full">
+        {/* Slide Carousel Frame (Responsive on mobile, fixed exact height on desktop) */}
+        <div className="relative min-h-[540px] sm:min-h-[500px] md:h-[500px] md:min-h-0 flex items-center overflow-hidden">
           {slides.map((slide, index) => {
             const isActive = index === currentSlide;
             return (
               <div
                 key={slide.id}
-                className={`w-full transition-all duration-700 ease-in-out ${
+                className={`w-full md:h-full flex items-center transition-all duration-700 ease-in-out ${
                   isActive
                     ? "opacity-100 relative z-10 translate-x-0 scale-100"
                     : "opacity-0 absolute inset-0 z-0 pointer-events-none scale-[0.98] " +
@@ -99,7 +115,7 @@ export default function Hero() {
         </div>
 
         {/* Slide Pill Indicators */}
-        <div className="flex items-center justify-center gap-3 mt-12 md:mt-16 z-30">
+        <div className="flex items-center justify-center gap-3 mt-6 sm:mt-8 md:mt-10 z-30">
           {slides.map((_, index) => {
             const isActive = index === currentSlide;
             return (
@@ -118,21 +134,21 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Outer Arrow Navigation (placed at far screen edges so they never overlap content) */}
+      {/* Outer Arrow Navigation (Only visible on desktop hover, completely hidden on mobile) */}
       <button
         onClick={handlePrev}
         aria-label="Previous slide"
-        className="absolute left-3 lg:left-6 xl:left-10 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#171a1f]/80 hover:bg-[#2edbad]/20 border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-[#2edbad] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 cursor-pointer max-md:hidden backdrop-blur-sm"
+        className="hidden md:flex absolute left-3 lg:left-6 xl:left-10 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
       >
-        <ChevronLeft size={20} />
+        <ChevronLeft size={22} />
       </button>
 
       <button
         onClick={handleNext}
         aria-label="Next slide"
-        className="absolute right-3 lg:right-6 xl:right-10 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#171a1f]/80 hover:bg-[#2edbad]/20 border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-[#2edbad] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-30 cursor-pointer max-md:hidden backdrop-blur-sm"
+        className="hidden md:flex absolute right-3 lg:right-6 xl:right-10 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
       >
-        <ChevronRight size={20} />
+        <ChevronRight size={22} />
       </button>
     </section>
   );
