@@ -25,8 +25,6 @@ import Button from "./Common/Button";
 import {
   data,
   MenuItem,
-  FALLBACK_FUTURES_COINS,
-  FALLBACK_SPOT_COINS,
   getIsZeroFee,
 } from "./Constant";
 
@@ -82,7 +80,7 @@ export default function Navbar() {
     if (item === "Buy Crypto") {
       return path.startsWith("/buy-crypto");
     }
-    if (item === "Spot") {
+    if (item === "Trade" || item === "Spot") {
       return (
         path.startsWith("/spot") ||
         path.startsWith("/convert") ||
@@ -124,9 +122,19 @@ export default function Navbar() {
 
   const [futuresSubTab, setFuturesSubTab] = useState(null);
   const [spotSubTab, setSpotSubTab] = useState(null);
-  const [activeTradFiTag, setActiveTradFiTag] = useState("Stocks");
+  const [activeTradFiTag, setActiveTradFiTag] = useState("Stock");
   const [apiFuturesCoins, setApiFuturesCoins] = useState([]);
+  const [apiTradFiCoins, setApiTradFiCoins] = useState([]);
+  const [isTradFiLoading, setIsTradFiLoading] = useState(false);
   const [apiSpotCoins, setApiSpotCoins] = useState([]);
+  const [apiSpotTagCoins, setApiSpotTagCoins] = useState([]);
+  const [isSpotLoading, setIsSpotLoading] = useState(false);
+  const [futureTags, setFutureTags] = useState([]);
+  const [spotTags, setSpotTags] = useState([]);
+  const [spotQuoteTags, setSpotQuoteTags] = useState([]);
+
+  const lastFetchedTradFiTagRef = useRef(null);
+  const lastFetchedSpotSubTabRef = useRef(null);
 
   const navDropdownRef = useRef(null);
   const navMenuItemsRef = useRef([]);
@@ -184,13 +192,19 @@ export default function Navbar() {
     try {
       const res = await apiRequest({
         method: "get",
-        url: `${BASE_URL}/market/exchangeinfoall/?limit=300`,
+        url: `${BASE_URL}/market/exchangeinfoall/`,
       });
       if (res?.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
         setApiSpotCoins(res.data.data);
       }
-    } catch (e) {
-      // fallback will be used
+      if (res?.data?.alltags && Array.isArray(res.data.alltags)) {
+        setSpotTags(res.data.alltags);
+      }
+      if (res?.data?.allQuoteTags && Array.isArray(res.data.allQuoteTags)) {
+        setSpotQuoteTags(res.data.allQuoteTags);
+      }
+    } catch (err) {
+      console.error("Failed to fetch spot coins", err);
     }
   };
 
@@ -198,13 +212,66 @@ export default function Navbar() {
     try {
       const res = await apiRequest({
         method: "get",
-        url: `${BASE_URL}/futures/api/futures-curr-info-all/?limit=300`,
+        url: `${BASE_URL}/futures/api/futures-curr-info-all/`,
       });
       if (res?.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
         setApiFuturesCoins(res.data.data);
       }
-    } catch (e) {
-      // fallback will be used
+      if (res?.data?.alltags && Array.isArray(res.data.alltags)) {
+        setFutureTags(res.data.alltags);
+      }
+    } catch (err) {
+      console.error("Failed to fetch futures coins", err);
+    }
+  };
+
+  const fetchTradFiCoins = async (tag) => {
+    if (!tag) return;
+    if (lastFetchedTradFiTagRef.current === tag) return;
+    lastFetchedTradFiTagRef.current = tag;
+    setIsTradFiLoading(true);
+    try {
+      const tagQuery = encodeURIComponent(tag);
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/futures/api/futures-curr-info-all/?tag=${tagQuery}`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data)) {
+        setApiTradFiCoins(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch TradFi coins", err);
+    } finally {
+      setIsTradFiLoading(false);
+    }
+  };
+
+  const fetchSpotTagCoins = async (subTab) => {
+    if (!subTab || subTab === "convert") return;
+    if (lastFetchedSpotSubTabRef.current === subTab) return;
+    lastFetchedSpotSubTabRef.current = subTab;
+    setIsSpotLoading(true);
+    try {
+      let tagQuery = "";
+      if (subTab === "stocks") tagQuery = "Stocks";
+      else if (subTab === "0_fees") tagQuery = "0 fees";
+
+      let url = `${BASE_URL}/market/exchangeinfoall/`;
+      if (tagQuery) {
+        url = `${BASE_URL}/market/exchangeinfoall/?tag=${encodeURIComponent(tagQuery)}`;
+      }
+
+      const res = await apiRequest({
+        method: "get",
+        url,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data)) {
+        setApiSpotTagCoins(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch Spot coins", err);
+    } finally {
+      setIsSpotLoading(false);
     }
   };
 
@@ -215,6 +282,18 @@ export default function Navbar() {
     fetchSpotCoins();
     fetchFuturesCoins();
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (futuresSubTab === "tradfi") {
+      fetchTradFiCoins(activeTradFiTag);
+    }
+  }, [futuresSubTab, activeTradFiTag]);
+
+  useEffect(() => {
+    if (spotSubTab && spotSubTab !== "convert") {
+      fetchSpotTagCoins(spotSubTab);
+    }
+  }, [spotSubTab]);
 
   const combinedSpotList = useMemo(() => {
     const list = [];
@@ -232,34 +311,31 @@ export default function Navbar() {
     };
 
     addCoins(apiSpotCoins);
-    addCoins(FALLBACK_SPOT_COINS);
-
     return list;
   }, [apiSpotCoins]);
 
   const spotCoins = useMemo(() => {
+    if (apiSpotTagCoins && apiSpotTagCoins.length > 0) {
+      return apiSpotTagCoins;
+    }
     if (!spotSubTab) return [];
     if (spotSubTab === "0_fees") {
-      return combinedSpotList.filter((c) => getIsZeroFee(c));
+      return combinedSpotList.filter((c) => {
+        const itemTag = (c.tag || "").toLowerCase();
+        return itemTag.includes("0 fees") || itemTag.includes("zero fee") || getIsZeroFee(c);
+      });
     }
     if (spotSubTab === "stocks") {
       return combinedSpotList.filter((item) => {
         const itemTag = (item.tag || "").toLowerCase();
-        const sym = (item.pair_symbol || item.symbol || "").toUpperCase();
-        return (
-          itemTag === "stock" ||
-          itemTag === "stocks" ||
-          ["RSPY", "NVDA", "AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "QQQ", "SPY", "TSM", "HOOD", "INTC", "META", "SNDK", "SOXL", "SKHYNIX", "SPCX", "MU"].some((s) =>
-            sym.includes(s),
-          )
-        );
+        return itemTag.includes("stock");
       });
     }
     if (spotSubTab === "spot") {
       return combinedSpotList;
     }
     return [];
-  }, [combinedSpotList, spotSubTab]);
+  }, [apiSpotTagCoins, combinedSpotList, spotSubTab]);
 
   const combinedFuturesList = useMemo(() => {
     const list = [];
@@ -277,14 +353,35 @@ export default function Navbar() {
     };
 
     addCoins(apiFuturesCoins);
-    addCoins(FALLBACK_FUTURES_COINS);
-
     return list;
   }, [apiFuturesCoins]);
 
   const tradFiTags = useMemo(() => {
-    return ["Stocks", "Metal", "Oil", "Commodity"];
-  }, []);
+    if (futureTags && Array.isArray(futureTags) && futureTags.length > 0) {
+      const stockIdx = futureTags.findIndex(
+        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+      );
+      if (stockIdx > 0) {
+        const reordered = [...futureTags];
+        const [stockItem] = reordered.splice(stockIdx, 1);
+        return [stockItem, ...reordered];
+      }
+      return futureTags;
+    }
+    return ["Stock", "Metal", "Oil", "Commodity"];
+  }, [futureTags]);
+
+  useEffect(() => {
+    if (tradFiTags.length > 0) {
+      const stockTag = tradFiTags.find(
+        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+      );
+      const defaultTag = stockTag || tradFiTags[0];
+      if (!tradFiTags.includes(activeTradFiTag)) {
+        setActiveTradFiTag(defaultTag);
+      }
+    }
+  }, [tradFiTags, activeTradFiTag]);
 
   const usdtCoins = useMemo(() => {
     return combinedFuturesList.filter((item) => {
@@ -294,53 +391,8 @@ export default function Navbar() {
   }, [combinedFuturesList]);
 
   const tradFiCoins = useMemo(() => {
-    let list = combinedFuturesList;
-    const matchTag = (activeTradFiTag || "Stocks").toLowerCase();
-
-    const filtered = list.filter((item) => {
-      const itemTag = (item.tag || "").toLowerCase();
-      const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
-
-      if (matchTag === "stocks" || matchTag === "stock") {
-        return (
-          itemTag === "stock" ||
-          itemTag === "stocks" ||
-          ["RSPY", "NVDA", "AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "QQQ", "SPY", "TSM", "HOOD", "INTC", "META", "SNDK", "SOXL", "SKHYNIX", "SPCX", "MU"].some((s) =>
-            sym.includes(s),
-          )
-        );
-      }
-      if (matchTag === "metal") {
-        return (
-          itemTag === "metal" ||
-          itemTag === "metals" ||
-          ["XAU", "XAG", "GOLD", "SILVER", "PLATINUM"].some((s) => sym.includes(s))
-        );
-      }
-      if (matchTag === "oil") {
-        return (
-          itemTag === "oil" ||
-          itemTag === "crude" ||
-          ["CL", "BRENT", "OIL", "WTI", "CRUDE"].some((s) => sym.includes(s))
-        );
-      }
-      if (matchTag === "commodity") {
-        return (
-          itemTag === "commodity" ||
-          itemTag === "commodities" ||
-          ["NG", "COPPER", "GAS", "WHEAT", "CORN"].some((s) => sym.includes(s))
-        );
-      }
-      return itemTag === matchTag;
-    });
-
-    if (filtered.length > 0) return filtered;
-    return FALLBACK_FUTURES_COINS.filter((c) => {
-      const tagLower = (c.tag || "").toLowerCase();
-      if (matchTag === "stocks" || matchTag === "stock") return tagLower === "stocks" || tagLower === "stock";
-      return tagLower === matchTag;
-    });
-  }, [combinedFuturesList, activeTradFiTag]);
+    return apiTradFiCoins;
+  }, [apiTradFiCoins]);
 
   const handleLogout = async () => {
     try {
@@ -483,7 +535,7 @@ export default function Navbar() {
                 setCurrentItem(item);
                 if (item === "Futures") {
                   setFuturesSubTab(null);
-                } else if (item === "Spot") {
+                } else if (item === "Spot" || item === "Trade") {
                   setSpotSubTab(null);
                 }
                 setHoverPosition({
@@ -495,7 +547,7 @@ export default function Navbar() {
               onClick={() => {
                 if (item === "Buy Crypto") {
                   handleNavigate("/trade/buy-crypto");
-                } else if (item === "Spot") {
+                } else if (item === "Spot" || item === "Trade") {
                   handleNavigate("/trade/spot/BTCUSDT");
                 } else if (item === "Futures") {
                   handleNavigate("/trade/futures/BTCUSDT");
@@ -540,7 +592,7 @@ export default function Navbar() {
           {hoveredItemIndex !== null && (
             <>
               <div className="absolute right-0 top-full w-full h-5 z-999" />
-              {currentItem === "Spot" ? (
+              {currentItem === "Spot" || currentItem === "Trade" ? (
                 /* ─── Spot Flyout Dropdown (Bybit Style with Subtitles - Exact sizing and padding) ─── */
                 <div
                   className="absolute mt-5 bg-recessed text-text-primary border border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:flex overflow-hidden transition-all duration-200 ease-in-out"
@@ -672,7 +724,11 @@ export default function Navbar() {
                   {spotSubTab && spotSubTab !== "convert" && (
                     <div className="w-[350px] p-2.5 flex flex-col min-w-0 bg-recessed shrink-0">
                       <div className="flex-1 overflow-y-auto custom-scroll space-y-0.5 max-h-[375px] pr-1">
-                        {spotCoins.length === 0 ? (
+                        {isSpotLoading ? (
+                          <div className="flex justify-center items-center py-12">
+                            <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        ) : spotCoins.length === 0 ? (
                           <div className="flex flex-col items-center justify-center py-12 text-xs text-text-muted">
                             No pairs found
                           </div>
@@ -856,7 +912,11 @@ export default function Navbar() {
 
                       {/* Coin List: Icon + Symbol + Subtitle */}
                       <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
-                        {(futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).length === 0 ? (
+                        {isTradFiLoading && futuresSubTab === "tradfi" ? (
+                          <div className="flex justify-center items-center py-12">
+                            <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
+                          </div>
+                        ) : (futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).length === 0 ? (
                           <div className="flex flex-col items-center justify-center py-12 text-xs text-text-muted">
                             No contracts found
                           </div>
