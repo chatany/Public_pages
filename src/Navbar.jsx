@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import QRCode from "react-qr-code";
 
@@ -14,12 +14,7 @@ import { BsMoon } from "react-icons/bs";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BiSupport, BiCreditCard, BiWallet } from "react-icons/bi";
 import { FiRefreshCw } from "react-icons/fi";
-import { MdDashboardCustomize } from "react-icons/md";
-import { LuWallet } from "react-icons/lu";
-import { HiOfficeBuilding } from "react-icons/hi";
-import { FaUserLarge } from "react-icons/fa6";
-import { FaUserPlus } from "react-icons/fa";
-import { CiLogout } from "react-icons/ci";
+import { FaAngleRight } from "react-icons/fa";
 
 import MobileDrawer from "./Drawer";
 import { apiRequest, BASE_URL } from "./Components/fee";
@@ -27,170 +22,61 @@ import { DepositPopup } from "./Components/DepositPopup";
 import { useDeviceInfo } from "./Hooks/useDeviceInfo";
 import { useAuth } from "./useAuth";
 import Button from "./Common/Button";
+import {
+  data,
+  MenuItem,
+  FALLBACK_FUTURES_COINS,
+  FALLBACK_SPOT_COINS,
+  getIsZeroFee,
+} from "./Constant";
 
 const MAIN_SITE = "/trade";
 
-const MenuItem = [
-  {
-    icon: <MdDashboardCustomize className="size-5" />,
-    name: "Dashboard",
-    path: "/trade/dashboard",
-  },
-  {
-    icon: <LuWallet className="size-5" />,
-    name: "Assets",
-    path: "/trade/assets",
-  },
-  {
-    icon: <HiOfficeBuilding className="size-5" />,
-    name: "Orders",
-    path: "/trade/orders",
-  },
-  {
-    icon: <FaUserLarge className="size-5" />,
-    name: "Account",
-    path: "/trade/Identity",
-  },
-  {
-    icon: <FaUserPlus className="size-5" />,
-    name: "Referral",
-    path: "/trade/referral",
-  },
-  { icon: <CiLogout className="size-5" />, name: "Log Out" },
-];
+const NavCoinIcon = ({ icon, symbol, name, className = "size-7" }) => {
+  const [imgError, setImgError] = useState(false);
+  const sym = (symbol || "").toUpperCase();
+  const letter = (symbol || name || "?").charAt(0).toUpperCase();
 
-const data = [
-  {
-    category: "Buy Crypto",
-    item: [
-      {
-        title: "Buy Crypto",
-        description: "Visa, Mastercard, and more",
-        path: `${MAIN_SITE}/buy-crypto`,
-        iconUrlLight: <BiCreditCard className="w-5 h-5 text-text-primary" />,
-        iconUrlDark: <BiCreditCard className="w-5 h-5 text-text-primary" />,
-      },
-      {
-        title: "Crypto Deposit",
-        description: "Deposit crypto to your account instantly",
-        path: `${MAIN_SITE}/crypto/deposit`,
-        iconUrlLight: <BiWallet className="w-5 h-5 text-text-primary" />,
-        iconUrlDark: <BiWallet className="w-5 h-5 text-text-primary" />,
-      },
-      {
-        title: "Auto-Invest",
-        description: "Auto-buy crypto on your schedule",
-        path: "/invest",
-        iconUrlLight: <FiRefreshCw className="w-5 h-5 text-text-primary" />,
-        iconUrlDark: <FiRefreshCw className="w-5 h-5 text-text-primary" />,
-      },
-      {
-        title: "OTC Trading",
-        description: "Large trades for institutions & individuals",
-        path: `${MAIN_SITE}/otc`,
-        iconUrlLight: "/swapWhite.png",
-        iconUrlDark: "/swapBlack.png",
-      },
-    ],
-  },
+  let bgClass = "bg-[#2b2f38] text-white";
+  if (sym.startsWith("BTC")) bgClass = "bg-[#F7931A] text-white font-bold";
+  else if (sym.startsWith("ETH")) bgClass = "bg-[#627EEA] text-white font-bold";
+  else if (sym.startsWith("SOL")) bgClass = "bg-[#14F195] text-black font-bold";
+  else if (sym.startsWith("DOGE")) bgClass = "bg-[#C2A633] text-white font-bold";
+  else if (sym.startsWith("XRP")) bgClass = "bg-[#23292F] text-white font-bold";
+  else if (sym.startsWith("MATIC")) bgClass = "bg-[#8247E5] text-white font-bold";
+  else if (sym.startsWith("TRX")) bgClass = "bg-[#EF0027] text-white font-bold";
+  else if (sym.startsWith("PEPE")) bgClass = "bg-[#4D8C2F] text-white font-bold";
+  else if (sym.startsWith("SUI")) bgClass = "bg-[#2A82E4] text-white font-bold";
+  else if (sym.startsWith("RSPY") || sym.startsWith("R")) bgClass = "bg-[#0A85EA] text-white font-bold";
+  else if (sym.startsWith("NVDA")) bgClass = "bg-[#76B900] text-white font-bold";
+  else if (sym.startsWith("AAPL")) bgClass = "bg-[#555555] text-white font-bold";
+  else if (sym.startsWith("TSLA")) bgClass = "bg-[#CC0000] text-white font-bold";
 
-  {
-    category: "Spot",
-    item: [
-      {
-        title: "Spot",
-        description: "Buy and sell on the Spot market with advanced tools",
-        path: `${MAIN_SITE}/spot/BTCUSDT`,
-        iconUrlLight: "/tr-white.png",
-        iconUrlDark: "/tr-black.png",
-      },
-      {
-        title: "Convert",
-        description: "Convert crypto with one click",
-        path: `${MAIN_SITE}/convert`,
-        iconUrlLight: "/convertWhite.png",
-        iconUrlDark: "/convertBlack.png",
-      },
-      {
-        title: "Auto invest",
-        description: "Invest in crypto with one click",
-        path: "/invest",
-        iconUrlLight: "/autoWhite.png",
-        iconUrlDark: "/autoBlack.png",
-      },
-    ],
-  },
-  {
-    category: "Futures",
-    item: [
-      {
-        title: "USDⓈ-M Futures",
-        description: "Contracts settled in USDT",
-        path: `${MAIN_SITE}/futures/BTCUSDT`,
-        iconUrlLight: "/futuresWhite.png",
-        iconUrlDark: "/futuresBlack.png",
-      },
-    ],
-  },
-  {
-    category: "Alpha",
-    item: [
-      {
-        title: "Alpha Trading",
-        description: "Trade top trending Solana & EVM tokens",
-        path: `${MAIN_SITE}/alpha`,
-        iconUrlLight: "/tr-white.png",
-        iconUrlDark: "/tr-black.png",
-      },
-    ],
-  },
-  {
-    category: "Earn",
-    item: [
-      {
-        title: "BitZup Earn",
-        description: "Earn passive income on 300+ crypto assets with Staking",
-        path: `${MAIN_SITE}/subscription`,
-        iconUrlLight: "/earnWhite.png",
-        iconUrlDark: "/earnBlack.png",
-      },
-    ],
-  },
-  {
-    category: "More",
-    item: [
-      {
-        title: "VIP & Institutional",
-        description:
-          "Your trusted digital asset platform for VIPs and institutions",
-        path: "/vip",
-        iconUrlLight: "/vipWhite.png",
-        iconUrlDark: "/vipBlack.png",
-      },
-      {
-        title: "OTC Trading",
-        description:
-          "Personalized, private, and secure OTC trading for professionals",
-        path: `${MAIN_SITE}/otc`,
-        iconUrlLight: "/swapWhite.png",
-        iconUrlDark: "/swapBlack.png",
-      },
-      {
-        title: "Referral Program",
-        description:
-          "Invite friends to earn either a commission rebate or a one-time reward",
-        path: "/referral",
-        iconUrlLight: "/referralWhite.png",
-        iconUrlDark: "/referralBlack.png",
-      },
-    ],
-  },
-];
+  return (
+    <div
+      className={`${className} rounded-full flex items-center justify-center shrink-0 overflow-hidden ${bgClass} border border-border/40 shadow-sm`}
+    >
+      {!imgError && icon ? (
+        <img
+          src={icon}
+          alt={symbol || name}
+          className="w-full h-full object-cover rounded-full"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <span className="text-[11px] font-bold uppercase">
+          {letter}
+        </span>
+      )}
+    </div>
+  );
+};
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const dark = true;
+
   const isTabActive = (item) => {
     const path = location.pathname;
     if (item === "Buy Crypto") {
@@ -200,20 +86,25 @@ export default function Navbar() {
       return (
         path.startsWith("/spot") ||
         path.startsWith("/convert") ||
-        path.startsWith("/invest")
+        path.startsWith("/invest") ||
+        path.startsWith("/trade/spot") ||
+        path.startsWith("/trade/convert")
       );
     }
     if (item === "Futures") {
-      return path.startsWith("/futures");
+      return path.startsWith("/futures") || path.startsWith("/trade/futures");
+    }
+    if (item === "Options") {
+      return path.startsWith("/options") || path.startsWith("/trade/options");
     }
     if (item === "Alpha") {
-      return path.startsWith("/alpha");
+      return path.startsWith("/alpha") || path.startsWith("/trade/alpha");
     }
     if (item === "Earn") {
-      return path.startsWith("/subscription") || path.startsWith("/earn");
+      return path.startsWith("/subscription") || path.startsWith("/earn") || path.startsWith("/trade/subscription");
     }
     if (item === "More") {
-      return path.startsWith("/vip") || path.startsWith("/referral");
+      return path.startsWith("/vip") || path.startsWith("/referral") || path.startsWith("/otc") || path.startsWith("/trade/otc");
     }
     return false;
   };
@@ -226,14 +117,30 @@ export default function Navbar() {
   const [openDeposit, setOpenDeposit] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
+  const [hoveredItemIndex, setHoveredItemIndex] = useState(null);
+  const [showQR, setShowQR] = useState(false);
+  const [currentItem, setCurrentItem] = useState("");
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0, width: 0 });
+
+  const [futuresSubTab, setFuturesSubTab] = useState(null);
+  const [spotSubTab, setSpotSubTab] = useState(null);
+  const [activeTradFiTag, setActiveTradFiTag] = useState("Stocks");
+  const [apiFuturesCoins, setApiFuturesCoins] = useState([]);
+  const [apiSpotCoins, setApiSpotCoins] = useState([]);
+
+  const navDropdownRef = useRef(null);
+  const navMenuItemsRef = useRef([]);
+
   const isLoggedIn = useAuth();
   const deviceInfo = useDeviceInfo();
+
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "https://download.bitzup.com/app-release.apk";
     link.download = "bitzup.apk";
     link.click();
   };
+
   const [userProfile, setUserProfile] = useState({
     email: "user@example.com",
     uid: "51297991",
@@ -243,13 +150,13 @@ export default function Navbar() {
 
   const fetchUserProfile = async () => {
     try {
-      const { data, status } = await apiRequest({
+      const { data: resData, status } = await apiRequest({
         method: "get",
         url: `${BASE_URL}/onboarding/user/getUserProfile`,
       });
 
-      if (status === 200 && data?.status === "1") {
-        const profileData = data?.data;
+      if (status === 200 && resData?.status === "1") {
+        const profileData = resData?.data;
         setUserProfile({
           email: profileData?.email,
           uid: profileData?.uid,
@@ -259,18 +166,45 @@ export default function Navbar() {
         });
       }
 
-      if (status === 400 && data?.status == 3) {
+      if (status === 400 && resData?.status == 3) {
         if (
-          data?.message == "You are not authorized" ||
-          data?.message == "Session expired, Please login again."
+          resData?.message == "You are not authorized" ||
+          resData?.message == "Session expired, Please login again."
         ) {
           localStorage.removeItem("isLoggedIn");
-          // setIsLoggedIn(false);
           window.dispatchEvent(new Event("userDataChanged"));
         }
       }
     } catch (err) {
-      console.error("Failed to fetch second API", err);
+      console.error("Failed to fetch profile API", err);
+    }
+  };
+
+  const fetchSpotCoins = async () => {
+    try {
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/market/exchangeinfoall/?limit=300`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
+        setApiSpotCoins(res.data.data);
+      }
+    } catch (e) {
+      // fallback will be used
+    }
+  };
+
+  const fetchFuturesCoins = async () => {
+    try {
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/futures/api/futures-curr-info-all/?limit=300`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data) && res.data.data.length > 0) {
+        setApiFuturesCoins(res.data.data);
+      }
+    } catch (e) {
+      // fallback will be used
     }
   };
 
@@ -278,7 +212,135 @@ export default function Navbar() {
     if (isLoggedIn) {
       fetchUserProfile();
     }
+    fetchSpotCoins();
+    fetchFuturesCoins();
   }, [isLoggedIn]);
+
+  const combinedSpotList = useMemo(() => {
+    const list = [];
+    const seenSymbols = new Set();
+
+    const addCoins = (arr) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((c) => {
+        const sym = (c.pair_symbol || c.symbol || c.pair_name || c.base_asset_symbol || "").toUpperCase().replace(/[\/_]/g, "");
+        if (sym && !seenSymbols.has(sym)) {
+          seenSymbols.add(sym);
+          list.push(c);
+        }
+      });
+    };
+
+    addCoins(apiSpotCoins);
+    addCoins(FALLBACK_SPOT_COINS);
+
+    return list;
+  }, [apiSpotCoins]);
+
+  const spotCoins = useMemo(() => {
+    if (!spotSubTab) return [];
+    if (spotSubTab === "0_fees") {
+      return combinedSpotList.filter((c) => getIsZeroFee(c));
+    }
+    if (spotSubTab === "stocks") {
+      return combinedSpotList.filter((item) => {
+        const itemTag = (item.tag || "").toLowerCase();
+        const sym = (item.pair_symbol || item.symbol || "").toUpperCase();
+        return (
+          itemTag === "stock" ||
+          itemTag === "stocks" ||
+          ["RSPY", "NVDA", "AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "QQQ", "SPY", "TSM", "HOOD", "INTC", "META", "SNDK", "SOXL", "SKHYNIX", "SPCX", "MU"].some((s) =>
+            sym.includes(s),
+          )
+        );
+      });
+    }
+    if (spotSubTab === "spot") {
+      return combinedSpotList;
+    }
+    return [];
+  }, [combinedSpotList, spotSubTab]);
+
+  const combinedFuturesList = useMemo(() => {
+    const list = [];
+    const seenSymbols = new Set();
+
+    const addCoins = (arr) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((c) => {
+        const sym = (c.symbol || c.pair_symbol || c.pair_name || c.base_coin || "").toUpperCase();
+        if (sym && !seenSymbols.has(sym)) {
+          seenSymbols.add(sym);
+          list.push(c);
+        }
+      });
+    };
+
+    addCoins(apiFuturesCoins);
+    addCoins(FALLBACK_FUTURES_COINS);
+
+    return list;
+  }, [apiFuturesCoins]);
+
+  const tradFiTags = useMemo(() => {
+    return ["Stocks", "Metal", "Oil", "Commodity"];
+  }, []);
+
+  const usdtCoins = useMemo(() => {
+    return combinedFuturesList.filter((item) => {
+      const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
+      return sym.endsWith("USDT") || sym.includes("USDT");
+    });
+  }, [combinedFuturesList]);
+
+  const tradFiCoins = useMemo(() => {
+    let list = combinedFuturesList;
+    const matchTag = (activeTradFiTag || "Stocks").toLowerCase();
+
+    const filtered = list.filter((item) => {
+      const itemTag = (item.tag || "").toLowerCase();
+      const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
+
+      if (matchTag === "stocks" || matchTag === "stock") {
+        return (
+          itemTag === "stock" ||
+          itemTag === "stocks" ||
+          ["RSPY", "NVDA", "AAPL", "TSLA", "MSFT", "AMZN", "GOOGL", "QQQ", "SPY", "TSM", "HOOD", "INTC", "META", "SNDK", "SOXL", "SKHYNIX", "SPCX", "MU"].some((s) =>
+            sym.includes(s),
+          )
+        );
+      }
+      if (matchTag === "metal") {
+        return (
+          itemTag === "metal" ||
+          itemTag === "metals" ||
+          ["XAU", "XAG", "GOLD", "SILVER", "PLATINUM"].some((s) => sym.includes(s))
+        );
+      }
+      if (matchTag === "oil") {
+        return (
+          itemTag === "oil" ||
+          itemTag === "crude" ||
+          ["CL", "BRENT", "OIL", "WTI", "CRUDE"].some((s) => sym.includes(s))
+        );
+      }
+      if (matchTag === "commodity") {
+        return (
+          itemTag === "commodity" ||
+          itemTag === "commodities" ||
+          ["NG", "COPPER", "GAS", "WHEAT", "CORN"].some((s) => sym.includes(s))
+        );
+      }
+      return itemTag === matchTag;
+    });
+
+    if (filtered.length > 0) return filtered;
+    return FALLBACK_FUTURES_COINS.filter((c) => {
+      const tagLower = (c.tag || "").toLowerCase();
+      if (matchTag === "stocks" || matchTag === "stock") return tagLower === "stocks" || tagLower === "stock";
+      return tagLower === matchTag;
+    });
+  }, [combinedFuturesList, activeTradFiTag]);
 
   const handleLogout = async () => {
     try {
@@ -313,17 +375,6 @@ export default function Navbar() {
     setOpenPopup(false);
   };
 
-  const handleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const [hoveredItemIndex, setHoveredItemIndex] = useState(null);
-  const [showQR, setShowQR] = useState(false);
-  const [currentItem, setCurrentItem] = useState("");
-  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0, width: 0 });
-  const navDropdownRef = useRef(null);
-  const navMenuItemsRef = useRef([]);
-
   useEffect(() => {
     let hoverTimeout;
 
@@ -331,6 +382,8 @@ export default function Navbar() {
       hoverTimeout = setTimeout(() => {
         setHoveredItemIndex(null);
         setCurrentItem("");
+        setFuturesSubTab(null);
+        setSpotSubTab(null);
       }, 100);
     };
 
@@ -390,7 +443,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between fixed top-0  items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary  z-99">
+    <div className="flex justify-between fixed top-0 items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary z-99">
       <div className="flex xl:w-[60%] items-center text-lg gap-2 font-semibold leading-6 lg:gap-8">
         <div
           className="text-brand-green font-semibold cursor-pointer"
@@ -409,13 +462,15 @@ export default function Navbar() {
             setTimeout(() => {
               setHoveredItemIndex(null);
               setCurrentItem("");
+              setFuturesSubTab(null);
+              setSpotSubTab(null);
             }, 50);
           }}
         >
-          {["Buy Crypto", "Spot", "Futures", "Alpha", "Earn", "More"].map((item, i) => (
+          {["Buy Crypto", "Spot", "Futures", "Options", "Alpha", "Earn", "More"].map((item, i) => (
             <div
               key={i}
-              className={` text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative ${
+              className={`text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative hover:text-brand-green ${
                 hoveredItemIndex === i ? "text-brand-green" : ""
               }`}
               ref={(el) => (navMenuItemsRef.current[i] = el)}
@@ -426,6 +481,11 @@ export default function Navbar() {
                   : { left: 0, top: 0 };
                 setHoveredItemIndex(i);
                 setCurrentItem(item);
+                if (item === "Futures") {
+                  setFuturesSubTab(null);
+                } else if (item === "Spot") {
+                  setSpotSubTab(null);
+                }
                 setHoverPosition({
                   x: rect.left - parentRect.left,
                   y: rect.bottom - parentRect.top,
@@ -439,6 +499,8 @@ export default function Navbar() {
                   handleNavigate("/trade/spot/BTCUSDT");
                 } else if (item === "Futures") {
                   handleNavigate("/trade/futures/BTCUSDT");
+                } else if (item === "Options") {
+                  handleNavigate("/trade/options");
                 } else if (item === "Alpha") {
                   handleNavigate("/trade/alpha");
                 }
@@ -474,76 +536,457 @@ export default function Navbar() {
               )}
             </div>
           ))}
+
           {hoveredItemIndex !== null && (
             <>
               <div className="absolute right-0 top-full w-full h-5 z-999" />
-              <div
-                className="absolute mt-5 w-80 border    bg-recessed text-text-primary border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:block transition-all duration-200 ease-in-out"
-                style={{
-                  top: `${hoverPosition.y}px`,
-                  left: `${hoverPosition.x}px`,
-                }}
-                onMouseEnter={() => {
-                  // Keep menu open on mouse enter
-                }}
-                onMouseLeave={() => {
-                  setTimeout(() => {
-                    setHoveredItemIndex(null);
-                    setCurrentItem("");
-                  }, 50);
-                }}
-              >
-                {data?.map(
-                  (item, idx) =>
-                    item.category === currentItem && (
-                      <div className="" key={idx}>
-                        {item?.item.map((ele, index) => (
-                          <a
-                            key={index}
-                            href={ele.path || "#"}
-                            onClick={(e) => {
-                              if (!e.ctrlKey && !e.metaKey && e.button === 0) {
-                                e.preventDefault();
-                                setHoveredItemIndex(null);
-                                setCurrentItem("");
-                                handleNavigate(ele.path);
+              {currentItem === "Spot" ? (
+                /* ─── Spot Flyout Dropdown (Bybit Style with Subtitles - Exact sizing and padding) ─── */
+                <div
+                  className="absolute mt-5 bg-recessed text-text-primary border border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:flex overflow-hidden transition-all duration-200 ease-in-out"
+                  style={{
+                    top: `${hoverPosition.y}px`,
+                    left: `${Math.max(10, hoverPosition.x - 20)}px`,
+                    width: spotSubTab && spotSubTab !== "convert" ? "700px" : "350px",
+                    height: spotSubTab && spotSubTab !== "convert" ? "400px" : "auto",
+                  }}
+                  onMouseLeave={() => {
+                    setTimeout(() => {
+                      setHoveredItemIndex(null);
+                      setCurrentItem("");
+                      setSpotSubTab(null);
+                    }, 80);
+                  }}
+                >
+                  {/* Left Column: Spot, Stocks, 0 Fees, Convert with Subtitles */}
+                  <div className={`w-[350px] p-1.5 bg-recessed flex flex-col justify-start shrink-0 ${spotSubTab && spotSubTab !== "convert" ? "border-r border-border" : ""}`}>
+                    <div className="flex flex-col gap-1">
+                      {[
+                        {
+                          id: "spot",
+                          title: "Spot",
+                          subtitle: "Trade Bitcoin, Ethereum & top crypto with USDT, USDC settlement",
+                          path: `${MAIN_SITE}/spot/BTCUSDT`,
+                          iconDark: "/icon 1 Black-01.png",
+                          iconLight: "/icon 1 white-01.png",
+                          hasFlyout: true,
+                        },
+                        {
+                          id: "stocks",
+                          title: "Stocks",
+                          subtitle: "Trade Apple, Tesla, Nvidia & global stocks with USDT, USDC settlement",
+                          path: `${MAIN_SITE}/spot/RSPYUSDT`,
+                          iconDark: "/icon 2 black-01.png",
+                          iconLight: "/icon 2 white-02.png",
+                          badge: "New",
+                          hasFlyout: true,
+                        },
+                        {
+                          id: "0_fees",
+                          title: "0 Fees",
+                          subtitle: "Trade selected spot pairs with 0% trading fees",
+                          path: `${MAIN_SITE}/spot/BTCUSDC`,
+                          badge: "New",
+                          icon: (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5">
+                              <rect x="2.5" y="2.5" width="19" height="19" rx="4" strokeWidth="2" />
+                              <line x1="7" y1="17" x2="17" y2="7" strokeWidth="2.2" strokeLinecap="round" />
+                              <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" strokeWidth="0" />
+                              <circle cx="15.5" cy="15.5" r="1.5" fill="currentColor" strokeWidth="0" />
+                            </svg>
+                          ),
+                          hasFlyout: true,
+                        },
+                        {
+                          id: "convert",
+                          title: "Convert",
+                          subtitle: "Convert crypto with one click and zero slippage",
+                          path: `${MAIN_SITE}/convert`,
+                          iconDark: "/convertBlack.png",
+                          iconLight: "/convertWhite.png",
+                          hasFlyout: false,
+                        },
+                      ].map((menuItem) => {
+                        const isSelected = spotSubTab === menuItem.id;
+                        const iconSrc = dark ? menuItem.iconLight : menuItem.iconDark;
+                        return (
+                          <div
+                            key={menuItem.id}
+                            onMouseEnter={() => {
+                              if (menuItem.hasFlyout) {
+                                setSpotSubTab(menuItem.id);
+                              } else {
+                                setSpotSubTab(null);
                               }
                             }}
-                            className="flex hover:bg-lift  gap-3 px-2 py-2 cursor-pointer rounded transition-colors duration-150 group text-left items-start no-underline hover:text-brand-green"
+                            onClick={() => {
+                              setHoveredItemIndex(null);
+                              setCurrentItem("");
+                              setSpotSubTab(null);
+                              handleNavigate(menuItem.path);
+                            }}
+                            className={`flex items-center justify-between px-3 py-2.5 rounded cursor-pointer transition-colors duration-150 group ${
+                              isSelected
+                                ? "bg-lift"
+                                : "hover:bg-lift"
+                            }`}
                           >
-                            <div
-                              className={`${ele.title.includes("Futures") ? "size-6 min-w-[24px]" : "size-8 min-w-[32px]"} flex items-center justify-center hover:text-brand-green mt-0.5`}
-                            >
-                              {typeof (dark
-                                ? ele?.iconUrlLight
-                                : ele?.iconUrlDark) === "string" ? (
-                                <img
-                                  src={
-                                    dark ? ele?.iconUrlLight : ele?.iconUrlDark
-                                  }
-                                  className="w-full h-auto max-h-full block"
-                                  alt={ele.title}
-                                />
-                              ) : dark ? (
-                                ele?.iconUrlLight
-                              ) : (
-                                ele?.iconUrlDark
-                              )}
-                            </div>
-                            <div className="flex flex-col">
-                              <div className="font-bold text-sm  flex gap-2">
-                                {ele.title}
+                            <div className="flex items-center gap-3 min-w-0 pr-2">
+                              <div className="size-8 min-w-[32px] flex items-center justify-center opacity-80 group-hover:opacity-100 text-text-primary group-hover:text-text-primary transition-all duration-150 shrink-0">
+                                {menuItem.icon ? (
+                                  <div className="w-6 h-6 flex items-center justify-center">
+                                    {menuItem.icon}
+                                  </div>
+                                ) : (
+                                  <img
+                                    src={iconSrc}
+                                    className="w-7 h-7 max-h-7 object-contain block"
+                                    alt={menuItem.title}
+                                  />
+                                )}
                               </div>
-                              <div className="leading-tight text-xs text-muted mt-0.5">
-                                {ele.description}
+                              <div className="flex flex-col min-w-0">
+                                <div className={`font-bold text-sm flex items-center gap-2 ${isSelected ? "text-brand-green" : "text-text-primary group-hover:text-brand-green"}`}>
+                                  <span>{menuItem.title}</span>
+                                  {menuItem.badge && (
+                                    <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
+                                      {menuItem.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="text-xs text-text-muted leading-4 mt-0.5 max-w-[245px]">
+                                  {menuItem.subtitle}
+                                </div>
                               </div>
                             </div>
-                          </a>
-                        ))}
+                            {menuItem.hasFlyout && (
+                              <FaAngleRight
+                                className={`text-xs shrink-0 transition-transform ${
+                                  isSelected
+                                    ? "text-brand-green translate-x-0.5"
+                                    : "text-text-muted group-hover:text-brand-green"
+                                }`}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Flyout Panel (Bybit Style) */}
+                  {spotSubTab && spotSubTab !== "convert" && (
+                    <div className="w-[350px] p-2.5 flex flex-col min-w-0 bg-recessed shrink-0">
+                      <div className="flex-1 overflow-y-auto custom-scroll space-y-0.5 max-h-[375px] pr-1">
+                        {spotCoins.length === 0 ? (
+                          <div className="flex flex-col items-center justify-center py-12 text-xs text-text-muted">
+                            No pairs found
+                          </div>
+                        ) : (
+                          spotCoins.map((item, idx) => {
+                            const rawSym = (item.pair_symbol || item.symbol || "").toUpperCase();
+                            const cleanSym = rawSym.replace(/[\/_]/g, "");
+                            const baseSymbol = (item.base_asset_symbol || item.base_coin || (cleanSym.endsWith("USDT") ? cleanSym.replace("USDT", "") : cleanSym.endsWith("USDC") ? cleanSym.replace("USDC", "") : cleanSym)).toUpperCase();
+                            const quoteSymbol = (item.quote_asset_symbol || item.quote_coin || (cleanSym.endsWith("USDC") ? "USDC" : "USDT")).toUpperCase();
+                            const isZeroFee = getIsZeroFee(item);
+                            const displayName = item.coin_name || item.name || baseSymbol;
+                            const subtitle = `${displayName} Spot`;
+
+                            return (
+                              <div
+                                key={cleanSym || idx}
+                                onClick={() => {
+                                  setHoveredItemIndex(null);
+                                  setCurrentItem("");
+                                  setSpotSubTab(null);
+                                  handleNavigate(`${MAIN_SITE}/spot/${cleanSym}`);
+                                }}
+                                className="flex items-center justify-between px-2.5 py-2.5 rounded hover:bg-lift cursor-pointer transition-colors duration-150 group"
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <NavCoinIcon
+                                    icon={item.coin_icon || item.icon || item.iconUrl || item.icon_url || item.logo}
+                                    symbol={baseSymbol}
+                                    name={displayName}
+                                    className="size-8"
+                                  />
+                                  <div className="flex flex-col min-w-0">
+                                    <div className="flex items-center gap-1 font-bold text-sm text-text-primary group-hover:text-brand-green transition-colors">
+                                      <span>{baseSymbol}</span>
+                                      <span className="text-xs text-text-muted">/{quoteSymbol}</span>
+                                      {isZeroFee && (
+                                        <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
+                                          0 Fees
+                                        </span>
+                                      )}
+                                      {(item.popular == 1 || item.hot == 1 || item.popular === true) && (
+                                        <span className="text-[10px]">🔥</span>
+                                      )}
+                                    </div>
+                                    <div className="text-xs text-text-muted truncate max-w-[260px] leading-4 mt-0.5">
+                                      {subtitle}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        )}
                       </div>
-                    ),
-                )}
-              </div>
+                    </div>
+                  )}
+                </div>
+              ) : currentItem === "Futures" ? (
+                /* ─── Futures Flyout Dropdown (Bybit Style with Subtitles - Exact sizing and padding) ─── */
+                <div
+                  className="absolute mt-5 bg-recessed text-text-primary border border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:flex overflow-hidden transition-all duration-200 ease-in-out"
+                  style={{
+                    top: `${hoverPosition.y}px`,
+                    left: `${Math.max(10, hoverPosition.x - 20)}px`,
+                    width: futuresSubTab ? "700px" : "350px",
+                    height: futuresSubTab ? "400px" : "auto",
+                  }}
+                  onMouseLeave={() => {
+                    setTimeout(() => {
+                      setHoveredItemIndex(null);
+                      setCurrentItem("");
+                      setFuturesSubTab(null);
+                    }, 80);
+                  }}
+                >
+                  {/* Left Column: USDT Perpetual & TradFi with Subtitles */}
+                  <div className={`w-[350px] p-1.5 bg-recessed flex flex-col justify-start shrink-0 ${futuresSubTab ? "border-r border-border" : ""}`}>
+                    <div className="flex flex-col gap-1">
+                      {[
+                        {
+                          id: "usdt_perpetual",
+                          title: "USDT Perpetual",
+                          subtitle: "Trade Perpetual contracts on global assets with USDT settlement",
+                          path: `${MAIN_SITE}/futures/BTCUSDT`,
+                          iconDark: "/icon 1 Black-01.png",
+                          iconLight: "/icon 1 white-01.png",
+                        },
+                        {
+                          id: "tradfi",
+                          title: "TradFi",
+                          subtitle: "Trade Stocks, Metal, Oil and Commodity contracts in one place.",
+                          path: `${MAIN_SITE}/futures/RSPYUSDT`,
+                          iconDark: "/icon 2 black-01.png",
+                          iconLight: "/icon 2 white-02.png",
+                        },
+                      ].map((menuItem) => {
+                        const isSelected = futuresSubTab === menuItem.id;
+                        const iconSrc = dark ? menuItem.iconLight : menuItem.iconDark;
+                        return (
+                          <div
+                            key={menuItem.id}
+                            onMouseEnter={() => setFuturesSubTab(menuItem.id)}
+                            onClick={() => {
+                              setHoveredItemIndex(null);
+                              setCurrentItem("");
+                              setFuturesSubTab(null);
+                              handleNavigate(menuItem.path);
+                            }}
+                            className={`flex items-center justify-between px-3 py-2.5 rounded cursor-pointer transition-colors duration-150 group ${
+                              isSelected
+                                ? "bg-lift"
+                                : "hover:bg-lift"
+                            }`}
+                          >
+                            <div className="flex items-center gap-3 min-w-0 pr-2">
+                              <div className="size-8 min-w-[32px] flex items-center justify-center opacity-80 group-hover:opacity-100 text-text-primary group-hover:text-text-primary transition-all duration-150 shrink-0">
+                                <img
+                                  src={iconSrc}
+                                  className="w-7 h-7 max-h-7 object-contain block"
+                                  alt={menuItem.title}
+                                />
+                              </div>
+                              <div className="flex flex-col min-w-0">
+                                <div className={`font-bold text-sm flex items-center gap-2 ${isSelected ? "text-brand-green" : "text-text-primary group-hover:text-brand-green"}`}>
+                                  {menuItem.title}
+                                </div>
+                                <div className="text-xs text-text-muted leading-4 mt-0.5 max-w-[245px]">
+                                  {menuItem.subtitle}
+                                </div>
+                              </div>
+                            </div>
+                            <FaAngleRight
+                              className={`text-xs shrink-0 transition-transform ${
+                                isSelected
+                                  ? "text-brand-green translate-x-0.5"
+                                  : "text-text-muted group-hover:text-brand-green"
+                              }`}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Flyout Panel (Bybit Style) */}
+                  {futuresSubTab && (
+                    <div className="w-[350px] p-2.5 flex flex-col min-w-0 bg-recessed shrink-0">
+                      {/* For TradFi: ONLY Dynamic Tags + Coin List */}
+                      {futuresSubTab === "tradfi" && (
+                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide flex-shrink-0">
+                          {tradFiTags.map((tag) => {
+                            const isTagActive = activeTradFiTag === tag;
+                            return (
+                              <button
+                                key={tag}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setActiveTradFiTag(tag);
+                                }}
+                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border flex-shrink-0 ${
+                                  isTagActive
+                                    ? "bg-brand-green/10 text-brand-green border-brand-green/40"
+                                    : "bg-surface-2 text-text-muted border-border hover:text-text-primary hover:bg-surface-2"
+                                }`}
+                              >
+                                {tag?.toLowerCase() === "stocks" || tag?.toLowerCase() === "stock" ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-green/25 text-brand-green border border-brand-green/40 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      New
+                                    </span>
+                                  </>
+                                ) : (
+                                  tag
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Coin List: Icon + Symbol + Subtitle */}
+                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
+                        {(futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).length === 0 ? (
+                          <div className="flex flex-col items-center justify-center py-12 text-xs text-text-muted">
+                            No contracts found
+                          </div>
+                        ) : (
+                          (futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).map((item) => {
+                            const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
+                            const baseSymbol = (item.base_coin || sym.replace("USDT", "")).toUpperCase();
+                            const displayName = item.coin_name || item.name || baseSymbol;
+                            const subtitle = `${displayName} USDT Perpetual`;
+
+                            return (
+                              <div
+                                key={sym}
+                                onClick={() => {
+                                  setHoveredItemIndex(null);
+                                  setCurrentItem("");
+                                  setFuturesSubTab(null);
+                                  handleNavigate(`${MAIN_SITE}/futures/${sym}`);
+                                }}
+                                className="flex items-center justify-between px-2.5 py-2.5 rounded hover:bg-lift cursor-pointer transition-colors duration-150 group"
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <NavCoinIcon
+                                    icon={item.coin_icon || item.icon || item.icon_url}
+                                    symbol={sym}
+                                    name={item.coin_name || item.name}
+                                    className="size-8"
+                                  />
+                                  <div className="flex flex-col min-w-0">
+                                    <div className="flex items-center gap-1 font-bold text-sm text-text-primary group-hover:text-brand-green transition-colors">
+                                      <span>{sym}</span>
+                                      {(item.popular == 1 || item.hot == 1 || item.popular === true) && (
+                                        <span className="text-[10px]">🔥</span>
+                                      )}
+                                    </div>
+                                    <div className="text-xs text-text-muted truncate max-w-[260px] leading-4 mt-0.5">
+                                      {subtitle}
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                /* Standard single-column dropdown for other items (Options, Alpha, Earn, More, Buy Crypto) */
+                <div
+                  className="absolute mt-5 w-80 border bg-recessed text-text-primary border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:block transition-all duration-200 ease-in-out"
+                  style={{
+                    top: `${hoverPosition.y}px`,
+                    left: `${hoverPosition.x}px`,
+                  }}
+                  onMouseLeave={() => {
+                    setTimeout(() => {
+                      setHoveredItemIndex(null);
+                      setCurrentItem("");
+                    }, 50);
+                  }}
+                >
+                  {data?.map(
+                    (item, idx) =>
+                      item.category === currentItem && (
+                        <div className="flex flex-col gap-1" key={idx}>
+                          {item?.item.map((ele, index) => (
+                            <a
+                              key={index}
+                              href={ele.path || "#"}
+                              onClick={(e) => {
+                                if (!e.ctrlKey && !e.metaKey && e.button === 0) {
+                                  e.preventDefault();
+                                  setHoveredItemIndex(null);
+                                  setCurrentItem("");
+                                  handleNavigate(ele.path);
+                                }
+                              }}
+                              className="flex hover:bg-lift hover:text-brand-green gap-3 px-3 py-2.5 cursor-pointer rounded transition-colors duration-150 group items-center"
+                            >
+                              <div
+                                className="size-8 min-w-[32px] flex items-center justify-center group-hover:text-text-primary group-hover:opacity-100 opacity-80 transition-all duration-150 shrink-0"
+                              >
+                                {typeof (dark
+                                  ? ele?.iconUrlLight
+                                  : ele?.iconUrlDark) === "string" ? (
+                                  <img
+                                    src={
+                                      dark ? ele?.iconUrlLight : ele?.iconUrlDark
+                                    }
+                                    className="w-7 h-7 max-h-7 object-contain block"
+                                    alt={ele.title}
+                                  />
+                                ) : dark ? (
+                                  <div className="w-6 h-6 flex items-center justify-center">
+                                    {ele?.iconUrlLight}
+                                  </div>
+                                ) : (
+                                  <div className="w-6 h-6 flex items-center justify-center">
+                                    {ele?.iconUrlDark}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="flex flex-col min-w-0">
+                                <div className="font-bold text-sm flex items-center gap-2">
+                                  <span>{ele.title}</span>
+                                  {ele.badge && (
+                                    <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
+                                      {ele.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="leading-4 text-xs text-text-muted mt-0.5">
+                                  {ele.description}
+                                </div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      ),
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>
@@ -759,16 +1202,7 @@ export default function Navbar() {
             )}
           </div>
         )}
-        {/* <div className="relative">
-          <IoMdNotificationsOutline
-            className="h-6 w-6 cursor-pointer max-md:hidden text-text-primary hover:text-brand-green"
-            onClick={() => handleNavigate("/trade/notification")}
-          />
-          <IoMdNotificationsOutline
-            className="h-6 w-6 cursor-pointer md:hidden text-text-primary hover:text-brand-green"
-            onClick={() => handleNavigate("/trade/notification")}
-          />
-        </div> */}
+
         {!isLoggedIn && (
           <>
             <Button
@@ -796,7 +1230,6 @@ export default function Navbar() {
             className={`hover:text-brand-green h-6 w-6 md:flex hidden cursor-pointer ${
               showQR ? "text-brand-green" : "text-text-primary"
             }`}
-            // onClick={handleDownload}
           />
 
           {showQR && (
@@ -825,7 +1258,6 @@ export default function Navbar() {
                     >
                       <img
                         src="/apple-badge.png"
-                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="App Store"
                       />
                     </a>
@@ -837,7 +1269,6 @@ export default function Navbar() {
                     >
                       <img
                         src="/google-play-badge.png"
-                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="Google Play"
                       />
                     </a>
@@ -847,7 +1278,6 @@ export default function Navbar() {
                     >
                       <img
                         src="/android-badge.png"
-                        // className="w-full h-10 cursor-pointer hover:opacity-85 transition-opacity object-contain"
                         alt="Android APK"
                       />
                     </div>
@@ -881,15 +1311,6 @@ export default function Navbar() {
             />
           </div>
         )}
-        {/* {isDarkMode ? (
-          <div title="Theme" className="hover:text-brand-green sm:flex hidden h-6 w-6 items-center justify-center text-text-primary" onClick={handleTheme}>
-            <IoSunnyOutline className="h-6 w-6" />
-          </div>
-        ) : (
-          <div title="Theme" className="hover:text-brand-green sm:flex hidden h-6 w-6 items-center justify-center text-text-primary" onClick={handleTheme}>
-            <BsMoon className="h-6 w-6" />
-          </div>
-        )} */}
       </div>
 
       {openDeposit && (

@@ -84,22 +84,22 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full pt-16 sm:pt-20 md:pt-24 pb-8 md:pb-10 bg-black flex flex-col justify-center items-center select-none group"
+      className="relative w-full pt-16 md:pt-16 pb-2 md:pb-3 bg-black flex flex-col justify-center items-center select-none group md:h-[calc(100vh-74px)] md:min-h-[580px] overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-8 md:px-16 w-full">
-        {/* Slide Carousel Frame (Responsive on mobile, fixed exact height on desktop) */}
-        <div className="relative min-h-[540px] sm:min-h-[500px] md:h-[500px] md:min-h-0 flex items-center overflow-hidden">
+      <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 w-full flex-1 flex flex-col justify-center">
+        {/* Slide Carousel Frame (Tightly holds large visuals & content) */}
+        <div className="relative w-full flex-1 flex items-center overflow-hidden min-h-[460px] md:min-h-0">
           {slides.map((slide, index) => {
             const isActive = index === currentSlide;
             return (
               <div
                 key={slide.id}
-                className={`w-full md:h-full flex items-center transition-all duration-700 ease-in-out ${
+                className={`w-full h-full flex items-center transition-all duration-700 ease-in-out ${
                   isActive
                     ? "opacity-100 relative z-10 translate-x-0 scale-100"
                     : "opacity-0 absolute inset-0 z-0 pointer-events-none scale-[0.98] " +
@@ -114,8 +114,8 @@ export default function Hero() {
           })}
         </div>
 
-        {/* Slide Pill Indicators */}
-        <div className="flex items-center justify-center gap-3 mt-6 sm:mt-8 md:mt-10 z-30">
+        {/* Slide Pill Indicators (Snug with content) */}
+        <div className="flex items-center justify-center gap-3 mt-2 md:mt-3 z-30 shrink-0">
           {slides.map((_, index) => {
             const isActive = index === currentSlide;
             return (
@@ -138,7 +138,7 @@ export default function Hero() {
       <button
         onClick={handlePrev}
         aria-label="Previous slide"
-        className="hidden md:flex absolute left-3 lg:left-6 xl:left-10 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
+        className="hidden md:flex absolute left-3 lg:left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
       >
         <ChevronLeft size={22} />
       </button>
@@ -146,7 +146,7 @@ export default function Hero() {
       <button
         onClick={handleNext}
         aria-label="Next slide"
-        className="hidden md:flex absolute right-3 lg:right-6 xl:right-10 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
+        className="hidden md:flex absolute right-3 lg:right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[#171a1f]/90 hover:bg-[#2edbad] border border-[#2b3139] hover:border-[#2edbad] text-[#848e9c] hover:text-black items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 z-30 cursor-pointer shadow-lg hover:shadow-[0_0_15px_rgba(46,219,173,0.4)] backdrop-blur-sm pointer-events-none group-hover:pointer-events-auto"
       >
         <ChevronRight size={22} />
       </button>

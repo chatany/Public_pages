@@ -10,35 +10,52 @@ export default function MobileDrawer({ open, onClose }) {
   const MAIN_SITE = "/trade";
 
   const navConfig = {
-    Trade: [
+    Spot: [
       {
         title: "Spot",
         path: `${MAIN_SITE}/spot/BTCUSDT`,
       },
       {
-        title: "Convert",
-        path: `${MAIN_SITE}/convert`,
+        title: "Stocks",
+        path: `${MAIN_SITE}/spot/RSPYUSDT`,
+        badge: "New",
       },
       {
-        title: "Auto invest",
-        path: "/invest",
+        title: "0 Fees",
+        path: `${MAIN_SITE}/spot/BTCUSDC`,
+        badge: "New",
+      },
+      {
+        title: "Convert",
+        path: `${MAIN_SITE}/convert`,
       },
     ],
     Futures: [
       {
-        title: "USDⓈ-M Futures",
+        title: "USDT Perpetual",
         path: `${MAIN_SITE}/futures/BTCUSDT`,
+      },
+      {
+        title: "TradFi",
+        path: `${MAIN_SITE}/futures/RSPYUSDT`,
+      },
+    ],
+    Options: [
+      {
+        title: "Options",
+        path: `${MAIN_SITE}/options`,
       },
     ],
     Alpha: [
       {
-        title: "Alpha Trading",
+        title: "Alpha",
         path: `${MAIN_SITE}/alpha`,
+        badge: "New",
       },
     ],
     Earn: [
       {
-        title: "Simple Earn",
+        title: "BitZup Earn",
         path: `${MAIN_SITE}/subscription`,
       },
     ],
@@ -46,6 +63,10 @@ export default function MobileDrawer({ open, onClose }) {
       {
         title: "VIP & Institutional",
         path: "/vip",
+      },
+      {
+        title: "OTC Trading",
+        path: `${MAIN_SITE}/otc`,
       },
       {
         title: "Referral Program",
@@ -147,7 +168,7 @@ export default function MobileDrawer({ open, onClose }) {
                 variant="ghost"
                 className="w-full h-12 font-semibold"
               >
-                Simple Earn
+                BitZup Earn
               </Button>
             </>
           ) : (
@@ -176,7 +197,7 @@ export default function MobileDrawer({ open, onClose }) {
           {/* Static Top Item */}
           <div
             onClick={() => handleNavigate("/trade/buy-crypto")}
-            className="py-4 text-lg font-semibold text-white hover:text-brand-green transition-colors cursor-pointer"
+            className="py-4 text-lg font-semibold text-white hover:text-brand-green transition-colors cursor-pointer border-b border-border"
           >
             Buy Crypto
           </div>
@@ -188,7 +209,7 @@ export default function MobileDrawer({ open, onClose }) {
               <div key={key} className="border-b border-border last:border-0">
                 <button
                   onClick={() => setExpandedItem(isExpanded ? null : key)}
-                  className="w-full py-4 flex items-center justify-between group"
+                  className="w-full py-4 flex items-center justify-between group cursor-pointer"
                 >
                   <span
                     className={`text-lg font-semibold transition-colors ${isExpanded ? "text-brand-green" : "text-white"}`}
@@ -207,14 +228,19 @@ export default function MobileDrawer({ open, onClose }) {
                     isExpanded ? "max-h-80 pb-4" : "max-h-0"
                   }`}
                 >
-                  <div className="space-y-4  ">
+                  <div className="space-y-4">
                     {items.map((sub) => (
                       <div
                         key={sub.title}
                         onClick={() => handleNavigate(sub.path)}
-                        className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+                        className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center justify-between"
                       >
-                        {sub.title}
+                        <span>{sub.title}</span>
+                        {sub.badge && (
+                          <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
+                            {sub.badge}
+                          </span>
+                        )}
                       </div>
                     ))}
                   </div>

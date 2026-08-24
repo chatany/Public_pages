@@ -3,20 +3,20 @@ import Button from "../Common/Button";
 
 export default function HeroCryptoSlide({ isLoggedIn }) {
   return (
-    <div className="w-full h-full flex max-md:flex-col max-md:gap-3 justify-between items-center">
-      {/* Content */}
-      <div className="z-base w-full md:w-[50%] flex flex-col justify-center text-left gap-1 md:gap-2">
-        <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-primary leading-tight md:leading-[1.12] text-left tracking-tight">
+    <div className="w-full h-full flex max-md:flex-col justify-center items-center gap-6 md:gap-8 lg:gap-12 my-auto">
+      {/* Content (Expanded, well-spaced, shifted slightly higher) */}
+      <div className="z-base w-full md:w-[52%] lg:w-[50%] flex flex-col justify-center text-left py-1 -mt-2 md:-mt-4">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-primary leading-tight md:leading-[1.14] text-left tracking-tight">
           Buy, trade and earn crypto - all in one place
         </h1>
-        <p className="text-xs sm:text-sm md:text-base text-secondary mt-1.5 md:mt-4 text-left leading-relaxed max-w-xl">
+        <p className="text-xs sm:text-sm md:text-base text-secondary mt-4 md:mt-6 text-left leading-relaxed max-w-xl">
           Join millions trading Bitcoin, Ethereum and 2,300+ coins on BitZup.
           Some of the lowest fees in crypto, tools that grow with you, and
           security you can verify.
         </p>
 
         {/* Desktop Buttons */}
-        <div className="flex items-center gap-3 mt-7 max-md:hidden">
+        <div className="flex items-center gap-3 mt-7 md:mt-10 lg:mt-12 max-md:hidden">
           {isLoggedIn ? (
             <>
               <Button
@@ -55,7 +55,7 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
         </div>
 
         {/* Desktop Download Badges */}
-        <div className="flex mt-7 text-secondary text-sm w-full gap-24 max-md:hidden">
+        <div className="flex mt-7 md:mt-10 lg:mt-12 text-secondary text-sm w-full gap-24 max-md:hidden">
           <div>
             <div className="flex gap-3">
               <a
@@ -96,11 +96,11 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
         </div>
       </div>
 
-      {/* Circle Video (Big & bold like before) */}
-      <div className="flex max-md:justify-center justify-end items-center w-full md:w-[48%] md:h-full py-1 md:py-0">
+      {/* Circle Video (Center-aligned with the left text section) */}
+      <div className="flex justify-center items-center w-full md:w-[48%] lg:w-[50%] -mt-2 md:-mt-4">
         <video
           src="/B Video.mp4"
-          className="size-52 sm:size-64 md:size-110 lg:size-[470px] object-cover"
+          className="size-60 sm:size-72 md:size-[440px] lg:size-[480px] xl:size-[520px] object-cover mix-blend-screen"
           autoPlay
           loop
           muted
@@ -114,14 +114,14 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
           <>
             <Button
               variant="primary"
-              className="h-9 flex-1 text-xs"
+              className="h-9 flex-1 text-xs font-bold"
               onClick={() => (window.location.href = "/trade/spot/BTCUSDT")}
             >
               Trade
             </Button>
             <Button
               variant="secondary"
-              className="h-9 flex-1 text-xs"
+              className="h-9 flex-1 text-xs font-medium"
               onClick={() => (window.location.href = "/invest")}
             >
               Explore markets
@@ -131,14 +131,14 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
           <>
             <Button
               variant="primary"
-              className="h-9 flex-1 text-xs"
+              className="h-9 flex-1 text-xs font-bold"
               onClick={() => (window.location.href = "/trade/register")}
             >
               Create free account
             </Button>
             <Button
               variant="secondary"
-              className="h-9 flex-1 text-xs"
+              className="h-9 flex-1 text-xs font-medium"
               onClick={() => (window.location.href = "/trade/login")}
             >
               Log In
