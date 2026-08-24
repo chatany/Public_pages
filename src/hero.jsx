@@ -7,12 +7,11 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export default function Hero() {
   const isLoggedIn = useAuth();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const touchEndX = useRef(0);
   const touchEndY = useRef(0);
-  const pauseTimeoutRef = useRef(null);
+  const SLIDE_DURATION = 10000; // 9 seconds per slide
 
   const slides = [
     {
@@ -25,33 +24,31 @@ export default function Hero() {
     },
   ];
 
-  // Auto-play timer (10 seconds for comfortable reading)
+  // Infinite cyclic auto-play timer: Stocks (0) -> Crypto (1) -> Stocks (0) -> Crypto (1)...
   useEffect(() => {
-    if (isPaused) return;
-
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
+    }, SLIDE_DURATION);
 
-    return () => clearInterval(interval);
-  }, [isPaused, slides.length]);
+    return () => clearInterval(timer);
+  }, [currentSlide, slides.length]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
 
-  const handlePrev = () => {
+  const handlePrev = (e) => {
+    if (e) e.stopPropagation();
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  const handleNext = () => {
+  const handleNext = (e) => {
+    if (e) e.stopPropagation();
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
-  // Touch Swipe handlers
+  // Touch Swipe handlers for mobile
   const handleTouchStart = (e) => {
-    setIsPaused(true);
-    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
     touchStartX.current = e.targetTouches[0].clientX;
     touchStartY.current = e.targetTouches[0].clientY;
     touchEndX.current = e.targetTouches[0].clientX;
@@ -64,11 +61,6 @@ export default function Hero() {
   };
 
   const handleTouchEnd = () => {
-    // Resume auto-play after 8 seconds of inactivity on mobile
-    pauseTimeoutRef.current = setTimeout(() => {
-      setIsPaused(false);
-    }, 8000);
-
     const diffX = touchStartX.current - touchEndX.current;
     const diffY = touchStartY.current - touchEndY.current;
 
@@ -85,8 +77,6 @@ export default function Hero() {
   return (
     <section
       className="relative w-full pt-16 md:pt-16 pb-2 md:pb-3 bg-black flex flex-col justify-center items-center select-none group md:h-[calc(100vh-74px)] md:min-h-[580px] overflow-hidden"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -114,21 +104,27 @@ export default function Hero() {
           })}
         </div>
 
-        {/* Slide Pill Indicators (Snug with content) */}
+        {/* Slide Pill Indicators with Continuous Timer Progress */}
         <div className="flex items-center justify-center gap-3 mt-2 md:mt-3 z-30 shrink-0">
-          {slides.map((_, index) => {
+          {slides.map((slide, index) => {
             const isActive = index === currentSlide;
             return (
               <button
-                key={index}
+                key={slide.id}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
-                className={`h-1.5 md:h-2 rounded-full cursor-pointer transition-all duration-300 ${
-                  isActive
-                    ? "w-10 md:w-12 bg-[#2edbad] shadow-[0_0_12px_rgba(46,219,173,0.8)]"
-                    : "w-10 md:w-12 bg-[#242831] hover:bg-[#323742]"
-                }`}
-              />
+                className="relative h-1.5 md:h-2 w-12 md:w-14 rounded-full bg-[#242831] overflow-hidden cursor-pointer hover:bg-[#323742] transition-colors"
+              >
+                {isActive ? (
+                  <div
+                    key={`${slide.id}-${currentSlide}`}
+                    className="absolute inset-0 bg-[#2edbad] rounded-full shadow-[0_0_12px_rgba(46,219,173,0.8)] origin-left"
+                    style={{
+                      animation: `heroSlideProgress ${SLIDE_DURATION}ms linear forwards`,
+                    }}
+                  />
+                ) : null}
+              </button>
             );
           })}
         </div>

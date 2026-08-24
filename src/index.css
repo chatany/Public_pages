@@ -519,3 +519,13 @@ video::-webkit-media-controls-overlay-play-button {
   -webkit-text-fill-color: var(--text-primary) !important;
   caret-color: var(--text-primary) !important;
 }
+
+@keyframes heroSlideProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
