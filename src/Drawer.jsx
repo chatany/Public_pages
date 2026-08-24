@@ -12,38 +12,45 @@ export default function MobileDrawer({ open, onClose }) {
   const navConfig = {
     Spot: [
       {
-        title: "Spot",
+        title: "Trade",
         path: `${MAIN_SITE}/spot/BTCUSDT`,
+        icon: "/icon 1 white-01.png",
       },
       {
         title: "Stocks",
         path: `${MAIN_SITE}/spot/RSPYUSDT`,
         badge: "New",
+        icon: "/icon 2 white-02.png",
       },
       {
         title: "0 Fees",
         path: `${MAIN_SITE}/spot/BTCUSDC`,
         badge: "New",
+        icon: "/icon 1 white-01.png",
       },
       {
         title: "Convert",
         path: `${MAIN_SITE}/convert`,
+        icon: "/convertWhite.png",
       },
     ],
     Futures: [
       {
         title: "USDT Perpetual",
         path: `${MAIN_SITE}/futures/BTCUSDT`,
+        icon: "/futuresWhite.png",
       },
       {
         title: "TradFi",
         path: `${MAIN_SITE}/futures/RSPYUSDT`,
+        icon: "/icon 2 white-02.png",
       },
     ],
     Options: [
       {
         title: "Options",
         path: `${MAIN_SITE}/options`,
+        icon: "/Options light-01.png",
       },
     ],
     Alpha: [
@@ -51,26 +58,31 @@ export default function MobileDrawer({ open, onClose }) {
         title: "Alpha",
         path: `${MAIN_SITE}/alpha`,
         badge: "New",
+        icon: "/Alpha Light-01.png",
       },
     ],
     Earn: [
       {
         title: "BitZup Earn",
         path: `${MAIN_SITE}/subscription`,
+        icon: "/earnWhite.png",
       },
     ],
     More: [
       {
         title: "VIP & Institutional",
         path: "/vip",
+        icon: "/vipWhite.png",
       },
       {
         title: "OTC Trading",
         path: `${MAIN_SITE}/otc`,
+        icon: "/tr-white.png",
       },
       {
         title: "Referral Program",
         path: "/referral",
+        icon: "/referralWhite.png",
       },
     ],
   };
@@ -233,9 +245,18 @@ export default function MobileDrawer({ open, onClose }) {
                       <div
                         key={sub.title}
                         onClick={() => handleNavigate(sub.path)}
-                        className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center justify-between"
+                        className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center justify-between py-0.5"
                       >
-                        <span>{sub.title}</span>
+                        <div className="flex items-center gap-2.5">
+                          {sub.icon && (
+                            <img
+                              src={sub.icon}
+                              className="w-4 h-4 object-contain opacity-80"
+                              alt=""
+                            />
+                          )}
+                          <span>{sub.title}</span>
+                        </div>
                         {sub.badge && (
                           <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
                             {sub.badge}

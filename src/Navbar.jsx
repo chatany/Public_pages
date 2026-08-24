@@ -564,7 +564,7 @@ export default function Navbar() {
                       {[
                         {
                           id: "spot",
-                          title: "Spot",
+                          title: "Trade",
                           subtitle: "Trade Bitcoin, Ethereum & top crypto with USDT, USDC settlement",
                           path: `${MAIN_SITE}/spot/BTCUSDT`,
                           iconDark: "/icon 1 Black-01.png",
@@ -587,14 +587,8 @@ export default function Navbar() {
                           subtitle: "Trade selected spot pairs with 0% trading fees",
                           path: `${MAIN_SITE}/spot/BTCUSDC`,
                           badge: "New",
-                          icon: (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5">
-                              <rect x="2.5" y="2.5" width="19" height="19" rx="4" strokeWidth="2" />
-                              <line x1="7" y1="17" x2="17" y2="7" strokeWidth="2.2" strokeLinecap="round" />
-                              <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" strokeWidth="0" />
-                              <circle cx="15.5" cy="15.5" r="1.5" fill="currentColor" strokeWidth="0" />
-                            </svg>
-                          ),
+                          iconDark: "/icon 1 Black-01.png",
+                          iconLight: "/icon 1 white-01.png",
                           hasFlyout: true,
                         },
                         {

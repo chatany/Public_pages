@@ -76,7 +76,7 @@ export const data = [
     category: "Spot",
     item: [
       {
-        title: "Spot",
+        title: "Trade",
         description: "Trade Bitcoin, Ethereum & top crypto with USDT, USDC settlement",
         path: `${MAIN_SITE}/spot/BTCUSDT`,
         iconUrlDark: "/icon 1 Black-01.png",
