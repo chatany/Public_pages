@@ -11,7 +11,7 @@ export default function Hero() {
   const touchStartY = useRef(0);
   const touchEndX = useRef(0);
   const touchEndY = useRef(0);
-  const SLIDE_DURATION = 10000; // 9 seconds per slide
+  const SLIDE_DURATION = 10000; // 10 seconds per slide
 
   const slides = [
     {
@@ -64,11 +64,11 @@ export default function Hero() {
     const diffX = touchStartX.current - touchEndX.current;
     const diffY = touchStartY.current - touchEndY.current;
 
-    // Only switch if horizontal movement is dominant and exceeds 75px threshold
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 75) {
-      if (diffX > 75) {
+    // Only switch if horizontal movement is dominant and exceeds 50px threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      if (diffX > 50) {
         handleNext();
-      } else if (diffX < -75) {
+      } else if (diffX < -50) {
         handlePrev();
       }
     }
@@ -76,36 +76,31 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full pt-16 md:pt-16 pb-2 md:pb-3 bg-black flex flex-col justify-center items-center select-none group md:h-[calc(100vh-74px)] md:min-h-[580px] overflow-hidden"
+      className="relative w-full pt-20 sm:pt-20 md:pt-16 pb-4 md:pb-3 bg-black flex flex-col justify-start md:justify-center items-center select-none group md:h-[calc(100vh-74px)] md:min-h-[580px] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 w-full flex-1 flex flex-col justify-center">
-        {/* Slide Carousel Frame (Tightly holds large visuals & content) */}
-        <div className="relative w-full flex-1 flex items-center overflow-hidden min-h-[460px] md:min-h-0">
-          {slides.map((slide, index) => {
-            const isActive = index === currentSlide;
-            return (
+      <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 w-full flex flex-col justify-start md:justify-center">
+        {/* Slide Carousel Track Container (Smooth Horizontal Slide) */}
+        <div className="relative w-full overflow-hidden flex items-start md:items-center">
+          <div
+            className="flex w-full transition-transform duration-500 ease-in-out will-change-transform items-start md:items-center"
+            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+          >
+            {slides.map((slide) => (
               <div
                 key={slide.id}
-                className={`w-full h-full flex items-center transition-all duration-700 ease-in-out ${
-                  isActive
-                    ? "opacity-100 relative z-10 translate-x-0 scale-100"
-                    : "opacity-0 absolute inset-0 z-0 pointer-events-none scale-[0.98] " +
-                      (index < currentSlide
-                        ? "-translate-x-12"
-                        : "translate-x-12")
-                }`}
+                className="w-full shrink-0 flex-none flex items-start md:items-center justify-center px-0.5"
               >
                 {slide.component}
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
 
         {/* Slide Pill Indicators with Continuous Timer Progress */}
-        <div className="flex items-center justify-center gap-3 mt-2 md:mt-3 z-30 shrink-0">
+        <div className="flex items-center justify-center gap-3 mt-4 md:mt-3 z-30 shrink-0">
           {slides.map((slide, index) => {
             const isActive = index === currentSlide;
             return (

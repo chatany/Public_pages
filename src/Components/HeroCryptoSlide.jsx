@@ -3,13 +3,13 @@ import Button from "../Common/Button";
 
 export default function HeroCryptoSlide({ isLoggedIn }) {
   return (
-    <div className="w-full h-full flex max-md:flex-col justify-center items-center gap-6 md:gap-8 lg:gap-12 my-auto">
-      {/* Content (Expanded, well-spaced, shifted slightly higher) */}
-      <div className="z-base w-full md:w-[52%] lg:w-[50%] flex flex-col justify-center text-left py-1 -mt-2 md:-mt-4">
+    <div className="w-full flex flex-col md:flex-row justify-start md:justify-center items-center gap-3 sm:gap-4 md:gap-8 lg:gap-12">
+      {/* Content (Expanded, well-spaced, shifted slightly higher on desktop) */}
+      <div className="z-base w-full md:w-[52%] lg:w-[50%] flex flex-col justify-center text-left py-0.5 md:py-1 mt-0 md:-mt-4">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-primary leading-tight md:leading-[1.14] text-left tracking-tight">
           Buy, trade and earn crypto - all in one place
         </h1>
-        <p className="text-xs sm:text-sm md:text-base text-secondary mt-4 md:mt-6 text-left leading-relaxed max-w-xl">
+        <p className="text-xs sm:text-sm md:text-base text-secondary mt-2.5 md:mt-6 text-left leading-relaxed max-w-xl">
           Join millions trading Bitcoin, Ethereum and 2,300+ coins on BitZup.
           Some of the lowest fees in crypto, tools that grow with you, and
           security you can verify.
@@ -97,10 +97,10 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
       </div>
 
       {/* Circle Video (Center-aligned with the left text section) */}
-      <div className="flex justify-center items-center w-full md:w-[48%] lg:w-[50%] -mt-2 md:-mt-4">
+      <div className="flex justify-center items-center w-full md:w-[48%] lg:w-[50%] my-2 md:-mt-4">
         <video
           src="/B Video.mp4"
-          className="size-60 sm:size-72 md:size-[440px] lg:size-[480px] xl:size-[520px] object-cover mix-blend-screen"
+          className="size-64 sm:size-72 md:size-[440px] lg:size-[480px] xl:size-[520px] object-cover mix-blend-screen"
           autoPlay
           loop
           muted
@@ -109,7 +109,7 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
       </div>
 
       {/* Mobile Buttons */}
-      <div className="flex items-center gap-3 mt-3 justify-between w-full md:hidden">
+      <div className="flex items-center gap-3 mt-2 justify-between w-full md:hidden">
         {isLoggedIn ? (
           <>
             <Button
@@ -148,7 +148,7 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
       </div>
 
       {/* Mobile Download Badges */}
-      <div className="flex gap-2.5 md:hidden mt-2.5">
+      <div className="flex gap-2.5 md:hidden mt-2">
         <a
           href="https://apps.apple.com/app/bitzup/id6749609757"
           target="_blank"
