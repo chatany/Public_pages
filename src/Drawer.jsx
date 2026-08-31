@@ -56,8 +56,8 @@ export default function MobileDrawer({ open, onClose }) {
     Alpha: [
       {
         title: "Alpha",
-        // path: `${MAIN_SITE}/alpha`,
-        badge: "Coming Soon",
+        path: `${MAIN_SITE}/alpha`,
+        badge: "New",
         icon: "/Alpha Light-01.png",
       },
     ],

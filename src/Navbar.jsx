@@ -96,8 +96,7 @@ export default function Navbar() {
       return path.startsWith("/options") || path.startsWith("/trade/options");
     }
     if (item === "Alpha") {
-      // return path.startsWith("/alpha") || path.startsWith("/trade/alpha");
-      return false;
+      return path.startsWith("/alpha") || path.startsWith("/trade/alpha");
     }
     if (item === "Earn") {
       return path.startsWith("/subscription") || path.startsWith("/earn") || path.startsWith("/trade/subscription");
@@ -555,7 +554,7 @@ export default function Navbar() {
                 } else if (item === "Options") {
                   handleNavigate("/trade/options");
                 } else if (item === "Alpha") {
-                  // handleNavigate("/trade/alpha");
+                  handleNavigate("/trade/alpha");
                 }
               }}
             > 
