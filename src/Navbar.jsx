@@ -96,7 +96,8 @@ export default function Navbar() {
       return path.startsWith("/options") || path.startsWith("/trade/options");
     }
     if (item === "Alpha") {
-      return path.startsWith("/alpha") || path.startsWith("/trade/alpha");
+      // return path.startsWith("/alpha") || path.startsWith("/trade/alpha");
+      return false;
     }
     if (item === "Earn") {
       return path.startsWith("/subscription") || path.startsWith("/earn") || path.startsWith("/trade/subscription");
@@ -554,7 +555,7 @@ export default function Navbar() {
                 } else if (item === "Options") {
                   handleNavigate("/trade/options");
                 } else if (item === "Alpha") {
-                  handleNavigate("/trade/alpha");
+                  // handleNavigate("/trade/alpha");
                 }
               }}
             > 
@@ -993,7 +994,7 @@ export default function Navbar() {
                                   e.preventDefault();
                                   setHoveredItemIndex(null);
                                   setCurrentItem("");
-                                  handleNavigate(ele.path);
+                                  if (ele.path) handleNavigate(ele.path);
                                 }
                               }}
                               className="flex hover:bg-lift hover:text-brand-green gap-3 px-3 py-2.5 cursor-pointer rounded transition-colors duration-150 group items-center"

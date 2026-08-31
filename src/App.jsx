@@ -58,6 +58,7 @@ export default function App() {
           <Route element={<ReferralPage />} path="/referral" />
           <Route element={<CarrierPage />} path="/careers" />
           <Route element={<Vip/>} path="/vip"/>
+          {/* <Route element={<Alpha />} path="/alpha" /> */}
           <Route element={<AutoInvest />} path="/invest" />
           <Route element={<OfficialVerification />} path="/verification" />
           <Route element={<SubmitRequestForm/>} path="/submit-request"/>

@@ -56,8 +56,8 @@ export default function MobileDrawer({ open, onClose }) {
     Alpha: [
       {
         title: "Alpha",
-        path: `${MAIN_SITE}/alpha`,
-        badge: "New",
+        // path: `${MAIN_SITE}/alpha`,
+        badge: "Coming Soon",
         icon: "/Alpha Light-01.png",
       },
     ],
@@ -244,7 +244,9 @@ export default function MobileDrawer({ open, onClose }) {
                     {items.map((sub) => (
                       <div
                         key={sub.title}
-                        onClick={() => handleNavigate(sub.path)}
+                        onClick={() => {
+                          if (sub.path) handleNavigate(sub.path);
+                        }}
                         className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer flex items-center justify-between py-0.5"
                       >
                         <div className="flex items-center gap-2.5">
