@@ -743,7 +743,7 @@ export default function Navbar() {
                         {
                           id: "tradfi",
                           title: "TradFi",
-                          subtitle: "Trade Stocks, Metal, Oil and Commodity contracts in one place.",
+                          subtitle: "Trade Stocks, Metal and Commodity contracts in one place.",
                           path: `${MAIN_SITE}/spot/RSPYUSDT`,
                           iconDark: "/icon 2 black-01.png",
                           iconLight: "/icon 2 white-02.png",
@@ -1004,7 +1004,7 @@ export default function Navbar() {
                         {
                           id: "tradfi",
                           title: "TradFi",
-                          subtitle: "Trade Stocks, Metal, Oil and Commodity contracts in one place.",
+                          subtitle: "Trade Stocks, Metal and Commodity contracts in one place.",
                           path: `${MAIN_SITE}/futures/RSPYUSDT`,
                           iconDark: "/icon 2 black-01.png",
                           iconLight: "/icon 2 white-02.png",
