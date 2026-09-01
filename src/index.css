@@ -241,22 +241,39 @@
 .animate-float-delayed {
   animation: floatDelayed 6s ease-in-out infinite 1.5s;
 }
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-/* Step 1: Hide all default scrollbars globally */
-/* 1. Hide default scrollbar globally */
-* {
-  -ms-overflow-style: none; /* IE & Edge */
-  scrollbar-width: none; /* Firefox */
+/* Global WebKit scrollbar base - thin transparent default */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 0px;
 }
 
-*::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* .no-scrollbar and .scrollbar-hide - fully hide scrollbars */
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar,
+.no-scrollbar::-webkit-scrollbar-thumb,
+.scrollbar-hide::-webkit-scrollbar-thumb,
+.no-scrollbar::-webkit-scrollbar-track,
+.scrollbar-hide::-webkit-scrollbar-track {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  -webkit-appearance: none !important;
+}
+
+.no-scrollbar,
+.scrollbar-hide {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 .marquee {
   animation: marquee 75s linear infinite;
@@ -267,35 +284,33 @@
     animation: marquee 50s linear infinite;
   }
 }
+/* Custom Scrollbar - Always visible on Chrome, Safari macOS, Firefox */
 .custom-scroll {
-  -ms-overflow-style: auto; /* IE and Edge */
-  scrollbar-width: auto; /* Firefox */
+  overflow-y: scroll !important;        /* Force scroll, always show scrollbar */
+  overflow-x: hidden !important;        /* Hide horizontal bar */
+  -webkit-overflow-scrolling: touch;    /* Safari smooth scrolling */
+  scrollbar-width: thin !important;     /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.08) !important;
 }
 
 .custom-scroll::-webkit-scrollbar {
-  display: block;
-  width: 4px;
-  height: 6px;
+  width: 6px !important;
+  height: 0px !important;              /* Hide horizontal scrollbar line */
 }
 
 .custom-scroll::-webkit-scrollbar-track {
-  /* background: #f1f1f1; */
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 4px !important;
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.4) !important;
+  border-radius: 4px !important;
+  min-height: 28px !important;
 }
 
-/* .custom-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-} */
-
-/* Optional: Show only on hover */
-.custom-scroll::-webkit-scrollbar {
-  opacity: 0;
-  transition: opacity 0.25s;
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7) !important;
 }
 .btn {
   display: inline-flex;

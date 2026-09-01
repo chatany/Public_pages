@@ -767,6 +767,13 @@ export default function Navbar() {
                             onMouseEnter={() => {
                               if (menuItem.hasFlyout) {
                                 setSpotSubTab(menuItem.id);
+                                if (menuItem.id === "tradfi") {
+                                  const stockTag = spotTradFiTags.find(
+                                    (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+                                  );
+                                  lastFetchedSpotTradFiTagRef.current = null;
+                                  setActiveSpotTradFiTag(stockTag || spotTradFiTags[0] || "Stock");
+                                }
                               } else {
                                 setSpotSubTab(null);
                               }
@@ -905,7 +912,7 @@ export default function Navbar() {
                       )}
 
                       {/* Coin List */}
-                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${spotSubTab === "tradfi" || (spotSubTab === "spot" && spotTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
+                      <div className={`flex-1 overflow-y-scroll overflow-x-hidden custom-scroll space-y-0.5 ${spotSubTab === "tradfi" || (spotSubTab === "spot" && spotTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
                         {(spotSubTab === "tradfi" ? isSpotTradFiLoading : spotSubTab === "spot" && activeSpotTradeTag !== "All" ? isSpotTradeLoading : isSpotLoading) ? (
                           <div className="flex justify-center items-center py-12">
                             <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
@@ -1008,7 +1015,16 @@ export default function Navbar() {
                         return (
                           <div
                             key={menuItem.id}
-                            onMouseEnter={() => setFuturesSubTab(menuItem.id)}
+                            onMouseEnter={() => {
+                              setFuturesSubTab(menuItem.id);
+                              if (menuItem.id === "tradfi") {
+                                const stockTag = tradFiTags.find(
+                                  (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+                                );
+                                lastFetchedTradFiTagRef.current = null;
+                                setActiveTradFiTag(stockTag || tradFiTags[0] || "Stock");
+                              }
+                            }}
                             onClick={() => {
                               setHoveredItemIndex(null);
                               setCurrentItem("");
@@ -1132,7 +1148,7 @@ export default function Navbar() {
                       )}
 
                       {/* Coin List */}
-                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" || (futuresSubTab === "usdt_perpetual" && futuresTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
+                      <div className={`flex-1 overflow-y-scroll overflow-x-hidden custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" || (futuresSubTab === "usdt_perpetual" && futuresTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
                         {(futuresSubTab === "tradfi" ? isTradFiLoading : futuresSubTab === "usdt_perpetual" && activeFuturesTradeTag !== "All" ? isFuturesTradeLoading : false) ? (
                           <div className="flex justify-center items-center py-12">
                             <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
