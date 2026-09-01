@@ -13,6 +13,7 @@ import { PiCopyLight } from "react-icons/pi";
 import { BsMoon } from "react-icons/bs";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { BiSupport, BiCreditCard, BiWallet } from "react-icons/bi";
+import { BiSupport as BiSupportIcon } from "react-icons/bi";
 import { FiRefreshCw } from "react-icons/fi";
 import { FaAngleRight } from "react-icons/fa";
 
@@ -32,27 +33,21 @@ const MAIN_SITE = "/trade";
 
 const NavCoinIcon = ({ icon, symbol, name, className = "size-7" }) => {
   const [imgError, setImgError] = useState(false);
-  const sym = (symbol || "").toUpperCase();
   const letter = (symbol || name || "?").charAt(0).toUpperCase();
 
-  let bgClass = "bg-[#2b2f38] text-white";
-  if (sym.startsWith("BTC")) bgClass = "bg-[#F7931A] text-white font-bold";
-  else if (sym.startsWith("ETH")) bgClass = "bg-[#627EEA] text-white font-bold";
-  else if (sym.startsWith("SOL")) bgClass = "bg-[#14F195] text-black font-bold";
-  else if (sym.startsWith("DOGE")) bgClass = "bg-[#C2A633] text-white font-bold";
-  else if (sym.startsWith("XRP")) bgClass = "bg-[#23292F] text-white font-bold";
-  else if (sym.startsWith("MATIC")) bgClass = "bg-[#8247E5] text-white font-bold";
-  else if (sym.startsWith("TRX")) bgClass = "bg-[#EF0027] text-white font-bold";
-  else if (sym.startsWith("PEPE")) bgClass = "bg-[#4D8C2F] text-white font-bold";
-  else if (sym.startsWith("SUI")) bgClass = "bg-[#2A82E4] text-white font-bold";
-  else if (sym.startsWith("RSPY") || sym.startsWith("R")) bgClass = "bg-[#0A85EA] text-white font-bold";
-  else if (sym.startsWith("NVDA")) bgClass = "bg-[#76B900] text-white font-bold";
-  else if (sym.startsWith("AAPL")) bgClass = "bg-[#555555] text-white font-bold";
-  else if (sym.startsWith("TSLA")) bgClass = "bg-[#CC0000] text-white font-bold";
+  // Generate a consistent color from the symbol string (no hardcoding)
+  const sym = (symbol || name || "?").toUpperCase().replace(/[^A-Z]/g, "");
+  let hash = 0;
+  for (let i = 0; i < sym.length; i++) {
+    hash = sym.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const hue = Math.abs(hash) % 360;
+  const bgStyle = { backgroundColor: `hsl(${hue}, 55%, 35%)`, color: "#fff" };
 
   return (
     <div
-      className={`${className} rounded-full flex items-center justify-center shrink-0 overflow-hidden ${bgClass} border border-border/40 shadow-sm`}
+      className={`${className} rounded-full flex items-center justify-center shrink-0 overflow-hidden border border-border/40 shadow-sm font-bold`}
+      style={!imgError && icon ? {} : bgStyle}
     >
       {!imgError && icon ? (
         <img
@@ -123,9 +118,18 @@ export default function Navbar() {
   const [futuresSubTab, setFuturesSubTab] = useState(null);
   const [spotSubTab, setSpotSubTab] = useState(null);
   const [activeTradFiTag, setActiveTradFiTag] = useState("Stock");
+  const [activeSpotTradFiTag, setActiveSpotTradFiTag] = useState("");
+  const [activeSpotTradeTag, setActiveSpotTradeTag] = useState("All");
+  const [activeFuturesTradeTag, setActiveFuturesTradeTag] = useState("All");
   const [apiFuturesCoins, setApiFuturesCoins] = useState([]);
   const [apiTradFiCoins, setApiTradFiCoins] = useState([]);
+  const [apiSpotTradFiCoins, setApiSpotTradFiCoins] = useState([]);
+  const [apiSpotTradeCoins, setApiSpotTradeCoins] = useState([]);
+  const [apiFuturesTradeCoins, setApiFuturesTradeCoins] = useState([]);
   const [isTradFiLoading, setIsTradFiLoading] = useState(false);
+  const [isSpotTradFiLoading, setIsSpotTradFiLoading] = useState(false);
+  const [isSpotTradeLoading, setIsSpotTradeLoading] = useState(false);
+  const [isFuturesTradeLoading, setIsFuturesTradeLoading] = useState(false);
   const [apiSpotCoins, setApiSpotCoins] = useState([]);
   const [apiSpotTagCoins, setApiSpotTagCoins] = useState([]);
   const [isSpotLoading, setIsSpotLoading] = useState(false);
@@ -135,6 +139,9 @@ export default function Navbar() {
 
   const lastFetchedTradFiTagRef = useRef(null);
   const lastFetchedSpotSubTabRef = useRef(null);
+  const lastFetchedSpotTradFiTagRef = useRef(null);
+  const lastFetchedSpotTradeTagRef = useRef(null);
+  const lastFetchedFuturesTradeTagRef = useRef(null);
 
   const navDropdownRef = useRef(null);
   const navMenuItemsRef = useRef([]);
@@ -247,24 +254,13 @@ export default function Navbar() {
   };
 
   const fetchSpotTagCoins = async (subTab) => {
-    if (!subTab || subTab === "convert") return;
+    if (!subTab || subTab === "convert" || subTab === "tradfi") return;
     if (lastFetchedSpotSubTabRef.current === subTab) return;
     lastFetchedSpotSubTabRef.current = subTab;
     setIsSpotLoading(true);
     try {
-      let tagQuery = "";
-      if (subTab === "stocks") tagQuery = "Stocks";
-      else if (subTab === "0_fees") tagQuery = "0 fees";
-
       let url = `${BASE_URL}/market/exchangeinfoall/`;
-      if (tagQuery) {
-        url = `${BASE_URL}/market/exchangeinfoall/?tag=${encodeURIComponent(tagQuery)}`;
-      }
-
-      const res = await apiRequest({
-        method: "get",
-        url,
-      });
+      const res = await apiRequest({ method: "get", url });
       if (res?.data?.data && Array.isArray(res.data.data)) {
         setApiSpotTagCoins(res.data.data);
       }
@@ -272,6 +268,75 @@ export default function Navbar() {
       console.error("Failed to fetch Spot coins", err);
     } finally {
       setIsSpotLoading(false);
+    }
+  };
+
+  const fetchSpotTradFiCoins = async (tag) => {
+    if (!tag) return;
+    if (lastFetchedSpotTradFiTagRef.current === tag) return;
+    lastFetchedSpotTradFiTagRef.current = tag;
+    setIsSpotTradFiLoading(true);
+    try {
+      const tagQuery = encodeURIComponent(tag);
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/market/exchangeinfoall/?tag=${tagQuery}`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data)) {
+        setApiSpotTradFiCoins(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch Spot TradFi coins", err);
+    } finally {
+      setIsSpotTradFiLoading(false);
+    }
+  };
+
+  const fetchSpotTradeCoins = async (tag) => {
+    if (!tag || tag === "All") {
+      setApiSpotTradeCoins([]);
+      return;
+    }
+    if (lastFetchedSpotTradeTagRef.current === tag) return;
+    lastFetchedSpotTradeTagRef.current = tag;
+    setIsSpotTradeLoading(true);
+    try {
+      const tagQuery = encodeURIComponent(tag);
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/market/exchangeinfoall/?tag=${tagQuery}`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data)) {
+        setApiSpotTradeCoins(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch Spot Trade coins", err);
+    } finally {
+      setIsSpotTradeLoading(false);
+    }
+  };
+
+  const fetchFuturesTradeCoins = async (tag) => {
+    if (!tag || tag === "All") {
+      setApiFuturesTradeCoins([]);
+      return;
+    }
+    if (lastFetchedFuturesTradeTagRef.current === tag) return;
+    lastFetchedFuturesTradeTagRef.current = tag;
+    setIsFuturesTradeLoading(true);
+    try {
+      const tagQuery = encodeURIComponent(tag);
+      const res = await apiRequest({
+        method: "get",
+        url: `${BASE_URL}/futures/api/futures-curr-info-all/?tag=${tagQuery}`,
+      });
+      if (res?.data?.data && Array.isArray(res.data.data)) {
+        setApiFuturesTradeCoins(res.data.data);
+      }
+    } catch (err) {
+      console.error("Failed to fetch Futures Trade coins", err);
+    } finally {
+      setIsFuturesTradeLoading(false);
     }
   };
 
@@ -286,14 +351,20 @@ export default function Navbar() {
   useEffect(() => {
     if (futuresSubTab === "tradfi") {
       fetchTradFiCoins(activeTradFiTag);
+    } else if (futuresSubTab === "usdt_perpetual" && activeFuturesTradeTag && activeFuturesTradeTag !== "All") {
+      fetchFuturesTradeCoins(activeFuturesTradeTag);
     }
-  }, [futuresSubTab, activeTradFiTag]);
+  }, [futuresSubTab, activeTradFiTag, activeFuturesTradeTag]);
 
   useEffect(() => {
-    if (spotSubTab && spotSubTab !== "convert") {
+    if (spotSubTab === "tradfi") {
+      fetchSpotTradFiCoins(activeSpotTradFiTag);
+    } else if (spotSubTab === "spot" && activeSpotTradeTag && activeSpotTradeTag !== "All") {
+      fetchSpotTradeCoins(activeSpotTradeTag);
+    } else if (spotSubTab && spotSubTab !== "convert") {
       fetchSpotTagCoins(spotSubTab);
     }
-  }, [spotSubTab]);
+  }, [spotSubTab, activeSpotTradFiTag, activeSpotTradeTag]);
 
   const combinedSpotList = useMemo(() => {
     const list = [];
@@ -314,28 +385,103 @@ export default function Navbar() {
     return list;
   }, [apiSpotCoins]);
 
+  const TRADFI_KEYWORDS = ["stock", "stocks", "metal", "metals", "oil", "oils", "commodity", "commodities", "tradfi"];
+  const isTradFiTag = (t) => {
+    if (!t) return false;
+    const lower = String(t).toLowerCase().trim();
+    return TRADFI_KEYWORDS.some((kw) => lower === kw || lower.includes(kw));
+  };
+  const isTradeTag = (t) => !isTradFiTag(t);
+
+  const tradFiTags = useMemo(() => {
+    if (futureTags && Array.isArray(futureTags) && futureTags.length > 0) {
+      const filtered = futureTags.filter(isTradFiTag);
+      if (filtered.length > 0) {
+        const stockIdx = filtered.findIndex(
+          (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+        );
+        if (stockIdx > 0) {
+          const reordered = [...filtered];
+          const [stockItem] = reordered.splice(stockIdx, 1);
+          return [stockItem, ...reordered];
+        }
+        return filtered;
+      }
+    }
+    return ["Stock", "Metal", "Oil", "Commodity"];
+  }, [futureTags]);
+
+  useEffect(() => {
+    if (tradFiTags.length > 0) {
+      const stockTag = tradFiTags.find(
+        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+      );
+      const defaultTag = stockTag || tradFiTags[0];
+      if (!tradFiTags.includes(activeTradFiTag)) {
+        setActiveTradFiTag(defaultTag);
+      }
+    }
+  }, [tradFiTags, activeTradFiTag]);
+
+  const spotTradFiTags = useMemo(() => {
+    if (spotTags && Array.isArray(spotTags) && spotTags.length > 0) {
+      const filtered = spotTags.filter(isTradFiTag);
+      if (filtered.length > 0) {
+        const stockIdx = filtered.findIndex(
+          (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+        );
+        if (stockIdx > 0) {
+          const reordered = [...filtered];
+          const [stockItem] = reordered.splice(stockIdx, 1);
+          return [stockItem, ...reordered];
+        }
+        return filtered;
+      }
+    }
+    return ["Stock", "Metal", "Oil", "Commodity"];
+  }, [spotTags]);
+
+  useEffect(() => {
+    if (spotTradFiTags.length > 0 && !activeSpotTradFiTag) {
+      const stockTag = spotTradFiTags.find(
+        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
+      );
+      setActiveSpotTradFiTag(stockTag || spotTradFiTags[0]);
+    }
+  }, [spotTradFiTags, activeSpotTradFiTag]);
+
+  const spotTradeTags = useMemo(() => {
+    if (spotTags && Array.isArray(spotTags) && spotTags.length > 0) {
+      const filtered = spotTags.filter(isTradeTag);
+      return ["All", ...filtered];
+    }
+    return ["All"];
+  }, [spotTags]);
+
+  const futuresTradeTags = useMemo(() => {
+    if (futureTags && Array.isArray(futureTags) && futureTags.length > 0) {
+      const filtered = futureTags.filter(isTradeTag);
+      return ["All", ...filtered];
+    }
+    return ["All"];
+  }, [futureTags]);
+
   const spotCoins = useMemo(() => {
+    if (!spotSubTab) return [];
+    if (spotSubTab === "tradfi") {
+      return apiSpotTradFiCoins;
+    }
+    if (spotSubTab === "spot") {
+      if (activeSpotTradeTag && activeSpotTradeTag !== "All" && apiSpotTradeCoins.length > 0) {
+        return apiSpotTradeCoins;
+      }
+      return combinedSpotList;
+    }
     if (apiSpotTagCoins && apiSpotTagCoins.length > 0) {
       return apiSpotTagCoins;
     }
-    if (!spotSubTab) return [];
-    if (spotSubTab === "0_fees") {
-      return combinedSpotList.filter((c) => {
-        const itemTag = (c.tag || "").toLowerCase();
-        return itemTag.includes("0 fees") || itemTag.includes("zero fee") || getIsZeroFee(c);
-      });
-    }
-    if (spotSubTab === "stocks") {
-      return combinedSpotList.filter((item) => {
-        const itemTag = (item.tag || "").toLowerCase();
-        return itemTag.includes("stock");
-      });
-    }
-    if (spotSubTab === "spot") {
-      return combinedSpotList;
-    }
     return [];
-  }, [apiSpotTagCoins, combinedSpotList, spotSubTab]);
+  }, [apiSpotTagCoins, combinedSpotList, spotSubTab, apiSpotTradFiCoins, activeSpotTradeTag, apiSpotTradeCoins]);
 
   const combinedFuturesList = useMemo(() => {
     const list = [];
@@ -356,33 +502,6 @@ export default function Navbar() {
     return list;
   }, [apiFuturesCoins]);
 
-  const tradFiTags = useMemo(() => {
-    if (futureTags && Array.isArray(futureTags) && futureTags.length > 0) {
-      const stockIdx = futureTags.findIndex(
-        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
-      );
-      if (stockIdx > 0) {
-        const reordered = [...futureTags];
-        const [stockItem] = reordered.splice(stockIdx, 1);
-        return [stockItem, ...reordered];
-      }
-      return futureTags;
-    }
-    return ["Stock", "Metal", "Oil", "Commodity"];
-  }, [futureTags]);
-
-  useEffect(() => {
-    if (tradFiTags.length > 0) {
-      const stockTag = tradFiTags.find(
-        (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
-      );
-      const defaultTag = stockTag || tradFiTags[0];
-      if (!tradFiTags.includes(activeTradFiTag)) {
-        setActiveTradFiTag(defaultTag);
-      }
-    }
-  }, [tradFiTags, activeTradFiTag]);
-
   const usdtCoins = useMemo(() => {
     return combinedFuturesList.filter((item) => {
       const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
@@ -390,9 +509,18 @@ export default function Navbar() {
     });
   }, [combinedFuturesList]);
 
-  const tradFiCoins = useMemo(() => {
-    return apiTradFiCoins;
-  }, [apiTradFiCoins]);
+  const displayFuturesCoins = useMemo(() => {
+    if (futuresSubTab === "tradfi") {
+      return apiTradFiCoins;
+    }
+    if (futuresSubTab === "usdt_perpetual") {
+      if (activeFuturesTradeTag && activeFuturesTradeTag !== "All" && apiFuturesTradeCoins.length > 0) {
+        return apiFuturesTradeCoins;
+      }
+      return usdtCoins;
+    }
+    return usdtCoins;
+  }, [futuresSubTab, apiTradFiCoins, activeFuturesTradeTag, apiFuturesTradeCoins, usdtCoins]);
 
   const handleLogout = async () => {
     try {
@@ -499,7 +627,9 @@ export default function Navbar() {
       <div className="flex xl:w-[60%] items-center text-lg gap-2 font-semibold leading-6 lg:gap-8">
         <div
           className="text-brand-green font-semibold cursor-pointer"
-          onClick={() => handleNavigate("/")}
+          onClick={() => {
+            window.location.href = "/";
+          }}
         >
           <img
             src="/bitzup_light_logo.png"
@@ -558,22 +688,9 @@ export default function Navbar() {
                 }
               }}
             > 
-              {item === "Futures" ? (
-                <>
-                  <span>🔥</span>
-                  <span
-                    className={`${isTabActive(item) ? "text-brand-green" : ""}`}
-                  >
-                    Futures
-                  </span>
-                </>
-              ) : (
-                <div
-                  className={`${isTabActive(item) ? "text-brand-green" : ""}`}
-                >
-                  {item}
-                </div>
-              )}
+              <div className={`${isTabActive(item) ? "text-brand-green" : ""}`}>
+                {item}
+              </div>
               <div
                 className={`transition-transform duration-300 ${isTabActive(item) ? "text-brand-green" : ""} ${
                   i === hoveredItemIndex || isTabActive(item)
@@ -593,7 +710,7 @@ export default function Navbar() {
             <>
               <div className="absolute right-0 top-full w-full h-5 z-999" />
               {currentItem === "Spot" || currentItem === "Trade" ? (
-                /* ─── Spot Flyout Dropdown (Bybit Style with Subtitles - Exact sizing and padding) ─── */
+                /* ─── Spot Flyout Dropdown ─── */
                 <div
                   className="absolute mt-5 bg-recessed text-text-primary border border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:flex overflow-hidden transition-all duration-200 ease-in-out"
                   style={{
@@ -610,7 +727,7 @@ export default function Navbar() {
                     }, 80);
                   }}
                 >
-                  {/* Left Column: Spot, Stocks, 0 Fees, Convert with Subtitles */}
+                  {/* Left Column: Trade, TradFi, Convert with Subtitles */}
                   <div className={`w-[350px] p-1.5 bg-recessed flex flex-col justify-start shrink-0 ${spotSubTab && spotSubTab !== "convert" ? "border-r border-border" : ""}`}>
                     <div className="flex flex-col gap-1">
                       {[
@@ -624,23 +741,12 @@ export default function Navbar() {
                           hasFlyout: true,
                         },
                         {
-                          id: "stocks",
-                          title: "Stocks",
-                          subtitle: "Trade Apple, Tesla, Nvidia & global stocks with USDT, USDC settlement",
+                          id: "tradfi",
+                          title: "TradFi",
+                          subtitle: "Trade Stocks, Metal, Oil and Commodity contracts in one place.",
                           path: `${MAIN_SITE}/spot/RSPYUSDT`,
                           iconDark: "/icon 2 black-01.png",
                           iconLight: "/icon 2 white-02.png",
-                          badge: "New",
-                          hasFlyout: true,
-                        },
-                        {
-                          id: "0_fees",
-                          title: "0 Fees",
-                          subtitle: "Trade selected spot pairs with 0% trading fees",
-                          path: `${MAIN_SITE}/spot/BTCUSDC`,
-                          badge: "New",
-                          iconDark: "/icon 1 Black-01.png",
-                          iconLight: "/icon 1 white-01.png",
                           hasFlyout: true,
                         },
                         {
@@ -720,11 +826,87 @@ export default function Navbar() {
                     </div>
                   </div>
 
-                  {/* Right Column: Flyout Panel (Bybit Style) */}
+                  {/* Right Column: Flyout Panel */}
                   {spotSubTab && spotSubTab !== "convert" && (
                     <div className="w-[350px] p-2.5 flex flex-col min-w-0 bg-recessed shrink-0">
-                      <div className="flex-1 overflow-y-auto custom-scroll space-y-0.5 max-h-[375px] pr-1">
-                        {isSpotLoading ? (
+                      {/* For TradFi: Tag Filter Bar */}
+                      {spotSubTab === "tradfi" && spotTradFiTags.length > 0 && (
+                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide shrink-0">
+                          {spotTradFiTags.map((tag) => {
+                            const isTagActive = activeSpotTradFiTag === tag;
+                            return (
+                              <button
+                                key={tag}
+                                onClick={() => {
+                                  lastFetchedSpotTradFiTagRef.current = null;
+                                  setActiveSpotTradFiTag(tag);
+                                }}
+                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border shrink-0 ${
+                                  isTagActive
+                                    ? "bg-brand-green/10 text-brand-green border-brand-green/40"
+                                    : "bg-surface-2 text-text-muted border-border hover:text-text-primary hover:bg-surface-2"
+                                }`}
+                              >
+                                {tag?.toLowerCase() === "stocks" || tag?.toLowerCase() === "stock" ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-green/25 text-brand-green border border-brand-green/40 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      New
+                                    </span>
+                                  </>
+                                ) : tag?.toLowerCase().includes("0 fee") || tag?.toLowerCase().includes("0fee") ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-warning/25 text-brand-warning-text border border-brand-warning/30 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      Hot
+                                    </span>
+                                  </>
+                                ) : (
+                                  tag
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* For Trade (Crypto): Tag Filter Bar */}
+                      {spotSubTab === "spot" && spotTradeTags.length > 0 && (
+                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide shrink-0">
+                          {spotTradeTags.map((tag) => {
+                            const isTagActive = activeSpotTradeTag === tag;
+                            return (
+                              <button
+                                key={tag}
+                                onClick={() => {
+                                  lastFetchedSpotTradeTagRef.current = null;
+                                  setActiveSpotTradeTag(tag);
+                                }}
+                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border shrink-0 ${
+                                  isTagActive
+                                    ? "bg-brand-green/10 text-brand-green border-brand-green/40"
+                                    : "bg-surface-2 text-text-muted border-border hover:text-text-primary hover:bg-surface-2"
+                                }`}
+                              >
+                                {tag?.toLowerCase().includes("0 fee") || tag?.toLowerCase().includes("0fee") ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-warning/25 text-brand-warning-text border border-brand-warning/30 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      Hot
+                                    </span>
+                                  </>
+                                ) : (
+                                  tag
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Coin List */}
+                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${spotSubTab === "tradfi" || (spotSubTab === "spot" && spotTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
+                        {(spotSubTab === "tradfi" ? isSpotTradFiLoading : spotSubTab === "spot" && activeSpotTradeTag !== "All" ? isSpotTradeLoading : isSpotLoading) ? (
                           <div className="flex justify-center items-center py-12">
                             <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
                           </div>
@@ -737,10 +919,9 @@ export default function Navbar() {
                             const rawSym = (item.pair_symbol || item.symbol || "").toUpperCase();
                             const cleanSym = rawSym.replace(/[\/_]/g, "");
                             const baseSymbol = (item.base_asset_symbol || item.base_coin || (cleanSym.endsWith("USDT") ? cleanSym.replace("USDT", "") : cleanSym.endsWith("USDC") ? cleanSym.replace("USDC", "") : cleanSym)).toUpperCase();
-                            const quoteSymbol = (item.quote_asset_symbol || item.quote_coin || (cleanSym.endsWith("USDC") ? "USDC" : "USDT")).toUpperCase();
                             const isZeroFee = getIsZeroFee(item);
                             const displayName = item.coin_name || item.name || baseSymbol;
-                            const subtitle = `${displayName} Spot`;
+                            const subtitle = item.coin_name || item.name || "";
 
                             return (
                               <div
@@ -762,22 +943,19 @@ export default function Navbar() {
                                   />
                                   <div className="flex flex-col min-w-0">
                                     <div className="flex items-center gap-1 font-bold text-sm text-text-primary group-hover:text-brand-green transition-colors">
-                                      <span>{baseSymbol}</span>
-                                      <span className="text-xs text-text-muted">/{quoteSymbol}</span>
+                                      <span>{cleanSym}</span>
                                       {isZeroFee && (
                                         <span className="px-1.5 py-0.5 text-[9px] font-bold rounded bg-brand-green/15 text-brand-green border border-brand-green/30 uppercase tracking-wider">
                                           0 Fees
                                         </span>
                                       )}
-                                      {(item.popular == 1 || item.hot == 1 || item.popular === true) && (
-                                        <span className="text-[10px]">🔥</span>
-                                      )}
                                     </div>
-                                    <div className="text-xs text-text-muted truncate max-w-[260px] leading-4 mt-0.5">
+                                    <div className="text-xs text-text-muted truncate max-w-[245px] leading-4 mt-0.5">
                                       {subtitle}
                                     </div>
                                   </div>
                                 </div>
+                                <FaAngleRight className="text-xs text-text-muted opacity-0 group-hover:opacity-100 group-hover:text-brand-green transition-all duration-150 shrink-0 translate-x-0 group-hover:translate-x-0.5" />
                               </div>
                             );
                           })
@@ -787,7 +965,7 @@ export default function Navbar() {
                   )}
                 </div>
               ) : currentItem === "Futures" ? (
-                /* ─── Futures Flyout Dropdown (Bybit Style with Subtitles - Exact sizing and padding) ─── */
+                /* ─── Futures Flyout Dropdown ─── */
                 <div
                   className="absolute mt-5 bg-recessed text-text-primary border border-border p-1.5 shadow-lg rounded-md z-99 hidden lg:flex overflow-hidden transition-all duration-200 ease-in-out"
                   style={{
@@ -873,12 +1051,12 @@ export default function Navbar() {
                     </div>
                   </div>
 
-                  {/* Right Column: Flyout Panel (Bybit Style) */}
+                  {/* Right Column: Flyout Panel */}
                   {futuresSubTab && (
                     <div className="w-[350px] p-2.5 flex flex-col min-w-0 bg-recessed shrink-0">
-                      {/* For TradFi: ONLY Dynamic Tags + Coin List */}
-                      {futuresSubTab === "tradfi" && (
-                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide flex-shrink-0">
+                      {/* For TradFi: Tag Filter Bar */}
+                      {futuresSubTab === "tradfi" && tradFiTags.length > 0 && (
+                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide shrink-0">
                           {tradFiTags.map((tag) => {
                             const isTagActive = activeTradFiTag === tag;
                             return (
@@ -886,9 +1064,10 @@ export default function Navbar() {
                                 key={tag}
                                 onClick={(e) => {
                                   e.stopPropagation();
+                                  lastFetchedTradFiTagRef.current = null;
                                   setActiveTradFiTag(tag);
                                 }}
-                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border flex-shrink-0 ${
+                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border shrink-0 ${
                                   isTagActive
                                     ? "bg-brand-green/10 text-brand-green border-brand-green/40"
                                     : "bg-surface-2 text-text-muted border-border hover:text-text-primary hover:bg-surface-2"
@@ -901,6 +1080,13 @@ export default function Navbar() {
                                       New
                                     </span>
                                   </>
+                                ) : tag?.toLowerCase().includes("0 fee") || tag?.toLowerCase().includes("0fee") ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-warning/25 text-brand-warning-text border border-brand-warning/30 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      Hot
+                                    </span>
+                                  </>
                                 ) : (
                                   tag
                                 )}
@@ -910,22 +1096,57 @@ export default function Navbar() {
                         </div>
                       )}
 
-                      {/* Coin List: Icon + Symbol + Subtitle */}
-                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
-                        {isTradFiLoading && futuresSubTab === "tradfi" ? (
+                      {/* For USDT Perpetual (Trade): Tag Filter Bar */}
+                      {futuresSubTab === "usdt_perpetual" && futuresTradeTags.length > 0 && (
+                        <div className="flex items-center gap-1.5 pt-2 pb-2 border-b border-border/50 overflow-x-auto scrollbar-hide shrink-0">
+                          {futuresTradeTags.map((tag) => {
+                            const isTagActive = activeFuturesTradeTag === tag;
+                            return (
+                              <button
+                                key={tag}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  lastFetchedFuturesTradeTagRef.current = null;
+                                  setActiveFuturesTradeTag(tag);
+                                }}
+                                className={`relative py-1 px-3 rounded text-xs font-semibold whitespace-nowrap cursor-pointer transition-all border shrink-0 ${
+                                  isTagActive
+                                    ? "bg-brand-green/10 text-brand-green border-brand-green/40"
+                                    : "bg-surface-2 text-text-muted border-border hover:text-text-primary hover:bg-surface-2"
+                                }`}
+                              >
+                                {tag?.toLowerCase().includes("0 fee") || tag?.toLowerCase().includes("0fee") ? (
+                                  <>
+                                    <span>{tag}</span>
+                                    <span className="absolute -top-2 -right-1 px-1.5 py-0.5 text-[7.5px] font-bold rounded-full bg-brand-warning/25 text-brand-warning-text border border-brand-warning/30 uppercase leading-none tracking-tight pointer-events-none z-10 shadow-sm">
+                                      Hot
+                                    </span>
+                                  </>
+                                ) : (
+                                  tag
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+
+                      {/* Coin List */}
+                      <div className={`flex-1 overflow-y-auto custom-scroll space-y-0.5 ${futuresSubTab === "tradfi" || (futuresSubTab === "usdt_perpetual" && futuresTradeTags.length > 0) ? "max-h-[330px] pt-1" : "max-h-[375px]"} pr-1`}>
+                        {(futuresSubTab === "tradfi" ? isTradFiLoading : futuresSubTab === "usdt_perpetual" && activeFuturesTradeTag !== "All" ? isFuturesTradeLoading : false) ? (
                           <div className="flex justify-center items-center py-12">
                             <div className="w-5 h-5 border-2 border-brand-green border-t-transparent rounded-full animate-spin" />
                           </div>
-                        ) : (futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).length === 0 ? (
+                        ) : displayFuturesCoins.length === 0 ? (
                           <div className="flex flex-col items-center justify-center py-12 text-xs text-text-muted">
                             No contracts found
                           </div>
                         ) : (
-                          (futuresSubTab === "tradfi" ? tradFiCoins : usdtCoins).map((item) => {
+                          displayFuturesCoins.map((item) => {
                             const sym = (item.symbol || item.pair_symbol || "").toUpperCase();
                             const baseSymbol = (item.base_coin || sym.replace("USDT", "")).toUpperCase();
                             const displayName = item.coin_name || item.name || baseSymbol;
-                            const subtitle = `${displayName} USDT Perpetual`;
+                            const subtitle = item.coin_name || item.name || "";
 
                             return (
                               <div
@@ -940,23 +1161,21 @@ export default function Navbar() {
                               >
                                 <div className="flex items-center gap-3 min-w-0">
                                   <NavCoinIcon
-                                    icon={item.coin_icon || item.icon || item.icon_url}
+                                    icon={item.coin_icon || item.icon || item.icon_url || item.iconUrl}
                                     symbol={sym}
-                                    name={item.coin_name || item.name}
+                                    name={displayName}
                                     className="size-8"
                                   />
                                   <div className="flex flex-col min-w-0">
                                     <div className="flex items-center gap-1 font-bold text-sm text-text-primary group-hover:text-brand-green transition-colors">
                                       <span>{sym}</span>
-                                      {(item.popular == 1 || item.hot == 1 || item.popular === true) && (
-                                        <span className="text-[10px]">🔥</span>
-                                      )}
                                     </div>
-                                    <div className="text-xs text-text-muted truncate max-w-[260px] leading-4 mt-0.5">
+                                    <div className="text-xs text-text-muted truncate max-w-[245px] leading-4 mt-0.5">
                                       {subtitle}
                                     </div>
                                   </div>
                                 </div>
+                                <FaAngleRight className="text-xs text-text-muted opacity-0 group-hover:opacity-100 group-hover:text-brand-green transition-all duration-150 shrink-0 translate-x-0 group-hover:translate-x-0.5" />
                               </div>
                             );
                           })
@@ -1049,12 +1268,13 @@ export default function Navbar() {
       {/* Right Navbar */}
       <div className="flex md:gap-5 gap-2 lg:gap-4 items-center md:mt-0 justify-between lg:pr-10 pr-4 cursor-pointer">
         {isLoggedIn && (
-          <div
-            className="font-medium leading-6 bg-brand-green text-xs hover:bg-brand-green-d text-black rounded-sm px-3 py-1 h-8 flex items-center gap-1.5 transition-colors"
+          <Button
+            variant="primary"
+            className="h-8 text-xs font-semibold px-4 rounded-full"
             onClick={() => setOpenDeposit(true)}
           >
             Add Funds
-          </div>
+          </Button>
         )}
         {isLoggedIn && (
           <div
@@ -1261,15 +1481,15 @@ export default function Navbar() {
           <>
             <Button
               variant="ghost"
-              className="h-8 text-xs font-semibold md:flex hidden px-4"
-              onClick={() => handleNavigate("/trade/login")}
+              className="h-8 text-xs font-semibold md:flex hidden px-4 rounded-full"
+              onClick={() => (window.location.href = "/trade/login")}
             >
               Log In
             </Button>
             <Button
               variant="primary"
-              className="h-8 text-xs font-semibold px-4"
-              onClick={() => handleNavigate("/trade/register")}
+              className="h-8 text-xs font-semibold px-4 rounded-full"
+              onClick={() => (window.location.href = "/trade/register")}
             >
               Sign Up
             </Button>
@@ -1354,7 +1574,7 @@ export default function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BiSupport className="hover:text-brand-green h-6 w-6 md:flex hidden text-text-primary" />
+            <BiSupportIcon className="hover:text-brand-green h-6 w-6 md:flex hidden text-text-primary" />
           </a>
         </div>
         {isLoggedIn && (
