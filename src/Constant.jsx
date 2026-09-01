@@ -219,16 +219,5 @@ export const getIsZeroFee = (item) => {
   ) {
     return true;
   }
-  const sym = (item.pair_symbol || item.symbol || "").toUpperCase().replace(/[\/_]/g, "");
-  const zeroFeePairs = [
-    "BTCUSDC",
-    "ETHUSDC",
-    "USDCUSDT",
-    "FDUSDUSDT",
-    "BTCFDUSD",
-    "ETHFDUSD",
-    "TUSDUSDT",
-    "EURUSDT",
-  ];
-  return zeroFeePairs.includes(sym);
+  return false;
 };
