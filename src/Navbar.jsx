@@ -117,7 +117,7 @@ export default function Navbar() {
 
   const [futuresSubTab, setFuturesSubTab] = useState(null);
   const [spotSubTab, setSpotSubTab] = useState(null);
-  const [activeTradFiTag, setActiveTradFiTag] = useState("Stock");
+  const [activeTradFiTag, setActiveTradFiTag] = useState("");
   const [activeSpotTradFiTag, setActiveSpotTradFiTag] = useState("");
   const [activeSpotTradeTag, setActiveSpotTradeTag] = useState("All");
   const [activeFuturesTradeTag, setActiveFuturesTradeTag] = useState("All");
@@ -408,7 +408,7 @@ export default function Navbar() {
         return filtered;
       }
     }
-    return ["Stock", "Metal", "Oil", "Commodity"];
+    return [];
   }, [futureTags]);
 
   useEffect(() => {
@@ -438,7 +438,7 @@ export default function Navbar() {
         return filtered;
       }
     }
-    return ["Stock", "Metal", "Oil", "Commodity"];
+    return [];
   }, [spotTags]);
 
   useEffect(() => {
@@ -772,7 +772,7 @@ export default function Navbar() {
                                     (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
                                   );
                                   lastFetchedSpotTradFiTagRef.current = null;
-                                  setActiveSpotTradFiTag(stockTag || spotTradFiTags[0] || "Stock");
+                                  setActiveSpotTradFiTag(stockTag || spotTradFiTags[0] || "");
                                 }
                               } else {
                                 setSpotSubTab(null);
@@ -1004,7 +1004,7 @@ export default function Navbar() {
                         {
                           id: "tradfi",
                           title: "TradFi",
-                          subtitle: "Trade Stocks, Metal and Commodity contracts in one place.",
+                          subtitle: "Trade Stocks, Metal, Oil and Commodity contracts in one place.",
                           path: `${MAIN_SITE}/futures/RSPYUSDT`,
                           iconDark: "/icon 2 black-01.png",
                           iconLight: "/icon 2 white-02.png",
@@ -1022,7 +1022,7 @@ export default function Navbar() {
                                   (t) => (t || "").toLowerCase() === "stock" || (t || "").toLowerCase() === "stocks",
                                 );
                                 lastFetchedTradFiTagRef.current = null;
-                                setActiveTradFiTag(stockTag || tradFiTags[0] || "Stock");
+                                setActiveTradFiTag(stockTag || tradFiTags[0] || "");
                               }
                             }}
                             onClick={() => {
