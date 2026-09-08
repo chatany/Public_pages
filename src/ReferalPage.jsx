@@ -6,6 +6,7 @@ import { Footer } from "./foooter";
 import { Gift, Share2, UserPlus, Trophy } from "lucide-react";
 import Button from "./Common/Button";
 import { useAuth } from "./useAuth";
+import PageContainer from "./Common/PageContainer";
 
 export const ReferralPage = () => {
   const isLoggedIn = useAuth();
@@ -29,7 +30,7 @@ export const ReferralPage = () => {
       </Helmet>
       <Navbar/>
     <div className="bg-bg min-h-screen text-primary">
-      <div className="flex items-center max-md:flex-col  justify-between md:p-20 p-5">
+      <PageContainer className="flex items-center max-md:flex-col justify-between py-12 md:py-16">
         <div className=" md:text-left text-center flex flex-col gap-10">
           <h1 className="md:text-3xl text-2xl font-bold md:text-left text-center leading-tight">
             Invite friends. Earn 30% of their fees.
@@ -50,8 +51,8 @@ export const ReferralPage = () => {
           <div className="absolute bg-brand-green/50 blur-2xl rounded-full md:size-80 size-60" />
           <img src="/referral.svg" className="relative z-base md:size-96 size-72" alt="Referral"/>
         </div>
-      </div>
-      <div className="flex justify-center flex-col items-center md:p-20 p-6">
+      </PageContainer>
+      <PageContainer className="flex justify-center flex-col items-center py-12">
         <h2 className="md:text-2xl text-xl font-bold mb-12">How To Refer Your Friends</h2>
         <div className="grid md:grid-cols-3 grid-cols-1 gap-8 w-full">
           {/* Step 1 */}
@@ -121,18 +122,20 @@ export const ReferralPage = () => {
             </li>
           </ul>
         </div>
-      </div>
-      <div className="flex flex-col gap-8 items-center bg-surface py-16 mt-24">
-        <h2 className="font-bold text-2xl md:text-3xl text-primary">
-          Start earning today
-        </h2>
-        <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
-          The more friends you invite, the more you earn — with no limit on referrals.
-        </p>
-        <Button variant="primary" className="h-12">
-          <Gift className="size-6" strokeWidth={1.5} />
-          Get my referral link
-        </Button>
+      </PageContainer>
+      <div className="bg-surface py-16 mt-24">
+        <PageContainer className="flex flex-col gap-8 items-center">
+          <h2 className="font-bold text-2xl md:text-3xl text-primary">
+            Start earning today
+          </h2>
+          <p className="text-secondary text-sm md:text-base text-center max-md:px-4">
+            The more friends you invite, the more you earn — with no limit on referrals.
+          </p>
+          <Button variant="primary" className="h-12">
+            <Gift className="size-6" strokeWidth={1.5} />
+            Get my referral link
+          </Button>
+        </PageContainer>
       </div>
     <Footer isShow={false}/>
     </div>

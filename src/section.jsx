@@ -12,6 +12,7 @@ import { BsAndroid2 } from "react-icons/bs";
 import Button from "./Common/Button";
 import { useAuth } from "./useAuth";
 import { apiRequest, BASE_URL } from "./Components/fee";
+import PageContainer from "./Common/PageContainer";
 function CoinIcon({ mover }) {
   const [imgError, setImgError] = useState(false);
   const iconSrc = mover?.coin_icon;
@@ -214,7 +215,7 @@ export const Section = () => {
 
   return (
     <div className="w-full flex flex-col gap-10">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
+      <PageContainer>
         <div className="w-full md:flex justify-center grid grid-cols-2 md:grid-cols-4 gap-8  max-md:hidden mt-20 ">
           {promoCards.map((card, ind) => (
             <div
@@ -240,7 +241,7 @@ export const Section = () => {
             </div>
           ))}
         </div>
-      </div>
+      </PageContainer>
       {/* <div className="flex justify-center gap-3 mt-1 max-md:hidden ">
         <button
           onClick={prev}
@@ -306,7 +307,7 @@ export const Section = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full mt-10">
+      <PageContainer className="mt-10">
         <div className="flex justify-center flex-col w-full">
           {/* Ticker heading and sub */}
           <div className="text-center mb-8">
@@ -418,7 +419,7 @@ export const Section = () => {
             </div>
           </div>
         </div>
-      </div>
+      </PageContainer>
       <div
         className="items-center cursor-pointer flex justify-center gap-2 hover:text-brand-green transition-colors font-semibold"
         onClick={() => (window.location.href = `/trade/spot/BTCUSDT`)}
@@ -426,7 +427,7 @@ export const Section = () => {
         {" "}
         View all 2,300+ coins <FaChevronRight className="size-3" />
       </div>
-      <div className="max-w-7xl mx-auto px-6 md:px-8 w-full">
+      <PageContainer>
         <div className="text-center text-2xl p-3 font-bold md:hidden">
           Your portfolio, in your pocket
           <p className="text-xs font-normal text-secondary mt-1">
@@ -436,7 +437,7 @@ export const Section = () => {
         </div>
         <div className="flex max-md:flex-col rounded-2xl items-center md:justify-between w-full">
           <div className="md:w-[50%] w-full justify-center flex ">
-            <div className=" rounded-full p-4 md:p-20  w-full flex justify-center relative items-center">
+            <div className=" rounded-full p-4 md:p-10 lg:p-16 xl:p-20  w-full flex justify-center relative items-center">
               {/* Invisible interactive overlay to prevent default iOS controls trigger */}
               <div
                 onClick={handleVideoClick}
@@ -574,8 +575,8 @@ export const Section = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="max-md:hidden flex flex-col gap-10 mt-20 w-full max-w-7xl mx-auto px-6 md:px-8">
+      </PageContainer>
+      <PageContainer className="max-md:hidden flex flex-col gap-10 mt-20">
         <div className="font-bold text-3xl text-center">
           {isLoggedIn
             ? "Grow your assets with BitZup"
@@ -651,7 +652,7 @@ export const Section = () => {
             </div>
           </div>
         </div>
-      </div>
+      </PageContainer>
       <div className=" w-full md:text-3xl text-2xl mt-10 font-bold md:hidden text-center ">
         {isLoggedIn
           ? "Grow your assets with BitZup"
@@ -700,7 +701,7 @@ export const Section = () => {
           </div>
         </>
       </div>
-      <div className="flex flex-col mt-10 max-w-7xl mx-auto px-6 md:px-8 w-full">
+      <PageContainer className="flex flex-col mt-10">
         <div className="font-bold md:text-3xl text-2xl mb-15 text-center">
           Your security is engineered in, not bolted on
         </div>
@@ -803,7 +804,7 @@ export const Section = () => {
             </div>
           </div>
         </div>
-      </div>
+      </PageContainer>
 
       {/* <PrivacyPolicy/> */}
       {/* <Menu  children={<PrivacysPolicy/>}/> */}

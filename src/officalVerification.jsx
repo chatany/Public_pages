@@ -16,6 +16,7 @@ import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import VerifyPopup from "./Components/verification/success";
 import Button from "./Common/Button";
+import PageContainer from "./Common/PageContainer";
 
 export const Verification = () => {
   const dark = true;
@@ -161,11 +162,11 @@ export const Verification = () => {
           category={select?.account_type}
         />
       )}
-      <div className="bg-bg min-h-screen ">
-        <div className="flex justify-center w-full md:min-h-[75vh] min-h-[70vh] mt-20">
-          <div className="flex flex-col w-[60%] max-md:w-full">
+      <div className="bg-bg min-h-screen">
+        <PageContainer className="flex justify-center items-center py-12 md:py-20 min-h-[60vh]">
+          <div className="flex flex-col w-full max-w-2xl">
             <div className="flex items-center flex-col p-5 gap-5">
-              <div className="md:text-3xl text-2xl text-primary font-bold md:text-left text-center leading-[100%] mt-16">
+              <div className="md:text-3xl text-2xl text-primary font-bold md:text-left text-center leading-[100%]">
                 Verify it's really BitZup
               </div>
               <div className="md:text-base text-xs font-bold md:leading-6 text-muted text-center max-w-xl">
@@ -274,7 +275,7 @@ export const Verification = () => {
               </div>
             </div>
           </div>
-        </div>
+        </PageContainer>
         <Footer isShow={false} />
       </div>
     </>

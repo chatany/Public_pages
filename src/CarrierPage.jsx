@@ -7,6 +7,7 @@ import { LuMoveRight } from "react-icons/lu";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import Button from "./Common/Button";
+import PageContainer from "./Common/PageContainer";
 
 export const CarrierPage = () => {
   const [activeItem, setActiveItem] = useState("Buy");
@@ -89,7 +90,7 @@ export const CarrierPage = () => {
       </Helmet>
       <Navbar />
       <div className="bg-background text-primary min-h-screen ">
-        <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
+        <PageContainer className="flex items-center max-md:flex-col justify-between py-12 md:py-16">
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
             <div className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
               Build the future of crypto with us
@@ -114,7 +115,7 @@ export const CarrierPage = () => {
           <div className="mt-10">
             <div className="bg-surface rounded-full md:size-96 size-64" />
           </div>
-        </div>
+        </PageContainer>
         {/* <div className="flex justify-center items-center mt-10 font-bold md:px-16 p-5">
           <div
             className={`flex border-border bg-surface text-secondary rounded-full max-w-md overflow-hidden p-0.5 h-14 w-full`}
@@ -139,7 +140,7 @@ export const CarrierPage = () => {
             </div>
           </div>
         </div> */}
-        <div className="mt-20 md:px-16 p-5">
+        <PageContainer className="mt-20">
           <div className="text-2xl md:text-3xl text-center font-bold mb-10">
             What we value
           </div>
@@ -165,8 +166,8 @@ export const CarrierPage = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="mt-20 md:px-16 p-5">
+        </PageContainer>
+        <PageContainer className="mt-20">
           <div className="text-2xl md:text-3xl text-center font-bold mb-10">
             Why you'll love working here
           </div>
@@ -216,8 +217,8 @@ export const CarrierPage = () => {
               ))}
             </div>
           </div>
-        </div>
-        <div className="mt-20 md:px-16 p-5">
+        </PageContainer>
+        <PageContainer className="mt-20">
           <div className="text-2xl md:text-3xl font-bold text-center mb-4">
             Find your role
           </div>
@@ -249,18 +250,20 @@ export const CarrierPage = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="text-2xl md:text-3xl font-bold mt-20 md:px-16 p-5 leading-tight text-center">
-          Don't see your role?
-        </div>
-        <div className="text-sm md:text-base text-secondary text-center mt-2 max-w-xl mx-auto">
-          We're always meeting great people. Send us your profile and we'll reach out when there's a fit.
-        </div>
-        <div className="flex justify-center items-center mt-8 mb-10">
-          <Button variant="primary" className="px-10">
-            Submit your profile
-          </Button>
-        </div>
+        </PageContainer>
+        <PageContainer className="mt-20 text-center mb-16">
+          <div className="text-2xl md:text-3xl font-bold leading-tight text-center">
+            Don't see your role?
+          </div>
+          <div className="text-sm md:text-base text-secondary text-center mt-2 max-w-xl mx-auto">
+            We're always meeting great people. Send us your profile and we'll reach out when there's a fit.
+          </div>
+          <div className="flex justify-center items-center mt-8 mb-10">
+            <Button variant="primary" className="px-10">
+              Submit your profile
+            </Button>
+          </div>
+        </PageContainer>
         <Footer isShow={false} />
       </div>
     </>

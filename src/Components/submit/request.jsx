@@ -6,6 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import Navbar from "../../Navbar";
 import { Footer } from "../../foooter";
 import Button from "../../Common/Button";
+import PageContainer from "../../Common/PageContainer";
 
 export default function SubmitRequestForm() {
   const [open, setOpen] = useState(false);
@@ -102,28 +103,19 @@ export default function SubmitRequestForm() {
       </Helmet>
       <Navbar />
       <div className="min-h-screen bg-black text-white mt-20">
-        {/* HEADER */}
-        <div className="flex w-full justify-between md:px-10 px-3 py-12 md:ml-15 max-md:flex-col">
-          <div className="text-base textbrand-green mb-4 text-left">
-            <span className=" cursor-pointer">Help Center</span> › Submit a
-            request
+        <PageContainer className="py-8">
+          {/* HEADER / BREADCRUMB */}
+          <div className="text-base text-brand-green mb-8 text-left">
+            <span className="cursor-pointer">Help Center</span> › Submit a request
           </div>
-          {/* <div className="relative w-[280px]">
-          <IoSearchOutline className="absolute left-3 top-3 text-gray-400" />
-          <input
-            placeholder="Search"
-            className="w-full bg-transparent border borderbrand-green rounded-full pl-10 pr-4 py-2 text-sm outline-none"
-          />
-        </div> */}
-        </div>
-        {/* BODY */}
-        <div className="md:w-[800px] w-full md:px-10 px-3 md:ml-15 md:py-8 py-4">
-          <h1 className="md:text-3xl text-2xl font-bold text-left mb-3">
-            Submit a request
-          </h1>
-          <p className="text-sm text-gray-400 text-left mb-8">
-            Tell us what's going on and our support team will get back to you — usually within 24 hours.
-          </p>
+          {/* BODY */}
+          <div className="max-w-3xl w-full">
+            <h1 className="md:text-3xl text-2xl font-bold text-left mb-3">
+              Submit a request
+            </h1>
+            <p className="text-sm text-gray-400 text-left mb-8">
+              Tell us what's going on and our support team will get back to you — usually within 24 hours.
+            </p>
           <Field
             label="Category"
             helper="Pick the topic that fits best (Account, Deposits & withdrawals, Trading, Verification, Security, Other) so we route you to the right team."
@@ -746,10 +738,11 @@ export default function SubmitRequestForm() {
                 Check <a href="/official-verification" className="textbrand-green hover:underline">Official Verification</a> before acting on any email, link or caller claiming to be BitZup.
               </p>
             </div>
+          </div>
         </div>
+        </PageContainer>
       </div>
-    </div>
-    <Footer isShow={false} />
+      <Footer isShow={false} />
     </>
   );
 }

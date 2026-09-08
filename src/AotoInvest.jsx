@@ -9,6 +9,7 @@ import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import { useAuth } from "./useAuth";
 import Button from "./Common/Button";
+import PageContainer from "./Common/PageContainer";
 
 export const AutoInvest = () => {
   const isLoggedIn = useAuth();
@@ -55,7 +56,7 @@ export const AutoInvest = () => {
       </Helmet>
       <Navbar />
       <div className="bg-bg text-primary min-h-screen ">
-        <div className="flex items-center max-md:flex-col justify-between md:px-16 p-5 ">
+        <PageContainer className="flex items-center max-md:flex-col justify-between py-12 md:py-16">
           <div className=" md:text-left text-center flex flex-col gap-10 mt-10">
             <div className="flex flex-col gap-4">
               <h1 className="text-2xl md:text-3xl font-bold md:text-left text-center leading-tight">
@@ -79,8 +80,8 @@ export const AutoInvest = () => {
           <div className="mt-10">
             <div className="bg-surface rounded-full md:size-96 size-64" />
           </div>
-        </div>
-        <div className="mt-20 md:px-16 p-5">
+        </PageContainer>
+        <PageContainer className="mt-20">
           <h2 className="text-2xl md:text-3xl font-bold mb-10 text-center">
             Recurring buy advantages
           </h2>
@@ -106,22 +107,24 @@ export const AutoInvest = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="text-xl md:text-3xl text-center font-bold mt-20 md:px-16 p-5 text-secondary leading-relaxed">
+        </PageContainer>
+        <PageContainer className="text-xl md:text-3xl text-center font-bold mt-20 text-secondary leading-relaxed">
           Auto Invest Buys give you the flexibility to decide how much and how
           often to invest.
-        </div>
-        <div className="flex flex-col gap-6 items-center bg-surface py-12 px-6 mt-20">
-          <div className="font-bold text-xl md:text-3xl text-center">
-            Set up Auto Invest Buys on the BitZup app
-          </div>
-          <Button
-            onClick={() => (window.location.href = "/trade/register")}
-            variant="primary"
-            className="md:h-12 h-8 md:min-w-max px-8 text-base font-bold"
-          >
-            Set up your first auto invest
-          </Button>
+        </PageContainer>
+        <div className="bg-surface py-12 px-6 mt-20">
+          <PageContainer className="flex flex-col gap-6 items-center">
+            <div className="font-bold text-xl md:text-3xl text-center">
+              Set up Auto Invest Buys on the BitZup app
+            </div>
+            <Button
+              onClick={() => (window.location.href = "/trade/register")}
+              variant="primary"
+              className="md:h-12 h-8 md:min-w-max px-8 text-base font-bold"
+            >
+              Set up your first auto invest
+            </Button>
+          </PageContainer>
         </div>
         <Footer isShow={false} />
       </div>

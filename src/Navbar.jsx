@@ -623,22 +623,22 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between fixed top-0 items-center md:border-b border-border/70 h-16 w-full p-3 bg-bg text-text-primary z-99">
-      <div className="flex xl:w-[60%] items-center text-lg gap-2 font-semibold leading-6 lg:gap-8">
+    <div className="flex justify-between fixed top-0 items-center md:border-b border-border/70 h-16 w-full px-3 md:px-4 lg:px-6 xl:px-8 bg-bg text-text-primary z-99">
+      <div className="flex items-center gap-3 lg:gap-4 xl:gap-8 min-w-0">
         <div
-          className="text-brand-green font-semibold cursor-pointer"
+          className="text-brand-green font-semibold cursor-pointer shrink-0"
           onClick={() => {
             window.location.href = "/";
           }}
         >
           <img
             src="/bitzup_light_logo.png"
-            className="md:h-9 h-7 w-auto"
+            className="md:h-9 h-7 w-auto shrink-0"
             alt="logo"
           />
         </div>
         <div
-          className="relative flex gap-8"
+          className="relative flex gap-2.5 lg:gap-3.5 xl:gap-6 items-center shrink-0"
           ref={navDropdownRef}
           onMouseLeave={() => {
             setTimeout(() => {
@@ -652,7 +652,7 @@ export default function Navbar() {
           {["Buy Crypto", "Spot", "Futures", "Options", "Alpha", "Earn", "More"].map((item, i) => (
             <div
               key={i}
-              className={`text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative hover:text-brand-green ${
+              className={`text-xs xl:text-sm lg:flex hidden font-semibold items-center gap-1 cursor-pointer relative hover:text-brand-green whitespace-nowrap shrink-0 ${
                 hoveredItemIndex === i ? "text-brand-green" : ""
               }`}
               ref={(el) => (navMenuItemsRef.current[i] = el)}
@@ -688,7 +688,7 @@ export default function Navbar() {
                 }
               }}
             > 
-              <div className={`${isTabActive(item) ? "text-brand-green" : ""}`}>
+              <div className={`whitespace-nowrap ${isTabActive(item) ? "text-brand-green" : ""}`}>
                 {item}
               </div>
               <div
@@ -1282,11 +1282,11 @@ export default function Navbar() {
       </div>
 
       {/* Right Navbar */}
-      <div className="flex md:gap-5 gap-2 lg:gap-4 items-center md:mt-0 justify-between lg:pr-10 pr-4 cursor-pointer">
+      <div className="flex items-center gap-2 md:gap-2.5 lg:gap-3 xl:gap-4 shrink-0 cursor-pointer">
         {isLoggedIn && (
           <Button
             variant="primary"
-            className="h-8 text-xs font-semibold px-4 rounded-full"
+            className="h-8 text-xs font-semibold px-3 xl:px-4 rounded-full whitespace-nowrap shrink-0"
             onClick={() => setOpenDeposit(true)}
           >
             Add Funds
@@ -1497,14 +1497,14 @@ export default function Navbar() {
           <>
             <Button
               variant="ghost"
-              className="h-8 text-xs font-semibold md:flex hidden px-4 rounded-full"
+              className="h-8 text-xs font-semibold md:flex hidden px-3 xl:px-4 rounded-full whitespace-nowrap shrink-0"
               onClick={() => (window.location.href = "/trade/login")}
             >
               Log In
             </Button>
             <Button
               variant="primary"
-              className="h-8 text-xs font-semibold px-4 rounded-full"
+              className="h-8 text-xs font-semibold px-3 xl:px-4 rounded-full whitespace-nowrap shrink-0"
               onClick={() => (window.location.href = "/trade/register")}
             >
               Sign Up

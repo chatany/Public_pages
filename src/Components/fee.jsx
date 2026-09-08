@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../foooter";
 import Button from "../Common/Button";
+import PageContainer from "../Common/PageContainer";
 
 export const BASE_URL = import.meta.env.VITE_API_BASE || "https://api.bitzup.com";
 
@@ -179,8 +180,8 @@ export const VipLevel = () => {
   }, [vipLevel, volume]);
 
   return (
-    <div className="bg-bg text-text-primary min-h-screen overflow-x-hidden md:p-10 p-4 flex justify-center">
-      <div className="w-full max-w-[1200px] flex flex-col gap-10">
+    <div className="bg-bg text-text-primary min-h-screen overflow-x-hidden">
+      <PageContainer className="py-10 flex flex-col gap-10">
         <div className="flex gap-4 items-center">
           <div className="text-[32px] font-semibold text-text-primary">
             My Fee Rates
@@ -388,8 +389,8 @@ export const VipLevel = () => {
             </div>
           </div>
         </div>
-        <Footer />
-      </div>
+      </PageContainer>
+      <Footer />
       {loading && <Loder className="bg-brand-background" />}
     </div>
   );

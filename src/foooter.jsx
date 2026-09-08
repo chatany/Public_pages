@@ -18,6 +18,7 @@ import QRCode from "react-qr-code";
 import { Link } from "react-router-dom";
 import { useAuth } from "./useAuth";
 import Button from "./Common/Button";
+import PageContainer from "./Common/PageContainer";
 import { BsTwitterX } from "react-icons/bs";
 
 export const Footer = ({ isShow = true }) => {
@@ -138,7 +139,7 @@ export const Footer = ({ isShow = true }) => {
   return (
     <div className="bg-background">
       {isShow && (
-        <div className="py-24 md:px-16 px-5 max-w-7xl mx-auto w-full">
+        <PageContainer className="py-24">
           {/* FAQ Header */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">
@@ -176,7 +177,7 @@ export const Footer = ({ isShow = true }) => {
           </div>
 
           {/* View More Button */}
-        </div>
+        </PageContainer>
       )}
       {isShow && (
         <div className="flex flex-col gap-5 items-center bg-surface py-10 mt-10">
@@ -231,9 +232,9 @@ export const Footer = ({ isShow = true }) => {
       )}
       <div className="py-5">
         <footer className="bg-surface text-primary py-6 max-md:hidden">
-          <div className="max-w-7xl mx-auto  w-full">
+          <PageContainer>
             {/* Columns (Grid) */}
-            <div className="grid grid-cols-1 md:grid-cols-7 px-6 md:px-8 gap-8 w-full items-start">
+            <div className="grid grid-cols-1 md:grid-cols-7 gap-8 w-full items-start">
               {/* Column 1: LOGO & QR CODE */}
               
               <div className="text-left flex flex-col items-start gap-6 pr-4">
@@ -430,7 +431,7 @@ export const Footer = ({ isShow = true }) => {
                 <IoIosArrowDown className="size-3 text-secondary" />
               </div>
             </div> */}
-          </div>
+          </PageContainer>
         </footer>
         <div className="md:hidden bg-surface p-6 space-y-4">
           {/* Logo & Copyright */}

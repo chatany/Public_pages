@@ -3,9 +3,9 @@ import Button from "../Common/Button";
 
 export default function HeroCryptoSlide({ isLoggedIn }) {
   return (
-    <div className="w-full flex flex-col md:flex-row justify-start md:justify-center items-center gap-3 sm:gap-4 md:gap-8 lg:gap-12">
+    <div className="w-full flex flex-col md:flex-row justify-start md:justify-center items-center gap-3 sm:gap-4 md:gap-4 lg:gap-6 xl:gap-12">
       {/* Content (Expanded, well-spaced, shifted slightly higher on desktop) */}
-      <div className="z-base w-full md:w-[52%] lg:w-[50%] flex flex-col justify-center text-left py-0.5 md:py-1 mt-0 md:-mt-4">
+      <div className="z-base w-full md:flex-1 md:min-w-0 flex flex-col justify-center text-left py-0.5 md:py-1 mt-0">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-primary leading-tight md:leading-[1.14] text-left tracking-tight">
           Buy, trade and earn crypto - all in one place
         </h1>
@@ -55,7 +55,7 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
         </div>
 
         {/* Desktop Download Badges */}
-        <div className="flex mt-7 md:mt-10 lg:mt-12 text-secondary text-sm w-full gap-24 max-md:hidden">
+        <div className="flex mt-7 md:mt-10 lg:mt-12 text-secondary text-sm w-full gap-10 lg:gap-16 xl:gap-24 max-md:hidden">
           <div>
             <div className="flex gap-3">
               <a
@@ -97,10 +97,10 @@ export default function HeroCryptoSlide({ isLoggedIn }) {
       </div>
 
       {/* Circle Video (Center-aligned with the left text section) */}
-      <div className="flex justify-center items-center w-full md:w-[48%] lg:w-[50%] my-2 md:-mt-4">
+      <div className="flex justify-center items-center w-full md:flex-1 md:min-w-0 my-2 md:-mt-4">
         <video
           src="/B Video.mp4"
-          className="size-64 sm:size-72 md:size-[440px] lg:size-[480px] xl:size-[520px] object-cover mix-blend-screen"
+          className="size-48 sm:size-60 md:size-[380px] lg:size-[440px] xl:size-[500px] object-cover mix-blend-screen"
           autoPlay
           loop
           muted

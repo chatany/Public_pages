@@ -76,22 +76,22 @@ export default function Hero() {
 
   return (
     <section
-      className="relative w-full pt-20 sm:pt-20 md:pt-16 pb-4 md:pb-3 bg-black flex flex-col justify-start md:justify-center items-center select-none group md:h-[calc(100vh-74px)] md:min-h-[580px] overflow-hidden"
+      className="relative w-full pt-20 sm:pt-24 md:pt-24 pb-8 md:pb-12 bg-black flex flex-col justify-start items-center select-none group min-h-[calc(100vh-74px)]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-10 lg:px-12 w-full flex flex-col justify-start md:justify-center">
+      <div className="relative w-full mx-auto px-5 md:px-8 lg:px-12 xl:px-16 flex flex-col justify-start my-auto">
         {/* Slide Carousel Track Container (Smooth Horizontal Slide) */}
-        <div className="relative w-full overflow-hidden flex items-start md:items-center">
+        <div className="relative w-full overflow-hidden flex items-start">
           <div
-            className="flex w-full transition-transform duration-500 ease-in-out will-change-transform items-start md:items-center"
+            className="flex w-full transition-transform duration-500 ease-in-out will-change-transform items-start"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {slides.map((slide) => (
               <div
                 key={slide.id}
-                className="w-full shrink-0 flex-none flex items-start md:items-center justify-center px-0.5"
+                className="w-full shrink-0 flex-none flex items-start justify-center px-0.5"
               >
                 {slide.component}
               </div>

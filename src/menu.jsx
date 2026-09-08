@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import { Footer } from "./foooter";
 import { FaAngleDown } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import PageContainer from "./Common/PageContainer";
 
 export const Menu = ({ children }) => {
   const [show, setShow] = useState(false);
@@ -23,7 +24,7 @@ export const Menu = ({ children }) => {
     <div className="bg-black">
       <Navbar />
 
-      <div className="md:p-15 mt-20 ">
+      <PageContainer className="mt-20 py-10">
         <div className="flex flex-col gap-5">
           
           <div className="flex max-md:flex-col gap-20 w-full">
@@ -85,12 +86,12 @@ export const Menu = ({ children }) => {
                 </div>
               )}
             </div>
-            <div className="flex gap-10 p-2">
+            <div className="flex-1 min-w-0 p-2">
               <div>{children}</div>
             </div>
           </div>
         </div>
-      </div>
+      </PageContainer>
       <Footer isShow={false} />
     </div>
   );
