@@ -81,7 +81,7 @@ export default function Hero() {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="relative w-full mx-auto px-5 md:px-8 lg:px-12 xl:px-16 flex flex-col justify-start my-auto">
+      <div className="relative w-full max-w-360 mx-auto px-5 md:px-8 lg:px-12 xl:px-16 flex flex-col justify-start my-auto">
         {/* Slide Carousel Track Container (Smooth Horizontal Slide) */}
         <div className="relative w-full overflow-hidden flex items-start">
           <div
