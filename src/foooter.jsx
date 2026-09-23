@@ -124,7 +124,7 @@ export const Footer = ({ isShow = true }) => {
     {
       ele: "Socials",
       category: [
-        { name: "X (Twitter)", link: "https://x.com/BitZup_Official" },
+        // { name: "X (Twitter)", link: "https://x.com/BitZup_Official" },
         // { name: "Community", link: "https://t.me/bitzup_official" },
         { name: "Telegram", link: "https://t.me/bitzup_official" },
         { name: "Instagram", link: "https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx" },
@@ -384,7 +384,7 @@ export const Footer = ({ isShow = true }) => {
               <div className="text-left">
                 <h3 className="text-base font-semibold mb-4 text-primary">Socials</h3>
                 <ul className="text-secondary text-sm flex flex-col gap-3">
-                  <li className="hover:text-brand-green transition-colors">
+                  {/* <li className="hover:text-brand-green transition-colors">
                     <a
                       href="https://x.com/BitZup_Official"
                       target="_blank"
@@ -393,7 +393,7 @@ export const Footer = ({ isShow = true }) => {
                     >
                       X (Twitter)
                     </a>
-                  </li>
+                  </li> */}
                  
                   <li className="hover:text-brand-green transition-colors">
                     <a
@@ -509,14 +509,14 @@ export const Footer = ({ isShow = true }) => {
               >
                 <FaTelegram className="text-base text-telegram" />
               </a>
-              <a
+              {/* <a
                 href="https://x.com/BitZup_Official"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-full bg-surface-2 border border-border flex items-center justify-center text-secondary hover:text-brand-green hover:border-brand-green transition-all duration-200 cursor-pointer"
               >
                 <FaTwitter className="text-base" />
-              </a>
+              </a> */}
               <a
                 href="https://www.instagram.com/bitzup_official?igsh=YTBlM3RyZTR1aHVx"
                 target="_blank"

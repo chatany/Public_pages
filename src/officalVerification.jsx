@@ -44,11 +44,11 @@ export const Verification = () => {
       icon: <FaTelegramPlane className="size-5" />,
       placeholder: "Paste a link, email, phone number or handle",
     },
-    {
-      name: "X(Twitter)",
-      icon: <FaSquareXTwitter className="size-5" />,
-      placeholder: "Paste a link, email, phone number or handle",
-    },
+    // {
+    //   name: "X(Twitter)",
+    //   icon: <FaSquareXTwitter className="size-5" />,
+    //   placeholder: "Paste a link, email, phone number or handle",
+    // },
     {
       name: "Wechat",
       icon: <IoLogoWechat className="size-5" />,

@@ -36,11 +36,11 @@ export const Vip = () => {
       icon: <FaTelegramPlane className="size-5" />,
       placeholder: "Please enter the link or @username",
     },
-    {
-      name: "X(Twitter)",
-      icon: <FaSquareXTwitter className="size-5" />,
-      placeholder: "Please enter the link or @username",
-    },
+    // {
+    //   name: "X(Twitter)",
+    //   icon: <FaSquareXTwitter className="size-5" />,
+    //   placeholder: "Please enter the link or @username",
+    // },
     {
       name: "Wechat",
       icon: <IoLogoWechat className="size-5" />,

@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
 import { AiFillLinkedin } from "react-icons/ai";
-import { BsTwitterX } from "react-icons/bs";
-import { FaSquareXTwitter, FaYoutube } from "react-icons/fa6";
+// import { BsTwitterX } from "react-icons/bs";
+import { FaYoutube } from "react-icons/fa6";
 import { LuMoveRight } from "react-icons/lu";
 import Navbar from "./Navbar";
 import { Footer } from "./foooter";
